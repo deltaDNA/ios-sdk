@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <Group
+      location = "group:DeltaDNA"
+      name = "DeltaDNA">
+      <FileRef
+         location = "group:DDNAClientInfo.h">
+      </FileRef>
+      <FileRef
+         location = "group:DDNAClientInfo.m">
+      </FileRef>
+      <FileRef
+         location = "group:DDNADecisionPoint.h">
+      </FileRef>
+      <FileRef
+         location = "group:DDNADecisionPoint.m">
+      </FileRef>
+      <FileRef
+         location = "group:DDNAEngageArchive.h">
+      </FileRef>
+      <FileRef
+         location = "group:DDNAEngageArchive.m">
+      </FileRef>
+      <FileRef
+         location = "group:DDNAEngageService.h">
+      </FileRef>
+      <FileRef
+         location = "group:DDNAEngageService.m">
+      </FileRef>
+      <FileRef
+         location = "group:DDNAEventBuilder.h">
+      </FileRef>
+      <FileRef
+         location = "group:DDNAEventBuilder.m">
+      </FileRef>
+      <FileRef
+         location = "group:DDNAEventStore.h">
+      </FileRef>
+      <FileRef
+         location = "group:DDNAEventStore.m">
+      </FileRef>
+      <FileRef
+         location = "group:DDNAInstanceFactory.h">
+      </FileRef>
+      <FileRef
+         location = "group:DDNAInstanceFactory.m">
+      </FileRef>
+      <FileRef
+         location = "group:DDNALog.h">
+      </FileRef>
+      <FileRef
+         location = "group:DDNALog.m">
+      </FileRef>
+      <FileRef
+         location = "group:DDNANetworkRequest.h">
+      </FileRef>
+      <FileRef
+         location = "group:DDNANetworkRequest.m">
+      </FileRef>
+      <FileRef
+         location = "group:DDNAPlayerPrefs.h">
+      </FileRef>
+      <FileRef
+         location = "group:DDNAPlayerPrefs.m">
+      </FileRef>
+      <FileRef
+         location = "group:DDNAPopup.h">
+      </FileRef>
+      <FileRef
+         location = "group:DDNAPopup.m">
+      </FileRef>
+      <FileRef
+         location = "group:DDNAProductBuilder.h">
+      </FileRef>
+      <FileRef
+         location = "group:DDNAProductBuilder.m">
+      </FileRef>
+      <FileRef
+         location = "group:DDNASDK+Transaction.h">
+      </FileRef>
+      <FileRef
+         location = "group:DDNASDK+Transaction.m">
+      </FileRef>
+      <FileRef
+         location = "group:DDNASDK.h">
+      </FileRef>
+      <FileRef
+         location = "group:DDNASDK.m">
+      </FileRef>
+      <FileRef
+         location = "group:DDNASettings.h">
+      </FileRef>
+      <FileRef
+         location = "group:DDNASettings.m">
+      </FileRef>
+      <FileRef
+         location = "group:DeltaDNA.h">
+      </FileRef>
+      <FileRef
+         location = "group:NSDictionary+Helpers.h">
+      </FileRef>
+      <FileRef
+         location = "group:NSDictionary+Helpers.m">
+      </FileRef>
+      <FileRef
+         location = "group:NSString+Helpers.h">
+      </FileRef>
+      <FileRef
+         location = "group:NSString+Helpers.m">
+      </FileRef>
+      <FileRef
+         location = "group:NSURL+DeltaDNA.h">
+      </FileRef>
+      <FileRef
+         location = "group:NSURL+DeltaDNA.m">
+      </FileRef>
+   </Group>
+   <FileRef
+      location = "group:Example/DeltaDNA iOS Example/DeltaDNA iOS Example.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:Tests/DeltaDNA Tests.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:DeltaDNA.podspec">
+   </FileRef>
+   <FileRef
+      location = "group:LICENSE">
+   </FileRef>
+   <FileRef
+      location = "group:Tests/Pods/Pods.xcodeproj">
+   </FileRef>
+</Workspace>

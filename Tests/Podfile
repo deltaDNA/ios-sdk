@@ -1,0 +1,25 @@
+source 'https://github.com/CocoaPods/Specs'
+
+xcodeproj 'DeltaDNA Tests'
+workspace '../DeltaDNA'
+#inhibit_all_warnings!
+
+target 'iOS Tests', :exclusive => true do
+    pod 'DeltaDNA', :path => '../'
+    
+    pod 'Specta', '~> 1.0'
+    pod 'Expecta', '~> 1.0'
+    pod 'OCMockito', '~> 1.0'
+end
+
+# Enable extra logging
+post_install do |installer|
+    installer.pods_project.targets.each do |target|
+        if target.name == 'DeltaDNA'
+            target.build_configurations.each do |config|
+                config.build_settings['GCC_PREPROCESSOR_DEFINITIONS'] ||= ['$(inherited)']
+                config.build_settings['GCC_PREPROCESSOR_DEFINITIONS'] << 'DDNA_DEBUG=1'
+            end
+        end
+    end
+end
