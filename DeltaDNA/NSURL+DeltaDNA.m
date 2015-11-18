@@ -7,7 +7,7 @@
 //
 
 #import "NSURL+DeltaDNA.h"
-#import "NSString+Helpers.h"
+#import "NSString+DeltaDNA.h"
 
 @implementation NSURL (DeltaDNA)
 

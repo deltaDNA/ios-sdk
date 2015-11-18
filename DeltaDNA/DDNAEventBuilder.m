@@ -8,7 +8,7 @@
 
 #import "DDNAEventBuilder.h"
 #import "DDNAProductBuilder.h"
-#import "NSString+Helpers.h"
+#import "NSString+DeltaDNA.h"
 
 @interface DDNAEventBuilder ()
 {

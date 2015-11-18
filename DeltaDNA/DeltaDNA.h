@@ -13,8 +13,8 @@
 
 #import "DDNASDK.h"
 #import "DDNASDK+Transaction.h"
-#import "NSString+Helpers.h"
-#import "NSDictionary+Helpers.h"
+#import "NSString+DeltaDNA.h"
+#import "NSDictionary+DeltaDNA.h"
 #import "DDNAClientInfo.h"
 #import "DDNALog.h"
 #import "DDNADecisionPoint.h"

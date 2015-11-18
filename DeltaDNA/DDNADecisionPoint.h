@@ -14,7 +14,7 @@ typedef NS_ENUM(NSInteger, DDNADecisionPointFlavour) {
     DDNADecisionPointFlavourAdvertising
 };
 
-@interface NSString (DeltaDNA)
+@interface NSString (DDNADecisionPoint)
 
 + (NSString *)stringWithDDNADecisionPointFlavour: (DDNADecisionPointFlavour)flavour;
 

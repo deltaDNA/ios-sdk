@@ -13,8 +13,8 @@
 #import "DDNAEventStore.h"
 #import "DDNAEngageArchive.h"
 #import "DDNAEventBuilder.h"
-#import "NSString+Helpers.h"
-#import "NSDictionary+Helpers.h"
+#import "NSString+DeltaDNA.h"
+#import "NSDictionary+DeltaDNA.h"
 #import <CommonCrypto/CommonDigest.h>
 
 @interface DDNASDK ()

@@ -18,7 +18,7 @@
 #import "DDNAEngageService.h"
 #import "DDNAFakeInstanceFactory.h"
 #import "DDNAFakeNetworkRequest.h"
-#import "NSString+Helpers.h"
+#import "NSString+DeltaDNA.h"
 
 
 SpecBegin(DDNAEngageService)

@@ -1,7 +1,7 @@
-#import "NSDictionary+Helpers.h"
-#import "NSString+Helpers.h"
+#import "NSDictionary+DeltaDNA.h"
+#import "NSString+DeltaDNA.h"
 
-@implementation NSDictionary (Helpers)
+@implementation NSDictionary (DeltaDNA)
 
 + (NSDictionary *) dictionaryWithJSONString: (NSString *) jsonString
 {    

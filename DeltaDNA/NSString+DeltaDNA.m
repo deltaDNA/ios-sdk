@@ -1,15 +1,15 @@
 //
-//  NSString+Helpers.m
+//  NSString+DeltaDNA.m
 //  DeltaDNASDK
 //
 //  Created by David White on 18/07/2014.
 //  Copyright (c) 2014 deltadna. All rights reserved.
 //
 
-#import "NSString+Helpers.h"
+#import "NSString+DeltaDNA.h"
 #import <CommonCrypto/CommonDigest.h>
 
-@implementation NSString (Helpers)
+@implementation NSString (DeltaDNA)
 
 + (BOOL) stringIsNilOrEmpty: (NSString*) aString
 {

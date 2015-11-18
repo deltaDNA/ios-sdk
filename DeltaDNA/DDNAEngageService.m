@@ -10,8 +10,8 @@
 #import "DDNANetworkRequest.h"
 #import "DDNAInstanceFactory.h"
 #import "NSURL+DeltaDNA.h"
-#import "NSString+Helpers.h"
-#import "NSDictionary+Helpers.h"
+#import "NSString+DeltaDNA.h"
+#import "NSDictionary+DeltaDNA.h"
 #import "DDNALog.h"
 
 @interface DDNAEngageService () <DDNANetworkRequestDelegate>

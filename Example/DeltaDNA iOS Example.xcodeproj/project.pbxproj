@@ -28,8 +28,8 @@
 		63CF8DFB1BFCCE2B00D4FC27 /* DDNASDK+Transaction.m in Sources */ = {isa = PBXBuildFile; fileRef = 63CF8DE31BFCCDE200D4FC27 /* DDNASDK+Transaction.m */; };
 		63CF8DFC1BFCCE2B00D4FC27 /* DDNASDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 63CF8DE51BFCCDE200D4FC27 /* DDNASDK.m */; };
 		63CF8DFD1BFCCE2B00D4FC27 /* DDNASettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 63CF8DE71BFCCDE200D4FC27 /* DDNASettings.m */; };
-		63CF8DFE1BFCCE2B00D4FC27 /* NSDictionary+Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 63CF8DEA1BFCCDE200D4FC27 /* NSDictionary+Helpers.m */; };
-		63CF8DFF1BFCCE2B00D4FC27 /* NSString+Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 63CF8DEC1BFCCDE200D4FC27 /* NSString+Helpers.m */; };
+		63CF8DFE1BFCCE2B00D4FC27 /* NSDictionary+DeltaDNA.m in Sources */ = {isa = PBXBuildFile; fileRef = 63CF8DEA1BFCCDE200D4FC27 /* NSDictionary+DeltaDNA.m */; };
+		63CF8DFF1BFCCE2B00D4FC27 /* NSString+DeltaDNA.m in Sources */ = {isa = PBXBuildFile; fileRef = 63CF8DEC1BFCCDE200D4FC27 /* NSString+DeltaDNA.m */; };
 		63CF8E001BFCCE2B00D4FC27 /* NSURL+DeltaDNA.m in Sources */ = {isa = PBXBuildFile; fileRef = 63CF8DEE1BFCCDE200D4FC27 /* NSURL+DeltaDNA.m */; };
 /* End PBXBuildFile section */
 
@@ -75,10 +75,10 @@
 		63CF8DE61BFCCDE200D4FC27 /* DDNASettings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DDNASettings.h; sourceTree = "<group>"; };
 		63CF8DE71BFCCDE200D4FC27 /* DDNASettings.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DDNASettings.m; sourceTree = "<group>"; };
 		63CF8DE81BFCCDE200D4FC27 /* DeltaDNA.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeltaDNA.h; sourceTree = "<group>"; };
-		63CF8DE91BFCCDE200D4FC27 /* NSDictionary+Helpers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Helpers.h"; sourceTree = "<group>"; };
-		63CF8DEA1BFCCDE200D4FC27 /* NSDictionary+Helpers.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Helpers.m"; sourceTree = "<group>"; };
-		63CF8DEB1BFCCDE200D4FC27 /* NSString+Helpers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+Helpers.h"; sourceTree = "<group>"; };
-		63CF8DEC1BFCCDE200D4FC27 /* NSString+Helpers.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+Helpers.m"; sourceTree = "<group>"; };
+		63CF8DE91BFCCDE200D4FC27 /* NSDictionary+DeltaDNA.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+DeltaDNA.h"; sourceTree = "<group>"; };
+		63CF8DEA1BFCCDE200D4FC27 /* NSDictionary+DeltaDNA.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+DeltaDNA.m"; sourceTree = "<group>"; };
+		63CF8DEB1BFCCDE200D4FC27 /* NSString+DeltaDNA.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+DeltaDNA.h"; sourceTree = "<group>"; };
+		63CF8DEC1BFCCDE200D4FC27 /* NSString+DeltaDNA.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+DeltaDNA.m"; sourceTree = "<group>"; };
 		63CF8DED1BFCCDE200D4FC27 /* NSURL+DeltaDNA.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSURL+DeltaDNA.h"; sourceTree = "<group>"; };
 		63CF8DEE1BFCCDE200D4FC27 /* NSURL+DeltaDNA.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSURL+DeltaDNA.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -169,10 +169,10 @@
 				63CF8DE61BFCCDE200D4FC27 /* DDNASettings.h */,
 				63CF8DE71BFCCDE200D4FC27 /* DDNASettings.m */,
 				63CF8DE81BFCCDE200D4FC27 /* DeltaDNA.h */,
-				63CF8DE91BFCCDE200D4FC27 /* NSDictionary+Helpers.h */,
-				63CF8DEA1BFCCDE200D4FC27 /* NSDictionary+Helpers.m */,
-				63CF8DEB1BFCCDE200D4FC27 /* NSString+Helpers.h */,
-				63CF8DEC1BFCCDE200D4FC27 /* NSString+Helpers.m */,
+				63CF8DE91BFCCDE200D4FC27 /* NSDictionary+DeltaDNA.h */,
+				63CF8DEA1BFCCDE200D4FC27 /* NSDictionary+DeltaDNA.m */,
+				63CF8DEB1BFCCDE200D4FC27 /* NSString+DeltaDNA.h */,
+				63CF8DEC1BFCCDE200D4FC27 /* NSString+DeltaDNA.m */,
 				63CF8DED1BFCCDE200D4FC27 /* NSURL+DeltaDNA.h */,
 				63CF8DEE1BFCCDE200D4FC27 /* NSURL+DeltaDNA.m */,
 			);
@@ -265,8 +265,8 @@
 				63CF8DFB1BFCCE2B00D4FC27 /* DDNASDK+Transaction.m in Sources */,
 				63CF8DFC1BFCCE2B00D4FC27 /* DDNASDK.m in Sources */,
 				63CF8DFD1BFCCE2B00D4FC27 /* DDNASettings.m in Sources */,
-				63CF8DFE1BFCCE2B00D4FC27 /* NSDictionary+Helpers.m in Sources */,
-				63CF8DFF1BFCCE2B00D4FC27 /* NSString+Helpers.m in Sources */,
+				63CF8DFE1BFCCE2B00D4FC27 /* NSDictionary+DeltaDNA.m in Sources */,
+				63CF8DFF1BFCCE2B00D4FC27 /* NSString+DeltaDNA.m in Sources */,
 				63CF8E001BFCCE2B00D4FC27 /* NSURL+DeltaDNA.m in Sources */,
 				63CCEBD71BFB70440041F49E /* ViewController.m in Sources */,
 				63CCEBD41BFB70440041F49E /* AppDelegate.m in Sources */,

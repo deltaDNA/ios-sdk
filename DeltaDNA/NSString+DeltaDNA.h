@@ -1,5 +1,5 @@
 //
-//  NSString+Helpers.h
+//  NSString+DeltaDNA.h
 //  DeltaDNASDK
 //
 //  Created by David White on 18/07/2014.
@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NSString (Helpers)
+@interface NSString (DeltaDNA)
 
 + (BOOL) stringIsNilOrEmpty: (NSString*) aString;
 

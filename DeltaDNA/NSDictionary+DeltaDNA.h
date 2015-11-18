@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NSDictionary (Helpers)
+@interface NSDictionary (DeltaDNA)
 
 + (NSDictionary *) dictionaryWithJSONString: (NSString *) jsonString;
 
