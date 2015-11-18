@@ -98,16 +98,16 @@
          location = "group:DeltaDNA.h">
       </FileRef>
       <FileRef
-         location = "group:NSDictionary+Helpers.h">
+         location = "group:NSDictionary+DeltaDNA.h">
       </FileRef>
       <FileRef
-         location = "group:NSDictionary+Helpers.m">
+         location = "group:NSDictionary+DeltaDNA.m">
       </FileRef>
       <FileRef
-         location = "group:NSString+Helpers.h">
+         location = "group:NSString+DeltaDNA.h">
       </FileRef>
       <FileRef
-         location = "group:NSString+Helpers.m">
+         location = "group:NSString+DeltaDNA.m">
       </FileRef>
       <FileRef
          location = "group:NSURL+DeltaDNA.h">
