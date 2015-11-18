@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		56A33AEFB4D79DE43EAF7637 /* libPods-iOS Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D4EB7A1163D77F31075AE252 /* libPods-iOS Tests.a */; };
 		63CCEC741BFB7DB00041F49E /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 63CCEC731BFB7DB00041F49E /* Podfile */; };
+		63CF8DBF1BFCADD000D4FC27 /* DDNAEngageServiceSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 63CF8DBC1BFCADD000D4FC27 /* DDNAEngageServiceSpec.m */; };
+		63CF8DC01BFCADD000D4FC27 /* DDNANetworkRequestSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 63CF8DBD1BFCADD000D4FC27 /* DDNANetworkRequestSpec.m */; };
+		63CF8DC11BFCADD000D4FC27 /* NSURL+DeltaDNASpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 63CF8DBE1BFCADD000D4FC27 /* NSURL+DeltaDNASpec.m */; };
+		63CF8DC41BFCBF1700D4FC27 /* DDNAFakeInstanceFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 63CF8DC31BFCBF1700D4FC27 /* DDNAFakeInstanceFactory.m */; };
+		63CF8DC81BFCC11000D4FC27 /* DDNAFakeNetworkRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 63CF8DC71BFCC11000D4FC27 /* DDNAFakeNetworkRequest.m */; };
 		63E971401BFB8AFE008DFCC1 /* DDNADecisionPointSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E9713F1BFB8AFE008DFCC1 /* DDNADecisionPointSpec.m */; };
 /* End PBXBuildFile section */
 
@@ -17,6 +22,13 @@
 		63CCEC6A1BFB7C6C0041F49E /* iOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "iOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		63CCEC6F1BFB7C6C0041F49E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		63CCEC731BFB7DB00041F49E /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
+		63CF8DBC1BFCADD000D4FC27 /* DDNAEngageServiceSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDNAEngageServiceSpec.m; sourceTree = "<group>"; };
+		63CF8DBD1BFCADD000D4FC27 /* DDNANetworkRequestSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDNANetworkRequestSpec.m; sourceTree = "<group>"; };
+		63CF8DBE1BFCADD000D4FC27 /* NSURL+DeltaDNASpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+DeltaDNASpec.m"; sourceTree = "<group>"; };
+		63CF8DC21BFCBF1700D4FC27 /* DDNAFakeInstanceFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DDNAFakeInstanceFactory.h; path = Fakes/DDNAFakeInstanceFactory.h; sourceTree = "<group>"; };
+		63CF8DC31BFCBF1700D4FC27 /* DDNAFakeInstanceFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DDNAFakeInstanceFactory.m; path = Fakes/DDNAFakeInstanceFactory.m; sourceTree = "<group>"; };
+		63CF8DC61BFCC11000D4FC27 /* DDNAFakeNetworkRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DDNAFakeNetworkRequest.h; path = Fakes/DDNAFakeNetworkRequest.h; sourceTree = "<group>"; };
+		63CF8DC71BFCC11000D4FC27 /* DDNAFakeNetworkRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DDNAFakeNetworkRequest.m; path = Fakes/DDNAFakeNetworkRequest.m; sourceTree = "<group>"; };
 		63E9713F1BFB8AFE008DFCC1 /* DDNADecisionPointSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDNADecisionPointSpec.m; sourceTree = "<group>"; };
 		B4498C7A5E3571901445C97A /* Pods-iOS Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOS Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iOS Tests/Pods-iOS Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		D4EB7A1163D77F31075AE252 /* libPods-iOS Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-iOS Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -47,6 +59,7 @@
 			children = (
 				63CCEC731BFB7DB00041F49E /* Podfile */,
 				63E9713E1BFB8AFE008DFCC1 /* Specs */,
+				63CF8DC51BFCBF1E00D4FC27 /* Fakes */,
 				63CCEC6C1BFB7C6C0041F49E /* iOS Tests */,
 				63CCEC6B1BFB7C6C0041F49E /* Products */,
 				758503E8563CF766DB2BCADA /* Pods */,
@@ -70,9 +83,23 @@
 			path = "iOS Tests";
 			sourceTree = "<group>";
 		};
+		63CF8DC51BFCBF1E00D4FC27 /* Fakes */ = {
+			isa = PBXGroup;
+			children = (
+				63CF8DC61BFCC11000D4FC27 /* DDNAFakeNetworkRequest.h */,
+				63CF8DC71BFCC11000D4FC27 /* DDNAFakeNetworkRequest.m */,
+				63CF8DC21BFCBF1700D4FC27 /* DDNAFakeInstanceFactory.h */,
+				63CF8DC31BFCBF1700D4FC27 /* DDNAFakeInstanceFactory.m */,
+			);
+			name = Fakes;
+			sourceTree = "<group>";
+		};
 		63E9713E1BFB8AFE008DFCC1 /* Specs */ = {
 			isa = PBXGroup;
 			children = (
+				63CF8DBC1BFCADD000D4FC27 /* DDNAEngageServiceSpec.m */,
+				63CF8DBD1BFCADD000D4FC27 /* DDNANetworkRequestSpec.m */,
+				63CF8DBE1BFCADD000D4FC27 /* NSURL+DeltaDNASpec.m */,
 				63E9713F1BFB8AFE008DFCC1 /* DDNADecisionPointSpec.m */,
 			);
 			path = Specs;
@@ -204,6 +231,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				63CF8DC01BFCADD000D4FC27 /* DDNANetworkRequestSpec.m in Sources */,
+				63CF8DBF1BFCADD000D4FC27 /* DDNAEngageServiceSpec.m in Sources */,
+				63CF8DC81BFCC11000D4FC27 /* DDNAFakeNetworkRequest.m in Sources */,
+				63CF8DC41BFCBF1700D4FC27 /* DDNAFakeInstanceFactory.m in Sources */,
+				63CF8DC11BFCADD000D4FC27 /* NSURL+DeltaDNASpec.m in Sources */,
 				63E971401BFB8AFE008DFCC1 /* DDNADecisionPointSpec.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
