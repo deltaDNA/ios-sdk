@@ -1,6 +1,6 @@
 //
 //  NSURL+DeltaDNASpec.m
-//  SmartAds
+//  DeltaDNA
 //
 //  Created by David White on 15/10/2015.
 //  Copyright © 2015 deltadna. All rights reserved.
