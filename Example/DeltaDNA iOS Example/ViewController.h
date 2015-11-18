@@ -10,6 +10,19 @@
 
 @interface ViewController : UIViewController
 
+@property (nonatomic, strong) IBOutlet UILabel *labelSDK;
+
+- (IBAction)simpleEvent:(id)sender;
+- (IBAction)complexEvent:(id)sender;
+- (IBAction)customEvent:(id)sender;
+- (IBAction)transactionHelper:(id)sender;
+- (IBAction)engage:(id)sender;
+- (IBAction)imageMessage:(id)sender;
+- (IBAction)pushNotification:(id)sender;
+- (IBAction)uploadEvents:(id)sender;
+- (IBAction)startSDK:(id)sender;
+- (IBAction)stopSDK:(id)sender;
+- (IBAction)newSession:(id)sender;
 
 @end
 
