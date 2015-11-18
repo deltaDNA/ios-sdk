@@ -117,7 +117,7 @@
       </FileRef>
    </Group>
    <FileRef
-      location = "group:Example/DeltaDNA iOS Example/DeltaDNA iOS Example.xcodeproj">
+      location = "group:Example/DeltaDNA iOS Example.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Tests/DeltaDNA Tests.xcodeproj">

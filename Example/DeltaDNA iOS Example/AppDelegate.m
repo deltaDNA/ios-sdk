@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import <DeltaDNA/DeltaDNA.h>
 
 @interface AppDelegate ()
 
@@ -17,6 +18,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    NSLog(@"DeltaDNA Version: %@", DDNA_SDK_VERSION);
+    
     return YES;
 }
 
