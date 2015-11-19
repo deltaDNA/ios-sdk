@@ -666,13 +666,15 @@ static NSString *const DD_EVENT_STARTED = @"DDNASDKStarted";
 
 + (NSString *) getCurrentTimestamp
 {
+    NSCalendar *gregorianCalendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    NSLocale *enUSPOSIXLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
-    [dateFormatter setLocale:enUSPOSIXLocale];
+    NSTimeZone *timeZone = [NSTimeZone timeZoneWithName:@"UTC"];
+    NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
+    [dateFormatter setCalendar:gregorianCalendar];
+    [dateFormatter setTimeZone:timeZone];
+    [dateFormatter setLocale:locale];
     [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss.SSS"];
-    
-    NSDate *now = [NSDate date];
-    return [dateFormatter stringFromDate:now];
+    return [dateFormatter stringFromDate:[NSDate date]];
 }
 
 + (NSString *) formatURIWithPattern: (NSString *) pattern
