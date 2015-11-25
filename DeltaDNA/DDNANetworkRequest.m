@@ -49,7 +49,6 @@
     [request setHTTPBody:[self.jsonPayload dataUsingEncoding:NSUTF8StringEncoding]];
     [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    [request setValue:@"100-continue" forHTTPHeaderField:@"Expect"];
     
     [[self.urlSession dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         [self handleResponse:data response:response error:error];

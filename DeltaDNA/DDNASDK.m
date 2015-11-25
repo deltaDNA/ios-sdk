@@ -651,17 +651,15 @@ static NSString *const DD_EVENT_STARTED = @"DDNASDKStarted";
     [request setHTTPBody:postData];
     [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    [request setValue:@"100-continue" forHTTPHeaderField:@"Expect"];
     
-    [NSURLConnection sendAsynchronousRequest:request
-                                       queue:[NSOperationQueue mainQueue]
-                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+    NSURLSession *session = [NSURLSession sharedSession];
+    [[session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
         NSString *responseStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
         DDNALogDebug(@"Server responded: status %li response: %@ error:%@",
-                     (long)httpResponse.statusCode, responseStr, connectionError);
+                     (long)httpResponse.statusCode, responseStr, error);
         callback((int)httpResponse.statusCode, responseStr);
-    }];
+    }] resume];
 }
 
 + (NSString *) getCurrentTimestamp
