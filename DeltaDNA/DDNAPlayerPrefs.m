@@ -12,6 +12,9 @@ static NSMutableDictionary *sPreferences;
     if (self == [DDNAPlayerPrefs self])
     {
         NSString *path = [[DDNAPlayerPrefs getPrivateDocsDir] stringByAppendingPathComponent:PF_FILE_NAME];
+        
+        NSLog(@"Your Legacy settings are stored in this folder: %@", path);
+        
         sPreferences = [NSMutableDictionary dictionaryWithContentsOfFile:path];
         
         // If no file exists create a new empty dictionary
@@ -19,6 +22,11 @@ static NSMutableDictionary *sPreferences;
         {
             sPreferences = [NSMutableDictionary dictionary];
         }
+        
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(
+                                                            NSLibraryDirectory, NSUserDomainMask, YES);
+        NSString *folder = [paths objectAtIndex:0];
+        NSLog(@"Your NSUserDefaults are stored in this folder: %@/Preferences", folder);
     }
 }
 

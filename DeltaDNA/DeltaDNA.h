@@ -1,22 +1,19 @@
 //
 //  DeltaDNA.h
-//  
+//  DeltaDNA
 //
-//  Created by David White on 09/09/2015.
+//  Created by David White on 02/02/2016.
 //
 //
-
-#import <Foundation/Foundation.h>
 
 #ifndef _DELTADNA_
 #define _DELTADNA_
 
-#import "DDNASDK.h"
-#import "DDNASDK+Transaction.h"
-#import "NSString+DeltaDNA.h"
-#import "NSDictionary+DeltaDNA.h"
-#import "DDNAClientInfo.h"
-#import "DDNALog.h"
-#import "DDNADecisionPoint.h"
+#import <DeltaDNA/DDNASDK.h>
+#import <DeltaDNA/DDNASDK+Transaction.h>
+#import <DeltaDNA/NSString+DeltaDNA.h>
+#import <DeltaDNA/NSDictionary+DeltaDNA.h>
+#import <DeltaDNA/DDNAClientInfo.h>
+#import <DeltaDNA/DDNALog.h>
 
 #endif /* _DELTADNA_ */

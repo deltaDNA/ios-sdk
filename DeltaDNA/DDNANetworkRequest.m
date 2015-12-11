@@ -23,6 +23,7 @@
     if ((self = [super init])) {
         self.URL = URL;
         self.jsonPayload = jsonPayload;
+        self.timeoutSeconds = [DDNASDK sharedInstance].settings.httpRequestCollectTimeoutSeconds;
         
         NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration ephemeralSessionConfiguration];
         // TODO: make this configurable
@@ -42,8 +43,8 @@
 - (void)makeRequest
 {
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:self.URL
-                                                           cachePolicy:NSURLRequestUseProtocolCachePolicy
-                                                       timeoutInterval:[DDNASDK sharedInstance].settings.httpRequestTimeoutSeconds];
+                                                           cachePolicy:NSURLRequestReloadIgnoringCacheData
+                                                       timeoutInterval:self.timeoutSeconds];
     
     [request setHTTPMethod:@"POST"];
     [request setHTTPBody:[self.jsonPayload dataUsingEncoding:NSUTF8StringEncoding]];

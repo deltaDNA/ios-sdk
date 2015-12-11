@@ -48,6 +48,7 @@
     NSString * model = [UIDevice currentDevice].model;
     if ([model hasPrefix:@"iPad"]) return @"IOS_TABLET";
     else if ([model hasPrefix:@"iPhone"]) return @"IOS_MOBILE";
+    else if ([model isEqualToString:@"Apple TV"]) return @"IOS_TV";
     return @"IOS";
 }
 
@@ -145,15 +146,15 @@
     NSString * model = [UIDevice currentDevice].model;
     if ([model hasPrefix:@"iPad"]) return @"TABLET";
     else if ([model hasPrefix:@"iPhone"]) return @"MOBILE_PHONE";
+    else if ([model containsString:@"TV"]) return @"TV";
     return @"UNKNOWN";
 }
 
 - (NSString *) getOperatingSystem
 {
-    if ([[UIDevice currentDevice].systemName  isEqual: @"iPhone OS"])
-    {
-        return @"IOS";
-    }
+    NSString *operatingSystem = [UIDevice currentDevice].systemName;
+    if ([operatingSystem isEqualToString: @"iPhone OS"]) return @"IOS";
+    else if ([operatingSystem isEqualToString:@"tvOS"]) return @"TVOS";
     return @"OSX";
 }
 
@@ -176,17 +177,26 @@
 
 - (NSString *) getCountryCode
 {
-    return [[NSLocale currentLocale] objectForKey:NSLocaleCountryCode];
+    NSError *error = NULL;
+    NSRegularExpression *countryRegex = [NSRegularExpression regularExpressionWithPattern:@"^[A-Z]{2}$" options:0 error:&error];
+    NSString *countryCode = [[NSLocale currentLocale] objectForKey:NSLocaleCountryCode];
+    return [countryRegex numberOfMatchesInString:countryCode options:0 range:NSMakeRange(0, countryCode.length)] == 1 ? countryCode : @"ZZ";
 }
 
 - (NSString *) getLanguageCode
 {
-    return [[NSLocale currentLocale] objectForKey:NSLocaleLanguageCode];
+    NSError *error = NULL;
+    NSRegularExpression *languageRegex = [NSRegularExpression regularExpressionWithPattern:@"^[a-z]{2}$" options:0 error:&error];
+    NSString *languageCode = [[NSLocale currentLocale] objectForKey:NSLocaleLanguageCode];
+    return [languageRegex numberOfMatchesInString:languageCode options:0 range:NSMakeRange(0, languageCode.length)] == 1 ? languageCode : @"zz";
 }
 
 - (NSString *) getLocale
 {
-    return ([self getLanguageCode]!=nil && [self getCountryCode]!=nil)?[NSString stringWithFormat:@"%@_%@",[self getLanguageCode],[self getCountryCode]]:nil;
+    NSLocale *locale = [NSLocale currentLocale];
+    NSError *error = NULL;
+    NSRegularExpression *localeRegex = [NSRegularExpression regularExpressionWithPattern:@"^[a-z]{2}_[A-Z]{2}$" options:0 error:&error];
+    return [localeRegex numberOfMatchesInString:locale.localeIdentifier options:0 range:NSMakeRange(0, locale.localeIdentifier.length)] == 1 ? locale.localeIdentifier : @"zz_ZZ";
 }
 
 @end

@@ -8,6 +8,8 @@
 
 #import "DDNAPopup.h"
 #import "NSString+DeltaDNA.h"
+#import "DDNACache.h"
+#import "DDNASDK.h"
 
 @interface DDNABasicPopup () {
     
@@ -87,10 +89,20 @@
         __strong __typeof__(weakSelf) strongSelf = weakSelf;
        
         if (image[@"url"]) {
+            
             NSURL *url = [NSURL URLWithString:image[@"url"]];
-            NSData *data = [NSData dataWithContentsOfURL:url];
+            NSURLResponse *urlResponse;
+            NSError *error;
+            NSMutableURLRequest* urlRequest = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:[DDNASDK sharedInstance].settings.httpRequestEngageTimeoutSeconds];
+            NSData *data = [NSURLConnection sendSynchronousRequest:urlRequest returningResponse:&urlResponse error:&error];
+            
+            if (data == nil) {
+                // try and load from cache
+                data = [[DDNACache sharedCache] objectForKey:image[@"url"]];
+            }
             
             if (data != nil) {
+                [[DDNACache sharedCache] setObject:data forKey:image[@"url"]];
                 _spriteMap = [UIImage imageWithData:data];
                 _image = [NSDictionary dictionaryWithDictionary:image];
                 
@@ -177,8 +189,11 @@
     if (_image[@"layout"]) {
         NSDictionary* layout = _image[@"layout"];
         
+        BOOL landscape = YES;
+        #ifndef TARGET_OS_TV
         UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
-        BOOL landscape = (orientation == UIInterfaceOrientationLandscapeLeft || orientation == UIInterfaceOrientationLandscapeRight);
+        landscape = (orientation == UIInterfaceOrientationLandscapeLeft || orientation == UIInterfaceOrientationLandscapeRight);
+        #endif
         
         NSDictionary * orientationDict = nil;
         if (layout[@"landscape"] && landscape) {
@@ -246,7 +261,11 @@
                     btn.contentEdgeInsets = UIEdgeInsetsZero;
                     [btn setBackgroundImage:buttonImages[i] forState:UIControlStateNormal];
                     [btn setTag:i+1];   // help identify the button when clicked
+                    #ifdef TARGET_OS_TV
+                    [btn addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventPrimaryActionTriggered];
+                    #else
                     [btn addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
+                    #endif
                     
                     NSLayoutConstraint* leftConstraint = [NSLayoutConstraint constraintWithItem:btn attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:_backgroundView attribute:NSLayoutAttributeLeft multiplier:1.0f constant:dim.origin.x];
                     NSLayoutConstraint* topConstraint = [NSLayoutConstraint constraintWithItem:btn attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:_backgroundView attribute:NSLayoutAttributeTop multiplier:1.0f constant:dim.origin.y];

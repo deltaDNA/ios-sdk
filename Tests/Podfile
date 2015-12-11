@@ -1,15 +1,24 @@
 source 'https://github.com/CocoaPods/Specs'
 
-xcodeproj 'DeltaDNA Tests'
+xcodeproj '../DeltaDNA'
 workspace '../DeltaDNA'
 #inhibit_all_warnings!
 
-target 'iOS Tests', :exclusive => true do
-    pod 'DeltaDNA', :path => '../'
-    
+def shared_pods
     pod 'Specta', '~> 1.0'
     pod 'Expecta', '~> 1.0'
-    pod 'OCMockito', '~> 1.0'
+    pod 'OCMockito', '~> 3.0'
+end
+
+target 'DeltaDNA iOS Tests' do
+    platform :ios, '7.0'
+    shared_pods
+end
+
+target 'DeltaDNA tvOS Tests' do
+    use_frameworks!
+    platform :tvos, '9.0'
+    shared_pods
 end
 
 # Enable extra logging

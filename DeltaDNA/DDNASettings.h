@@ -16,6 +16,8 @@ extern NSString *const DDNA_COLLECT_HASH_URL_PATTERN;
 extern NSString *const DDNA_ENGAGE_URL_PATTERN;
 extern NSString *const DDNA_ENGAGE_HASH_URL_PATTERN;
 
+extern NSUInteger const DDNA_MAX_EVENT_STORE_BYTES;
+
 @interface DDNASettings : NSObject
 
 /**
@@ -50,9 +52,15 @@ extern NSString *const DDNA_ENGAGE_HASH_URL_PATTERN;
 
 /**
  Controls the timeout in seconds before the SDK decides
- a HTTP request is unresponsive.
+ a HTTP request to Collect is unresponsive.
  */
-@property (nonatomic, assign) int httpRequestTimeoutSeconds;
+@property (nonatomic, assign) int httpRequestCollectTimeoutSeconds;
+
+/**
+ Controls the timeout in seconds before the SDK decides
+ a HTTP request to Engage is unresponsive.
+ */
+@property (nonatomic, assign) int httpRequestEngageTimeoutSeconds;
 
 /**
  Controls if the SDK should automatically upload events
@@ -70,6 +78,11 @@ extern NSString *const DDNA_ENGAGE_HASH_URL_PATTERN;
  Controls how frequently the event upload method is called.
  */
 @property (nonatomic, assign) int backgroundEventUploadRepeatRateSeconds;
+
+/**
+ Controls if the event store is used or not (default YES).
+ */
+@property (nonatomic, assign) BOOL useEventStore;
 
 /**
  Returns the path to the privates settings directory on 

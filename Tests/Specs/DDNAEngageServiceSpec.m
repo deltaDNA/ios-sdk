@@ -19,27 +19,56 @@
 #import "DDNAFakeInstanceFactory.h"
 #import "DDNAFakeNetworkRequest.h"
 #import "NSString+DeltaDNA.h"
+#import "DDNACache.h"
 
 
 SpecBegin(DDNAEngageService)
 
-describe(@"engage service request", ^{
+describe(@"engage request", ^{
+    
+    it(@"builds engage request with default flavour", ^{
+        DDNAEngageRequest *request = [[DDNAEngageRequest alloc] initWithDecisionPoint:@"testDecisionPoint" userId:@"user-id-12345" sessionId:@"session-id-12345"];
+        
+        expect(request.decisionPoint).to.equal(@"testDecisionPoint");
+        expect(request.flavour).to.equal(@"engagement");
+        expect(request.parameters).to.beNil();
+        expect(request.userId).to.equal(@"user-id-12345");
+        expect(request.sessionId).to.equal(@"session-id-12345");
+    });
+    
+    it(@"builds engage request with custom flavour", ^{
+        DDNAEngageRequest *request = [[DDNAEngageRequest alloc] initWithDecisionPoint:@"testDecisionPoint" userId:@"user-id-12345" sessionId:@"session-id-12345"];
+        
+        request.flavour = @"advertising";
+        request.parameters = @{@"hello":@"goodbye"};
+        
+        expect(request.decisionPoint).to.equal(@"testDecisionPoint");
+        expect(request.flavour).to.equal(@"advertising");
+        expect(request.parameters).to.equal(@{@"hello":@"goodbye"});
+        expect(request.userId).to.equal(@"user-id-12345");
+        expect(request.sessionId).to.equal(@"session-id-12345");
+
+    });
+    
+});
+
+describe(@"engage service", ^{
     
     __block DDNAEngageService *engageService;
     __block DDNAFakeInstanceFactory *fakeFactory;
     
     beforeEach(^{
-        engageService = [[DDNAEngageService alloc] initWithEndpoint:@"http://engage.net"
-                                                     environmentKey:@"12345abcde"
-                                                         hashSecret:nil
-                                                             userID:@"user-id-1234"
-                                                          sessionID:@"session-id-12345"
-                                                            version:@"1.0.0"
-                                                         sdkVersion:@"1.0.0"
-                                                           platform:@"iOS"
-                                                     timezoneOffset:@"-05"
-                                                       manufacturer:@"Apple Inc."
-                                             operatingSystemVersion:@"iOS 9.1"];
+        [[DDNACache sharedCache] clear];
+        engageService = [[DDNAEngageService alloc] initWithEnvironmentKey:@"12345abcde"
+                                                                engageURL:@"http://engage.net"
+                                                               hashSecret:nil
+                                                               apiVersion:@"1.0.0"
+                                                               sdkVersion:@"1.0.0"
+                                                                 platform:@"iOS"
+                                                           timezoneOffset:@"-05"
+                                                             manufacturer:@"Apple Inc."
+                                                   operatingSystemVersion:@"iOS 9.1"
+                                                           timeoutSeconds:5];
         
         fakeFactory = [[DDNAFakeInstanceFactory alloc] init];
         fakeFactory.fakeNetworkRequest = [[DDNAFakeNetworkRequest alloc] init];
@@ -55,12 +84,16 @@ describe(@"engage service request", ^{
         
         __block NSString *resultResponse;
         __block NSInteger resultStatusCode;
-        __block NSError *resultError;
+        __block NSString *resultError;
         
-        [engageService requestWithDecisionPoint:nil flavour:DDNADecisionPointFlavourInternal parameters:nil completionHandler:^(NSString *response, NSInteger statusCode, NSError *connectionError) {
+        DDNAEngageRequest *request = [[DDNAEngageRequest alloc] initWithDecisionPoint:@"testDecisionPoint"
+                                                                               userId:@"user-id-1234"
+                                                                            sessionId:@"session-id-12345"];
+        
+        [engageService request:request handler:^(NSString *response, NSInteger statusCode, NSString *error) {
             resultResponse = response;
             resultStatusCode = statusCode;
-            resultError = connectionError;
+            resultError = error;
         }];
         
         expect(resultResponse).to.equal(@"Request body couldn't be processed: One or more of the compulsory parameters are missing!");
@@ -95,9 +128,13 @@ describe(@"engage service request", ^{
         
         __block NSString *resultResponse;
         __block NSInteger resultStatusCode;
-        __block NSError *resultError;
+        __block NSString *resultError;
         
-        [engageService requestWithDecisionPoint:nil flavour:DDNADecisionPointFlavourInternal parameters:nil completionHandler:^(NSString *response, NSInteger statusCode, NSError *connectionError) {
+        DDNAEngageRequest *engageRequest = [[DDNAEngageRequest alloc] initWithDecisionPoint:@"testDecisionPoint"
+                                                                                     userId:@"user-id-1234"
+                                                                                  sessionId:@"session-id-12345"];
+        
+        [engageService request:engageRequest handler:^(NSString *response, NSInteger statusCode, NSString *connectionError) {
             resultResponse = response;
             resultStatusCode = statusCode;
             resultError = connectionError;
@@ -118,9 +155,13 @@ describe(@"engage service request", ^{
         
         __block NSString *resultResponse;
         __block NSInteger resultStatusCode;
-        __block NSError *resultError;
+        __block NSString *resultError;
         
-        [engageService requestWithDecisionPoint:nil flavour:DDNADecisionPointFlavourInternal parameters:nil completionHandler:^(NSString *response, NSInteger statusCode, NSError *connectionError) {
+        DDNAEngageRequest *engageRequest = [[DDNAEngageRequest alloc] initWithDecisionPoint:@"testDecisionPoint"
+                                                                                     userId:@"user-id-12345"
+                                                                                  sessionId:@"session-id-12345"];
+        
+        [engageService request:engageRequest handler:^(NSString *response, NSInteger statusCode, NSString *connectionError) {
             resultResponse = response;
             resultStatusCode = statusCode;
             resultError = connectionError;
@@ -128,7 +169,7 @@ describe(@"engage service request", ^{
         
         expect(resultResponse).to.beNil();
         expect(resultStatusCode).to.equal(-1);
-        expect(resultError).to.equal([NSError errorWithDomain:NSURLErrorDomain code:-57 userInfo:nil]);
+        expect(resultError).to.equal(@"The operation couldn’t be completed. (NSURLErrorDomain error -57.)");
         
     });
     

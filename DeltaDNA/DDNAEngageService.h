@@ -7,55 +7,43 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "DDNADecisionPoint.h"
 
 @class DDNAInstanceFactory;
+
+@interface DDNAEngageRequest : NSObject
+
+@property (nonatomic, copy, readonly) NSString *decisionPoint;
+@property (nonatomic, copy, readonly) NSString *userId;
+@property (nonatomic, copy, readonly) NSString *sessionId;
+@property (nonatomic, copy) NSString *flavour;
+@property (nonatomic, strong) NSDictionary *parameters;
+
+- (instancetype)initWithDecisionPoint:(NSString *)decisionPoint
+                               userId:(NSString *)userId
+                            sessionId:(NSString *)sessionId;
+
+- (NSString *)description;
+
+@end
+
+typedef void (^DDNAEngageResponse) (NSString *response, NSInteger statusCode, NSString *error);
 
 @interface DDNAEngageService : NSObject
 
 @property (nonatomic, weak) DDNAInstanceFactory *factory;
-@property (nonatomic, copy) void (^completionHandler)(NSString *response, NSInteger statusCode, NSError *connectionError);
 
-// TODO - what happens when you want to restart with a different
-// session id or user id?
-// TODO - implement a cache
+- (instancetype)initWithEnvironmentKey:(NSString *)environmentKey
+                             engageURL:(NSString *)engageURL
+                            hashSecret:(NSString *)hashSecret
+                            apiVersion:(NSString *)apiVersion
+                            sdkVersion:(NSString *)sdkVersion
+                              platform:(NSString *)platform
+                        timezoneOffset:(NSString *)timezoneOffset
+                          manufacturer:(NSString *)manufacturer
+                operatingSystemVersion:(NSString *)operatingSystemVersion
+                        timeoutSeconds:(NSInteger)timeoutSeconds;
 
-@property (nonatomic, copy, readonly) NSString *userID;
-@property (nonatomic, copy, readonly) NSString *sessionID;
-@property (nonatomic, copy, readonly) NSString *version;
-@property (nonatomic, copy, readonly) NSString *sdkVersion;
-@property (nonatomic, copy, readonly) NSString *platform;
-@property (nonatomic, copy, readonly) NSString *timezoneOffset;
-@property (nonatomic, copy, readonly) NSString *manufacturer;
-@property (nonatomic, copy, readonly) NSString *operatingSystemVersion;
-
-@property (nonatomic, assign, getter=isRequestInProgress, readonly) BOOL requestInProgress;
-
-- (instancetype)initWithEndpoint: (NSString *)endpoint
-                  environmentKey: (NSString *)environmentKey
-                      hashSecret: (NSString *)hashSecret
-                          userID: (NSString *)userID
-                       sessionID: (NSString *)sessionID
-                         version: (NSString *)version
-                      sdkVersion: (NSString *)sdkVersion
-                        platform: (NSString *)platform
-                  timezoneOffset: (NSString *)timezoneOffset
-                    manufacturer: (NSString *)manufacturer
-          operatingSystemVersion: (NSString *)operatingSystemVersion;
-
-
-- (void)requestWithDecisionPoint: (NSString *)decisionPoint
-                      parameters: (NSDictionary *)parameters
-               completionHandler: (void (^)(NSString *response,
-                                            NSInteger statusCode,
-                                            NSError *connectionError))handler;
-
-- (void)requestWithDecisionPoint: (NSString *)decisionPoint
-                         flavour: (DDNADecisionPointFlavour)flavour
-                      parameters: (NSDictionary *)parameters
-               completionHandler: (void (^)(NSString *response,
-                                            NSInteger statusCode,
-                                            NSError *connectionError))handler;
+- (void)request:(DDNAEngageRequest *)request handler:(DDNAEngageResponse)responseHander;
 
 @end
 

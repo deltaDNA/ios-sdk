@@ -39,18 +39,18 @@
     DDNASDK *ddnasdk = [DDNASDK sharedInstance];
     DDNAClientInfo *ddnaci = [DDNAClientInfo sharedInstance];
     
-    DDNAEngageService *engageService = [[DDNAEngageService alloc] initWithEndpoint:ddnasdk.engageURL
-                                                                    environmentKey:ddnasdk.environmentKey
-                                                                        hashSecret:ddnasdk.hashSecret
-                                                                            userID:ddnasdk.userID
-                                                                         sessionID:ddnasdk.sessionID
-                                                                           version:DDNA_ENGAGE_API_VERSION
-                                                                        sdkVersion:DDNA_SDK_VERSION
-                                                                          platform:ddnaci.platform
-                                                                    timezoneOffset:ddnaci.timezoneOffset
-                                                                      manufacturer:ddnaci.manufacturer
-                                                            operatingSystemVersion:ddnaci.operatingSystemVersion];
+    DDNAEngageService *engageService = [[DDNAEngageService alloc] initWithEnvironmentKey:ddnasdk.environmentKey
+                                                                                engageURL:ddnasdk.engageURL
+                                                                              hashSecret:ddnasdk.hashSecret
+                                                                              apiVersion:DDNA_ENGAGE_API_VERSION
+                                                                            sdkVersion:DDNA_SDK_VERSION
+                                                                              platform:ddnaci.platform
+                                                                        timezoneOffset:ddnaci.timezoneOffset
+                                                                          manufacturer:ddnaci.manufacturer
+                                                                operatingSystemVersion:ddnaci.operatingSystemVersion
+                                                                        timeoutSeconds:ddnasdk.settings.httpRequestEngageTimeoutSeconds];
     
+    engageService.factory = self;
     return engageService;
 }
 

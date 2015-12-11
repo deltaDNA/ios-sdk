@@ -15,7 +15,7 @@
 #define MOCKITO_SHORTHAND
 #import <OCMockito/OCMockito.h>
 
-#import <DeltaDNA/NSURL+DeltaDNA.h>
+#import "NSURL+DeltaDNA.h"
 
 
 SpecBegin(NSURL_DeltaDNA)

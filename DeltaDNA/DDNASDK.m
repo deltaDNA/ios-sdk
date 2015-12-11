@@ -10,12 +10,15 @@
 #import "DDNALog.h"
 #import "DDNAPlayerPrefs.h"
 #import "DDNAClientInfo.h"
-#import "DDNAEventStore.h"
-#import "DDNAEngageArchive.h"
 #import "DDNAEventBuilder.h"
 #import "NSString+DeltaDNA.h"
 #import "NSDictionary+DeltaDNA.h"
 #import <CommonCrypto/CommonDigest.h>
+
+#import "DDNAPersistentEventStore.h"
+#import "DDNAVolatileEventStore.h"
+#import "DDNAEngageService.h"
+#import "DDNAInstanceFactory.h"
 
 @interface DDNASDK ()
 {
@@ -23,8 +26,8 @@
     dispatch_queue_t _taskQueue;
 }
 
-@property (nonatomic, strong) DDNAEventStore *eventStore;
-@property (nonatomic, strong) DDNAEngageArchive *engageArchive;
+@property (nonatomic, strong) id<DDNAEventStoreProtocol> eventStore;
+@property (nonatomic, strong) DDNAEngageService *engageService;
 @property (nonatomic, assign) BOOL reset;
 @property (nonatomic, copy, readwrite) NSString *environmentKey;
 @property (nonatomic, copy, readwrite) NSString *collectURL;
@@ -54,6 +57,9 @@ static NSString *const PP_KEY_PUSH_NOTIFICATION_TOKEN = @"DDSDK_PUSH_NOTIFICATIO
 
 static NSString *const DD_EVENT_STARTED = @"DDNASDKStarted";
 
+static NSString *const kUserIdKey = @"DeltaDNA UserId";
+static NSString *const kPushNotificationTokenKey = @"DeltaDNA PushNotificationToken";
+
 @implementation DDNASDK
 
 #pragma mark - SingletonAccess
@@ -81,18 +87,21 @@ static NSString *const DD_EVENT_STARTED = @"DDNASDKStarted";
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveNotification:) name:DD_EVENT_STARTED object:nil];
         
-        NSString *eventStorePath = [DDNA_EVENT_STORAGE_PATH stringByReplacingOccurrencesOfString:@"{persistent_path}" withString:[DDNASettings getPrivateSettingsDirectoryPath]];
-        _eventStore = [[DDNAEventStore alloc] initWithStorePath:eventStorePath clearStore:_reset];
-        
-        NSString *engageArchivePath = [DDNA_ENGAGE_STORAGE_PATH stringByReplacingOccurrencesOfString:@"{persistent_path}" withString:[DDNASettings getPrivateSettingsDirectoryPath]];
-        _engageArchive = [[DDNAEngageArchive alloc] initWithArchivePath:engageArchivePath clearStore:_reset];
+        if (self.settings.useEventStore) {
+            DDNALogDebug(@"Using persistent event store for session.");
+            NSString *path = [DDNA_EVENT_STORAGE_PATH stringByReplacingOccurrencesOfString:@"{persistent_path}" withString:[DDNASettings getPrivateSettingsDirectoryPath]];
+            self.eventStore = [[DDNAPersistentEventStore alloc] initWithPath:path sizeBytes:DDNA_MAX_EVENT_STORE_BYTES clean:self.reset];
+        } else {
+            DDNALogDebug(@"Using volatile event store for session.");
+            self.eventStore = [[DDNAVolatileEventStore alloc] initWithSizeBytes:DDNA_MAX_EVENT_STORE_BYTES];
+        }
     }
     return self;
 }
 
 #pragma mark - Setup SDK
 
-- (void) startWithEnvironmentKey:(NSString *)environmentKey
+- (void)startWithEnvironmentKey:(NSString *)environmentKey
                       collectURL:(NSString *)collectURL
                        engageURL:(NSString *)engageURL
 {
@@ -102,21 +111,23 @@ static NSString *const DD_EVENT_STARTED = @"DDNASDKStarted";
                            userID:nil];
 }
 
--(void) startWithEnvironmentKey:(NSString *)environmentKey
+- (void)startWithEnvironmentKey:(NSString *)environmentKey
                      collectURL:(NSString *)collectURL
                       engageURL:(NSString *)engageURL
                          userID:(NSString *)userID
 {
     // Ensure this can only be called once
     @synchronized(self)
-    {        
+    {
         self.environmentKey = environmentKey;
         self.collectURL = [self mungeUrl: collectURL];
         self.engageURL = [self mungeUrl: engageURL];
         
+        BOOL newPlayer = NO;
         if ([NSString stringIsNilOrEmpty:userID] && [NSString stringIsNilOrEmpty:self.userID])
         {
             self.userID = [DDNASDK generateUserID];
+            newPlayer = YES;
         }
         else
         {
@@ -127,12 +138,13 @@ static NSString *const DD_EVENT_STARTED = @"DDNASDKStarted";
         
         self.platform = [DDNAClientInfo sharedInstance].platform;
         self.sessionID = [DDNASDK generateSessionID];
+        self.engageService = [[DDNAInstanceFactory sharedInstance] buildEngageService];
         
         [[NSNotificationCenter defaultCenter] postNotificationName:DD_EVENT_STARTED object:self];
         _started = YES;
         
         // Once we're started, send default events.
-        [self triggerDefaultEvents];
+        [self triggerDefaultEvents:newPlayer];
         
         // Setup automated event uploads.
         if (_settings.backgroundEventUpload)
@@ -254,81 +266,32 @@ static NSString *const DD_EVENT_STARTED = @"DDNASDKStarted";
 
     if ([NSString stringIsNilOrEmpty:_engageURL])
     {
-        DDNALogWarn(@"Engage URL not configured, can not make engagement.");
+        DDNALogWarn(@"Engagement request failed: Engage URL not configured.");
         return;
     }
     
     if ([NSString stringIsNilOrEmpty:decisionPoint])
     {
-        DDNALogWarn(@"No decision point set, can not make engagement.");
+        DDNALogWarn(@"Engagement request failed: No decision point set.");
         return;
     }
     
     @try
     {
-        DDNALogDebug(@"Starting engagement for '%@'", decisionPoint);
+        DDNAEngageRequest *engageRequest = [[DDNAEngageRequest alloc] initWithDecisionPoint:decisionPoint
+                                                                                     userId:self.userID
+                                                                                  sessionId:self.sessionID];
+        engageRequest.parameters = engageParams;
         
-        NSMutableDictionary *engageRequest = [NSMutableDictionary dictionary];
-        [engageRequest setObject:self.userID forKey:@"userID"];
-        [engageRequest setObject:decisionPoint forKey:@"decisionPoint"];
-        [engageRequest setObject:self.sessionID forKey:@"sessionID"];
-        [engageRequest setObject:DDNA_ENGAGE_API_VERSION forKey:@"version"];
-        [engageRequest setObject:DDNA_SDK_VERSION forKey:@"sdkVersion"];
-        [engageRequest setObject:self.platform forKey:@"platform"];
+        DDNALogDebug(@"Requesting engagement %@", engageRequest);
         
-        NSNumberFormatter * f = [[NSNumberFormatter alloc] init];
-        [f setNumberStyle:NSNumberFormatterDecimalStyle];
-        NSNumber * timezoneOffset = [f numberFromString:[DDNAClientInfo sharedInstance].timezoneOffset];
-        if (timezoneOffset != nil)
-        {
-            [engageRequest setObject:timezoneOffset forKey:@"timezoneOffset"];
-        }
-        
-        if ([DDNAClientInfo sharedInstance].locale != nil)
-        {
-            [engageRequest setObject:[DDNAClientInfo sharedInstance].locale forKey:@"locale"];
-        }
-        
-        if (engageParams != nil)
-        {
-            [engageRequest setObject:engageParams forKey:@"parameters"];
-        }
-        
-        [self engageRequest:[NSString stringWithContentsOfDictionary:engageRequest]
-          completionHandler:^(NSString * response)
-         {
-             bool usingCache = false;
-             if (response != nil)
-             {
-                 DDNALogDebug(@"Using live engagement: %@.", response);
-                 [_engageArchive setObject:response forKey:decisionPoint];
-                 [_engageArchive save];
-             }
-             else
-             {
-                 NSString * cachedResponse = [_engageArchive objectForKey:decisionPoint];
-                 if (cachedResponse != nil)
-                 {
-                     DDNALogWarn(@"Engage request failed, using cached response.");
-                     usingCache = true;
-                     response = cachedResponse;
-                 }
-                 else
-                 {
-                     DDNALogWarn(@"Engage request failed");
-                 }
-             }
-             
-             NSDictionary * result = [NSDictionary dictionaryWithJSONString:response];
-             
-             if (usingCache)
-             {
-                 NSMutableDictionary * result2 = [NSMutableDictionary dictionaryWithDictionary:result];
-                 [result2 setObject:@YES forKey:@"isCachedResponse"];
-                 result = result2;
-             }
-             callback(result);
-         }];
+        [self.engageService request:engageRequest handler:^(NSString *response, NSInteger statusCode, NSString *error) {
+            if (response && callback) {
+                callback([NSDictionary dictionaryWithJSONString:response]);
+            } else {
+                DDNALogWarn(@"Engagement failed with status code %ld: %@", statusCode, error);
+            }
+        }];
     }
     @catch (NSException *exception)
     {
@@ -407,10 +370,10 @@ static NSString *const DD_EVENT_STARTED = @"DDNASDKStarted";
     @try
     {
         // Swap over the event queue.
-        [_eventStore swap];
+        [_eventStore swapBuffers];
         
         // Create bulk event message to post to Collect.
-        NSArray *events = [_eventStore read];
+        NSArray *events = [_eventStore readOut];
         
         if (events.count > 0)
         {
@@ -422,12 +385,12 @@ static NSString *const DD_EVENT_STARTED = @"DDNASDKStarted";
                  if (succeeded)
                  {
                      DDNALogDebug(@"Event upload successful.");
-                     [_eventStore clear];
+                     [_eventStore clearOut];
                  }
                  else if (statusCode == 400)
                  {
                      DDNALogWarn(@"Collect rejected invalid events, resetting event store.");
-                     [_eventStore clear];
+                     [_eventStore clearOut];
                  }
                  else
                  {
@@ -449,7 +412,8 @@ static NSString *const DD_EVENT_STARTED = @"DDNASDKStarted";
 
 - (void) clearPersistentData
 {
-    [DDNAPlayerPrefs clear];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults removeObjectForKey:kUserIdKey];
     _reset = YES;
 }
 
@@ -457,70 +421,38 @@ static NSString *const DD_EVENT_STARTED = @"DDNASDKStarted";
 
 - (NSString *) userID
 {
-    return [DDNAPlayerPrefs getObjectForKey:PP_KEY_USER_ID withDefault:nil];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *userID = [defaults stringForKey:kUserIdKey];
+    if (userID) return userID;
+    
+    // read legacy userId
+    userID = [DDNAPlayerPrefs getObjectForKey:PP_KEY_USER_ID withDefault:nil];
+    [self setUserID:userID];
+    return userID;
 }
 
 - (void) setUserID:(NSString *)userID
 {
     if (![NSString stringIsNilOrEmpty:userID])
     {
-        [DDNAPlayerPrefs setObject:userID forKey:PP_KEY_USER_ID];
-        [DDNAPlayerPrefs save];
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        [defaults setObject:userID forKey:kUserIdKey];
     }
-}
-
-- (NSString *) hashSecret
-{
-    NSString *v = [DDNAPlayerPrefs getObjectForKey:PP_KEY_HASH_SECRET withDefault:nil];
-    if ([NSString stringIsNilOrEmpty:v])
-    {
-        return nil;
-    }
-    return v;
-}
-
-- (void) setHashSecret:(NSString *)hashSecret
-{
-    [DDNAPlayerPrefs setObject:hashSecret forKey:PP_KEY_HASH_SECRET];
-    [DDNAPlayerPrefs save];
-}
-
-- (NSString *) clientVersion
-{
-    NSString *v = [DDNAPlayerPrefs getObjectForKey:PP_KEY_CLIENT_VERSION withDefault:nil];
-    if ([NSString stringIsNilOrEmpty:v])
-    {
-        return nil;
-    }
-    return v;
-}
-
-- (void) setClientVersion:(NSString *)clientVersion
-{
-    if (![NSString stringIsNilOrEmpty:clientVersion])
-    {
-        [DDNAPlayerPrefs setObject:clientVersion forKey:PP_KEY_CLIENT_VERSION];
-        [DDNAPlayerPrefs save];
-    }
-}
-
-- (NSString *) pushNotificationToken
-{
-    NSString *v = [DDNAPlayerPrefs getObjectForKey:PP_KEY_PUSH_NOTIFICATION_TOKEN withDefault:nil];
-    if ([NSString stringIsNilOrEmpty:v])
-    {
-        DDNALogWarn(@"No push notification token set, sending push notifications will be unavailable");
-        return nil;
-    }
-    return v;
 }
 
 - (void) setPushNotificationToken:(NSString *)pushNotificationToken
 {
-    if (![NSString stringIsNilOrEmpty:pushNotificationToken])
-    {
-        [DDNAPlayerPrefs setObject:pushNotificationToken forKey:PP_KEY_PUSH_NOTIFICATION_TOKEN];
-        [DDNAPlayerPrefs save];
+    if (_started) {
+        NSString *token = [pushNotificationToken stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]];
+        token = [token stringByReplacingOccurrencesOfString:@" " withString:@""];
+        [self recordEvent:@"notificationServices" withEventDictionary:@{
+                @"pushNotificationToken": token
+            }];
+    } else {
+        __typeof(self) __weak weakSelf = self;
+        dispatch_async(_taskQueue, ^{
+            [weakSelf setPushNotificationToken:pushNotificationToken];
+        });
     }
 }
 
@@ -569,39 +501,6 @@ static NSString *const DD_EVENT_STARTED = @"DDNASDKStarted";
            }];
 }
 
-- (void) engageRequest:(NSString *) data completionHandler: (void(^)(NSString *)) callback
-{
-    NSString *url;
-    if (self.hashSecret != nil)
-    {
-        NSString *md5Hash = [DDNASDK generateHashForData:data
-                                          withHashSecret:self.hashSecret];
-        
-        url = [DDNASDK formatURIWithPattern:DDNA_ENGAGE_HASH_URL_PATTERN
-                                    forHost:self.engageURL
-                             forEnvironment:self.environmentKey
-                                withMD5Hash:md5Hash];
-    }
-    else
-    {
-        url = [DDNASDK formatURIWithPattern:DDNA_ENGAGE_URL_PATTERN
-                                    forHost:self.engageURL
-                             forEnvironment:self.environmentKey];
-    }
-    
-    [self httpPost:url withData:data completionHandler:^(int status, NSString * response) {
-           if (status == 200)
-           {
-               callback(response);
-           }
-           else
-           {
-               DDNALogDebug(@"Error requesting engagement, Engage returned: %i", status);
-               callback(nil);
-           }
-       }];
-}
-
 - (void) httpPostDispatcher: (NSString *) url
                    withData: (NSString *) data
                    attempts: (int) attempts
@@ -643,7 +542,7 @@ static NSString *const DD_EVENT_STARTED = @"DDNASDKStarted";
     
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]
                                                            cachePolicy:NSURLRequestUseProtocolCachePolicy
-                                                       timeoutInterval:self.settings.httpRequestTimeoutSeconds];
+                                                       timeoutInterval:self.settings.httpRequestCollectTimeoutSeconds];
     
     NSData *postData = [data dataUsingEncoding:NSUTF8StringEncoding];
     
@@ -716,9 +615,9 @@ static NSString *const DD_EVENT_STARTED = @"DDNASDKStarted";
     return [[NSUUID UUID] UUIDString];
 }
 
-- (void) triggerDefaultEvents
+- (void) triggerDefaultEvents:(BOOL)newPlayer
 {
-    if (_settings.onFirstRunSendNewPlayerEvent && [DDNAPlayerPrefs getIntegerForKey:PP_KEY_FIRST_RUN withDefault:1])
+    if (_settings.onFirstRunSendNewPlayerEvent && newPlayer)
     {
         DDNALogDebug(@"Sending 'newPlayer' event");
         
@@ -728,9 +627,6 @@ static NSString *const DD_EVENT_STARTED = @"DDNASDKStarted";
         }
         
         [self recordEvent:@"newPlayer" withEventDictionary:eventParams];
-        
-        [DDNAPlayerPrefs setInteger:0 forKey:PP_KEY_FIRST_RUN];
-        [DDNAPlayerPrefs save];
     }
     
     if (_settings.onStartSendGameStartedEvent)

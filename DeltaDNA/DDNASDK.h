@@ -146,7 +146,7 @@ typedef void (^DDNAEngagementResponseBlock) (NSDictionary *engageResponse);
  recognised, the callback block is called with the response parameters.
  @param decisionPoint The decision point.
  @param engageParams A dictionary of parameters for Engage.
- @param callback The block to call once Engage returns.
+ @param callback The block to call once Engage returns. Will be nil is no response is available.
  */
 - (void)requestEngagement: (NSString *) decisionPoint
          withEngageParams: (NSDictionary *) engageParams

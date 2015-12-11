@@ -14,6 +14,7 @@
 
 @property (nonatomic, copy, readonly) NSURL *url;
 @property (nonatomic, copy, readonly) NSString *jsonPayload;
+@property (nonatomic, assign) NSInteger timeoutSeconds;
 
 @property (nonatomic, weak) id<DDNANetworkRequestDelegate> delegate;
 

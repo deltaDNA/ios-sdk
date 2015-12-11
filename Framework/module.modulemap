@@ -1,0 +1,5 @@
+framework module DeltaDNA {
+    umbrella header "DeltaDNA.h"
+    export *
+    module * { export * }
+}

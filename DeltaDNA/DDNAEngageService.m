@@ -13,118 +13,160 @@
 #import "NSString+DeltaDNA.h"
 #import "NSDictionary+DeltaDNA.h"
 #import "DDNALog.h"
+#import "DDNACache.h"
+
+@interface DDNAEngageRequest ()
+
+@property (nonatomic, copy) NSString *decisionPoint;
+@property (nonatomic, copy) NSString *userId;
+@property (nonatomic, copy) NSString *sessionId;
+
+@end
+
+@implementation DDNAEngageRequest
+
+- (instancetype)initWithDecisionPoint:(NSString *)decisionPoint
+                               userId:(NSString *)userId
+                            sessionId:(NSString *)sessionId
+{
+    if ((self = [super self])) {
+        if (!decisionPoint || !userId || !sessionId) return nil;
+        self.decisionPoint = decisionPoint;
+        self.userId = userId;
+        self.sessionId = sessionId;
+        self.flavour = @"engagement";
+    }
+    return self;
+}
+
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"[EngageRequest] %@(%@) %@",
+            self.decisionPoint,
+            self.flavour,
+            (self.parameters ? self.parameters : @{})];
+}
+
+@end
+
+static NSString *const kEngagementCacheKey = @"Engagement %@(%@)";
 
 @interface DDNAEngageService () <DDNANetworkRequestDelegate>
 
-@property (nonatomic, copy) NSString *endpoint;
+@property (nonatomic, copy) NSString *engageURL;
 @property (nonatomic, copy) NSString *environmentKey;
 @property (nonatomic, copy) NSString *hashSecret;
-@property (nonatomic, copy) NSString *userID;
-@property (nonatomic, copy) NSString *sessionID;
-@property (nonatomic, copy) NSString *version;
+@property (nonatomic, copy) NSString *apiVersion;
 @property (nonatomic, copy) NSString *sdkVersion;
 @property (nonatomic, copy) NSString *platform;
 @property (nonatomic, copy) NSString *timezoneOffset;
 @property (nonatomic, copy) NSString *manufacturer;
 @property (nonatomic, copy) NSString *operatingSystemVersion;
-
-@property (nonatomic, assign) BOOL requestInProgress;
+@property (nonatomic, assign) NSInteger timeoutSeconds;
+@property (nonatomic, strong) NSMapTable *requests;
 
 @end
 
 @implementation DDNAEngageService
 
-- (instancetype)initWithEndpoint:(NSString *)endpoint
-                  environmentKey:(NSString *)environmentKey
-                      hashSecret:(NSString *)hashSecret
-                          userID:(NSString *)userID
-                       sessionID:(NSString *)sessionID
-                         version:(NSString *)version
-                      sdkVersion:(NSString *)sdkVersion
-                        platform:(NSString *)platform
-                  timezoneOffset:(NSString *)timezoneOffset
-                    manufacturer:(NSString *)manufacturer
-          operatingSystemVersion:(NSString *)operatingSystemVersion
+- (instancetype)initWithEnvironmentKey:(NSString *)environmentKey
+                             engageURL:(NSString *)engageURL
+                            hashSecret:(NSString *)hashSecret
+                            apiVersion:(NSString *)apiVersion
+                            sdkVersion:(NSString *)sdkVersion
+                              platform:(NSString *)platform
+                        timezoneOffset:(NSString *)timezoneOffset
+                          manufacturer:(NSString *)manufacturer
+                operatingSystemVersion:(NSString *)operatingSystemVersion
+                        timeoutSeconds:(NSInteger)timeoutSeconds
 {
-    if ((self = [super init])) {
-        self.endpoint = endpoint;
+    if ((self = [super self])) {
         self.environmentKey = environmentKey;
+        self.engageURL = engageURL;
         self.hashSecret = hashSecret;
-        self.userID = userID;
-        self.sessionID = sessionID;
-        self.version = version;
+        self.apiVersion = apiVersion;
         self.sdkVersion = sdkVersion;
         self.platform = platform;
         self.timezoneOffset = timezoneOffset;
         self.manufacturer = manufacturer;
         self.operatingSystemVersion = operatingSystemVersion;
-        self.factory = [DDNAInstanceFactory sharedInstance];
+        self.timeoutSeconds = timeoutSeconds;
+        self.requests = [NSMapTable strongToStrongObjectsMapTable];
     }
     return self;
 }
 
-- (void)requestWithDecisionPoint:(NSString *)decisionPoint
-                      parameters:(NSDictionary *)parameters
-               completionHandler:(void (^)(NSString *response,
-                                           NSInteger statusCode,
-                                           NSError *connectionError))handler
+- (void)request:(DDNAEngageRequest *)engageRequest handler:(DDNAEngageResponse)responseHandler
 {
-    return [self requestWithDecisionPoint:decisionPoint
-                                  flavour:DDNADecisionPointFlavourEngagement
-                               parameters:parameters
-                        completionHandler:handler];
-}
-
-- (void)requestWithDecisionPoint:(NSString *)decisionPoint
-                         flavour:(DDNADecisionPointFlavour)flavour
-                      parameters:(NSDictionary *)parameters
-               completionHandler:(void (^)(NSString *response,
-                                           NSInteger statusCode,
-                                           NSError *connectionError))handler
-{
-    DDNALogDebug(@"Making engage request for %@@%@ with parameters %@", decisionPoint, [NSString stringWithDDNADecisionPointFlavour:flavour], parameters);
+    if (!engageRequest || !responseHandler) return;
     
-    self.completionHandler = handler;
-    
-    NSMutableDictionary *request = [NSMutableDictionary dictionaryWithCapacity:11];
-    [request setValue:self.userID forKey:@"userID"];
-    [request setValue:self.sessionID forKey:@"sessionID"];
-    [request setValue:self.version forKey:@"version"];
-    [request setValue:self.sdkVersion forKey:@"sdkVersion"];
-    [request setValue:self.platform forKey:@"platform"];
-    [request setValue:self.timezoneOffset forKey:@"timezoneOffset"];
-    [request setValue:self.manufacturer forKey:@"manufacturer"];
-    [request setValue:self.operatingSystemVersion forKey:@"operatingSystemVersion"];
-    [request setValue:decisionPoint forKey:@"decisionPoint"];
-    [request setValue:[NSString stringWithDDNADecisionPointFlavour:flavour] forKey:@"flavour"];
-    [request setValue:parameters forKey:@"parameters"];
+    NSDictionary *request = @{
+        @"decisionPoint": engageRequest.decisionPoint,
+        @"flavour": engageRequest.flavour,
+        @"parameters": engageRequest.parameters ? engageRequest.parameters : @{},
+        @"userID": engageRequest.userId,
+        @"sessionID": engageRequest.sessionId,
+        @"version": self.apiVersion,
+        @"sdkVersion": self.sdkVersion,
+        @"platform": self.platform,
+        @"timezoneOffset": self.timezoneOffset,
+        @"manufacturer": self.manufacturer,
+        @"operatingSystemVersion": self.operatingSystemVersion
+    };
     
     NSString *jsonPayload = [NSString stringWithContentsOfDictionary:request];
     
-    NSURL *URL = [NSURL URLWithEngageEndpoint:self.endpoint
+    NSURL *url = [NSURL URLWithEngageEndpoint:self.engageURL
                                environmentKey:self.environmentKey
                                       payload:jsonPayload
                                    hashSecret:self.hashSecret];
     
-    DDNANetworkRequest *networkRequest = [self.factory buildNetworkRequestWithURL:URL
-                                                                      jsonPayload:jsonPayload
-                                                                         delegate:self];
-    [networkRequest send];
-    self.requestInProgress = YES;
+    DDNANetworkRequest *networkRequest = [self.factory buildNetworkRequestWithURL:url jsonPayload:jsonPayload delegate:self];
+    if (networkRequest) {
+        [self.requests setObject:@{ @"request": engageRequest, @"response": responseHandler} forKey:networkRequest];
+        networkRequest.timeoutSeconds = self.timeoutSeconds;
+        [networkRequest send];
+    }
 }
 
 #pragma mark - DDNANetworkRequestDelegate;
 
 - (void)request:(DDNANetworkRequest *)request didReceiveResponse:(NSString *)response statusCode:(NSInteger)statusCode
 {
-    self.requestInProgress = NO;
-    self.completionHandler(response, statusCode, nil);
+    NSDictionary *engagement = [self.requests objectForKey:request];
+    if (engagement != nil) {
+        DDNAEngageRequest *engageRequest = engagement[@"request"];
+        DDNAEngageResponse responseHandler = engagement[@"response"];
+        // We don't need to cache based on real-time criteria, better to use the last response that's close enough.
+        [[DDNACache sharedCache] setObject:response forKey:[NSString stringWithFormat:kEngagementCacheKey, engageRequest.decisionPoint, engageRequest.flavour]];
+        if (responseHandler) responseHandler(response, statusCode, nil);
+        [self.requests removeObjectForKey:request];
+    } else {
+        DDNALogWarn(@"Network request not found!");
+    }
 }
 
 - (void)request:(DDNANetworkRequest *)request didFailWithResponse: (NSString *)response statusCode:(NSInteger)statusCode error:(NSError *)error
 {
-    self.requestInProgress = NO;
-    self.completionHandler(response, statusCode, error);
+    NSDictionary *engagement = [self.requests objectForKey:request];
+    if (engagement != nil) {
+        DDNAEngageRequest *engageRequest = engagement[@"request"];
+        DDNAEngageResponse responseHandler = engagement[@"response"];
+        NSString *cachedResponse = [[DDNACache sharedCache] objectForKey:[NSString stringWithFormat:kEngagementCacheKey, engageRequest.decisionPoint, engageRequest.flavour]];
+        if (responseHandler != nil) {
+            if (cachedResponse != nil) {
+                NSMutableDictionary *jsonObj = [NSMutableDictionary dictionaryWithDictionary:[NSDictionary dictionaryWithJSONString:cachedResponse]];
+                [jsonObj setObject:@YES forKey:@"isCachedResponse"];
+                cachedResponse = [NSString stringWithContentsOfDictionary:jsonObj];
+            } else {
+                cachedResponse = response;
+            }
+            responseHandler(cachedResponse, statusCode, [error localizedDescription]);
+        }
+        [self.requests removeObjectForKey:request];
+    } else {
+        DDNALogWarn(@"Network request not found!");
+    }
 }
 
 @end
