@@ -7,6 +7,7 @@
 //
 
 #import "DDNAPopup.h"
+#import "NSString+DeltaDNA.h"
 
 @interface DDNABasicPopup () {
     
@@ -79,7 +80,11 @@
         self.beforePrepare();
     }
     
-    dispatch_async(dispatch_get_main_queue(), ^{
+    __weak typeof(self) weakSelf = self;
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        
+        __strong __typeof__(weakSelf) strongSelf = weakSelf;
        
         if (image[@"url"]) {
             NSURL *url = [NSURL URLWithString:image[@"url"]];
@@ -89,15 +94,14 @@
                 _spriteMap = [UIImage imageWithData:data];
                 _image = [NSDictionary dictionaryWithDictionary:image];
                 
-                if (self.afterPrepare != nil) {
-                    self.afterPrepare();
+                if (strongSelf.afterPrepare != nil) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        strongSelf.afterPrepare();
+                    });
                 }
             }
-            
-            
         }
     });
-    
 }
 
 - (void)show {
@@ -150,12 +154,12 @@
         NSDictionary* shim = _image[@"shim"];
         if (shim[@"mask"]) {
             NSString* mask = shim[@"mask"];
-            if ([mask isEqualToString:@"dimmed"]) {
+            if ([mask isEqualToStringCaseInsensitive:@"dimmed"]) {
                 _shimView.backgroundColor = [UIColor colorWithRed:(0.0/255.0f) green:(0.0/255.0f) blue:(0.0/255.0f) alpha:_dimmedMaskAlpha];
-            } else if ([mask isEqualToString:@"clear"]) {
+            } else if ([mask isEqualToStringCaseInsensitive:@"clear"]) {
                 _shimView.backgroundColor = [UIColor clearColor];
             }
-            if (![mask isEqualToString:@"none"]) {
+            if (![mask isEqualToStringCaseInsensitive:@"none"]) {
                 _shimView.userInteractionEnabled = YES;
                 _shimView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
                 _shimView.frame = self.bounds;
@@ -274,7 +278,7 @@
             NSEnumerator *frontToBackWindows = [[[UIApplication sharedApplication] windows] reverseObjectEnumerator];
             
             for (UIWindow *window in frontToBackWindows) {
-                if (window.windowLevel == UIWindowLevelNormal) {
+                if (window.windowLevel == UIWindowLevelNormal && window.hidden == NO) {
                     [window addSubview:self];
                     _isShowing = YES;
                     break;
@@ -316,20 +320,20 @@
     
     if (constraints[@"valign"]) {
         NSString * valign = constraints[@"valign"];
-        if ([valign isEqualToString:@"top"]) {
+        if ([valign isEqualToStringCaseInsensitive:@"top"]) {
             top = 0;
         }
-        else if ([valign isEqualToString:@"bottom"]) {
+        else if ([valign isEqualToStringCaseInsensitive:@"bottom"]) {
             top = screenHeight - height;
         }
     }
     
     if (constraints[@"halign"]) {
         NSString * halign = constraints[@"halign"];
-        if ([halign isEqualToString:@"left"]) {
+        if ([halign isEqualToStringCaseInsensitive:@"left"]) {
             left = 0;
         }
-        else if ([halign isEqualToString:@"right"]) {
+        else if ([halign isEqualToStringCaseInsensitive:@"right"]) {
             left = screenWidth - width;
         }
     }
@@ -373,20 +377,20 @@
     
     if (constraints[@"valign"]) {
         NSString * valign = constraints[@"valign"];
-        if ([valign isEqualToString:@"top"]) {
+        if ([valign isEqualToStringCaseInsensitive:@"top"]) {
             top = tc;
         }
-        else if ([valign isEqualToString:@"bottom"]) {
+        else if ([valign isEqualToStringCaseInsensitive:@"bottom"]) {
             top = screenHeight - height - bc;
         }
     }
     
     if (constraints[@"halign"]) {
         NSString * halign = constraints[@"halign"];
-        if ([halign isEqualToString:@"left"]) {
+        if ([halign isEqualToStringCaseInsensitive:@"left"]) {
             left = lc;
         }
-        else if ([halign isEqualToString:@"right"]) {
+        else if ([halign isEqualToStringCaseInsensitive:@"right"]) {
             left = screenWidth - width - rc;
         }
     }
@@ -432,15 +436,15 @@
     NSString* type = action[@"type"];
     NSString* value = action[@"value"];
     
-    if ([type isEqualToString:@"none"]) {
+    if ([type isEqualToStringCaseInsensitive:@"none"]) {
         return; // do nothing
     }
-    else if ([type isEqualToString:@"action"]) {
+    else if ([type isEqualToStringCaseInsensitive:@"action"]) {
         if (value != nil && self.onAction != nil) {
             self.onAction(name, type, value);
         }
     }
-    else if ([type isEqualToString:@"link"]) {
+    else if ([type isEqualToStringCaseInsensitive:@"link"]) {
         if (value != nil) {
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:value]];
         }
@@ -448,7 +452,7 @@
             self.onAction(name, type, value);
         }
     }
-    else if ([type isEqualToString:@"dismiss"]) {
+    else if ([type isEqualToStringCaseInsensitive:@"dismiss"]) {
         if (self.dismiss != nil) {
             self.dismiss(name);
         }

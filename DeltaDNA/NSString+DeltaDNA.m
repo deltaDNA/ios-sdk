@@ -46,4 +46,9 @@
     return ret;
 }
 
+- (BOOL)isEqualToStringCaseInsensitive:(NSString *)string
+{
+    return (string && [string caseInsensitiveCompare:self] == NSOrderedSame);
+}
+
 @end

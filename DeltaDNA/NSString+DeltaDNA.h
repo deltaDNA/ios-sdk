@@ -16,4 +16,6 @@
 
 - (NSString *) md5;
 
+- (BOOL)isEqualToStringCaseInsensitive:(NSString *)string;
+
 @end
