@@ -149,23 +149,17 @@ static NSString *const kPushNotificationTokenKey = @"DeltaDNA PushNotificationTo
         // Once we're started, send default events.
         [self triggerDefaultEvents:newPlayer];
         
-        // Setup automated event uploads.
-        if (_settings.backgroundEventUpload)
-        {
-            _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, dispatch_get_main_queue());
-            
-            if (_timer)
-            {
-                uint64_t interval = _settings.backgroundEventUploadRepeatRateSeconds * NSEC_PER_SEC;
+        // Setup automated event uploads in the background.
+        if (_settings.backgroundEventUpload) {
+            _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0));
+            if (_timer) {
+                uint64_t interval = self.settings.backgroundEventUploadRepeatRateSeconds * NSEC_PER_SEC;
                 uint64_t leeway = 1ull * NSEC_PER_SEC;
                 dispatch_source_set_timer(_timer, dispatch_walltime(NULL, 0), interval, leeway);
                 dispatch_source_set_event_handler(_timer, ^{
                     [self upload];
                 });
-                
-                // Trigger after delay
-                dispatch_time_t delay = dispatch_time(DISPATCH_TIME_NOW, _settings.backgroundEventUploadStartDelaySeconds * NSEC_PER_SEC);
-                dispatch_after(delay, dispatch_get_main_queue(), ^{
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(self.settings.backgroundEventUploadStartDelaySeconds * NSEC_PER_SEC)), dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
                     dispatch_resume(_timer);
                 });
             }
