@@ -12,7 +12,7 @@
 @protocol DDNANetworkRequestDelegate;
 
 @class DDNAEngageService;
-
+@class DDNACollectService;
 
 @interface DDNAInstanceFactory : NSObject
 
@@ -23,5 +23,7 @@
                                           delegate: (id<DDNANetworkRequestDelegate>)delegate;
 
 - (DDNAEngageService *)buildEngageService;
+
+- (DDNACollectService *)buildCollectService;
 
 @end

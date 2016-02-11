@@ -98,6 +98,10 @@
 		636556E91C610A12004153E7 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 636556E81C610A12004153E7 /* Info.plist */; };
 		636557001C610E20004153E7 /* DeltaDNA.h in Headers */ = {isa = PBXBuildFile; fileRef = 6365560E1C60F598004153E7 /* DeltaDNA.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		637373011C6B4B41007B789D /* DeltaDNA.h in Headers */ = {isa = PBXBuildFile; fileRef = 637373001C6B4B41007B789D /* DeltaDNA.h */; };
+		63A11FAD1C6B77D6008DEE99 /* DDNACollectService.h in Headers */ = {isa = PBXBuildFile; fileRef = 63A11FAB1C6B77D6008DEE99 /* DDNACollectService.h */; };
+		63A11FAE1C6B77D6008DEE99 /* DDNACollectService.h in Headers */ = {isa = PBXBuildFile; fileRef = 63A11FAB1C6B77D6008DEE99 /* DDNACollectService.h */; };
+		63A11FAF1C6B77D6008DEE99 /* DDNACollectService.m in Sources */ = {isa = PBXBuildFile; fileRef = 63A11FAC1C6B77D6008DEE99 /* DDNACollectService.m */; };
+		63A11FB01C6B77D6008DEE99 /* DDNACollectService.m in Sources */ = {isa = PBXBuildFile; fileRef = 63A11FAC1C6B77D6008DEE99 /* DDNACollectService.m */; };
 		A8B8DB3686B192A35B63F0A6 /* libPods-DeltaDNA iOS Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 076B4EC072FBCA3FB406D2B4 /* libPods-DeltaDNA iOS Tests.a */; };
 /* End PBXBuildFile section */
 
@@ -176,6 +180,8 @@
 		636556AB1C60FD6C004153E7 /* DeltaDNA tvOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "DeltaDNA tvOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		636556E81C610A12004153E7 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		637373001C6B4B41007B789D /* DeltaDNA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeltaDNA.h; sourceTree = "<group>"; };
+		63A11FAB1C6B77D6008DEE99 /* DDNACollectService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDNACollectService.h; sourceTree = "<group>"; };
+		63A11FAC1C6B77D6008DEE99 /* DDNACollectService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDNACollectService.m; sourceTree = "<group>"; };
 		967F8058FFACDBF7FC90FFAF /* Pods-DeltaDNA tvOS Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DeltaDNA tvOS Tests.debug.xcconfig"; path = "Tests/Pods/Target Support Files/Pods-DeltaDNA tvOS Tests/Pods-DeltaDNA tvOS Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		DB4588CC66B911AF2CF345B6 /* Pods-DeltaDNA iOS Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DeltaDNA iOS Tests.release.xcconfig"; path = "Tests/Pods/Target Support Files/Pods-DeltaDNA iOS Tests/Pods-DeltaDNA iOS Tests.release.xcconfig"; sourceTree = "<group>"; };
 		E7E746D2E40D5762C4AF1097 /* Pods-DeltaDNA iOS Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DeltaDNA iOS Tests.debug.xcconfig"; path = "Tests/Pods/Target Support Files/Pods-DeltaDNA iOS Tests/Pods-DeltaDNA iOS Tests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -294,6 +300,8 @@
 				6365563D1C60F5F2004153E7 /* NSURL+DeltaDNA.m */,
 				6327172B1C650D1B00AB2806 /* DDNACache.h */,
 				6327172C1C650D1B00AB2806 /* DDNACache.m */,
+				63A11FAB1C6B77D6008DEE99 /* DDNACollectService.h */,
+				63A11FAC1C6B77D6008DEE99 /* DDNACollectService.m */,
 			);
 			path = DeltaDNA;
 			sourceTree = "<group>";
@@ -388,6 +396,7 @@
 				636556491C60F5F2004153E7 /* DDNAEngageService.h in Headers */,
 				6327172D1C650D1B00AB2806 /* DDNACache.h in Headers */,
 				636556431C60F5F2004153E7 /* DDNAClientInfo.h in Headers */,
+				63A11FAD1C6B77D6008DEE99 /* DDNACollectService.h in Headers */,
 				636556661C60F5F2004153E7 /* NSURL+DeltaDNA.h in Headers */,
 				6365564B1C60F5F2004153E7 /* DDNAEventBuilder.h in Headers */,
 				636556411C60F5F2004153E7 /* DDNAVolatileEventStore.h in Headers */,
@@ -426,6 +435,7 @@
 				636556DF1C6108DF004153E7 /* DDNAProductBuilder.h in Headers */,
 				636556E01C6108DF004153E7 /* DDNASDK+Transaction.h in Headers */,
 				636556E11C6108DF004153E7 /* DDNASDK.h in Headers */,
+				63A11FAE1C6B77D6008DEE99 /* DDNACollectService.h in Headers */,
 				636556E21C6108DF004153E7 /* DDNASettings.h in Headers */,
 				636556E41C6108DF004153E7 /* NSDictionary+DeltaDNA.h in Headers */,
 				636556E51C6108DF004153E7 /* NSString+DeltaDNA.h in Headers */,
@@ -704,6 +714,7 @@
 				6365565E1C60F5F2004153E7 /* DDNASDK.m in Sources */,
 				636556441C60F5F2004153E7 /* DDNAClientInfo.m in Sources */,
 				636556521C60F5F2004153E7 /* DDNALog.m in Sources */,
+				63A11FAF1C6B77D6008DEE99 /* DDNACollectService.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -729,6 +740,7 @@
 				636556CE1C6108BE004153E7 /* NSDictionary+DeltaDNA.m in Sources */,
 				636556CF1C6108BE004153E7 /* NSString+DeltaDNA.m in Sources */,
 				636556D01C6108BE004153E7 /* NSURL+DeltaDNA.m in Sources */,
+				63A11FB01C6B77D6008DEE99 /* DDNACollectService.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

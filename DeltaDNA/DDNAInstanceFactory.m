@@ -11,6 +11,7 @@
 #import "DDNAClientInfo.h"
 #import "DDNANetworkRequest.h"
 #import "DDNAEngageService.h"
+#import "DDNACollectService.h"
 
 @implementation DDNAInstanceFactory
 
@@ -40,18 +41,28 @@
     DDNAClientInfo *ddnaci = [DDNAClientInfo sharedInstance];
     
     DDNAEngageService *engageService = [[DDNAEngageService alloc] initWithEnvironmentKey:ddnasdk.environmentKey
-                                                                                engageURL:ddnasdk.engageURL
+                                                                               engageURL:ddnasdk.engageURL
                                                                               hashSecret:ddnasdk.hashSecret
                                                                               apiVersion:DDNA_ENGAGE_API_VERSION
-                                                                            sdkVersion:DDNA_SDK_VERSION
-                                                                              platform:ddnaci.platform
-                                                                        timezoneOffset:ddnaci.timezoneOffset
-                                                                          manufacturer:ddnaci.manufacturer
-                                                                operatingSystemVersion:ddnaci.operatingSystemVersion
-                                                                        timeoutSeconds:ddnasdk.settings.httpRequestEngageTimeoutSeconds];
+                                                                              sdkVersion:DDNA_SDK_VERSION
+                                                                                platform:ddnaci.platform
+                                                                          timezoneOffset:ddnaci.timezoneOffset
+                                                                            manufacturer:ddnaci.manufacturer
+                                                                  operatingSystemVersion:ddnaci.operatingSystemVersion
+                                                                          timeoutSeconds:ddnasdk.settings.httpRequestEngageTimeoutSeconds];
     
     engageService.factory = self;
     return engageService;
+}
+
+- (DDNACollectService *)buildCollectService
+{
+    DDNASDK *ddnasdk = [DDNASDK sharedInstance];
+    
+    DDNACollectService *collectService = [[DDNACollectService alloc] initWithEnvironmentKey:ddnasdk.environmentKey collectURL:ddnasdk.collectURL hashSecret:ddnasdk.hashSecret];
+    
+    collectService.factory = self;
+    return collectService;
 }
 
 @end

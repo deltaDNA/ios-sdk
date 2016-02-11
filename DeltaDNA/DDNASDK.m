@@ -19,6 +19,7 @@
 #import "DDNAVolatileEventStore.h"
 #import "DDNAEngageService.h"
 #import "DDNAInstanceFactory.h"
+#import "DDNACollectService.h"
 
 @interface DDNASDK ()
 {
@@ -28,6 +29,7 @@
 
 @property (nonatomic, strong) id<DDNAEventStoreProtocol> eventStore;
 @property (nonatomic, strong) DDNAEngageService *engageService;
+@property (nonatomic, strong) DDNACollectService *collectService;
 @property (nonatomic, assign) BOOL reset;
 @property (nonatomic, copy, readwrite) NSString *environmentKey;
 @property (nonatomic, copy, readwrite) NSString *collectURL;
@@ -139,6 +141,7 @@ static NSString *const kPushNotificationTokenKey = @"DeltaDNA PushNotificationTo
         self.platform = [DDNAClientInfo sharedInstance].platform;
         self.sessionID = [DDNASDK generateSessionID];
         self.engageService = [[DDNAInstanceFactory sharedInstance] buildEngageService];
+        self.collectService = [[DDNAInstanceFactory sharedInstance] buildCollectService];
         
         [[NSNotificationCenter defaultCenter] postNotificationName:DD_EVENT_STARTED object:self];
         _started = YES;
@@ -354,59 +357,51 @@ static NSString *const kPushNotificationTokenKey = @"DeltaDNA PushNotificationTo
 
 - (void) upload
 {
-    if (!_started)
-    {
-        NSException * e = [NSException exceptionWithName:@"NotStartedException"
-                                                  reason:@"You must first start the DeltaDNA SDK"
-                                                userInfo:nil];
-        @throw e;
-    }
-    
-    if (_uploading) {
-        DDNALogWarn(@"Event upload already in progress, try again later.");
-        return;
-    }
-    
-    @try
-    {
-        // Swap over the event queue.
-        [_eventStore swapBuffers];
-        
-        // Create bulk event message to post to Collect.
-        NSArray *events = [_eventStore readOut];
-        
-        if (events.count > 0)
-        {
-            _uploading = YES;
-            DDNALogDebug(@"Sending latest events to Collect");
-            [self postEvents:events completionHandler:^(bool succeeded, int statusCode)
-             {
-                 _uploading = NO;
-                 if (succeeded)
-                 {
-                     DDNALogDebug(@"Event upload successful.");
-                     [_eventStore clearOut];
-                 }
-                 else if (statusCode == 400)
-                 {
-                     DDNALogWarn(@"Collect rejected invalid events, resetting event store.");
-                     [_eventStore clearOut];
-                 }
-                 else
-                 {
-                     DDNALogWarn(@"Event upload failed - try again later.");
-                 }
-             }];
+    @synchronized(self) {
+        if (!self.started) {
+            NSException *exception = [NSException exceptionWithName:@"NotStartedException" reason:@"You must first start the deltaDNA SDK" userInfo:nil];
+            @throw exception;
         }
-        else
-        {
-            DDNALogDebug(@"No events to upload");
+        
+        if (self.uploading) {
+            DDNALogWarn(@"Event upload already in progress, try again later.");
+            return;
         }
-    }
-    @catch (NSException *exception)
-    {
-        _uploading = NO;
-        DDNALogDebug(@"Event upload failed: %@", exception.reason);
+        
+        @try {
+            self.uploading = YES;
+            [self.eventStore swapBuffers];
+            
+            NSArray *events = [self.eventStore readOut];
+            if (events.count > 0) {
+                DDNACollectRequest *request = [[DDNACollectRequest alloc] initWithEventList:events timeoutSeconds:self.settings.httpRequestCollectTimeoutSeconds retries:self.settings.httpRequestMaxTries retryDelaySeconds:self.settings.httpRequestRetryDelaySeconds];
+                if (!request) {
+                    DDNALogWarn(@"Event corruption detected, clearing out queue");
+                    [self.eventStore clearOut];
+                    self.uploading = NO;
+                } else {
+                    DDNALogDebug(@"Sending latest events to Collect: %@", request);
+                    [self.collectService request:request handler:^(NSString *response, NSInteger statusCode, NSString *error) {
+                        if (statusCode >= 200 && statusCode < 400) {
+                            DDNALogDebug(@"Event upload completed successfully.");
+                            [self.eventStore clearOut];
+                        } else if (statusCode == 400) {
+                            DDNALogWarn(@"Collect rejected invalid events.");
+                            [self.eventStore clearOut];
+                        } else {
+                            DDNALogWarn(@"Event upload failed, try again later.");
+                        }
+                        self.uploading = NO;
+                    }];
+                }
+            } else {
+                self.uploading = NO;
+            }
+        }
+        @catch (NSException *exception) {
+            self.uploading = NO;
+            DDNALogWarn(@"Event upload failed: %@", exception.reason);
+        }
     }
 }
 
@@ -467,98 +462,6 @@ static NSString *const kPushNotificationTokenKey = @"DeltaDNA PushNotificationTo
     } else {
         return url;
     }
-}
-
-- (void) postEvents:(NSArray *)events completionHandler: (void(^)(bool, int)) callback
-{
-    NSString *joinedEvents = [events componentsJoinedByString:@","];
-    NSString *bulkEvent = [NSString stringWithFormat:@"%@%@%@", @"{\"eventList\":[", joinedEvents, @"]}"];
-    
-    NSString *url;
-    if (self.hashSecret != nil)
-    {
-        NSString *md5Hash = [DDNASDK generateHashForData:bulkEvent
-                                          withHashSecret:self.hashSecret];
-        
-        url = [DDNASDK formatURIWithPattern:DDNA_COLLECT_HASH_URL_PATTERN
-                                    forHost:self.collectURL
-                             forEnvironment:self.environmentKey
-                                withMD5Hash:md5Hash];
-    }
-    else
-    {
-        url = [DDNASDK formatURIWithPattern:DDNA_COLLECT_URL_PATTERN
-                                    forHost:self.collectURL
-                             forEnvironment:self.environmentKey];
-    }
-    
-    // Wrap up calling HttpPost method so it can be called repeatedly in the background with GCD.
-    [self httpPostDispatcher:url
-                    withData:bulkEvent
-                    attempts:self.settings.httpRequestMaxTries
-           completionHandler:^(bool success, int statusCode) {
-               callback(success, statusCode);
-           }];
-}
-
-- (void) httpPostDispatcher: (NSString *) url
-                   withData: (NSString *) data
-                   attempts: (int) attempts
-          completionHandler: (void(^)(bool, int)) callback
-{
-    if (attempts > 0)
-    {
-        [self httpPost:url withData:data completionHandler:^(int status, NSString *response) {
-            if (status == 200 || status == 204)
-            {
-                callback(true, status);
-            }
-            else if (status == 400) {
-                // Bad request, we're trying to send some invalid requests
-                DDNALogWarn(@"Bad request posting events.");
-                callback(false, status);
-            }
-            else
-            {
-                // trigger again after delay
-                DDNALogDebug(@"Retrying request, %i attempts remain", attempts);
-                dispatch_time_t delay = dispatch_time(DISPATCH_TIME_NOW,
-                                                      self.settings.httpRequestRetryDelaySeconds*NSEC_PER_SEC);
-                dispatch_after(delay, dispatch_get_main_queue(), ^{
-                    [self httpPostDispatcher:url withData:data attempts:attempts-1 completionHandler:callback];
-                });
-            }
-        }];
-    }
-    else
-    {
-        callback(false, 0);
-    }
-}
-
-- (void) httpPost:(NSString *) url withData:(NSString *) data completionHandler: (void(^)(int, NSString *)) callback
-{
-    DDNALogDebug(@"HttpPost called with %@ and data %@", url, data);
-    
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]
-                                                           cachePolicy:NSURLRequestUseProtocolCachePolicy
-                                                       timeoutInterval:self.settings.httpRequestCollectTimeoutSeconds];
-    
-    NSData *postData = [data dataUsingEncoding:NSUTF8StringEncoding];
-    
-    [request setHTTPMethod:@"POST"];
-    [request setHTTPBody:postData];
-    [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    
-    NSURLSession *session = [NSURLSession sharedSession];
-    [[session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
-        NSString *responseStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-        DDNALogDebug(@"Server responded: status %li response: %@ error:%@",
-                     (long)httpResponse.statusCode, responseStr, error);
-        callback((int)httpResponse.statusCode, responseStr);
-    }] resume];
 }
 
 + (NSString *) getCurrentTimestamp
