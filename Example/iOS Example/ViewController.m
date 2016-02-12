@@ -57,75 +57,51 @@
     // Dispose of any resources that can be recreated.
 }
 
-
-- (IBAction)simpleEvent:(id)sender {
-    // Send an Achievement event
-    DDNASDK * sdk = [DDNASDK sharedInstance];
-    
-    DDNAEventBuilder * achievementParams = [DDNAEventBuilder new];
-    [achievementParams setString:@"Sunday Showdown Tournament Win" forKey:@"achievementName"];
-    [achievementParams setString:@"SS-2014-03-02-01" forKey:@"achievementID"];
-    
-    DDNAProductBuilder * achievementProductParams = [DDNAProductBuilder new];
-    [achievementProductParams setRealCurrency:@"USD" withAmount:5000 ];
-    [achievementProductParams addVirtualCurrency:@"GRIND" withAmount:20 andName:@"VIP Points"];
-    [achievementProductParams addItem:@"Victory Badge" withAmount:1 andName:@"Sunday Showdown Medal"];
-    
-    DDNAEventBuilder * achievementRewardParams = [DDNAEventBuilder new];
-    [achievementRewardParams setProductBuilder:achievementProductParams forKey:@"rewardProducts"];
-    [achievementRewardParams setString:@"Medal" forKey:@"rewardName"];
-    [achievementParams setEventBuilder:achievementRewardParams forKey:@"reward"];
-    
-    [sdk recordEvent:@"achievement" withEventBuilder:achievementParams];
-}
-
-- (IBAction)complexEvent:(id)sender {
-    // Send a Transaction Event.
-    DDNASDK * sdk = [DDNASDK sharedInstance];
-    
-    DDNAEventBuilder * transactionParams = [DDNAEventBuilder new];
-    [transactionParams setString:@"Weapon type 11 manual repair" forKey:@"transactionName"];
-    [transactionParams setString:@"47891208312996456524019-178.149.115.237:51787" forKey:@"transactionID"];
-    [transactionParams setString:@"62.212.91.84:15116" forKey:@"transactorID"];
-    [transactionParams setString:@"4019" forKey:@"productID"];
-    [transactionParams setString:@"PURCHASE" forKey:@"transactionType"];
-    [transactionParams setString:@"GB" forKey:@"paymentCountry"];
-    
-    DDNAProductBuilder * productsReceivedParams = [DDNAProductBuilder new];
-    [productsReceivedParams addItem:@"WeaponMaxConditionRepair" withAmount:5 andName:@"WeaponMaxCondition:11"];
-    [transactionParams setProductBuilder:productsReceivedParams forKey:@"productsReceived"];
-    
-    DDNAProductBuilder * productsSpentParams = [DDNAProductBuilder new];
-    [productsReceivedParams addVirtualCurrency:@"GRIND" withAmount:710 andName:@"Credit"];
-    [transactionParams setProductBuilder:productsSpentParams forKey:@"productsSpent"];
-    
-    [sdk recordEvent:@"transaction" withEventBuilder:transactionParams];
+- (IBAction)basicEvent:(id)sender {
+    [[DDNASDK sharedInstance] recordEvent:[DDNAEvent eventWithName:@"basicEvent"]];
 }
 
 - (IBAction)customEvent:(id)sender {
-    // Send a KeyTypes event.
-    DDNASDK * sdk = [DDNASDK sharedInstance];
+    DDNAEvent *event = [DDNAEvent eventWithName:@"keyTypes"];
+    [event setParam:@5 forKey:@"userLevel"];
+    [event setParam:@YES forKey:@"isTutorial"];
+    [event setParam:[NSDate date] forKey:@"exampleTimestamp"];
     
-    DDNAEventBuilder * keyTypesParams = [DDNAEventBuilder new];
-    [keyTypesParams setInteger:5 forKey:@"userLevel"];
-    [keyTypesParams setBoolean:YES forKey:@"isTutorial"];
-    [keyTypesParams setTimestamp:[NSDate date] forKey:@"exampleTimestamp"];
-    
-    [sdk recordEvent:@"keyTypes" withEventBuilder:keyTypesParams];
+    [[DDNASDK sharedInstance] recordEvent:event];
 }
 
-- (IBAction)transactionHelper:(id)sender {
-    // Try out the Transaction helper
-    DDNASDK * sdk = [DDNASDK sharedInstance];
+- (IBAction)achievementEvent:(id)sender {
+    DDNAProduct *product = [DDNAProduct product];
+    [product setRealCurrencyType:@"USD" amount:5000];
+    [product addVirtualCurrencyName:@"VIP Points" type:@"GRIND" amount:20];
+    [product addItemName:@"Sunday Showdown Medal" type:@"Victory Badge" amount:1];
     
-    [sdk buyVirtualCurrency:@"PREMIUM_GRIND"
-            receivingAmount:5
-                   withName:@"Gold"
-          usingRealCurrency:@"USD"
-             spendingAmount:1000
-        withTransactionName:@"Buy Gold Coins"
-     //andTransactionReceipt:@"12567335-DFEWFG-sdfgr-343"];
-      andTransactionReceipt:nil];
+    DDNAParams *reward = [DDNAParams params];
+    [reward setParam:@"Medal" forKey:@"rewardName"];
+    [reward setParam:product forKey:@"rewardProducts"];
+    
+    DDNAEvent *event = [DDNAEvent eventWithName:@"achievement"];
+    [event setParam:@"Sunday Showdown Tournament Win" forKey:@"achievementName"];
+    [event setParam:@"SS-2014-03-02-01" forKey:@"achievementID"];
+    [event setParam:reward forKey:@"reward"];
+    
+    [[DDNASDK sharedInstance] recordEvent:event];
+}
+
+- (IBAction)transactionEvent:(id)sender {
+    DDNAProduct *productsReceived = [DDNAProduct product];
+    [productsReceived addItemName:@"WeaponMaxCondition:11" type:@"WeaponMaxConditionRepair" amount:5];
+    
+    DDNAProduct *productsSpent = [DDNAProduct product];
+    [productsSpent addVirtualCurrencyName:@"Credit" type:@"GRIND" amount:710];
+    
+    DDNATransaction *event = [DDNATransaction transactionWithName:@"Weapon type 11 manual repair" type:@"PURCHASE" productsReceived:productsReceived productsSpent:productsSpent];
+    [event setTransactionId:@"47891208312996456524019-178.149.115.237:51787"];
+    [event setTransactorId:@"62.212.91.84:15116"];
+    [event setProductId:@"4019"];
+    [event setParam:@"GB" forKey:@"paymentCountry"];
+    
+    [[DDNASDK sharedInstance] recordEvent:event];
 }
 
 - (IBAction)engage:(id)sender {

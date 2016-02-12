@@ -10,7 +10,6 @@
 #import "DDNALog.h"
 #import "DDNAPlayerPrefs.h"
 #import "DDNAClientInfo.h"
-#import "DDNAEventBuilder.h"
 #import "NSString+DeltaDNA.h"
 #import "NSDictionary+DeltaDNA.h"
 #import <CommonCrypto/CommonDigest.h>
@@ -181,7 +180,7 @@ static NSString *const kPushNotificationTokenKey = @"DeltaDNA PushNotificationTo
         dispatch_source_cancel(_timer);
     }
     
-    [self recordEvent:@"gameEnded"];
+    [self recordEventWithName:@"gameEnded"];
     [self upload];
     
     if (_started) {
@@ -190,57 +189,38 @@ static NSString *const kPushNotificationTokenKey = @"DeltaDNA PushNotificationTo
     _started = NO;
 }
 
-- (void) recordEvent: (NSString *) eventName
+- (void)recordEvent:(DDNAEvent *)event
 {
-    NSDictionary * eventParams = [NSDictionary dictionary];
-    [self recordEvent:eventName withEventDictionary:eventParams];
+    if (!self.started) {
+        @throw([NSException exceptionWithName:@"DDNANotStartedException" reason:@"The deltaDNA SDK must be started before it can record events." userInfo:nil]);
+    }
+    
+    [event setParam:self.platform forKey:@"platform"];
+    [event setParam:DDNA_SDK_VERSION forKey:@"sdkVersion"];
+    
+    NSMutableDictionary *eventSchema = [NSMutableDictionary dictionaryWithDictionary:[event dictionary]];
+    [eventSchema setObject:self.userID forKey:@"userID"];
+    [eventSchema setObject:self.sessionID forKey:@"sessionID"];
+    [eventSchema setObject:[DDNASDK getCurrentTimestamp] forKey:@"eventTimestamp"];
+    
+    if (![self.eventStore pushEvent:eventSchema]) {
+        DDNALogWarn(@"Event store full, dropping event");
+    }
 }
 
-- (void) recordEvent: (NSString *) eventName
-     withEventBuilder: (DDNAEventBuilder *) eventBuilder
+- (void)recordEventWithName:(NSString *)eventName
 {
-    [self recordEvent:eventName withEventDictionary:[eventBuilder dictionary]];
+    [self recordEvent:[DDNAEvent eventWithName:eventName]];
 }
 
-- (void) recordEvent: (NSString *) eventName
-  withEventDictionary: (NSDictionary *) eventParams
+- (void)recordEventWithName:(NSString *)eventName eventParams:(NSDictionary *)eventParams
 {
-    if (!self.hasStarted)
-    {
-        NSException * e = [NSException exceptionWithName:@"NotStartedException"
-                                                  reason:@"You must first start the DeltaDNA SDK"
-                                                userInfo:nil];
-        @throw e;
+    DDNAEvent *event = [DDNAEvent eventWithName:eventName];
+    for (NSString *key in eventParams) {
+        [event setParam:eventParams[key] forKey:key];
     }
     
-    // The header for every event is eventName, userID, sessionID and timestamp.
-    NSMutableDictionary * eventRecord = [NSMutableDictionary dictionary];
-    [eventRecord setObject:eventName forKey:EV_KEY_NAME];
-    [eventRecord setObject:self.userID forKey:EV_KEY_USER_ID];
-    [eventRecord setObject:self.sessionID forKey:EV_KEY_SESSION_ID];
-    [eventRecord setObject:[DDNASDK getCurrentTimestamp] forKey:EV_KEY_TIMESTAMP];
-    
-    NSMutableDictionary * mutableEventParams = [NSMutableDictionary dictionaryWithDictionary:eventParams];
-    
-    // Every template should support sdkVersion and platform in it's event params.
-    if (![mutableEventParams objectForKey:EP_KEY_PLATFORM])
-    {
-        [mutableEventParams setObject:self.platform forKey:EP_KEY_PLATFORM];
-    }
-    
-    if (![mutableEventParams objectForKey:EP_KEY_SDK_VERSION])
-    {
-        [mutableEventParams setObject:DDNA_SDK_VERSION forKey:EP_KEY_SDK_VERSION];
-    }
-    
-    [eventRecord setObject:mutableEventParams forKey:EV_KEY_PARAMS];
-    
-    // Push onto the event store.
-    
-    if (![_eventStore pushEvent:eventRecord])
-    {
-        DDNALogDebug(@"Event Store full, unable to record event");
-    }
+    [self recordEvent:event];
 }
 
 - (void) requestEngagement: (NSString *) decisionPoint
@@ -338,7 +318,7 @@ static NSString *const kPushNotificationTokenKey = @"DeltaDNA PushNotificationTo
         }
         [eventParams setObject:[NSNumber numberWithBool:didLaunch] forKey:@"notificationLaunch"];
         
-        [self recordEvent:@"notificationOpened" withEventDictionary:eventParams];
+        [self recordEventWithName:@"notificationOpened" eventParams:eventParams];
     }
     else {
         // wait until the SDK has been started
@@ -434,7 +414,7 @@ static NSString *const kPushNotificationTokenKey = @"DeltaDNA PushNotificationTo
     if (_started) {
         NSString *token = [pushNotificationToken stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]];
         token = [token stringByReplacingOccurrencesOfString:@" " withString:@""];
-        [self recordEvent:@"notificationServices" withEventDictionary:@{
+        [self recordEventWithName:@"notificationServices" eventParams:@{
                 @"pushNotificationToken": token
             }];
     } else {
@@ -523,7 +503,7 @@ static NSString *const kPushNotificationTokenKey = @"DeltaDNA PushNotificationTo
             [eventParams setObject:[DDNAClientInfo sharedInstance].countryCode forKey:@"userCountry"];
         }
         
-        [self recordEvent:@"newPlayer" withEventDictionary:eventParams];
+        [self recordEventWithName:@"newPlayer" eventParams:eventParams];
     }
     
     if (_settings.onStartSendGameStartedEvent)
@@ -545,7 +525,7 @@ static NSString *const kPushNotificationTokenKey = @"DeltaDNA PushNotificationTo
             [eventParams setObject:[DDNAClientInfo sharedInstance].locale forKey:@"userLocale"];
         }
         
-        [self recordEvent:@"gameStarted" withEventDictionary:eventParams];
+        [self recordEventWithName:@"gameStarted" eventParams:eventParams];
     }
     
     if (_settings.onStartSendClientDeviceEvent)
@@ -566,7 +546,7 @@ static NSString *const kPushNotificationTokenKey = @"DeltaDNA PushNotificationTo
             [eventParams setObject:[DDNAClientInfo sharedInstance].languageCode forKey:@"userLanguage"];
         }
         
-        [self recordEvent:@"clientDevice" withEventDictionary:eventParams];
+        [self recordEventWithName:@"clientDevice" eventParams:eventParams];
     }
 }
 

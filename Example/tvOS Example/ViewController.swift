@@ -33,7 +33,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func onSimpleEvent(sender: AnyObject) {
-        DDNASDK.sharedInstance().recordEvent("achievement", withEventDictionary: [
+        DDNASDK.sharedInstance().recordEventWithName("achievement", eventParams: [
             "achievementName" : "Sunday Showdown Tournament Win",
             "achievementID" : "SS-2014-03-02-01",
             "reward" : [

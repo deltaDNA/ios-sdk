@@ -12,10 +12,10 @@
 
 @property (nonatomic, strong) IBOutlet UILabel *labelSDK;
 
-- (IBAction)simpleEvent:(id)sender;
-- (IBAction)complexEvent:(id)sender;
+- (IBAction)basicEvent:(id)sender;
 - (IBAction)customEvent:(id)sender;
-- (IBAction)transactionHelper:(id)sender;
+- (IBAction)achievementEvent:(id)sender;
+- (IBAction)transactionEvent:(id)sender;
 - (IBAction)engage:(id)sender;
 - (IBAction)imageMessage:(id)sender;
 - (IBAction)pushNotification:(id)sender;

@@ -8,8 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import "DDNASettings.h"
-#import "DDNAEventBuilder.h"
 #import "DDNAPopup.h"
+#import "DDNAEvent.h"
 
 
 @interface DDNASDK : NSObject
@@ -104,26 +104,23 @@
 - (void)stop;
 
 /**
+ Records an event using the DDNAEvent builder class.
+ @param event The event to record.
+ */
+- (void)recordEvent:(DDNAEvent *)event;
+
+/**
  Records an event with no custom parameters.
  @param eventName The name of the event schema.
  */
-- (void)recordEvent: (NSString *) eventName;
+- (void)recordEventWithName:(NSString *)eventName;
 
 /**
- Records an event with event parameters.  Build the dictionary to
- match the @b eventParams structure of you event schema.
+ Records an event with a dictionary of event parameters.  Structure the dictionary keys to match the @b eventParams structure of your event schema.
  @param eventName The name of the event schema.
- @param eventParam A dictionary of event parameters.
+ @param eventParams A dictionary of event parameters.
  */
-- (void)recordEvent: (NSString *) eventName withEventDictionary: (NSDictionary *) eventParams;
-
-/**
- Records an event with event parameters built from the DDNAEventBuilder helper
- class.
- @param eventName The name of the eventSchema.
- @param eventBuilder The event parameters.
- */
-- (void)recordEvent: (NSString *) eventName withEventBuilder: (DDNAEventBuilder *) eventBuilder;
+- (void)recordEventWithName:(NSString *)eventName eventParams:(NSDictionary *)eventParams;
 
 /**
  @typedef
