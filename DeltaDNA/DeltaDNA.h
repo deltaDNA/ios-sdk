@@ -1,22 +1,28 @@
 //
-//  DeltaDNA.h
-//  DeltaDNA
+// Copyright (c) 2016 deltaDNA Ltd. All rights reserved.
 //
-//  Created by David White on 02/02/2016.
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
 //
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
 //
 
 #ifndef _DELTADNA_
 #define _DELTADNA_
 
 #import <DeltaDNA/DDNASDK.h>
-#import <DeltaDNA/NSString+DeltaDNA.h>
-#import <DeltaDNA/NSDictionary+DeltaDNA.h>
-#import <DeltaDNA/DDNAClientInfo.h>
-#import <DeltaDNA/DDNALog.h>
+#import <DeltaDNA/DDNASettings.h>
 #import <DeltaDNA/DDNAParams.h>
 #import <DeltaDNA/DDNAEvent.h>
 #import <DeltaDNA/DDNAProduct.h>
 #import <DeltaDNA/DDNATransaction.h>
+#import <DeltaDNA/DDNAPopup.h>
 
 #endif /* _DELTADNA_ */
