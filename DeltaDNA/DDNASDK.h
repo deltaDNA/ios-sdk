@@ -18,6 +18,7 @@
 
 @class DDNASettings;
 @class DDNAEvent;
+@class DDNAEngagement;
 @protocol DDNAPopup;
 
 @interface DDNASDK : NSObject
@@ -144,7 +145,7 @@ typedef void (^DDNAEngagementResponseBlock) (NSDictionary *engageResponse);
  @param callback The block to call once Engage returns.
  */
 - (void)requestEngagement: (NSString *) decisionPoint
-            callbackBlock: (DDNAEngagementResponseBlock) callback;
+            callbackBlock: (DDNAEngagementResponseBlock) callback DEPRECATED_ATTRIBUTE;
 
 /**
  Makes an Engage call for a decision point.  If the decision point is
@@ -155,7 +156,15 @@ typedef void (^DDNAEngagementResponseBlock) (NSDictionary *engageResponse);
  */
 - (void)requestEngagement: (NSString *) decisionPoint
          withEngageParams: (NSDictionary *) engageParams
-            callbackBlock: (DDNAEngagementResponseBlock) callback;
+            callbackBlock: (DDNAEngagementResponseBlock) callback DEPRECATED_ATTRIBUTE;
+
+/**
+ Makes an Engage call.  Create a @c DDNAEngagement with a decision point and optional paramters.  If the engagement is recognised by the platform the completion handler returns the set of parameters to use.
+ @param engagement The engagement to request.
+ @param completionHandler Optional callback that reports the parameters the engagement returns.  The status code and error report any network failures.
+ */
+- (void)requestEngagement:(DDNAEngagement *)engagement
+        completionHandler:(void(^)(NSDictionary *parameters, NSInteger statusCode, NSError *error))completionHandler;
 
 /**
  Requests an image based engagement for popup on the screen.  This is a convienience around @c requestEngagement that loads the image resource automatically from the original engage request.  Register a block with the popup's afterPrepare block to be notified when the resource has loaded.
@@ -165,7 +174,7 @@ typedef void (^DDNAEngagementResponseBlock) (NSDictionary *engageResponse);
  */
 - (void)requestImageMessage: (NSString *) decisionPoint
            withEngageParams: (NSDictionary *) engageParams
-                 imagePopup: (id <DDNAPopup>) popup;
+                 imagePopup: (id <DDNAPopup>) popup DEPRECATED_ATTRIBUTE;
 
 /**
  Requests an image based engagement for popup on the screen.  This is a convienience around @c requestEngagement that loads the image resource automatically from the original engage request.  Register a block with the popup's afterPrepare block to be notified when the resource has loaded.
@@ -177,7 +186,17 @@ typedef void (^DDNAEngagementResponseBlock) (NSDictionary *engageResponse);
 - (void)requestImageMessage: (NSString *) decisionPoint
            withEngageParams: (NSDictionary *) engageParams
                  imagePopup: (id <DDNAPopup>) popup
-              callbackBlock: (DDNAEngagementResponseBlock) callback;
+              callbackBlock: (DDNAEngagementResponseBlock) callback DEPRECATED_ATTRIBUTE;
+
+/**
+ Requests an image message engagement.  The image resource is automatically loaded from the engage request.  Register a block with the popup's afterPrepare block to be notified when the resource has loaded.
+ @param engagement The engagement the image message is an action for.
+ @param popup An object that conforms to the @c DDNAPopup protocol that can handle the response, for example @c DDNABasicPopup.
+ @param completionHandler Optional callback that reports the parameters the engagement returns.  The status code and error report any network failures.
+ */
+- (void)requestImageMessage:(DDNAEngagement *)engagement
+                      popup:(id<DDNAPopup>)popup
+          completionHandler:(void(^)(NSDictionary *parameters, NSInteger statusCode, NSError *error))completionHandler;
 
 /**
  Records receiving a push notification.  Call from @c application:didFinishLaunchingWithOptions and @c application:didReceiveRemoteNotification so we can track the open rate of your notifications.  It is safe to call this method before @c startWithEnvironmentKey:collectURL:engageURL, the event will be queued.

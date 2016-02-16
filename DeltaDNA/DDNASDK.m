@@ -18,6 +18,7 @@
 #import "DDNASettings.h"
 #import "DDNAPopup.h"
 #import "DDNAEvent.h"
+#import "DDNAEngagement.h"
 #import "DDNALog.h"
 #import "DDNAPlayerPrefs.h"
 #import "DDNAClientInfo.h"
@@ -128,7 +129,6 @@ static NSString *const kPushNotificationTokenKey = @"DeltaDNA PushNotificationTo
                       engageURL:(NSString *)engageURL
                          userID:(NSString *)userID
 {
-    // Ensure this can only be called once
     @synchronized(self)
     {
         self.environmentKey = environmentKey;
@@ -244,46 +244,46 @@ static NSString *const kPushNotificationTokenKey = @"DeltaDNA PushNotificationTo
           withEngageParams: (NSDictionary *) engageParams
              callbackBlock: (DDNAEngagementResponseBlock) callback
 {
-    if (!self.hasStarted)
-    {
-        NSException * e = [NSException exceptionWithName:@"NotStartedException"
-                                                  reason:@"You must first start the DeltaDNA SDK"
-                                                userInfo:nil];
-        @throw e;
+    DDNAEngagement *engagement = [DDNAEngagement engagementWithDecisionPoint:decisionPoint];
+    for (NSString *key in engageParams) {
+        [engagement setParam:engageParams[key] forKey:key];
     }
+    
+    [self requestEngagement:engagement completionHandler:^(NSDictionary *parameters, NSInteger statusCode, NSError *error) {
+        if (callback) callback(parameters);
+    }];
+}
 
-    if ([NSString stringIsNilOrEmpty:_engageURL])
-    {
-        DDNALogWarn(@"Engagement request failed: Engage URL not configured.");
-        return;
+- (void)requestEngagement:(DDNAEngagement *)engagement completionHandler:(void (^)(NSDictionary *, NSInteger, NSError *))completionHandler
+{
+    if (!self.started) {
+        @throw([NSException exceptionWithName:@"DDNANotStartedException" reason:@"You must first start the deltaDNA SDK" userInfo:nil]);
     }
     
-    if ([NSString stringIsNilOrEmpty:decisionPoint])
-    {
-        DDNALogWarn(@"Engagement request failed: No decision point set.");
-        return;
+    if ([NSString stringIsNilOrEmpty:self.engageURL]) {
+        @throw([NSException exceptionWithName:NSInvalidArgumentException reason:@"Engage URL not set" userInfo:nil]);
     }
     
-    @try
-    {
-        DDNAEngageRequest *engageRequest = [[DDNAEngageRequest alloc] initWithDecisionPoint:decisionPoint
+    @try {
+        
+        NSDictionary *dict = [engagement dictionary];
+        
+        DDNAEngageRequest *engageRequest = [[DDNAEngageRequest alloc] initWithDecisionPoint:dict[@"decisionPoint"]
                                                                                      userId:self.userID
                                                                                   sessionId:self.sessionID];
-        engageRequest.parameters = engageParams;
+        engageRequest.flavour = dict[@"flavour"];
+        engageRequest.parameters = dict[@"parameters"];
         
-        DDNALogDebug(@"Requesting engagement %@", engageRequest);
-        
-        [self.engageService request:engageRequest handler:^(NSString *response, NSInteger statusCode, NSString *error) {
-            if (response && callback) {
-                callback([NSDictionary dictionaryWithJSONString:response]);
+        [self.engageService request:engageRequest handler:^(NSString *response, NSInteger statusCode, NSError *error) {
+            if (response && completionHandler) {
+                completionHandler([NSDictionary dictionaryWithJSONString:response], statusCode, error);
             } else {
-                DDNALogWarn(@"Engagement failed with status code %ld: %@", statusCode, error);
+                DDNALogWarn(@"Engagement failed with status code %ld: %@", (long)statusCode, [error localizedDescription]);
             }
         }];
     }
-    @catch (NSException *exception)
-    {
-        DDNALogDebug(@"Engagement request failed: %@", exception.reason);
+    @catch (NSException *exception) {
+        DDNALogWarn(@"Engagement request failed: %@", exception.reason);
     }
 }
 
@@ -308,7 +308,21 @@ static NSString *const kPushNotificationTokenKey = @"DeltaDNA PushNotificationTo
                  }
              }
      ];
+}
 
+- (void)requestImageMessage:(DDNAEngagement *)engagement popup:(id<DDNAPopup>)popup completionHandler:(void (^)(NSDictionary *, NSInteger, NSError *))completionHandler
+{
+    [self requestEngagement:engagement completionHandler:^(NSDictionary *parameters, NSInteger statusCode, NSError *error) {
+        if (parameters) {
+            if (parameters[@"image"]) {
+                [popup prepareWithImage:parameters[@"image"]];
+            }
+        }
+
+        if (completionHandler) {
+            completionHandler(parameters, statusCode, error);
+        }
+    }];
 }
 
 - (void) recordPushNotification:(NSDictionary *)pushNotification didLaunch:(BOOL)didLaunch
@@ -344,7 +358,7 @@ static NSString *const kPushNotificationTokenKey = @"DeltaDNA PushNotificationTo
 {
     @synchronized(self) {
         if (!self.started) {
-            NSException *exception = [NSException exceptionWithName:@"NotStartedException" reason:@"You must first start the deltaDNA SDK" userInfo:nil];
+            NSException *exception = [NSException exceptionWithName:@"DDNANotStartedException" reason:@"You must first start the deltaDNA SDK" userInfo:nil];
             @throw exception;
         }
         

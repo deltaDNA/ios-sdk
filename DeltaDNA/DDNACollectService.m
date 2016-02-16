@@ -65,8 +65,8 @@
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"[CollectRequest] Events=%ld Bytes=%lu",
-            self.eventCount,
+    return [NSString stringWithFormat:@"[CollectRequest] Events=%ld Bytes=%u",
+            (long)self.eventCount,
             [self.eventJSON dataUsingEncoding:NSUTF8StringEncoding].length];
 }
 
@@ -150,7 +150,7 @@
         DDNALogDebug(@"Network request not found!");
     }
     
-    DDNALogDebug(@"Collect request failed! %ld %@ %@", statusCode, [error localizedDescription], retry ? @"Retrying..." : @"");
+    DDNALogDebug(@"Collect request failed! %ld %@ %@", (long)statusCode, [error localizedDescription], retry ? @"Retrying..." : @"");
 }
 
 @end

@@ -92,13 +92,13 @@ describe(@"engage service", ^{
         
         __block NSString *resultResponse;
         __block NSInteger resultStatusCode;
-        __block NSString *resultError;
+        __block NSError *resultError;
         
         DDNAEngageRequest *request = [[DDNAEngageRequest alloc] initWithDecisionPoint:@"testDecisionPoint"
                                                                                userId:@"user-id-1234"
                                                                             sessionId:@"session-id-12345"];
         
-        [engageService request:request handler:^(NSString *response, NSInteger statusCode, NSString *error) {
+        [engageService request:request handler:^(NSString *response, NSInteger statusCode, NSError *error) {
             resultResponse = response;
             resultStatusCode = statusCode;
             resultError = error;
@@ -136,13 +136,13 @@ describe(@"engage service", ^{
         
         __block NSString *resultResponse;
         __block NSInteger resultStatusCode;
-        __block NSString *resultError;
+        __block NSError *resultError;
         
         DDNAEngageRequest *engageRequest = [[DDNAEngageRequest alloc] initWithDecisionPoint:@"testDecisionPoint"
                                                                                      userId:@"user-id-1234"
                                                                                   sessionId:@"session-id-12345"];
         
-        [engageService request:engageRequest handler:^(NSString *response, NSInteger statusCode, NSString *connectionError) {
+        [engageService request:engageRequest handler:^(NSString *response, NSInteger statusCode, NSError *connectionError) {
             resultResponse = response;
             resultStatusCode = statusCode;
             resultError = connectionError;
@@ -163,13 +163,13 @@ describe(@"engage service", ^{
         
         __block NSString *resultResponse;
         __block NSInteger resultStatusCode;
-        __block NSString *resultError;
+        __block NSError *resultError;
         
         DDNAEngageRequest *engageRequest = [[DDNAEngageRequest alloc] initWithDecisionPoint:@"testDecisionPoint"
                                                                                      userId:@"user-id-12345"
                                                                                   sessionId:@"session-id-12345"];
         
-        [engageService request:engageRequest handler:^(NSString *response, NSInteger statusCode, NSString *connectionError) {
+        [engageService request:engageRequest handler:^(NSString *response, NSInteger statusCode, NSError *connectionError) {
             resultResponse = response;
             resultStatusCode = statusCode;
             resultError = connectionError;
@@ -177,7 +177,7 @@ describe(@"engage service", ^{
         
         expect(resultResponse).to.beNil();
         expect(resultStatusCode).to.equal(-1);
-        expect(resultError).to.equal(@"The operation couldn’t be completed. (NSURLErrorDomain error -57.)");
+        expect(resultError).to.equal([NSError errorWithDomain:NSURLErrorDomain code:-57 userInfo:nil]);
         
     });
     

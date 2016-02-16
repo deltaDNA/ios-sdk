@@ -34,6 +34,7 @@ FOUNDATION_EXPORT const unsigned char DeltaDNAVersionString[];
 #import <DeltaDNA/DDNAEvent.h>
 #import <DeltaDNA/DDNAProduct.h>
 #import <DeltaDNA/DDNATransaction.h>
+#import <DeltaDNA/DDNAEngagement.h>
 #import <DeltaDNA/DDNAPopup.h>
 
 #endif /* _DELTADNA_ */

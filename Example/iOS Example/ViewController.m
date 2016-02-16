@@ -113,24 +113,34 @@
 }
 
 - (IBAction)engage:(id)sender {
-    DDNASDK * sdk = [DDNASDK sharedInstance];
+//    DDNASDK * sdk = [DDNASDK sharedInstance];
+//    
+//    NSMutableDictionary * engageParams = [NSMutableDictionary dictionary];
+//    [engageParams setObject:[NSNumber numberWithInt:4] forKey:@"userLevel"];
+//    [engageParams setObject:[NSNumber numberWithInt:1000] forKey:@"experience"];
+//    [engageParams setObject:@"Disco Volante" forKey:@"missionName"];
+//    
+//    [sdk requestEngagement:@"gameLoaded"
+//          withEngageParams:engageParams
+//             callbackBlock:^(NSDictionary * response) {
+//                 NSLog(@"Engage returned '%@'.", response);
+//             } ];
     
-    NSMutableDictionary * engageParams = [NSMutableDictionary dictionary];
-    [engageParams setObject:[NSNumber numberWithInt:4] forKey:@"userLevel"];
-    [engageParams setObject:[NSNumber numberWithInt:1000] forKey:@"experience"];
-    [engageParams setObject:@"Disco Volante" forKey:@"missionName"];
+    DDNAEngagement *engagement = [DDNAEngagement engagementWithDecisionPoint:@"gameLoaded"];
+    [engagement setParam:@4 forKey:@"userLevel"];
+    [engagement setParam:@1000 forKey:@"experience"];
+    [engagement setParam:@"Disco Volante" forKey:@"missionName"];
     
-    [sdk requestEngagement:@"gameLoaded"
-          withEngageParams:engageParams
-             callbackBlock:^(NSDictionary * response) {
-                 NSLog(@"Engage returned '%@'.", response);
-             } ];
+    [[DDNASDK sharedInstance] requestEngagement:engagement completionHandler:^(NSDictionary *parameters, NSInteger statusCode, NSError *error) {
+        NSLog(@"Engagement request returned the following parameters:\n%@", parameters);
+    }];
+    
 }
 
 - (IBAction)imageMessage:(id)sender {
-    DDNASDK * sdk = [DDNASDK sharedInstance];
+//    DDNASDK * sdk = [DDNASDK sharedInstance];
     
-    NSMutableDictionary * engageParams = [NSMutableDictionary dictionary];
+//    NSMutableDictionary * engageParams = [NSMutableDictionary dictionary];
     
     DDNABasicPopup* popup = [DDNABasicPopup popup];
     __weak DDNABasicPopup* weakPopup = popup;
@@ -146,22 +156,28 @@
         NSLog(@"OnAction by %@ type %@ value %@", name, type, value);
     };
     
-    [sdk requestImageMessage:@"imageMessage"
-            withEngageParams:engageParams
-                  imagePopup:popup
-               callbackBlock:^(NSDictionary * response) {
-                   NSLog(@"Engage returned '%@'.", response);
-               } ];
+//    [sdk requestImageMessage:@"imageMessage"
+//            withEngageParams:engageParams
+//                  imagePopup:popup
+//               callbackBlock:^(NSDictionary * response) {
+//                   NSLog(@"Engage returned '%@'.", response);
+//               } ];
+    
+    DDNAEngagement *engagement = [DDNAEngagement engagementWithDecisionPoint:@"imageMessage"];
+    
+    [[DDNASDK sharedInstance] requestImageMessage:engagement popup:popup completionHandler:^(NSDictionary *parameters, NSInteger statusCode, NSError *error) {
+        NSLog(@"Image message request returned the following parameters:\n%@", parameters);
+    }];
 }
 
 - (IBAction)pushNotification:(id)sender {
     NSDictionary *apnsPayload = @{
-                                  @"aps": @{
-                                          @"alert": @"Play now to collect your reward"
-                                          },
-                                  @"_ddName": @"NotificationName",
-                                  @"_ddId": @"42"
-                                  };
+        @"aps": @{
+            @"alert": @"Play now to collect your reward"
+        },
+        @"_ddName": @"NotificationName",
+        @"_ddId": @"42"
+    };
     
     [[DDNASDK sharedInstance] recordPushNotification:apnsPayload didLaunch:YES];
 }

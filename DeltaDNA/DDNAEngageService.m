@@ -169,7 +169,7 @@ static NSString *const kEngagementCacheKey = @"Engagement %@(%@)";
             } else {
                 cachedResponse = response;
             }
-            responseHandler(cachedResponse, statusCode, [error localizedDescription]);
+            responseHandler(cachedResponse, statusCode, error);
         }
         [self.requests removeObjectForKey:request];
     } else {

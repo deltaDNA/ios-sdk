@@ -14,16 +14,16 @@
 // limitations under the License.
 //
 
-#ifndef _DELTADNA_
-#define _DELTADNA_
+#import <Foundation/Foundation.h>
 
-#import <DeltaDNA/DDNASDK.h>
-#import <DeltaDNA/DDNASettings.h>
-#import <DeltaDNA/DDNAParams.h>
-#import <DeltaDNA/DDNAEvent.h>
-#import <DeltaDNA/DDNAProduct.h>
-#import <DeltaDNA/DDNATransaction.h>
-#import <DeltaDNA/DDNAEngagement.h>
-#import <DeltaDNA/DDNAPopup.h>
+@interface DDNAEngagement : NSObject
 
-#endif /* _DELTADNA_ */
++ (instancetype)engagementWithDecisionPoint:(NSString *)decisionPoint;
+
+- (instancetype)initWithDecisionPoint:(NSString *)decisionPoint;
+
+- (void)setParam:(NSObject *)param forKey:(NSString *)key;
+
+- (NSDictionary *)dictionary;
+
+@end

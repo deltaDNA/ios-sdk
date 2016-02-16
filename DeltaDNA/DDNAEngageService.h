@@ -34,7 +34,7 @@
 
 @end
 
-typedef void (^DDNAEngageResponse) (NSString *response, NSInteger statusCode, NSString *error);
+typedef void (^DDNAEngageResponse) (NSString *response, NSInteger statusCode, NSError *error);
 
 @interface DDNAEngageService : NSObject
 
