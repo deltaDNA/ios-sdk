@@ -43,7 +43,7 @@
 		63298E2D1C624E500080E112 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		63298E2F1C624E500080E112 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		63298E311C624E500080E112 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6337E00C1C64EAB80011321F /* DeltaDNA.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = DeltaDNA.framework; path = "/Users/david/Library/Developer/Xcode/DerivedData/DeltaDNA-cuctxukefvqvsrflunvlzykufkqt/Build/Products/Debug-iphoneos/DeltaDNA.framework"; sourceTree = "<absolute>"; };
+		6337E00C1C64EAB80011321F /* DeltaDNA.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = DeltaDNA.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		636556EB1C610BB6004153E7 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = AppDelegate.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		636556EC1C610BB6004153E7 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AppDelegate.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		636556ED1C610BB6004153E7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
