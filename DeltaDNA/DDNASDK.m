@@ -136,15 +136,18 @@ static NSString *const kPushNotificationTokenKey = @"DeltaDNA PushNotificationTo
         self.engageURL = [self mungeUrl: engageURL];
         
         BOOL newPlayer = NO;
-        if ([NSString stringIsNilOrEmpty:userID] && [NSString stringIsNilOrEmpty:self.userID])
-        {
-            self.userID = [DDNASDK generateUserID];
+        if ([NSString stringIsNilOrEmpty:self.userID]) {    // first time!
             newPlayer = YES;
+            if ([NSString stringIsNilOrEmpty:userID]) {     // generate a user id
+                userID = [DDNASDK generateUserID];
+            }
+        } else if (![NSString stringIsNilOrEmpty:userID]) {
+            if (![self.userID isEqualToString:userID]) {    // started with a different user id
+                newPlayer = YES;
+            }
         }
-        else
-        {
-            self.userID = userID;
-        }
+        
+        self.userID = userID;
         
         DDNALogDebug(@"Starting SDK with user id %@", self.userID);
         
