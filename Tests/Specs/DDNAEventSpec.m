@@ -73,7 +73,12 @@ describe(@"event", ^{
         
     });
     
-    it(@"throws if setParam is nil", ^{
+    it(@"doesn't throw if setParam is nil", ^{
+        
+        expect(^{
+            DDNAEvent *event = [DDNAEvent eventWithName:@"myEvent"];
+            [event setParam:nil forKey:@"nilKey"];
+        }).to.raise(@"NSInvalidArgumentException");
         
     });
     
