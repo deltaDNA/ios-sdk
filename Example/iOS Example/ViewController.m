@@ -36,7 +36,7 @@
     
     //[sdk clearPersistentData];
     
-    // Configure additional behaviour.
+    // Optionally configure additional behaviour.
     //sdk.settings.backgroundEventUploadStartDelaySeconds = 10;
     //sdk.settings.backgroundEventUploadRepeatRateSeconds = 15;
     //sdk.settings.httpRequestTimeoutSeconds = 1;
@@ -113,19 +113,6 @@
 }
 
 - (IBAction)engage:(id)sender {
-//    DDNASDK * sdk = [DDNASDK sharedInstance];
-//    
-//    NSMutableDictionary * engageParams = [NSMutableDictionary dictionary];
-//    [engageParams setObject:[NSNumber numberWithInt:4] forKey:@"userLevel"];
-//    [engageParams setObject:[NSNumber numberWithInt:1000] forKey:@"experience"];
-//    [engageParams setObject:@"Disco Volante" forKey:@"missionName"];
-//    
-//    [sdk requestEngagement:@"gameLoaded"
-//          withEngageParams:engageParams
-//             callbackBlock:^(NSDictionary * response) {
-//                 NSLog(@"Engage returned '%@'.", response);
-//             } ];
-    
     DDNAEngagement *engagement = [DDNAEngagement engagementWithDecisionPoint:@"gameLoaded"];
     [engagement setParam:@4 forKey:@"userLevel"];
     [engagement setParam:@1000 forKey:@"experience"];
@@ -138,10 +125,6 @@
 }
 
 - (IBAction)imageMessage:(id)sender {
-//    DDNASDK * sdk = [DDNASDK sharedInstance];
-    
-//    NSMutableDictionary * engageParams = [NSMutableDictionary dictionary];
-    
     DDNABasicPopup* popup = [DDNABasicPopup popup];
     __weak DDNABasicPopup* weakPopup = popup;
     popup.afterPrepare = ^{
@@ -155,13 +138,6 @@
     popup.onAction = ^(NSString *name, NSString *type, NSString *value){
         NSLog(@"OnAction by %@ type %@ value %@", name, type, value);
     };
-    
-//    [sdk requestImageMessage:@"imageMessage"
-//            withEngageParams:engageParams
-//                  imagePopup:popup
-//               callbackBlock:^(NSDictionary * response) {
-//                   NSLog(@"Engage returned '%@'.", response);
-//               } ];
     
     DDNAEngagement *engagement = [DDNAEngagement engagementWithDecisionPoint:@"imageMessage"];
     

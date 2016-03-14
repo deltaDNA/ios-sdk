@@ -1,8 +1,10 @@
-SmartAds from deltaDNA.
+![deltaDNA logo](https://deltadna.com/wp-content/uploads/2015/06/deltadna_www@1x.png)
+
+## deltaDNA Analytics iOS SDK
 
 ### Installation with CocoaPods
 
-[CocoaPods](https://cocoapods.org/) is a dependency manager for Objective-C, which automates and simplfies using 3rd party libraries.
+[CocoaPods](https://cocoapods.org/) is a dependency manager for Objective-C, which automates and simplifies using 3rd party libraries.
 
 #### Podfile
 
@@ -16,6 +18,10 @@ pod 'DeltaDNA', '~> 4.0'
 ```
 
 The deltaDNA SDKs are available from our private spec repository, its url must be added as a source to your podfile.  
+
+### Installation as a Framework
+
+Open DeltaDNA.xcworkspace.  The DeltaDNA project contains targets to build iOS and tvOS frameworks.  Once built, drag the framework into your project.  The example project shows how to do this in XCode.
 
 ### Usage
 
@@ -36,4 +42,22 @@ Start the analytics SDK.
 
 ```
 
-Refer to our main [documentation](http://docs.deltadna.com/advanced-integration/ios-sdk/) site for more details how to use the SDK.
+#### iOS 9 Support
+
+Since iOS 9, all HTTP connections are forced to be HTTPS.  To allow HTTP to be used you need to add the following key to your Info.plist file.
+
+```xml
+<key>NSAppTransportSecurity</key>
+<dict>
+    <key>NSAllowsArbitraryLoads</key>
+    <true/>
+</dict>
+```
+
+### Example
+
+The DeltaDNA Example project shows how to use our analytics platform within your game.  The iOS example shows how to call it from Objective-C, the tvOS example with Swift.
+
+### Further Integration
+
+Refer to our [documentation](http://docs.deltadna.com/advanced-integration/ios-sdk/) site for more details how to use the SDK.
