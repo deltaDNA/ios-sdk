@@ -42,6 +42,8 @@ Start the analytics SDK.
 
 ```
 
+On the first run it will create a new user id and send a `newPlayer` event.  On every call it will send a `gameStarted` and `clientDevice` event.
+
 #### iOS 9 Support
 
 Since iOS 9, all HTTP connections are forced to be HTTPS.  To allow HTTP to be used you need to add the following key to your Info.plist file.
@@ -58,6 +60,38 @@ Since iOS 9, all HTTP connections are forced to be HTTPS.  To allow HTTP to be u
 
 The DeltaDNA Example project shows how to use our analytics platform within your game.  The iOS example shows how to call it from Objective-C, the tvOS example with Swift.
 
+### Custom Events
+
+You can easily record custom events by using the `DDNAEvent` class.  Create a `DDNAEvent` with the name of your event schema.  Call `setParam:forKey` to add event parameters.  For example:
+
+```objective-c
+DDNAEvent *event = [DDNAEvent eventWithName:@"keyTypes"];
+[event setParam:@5 forKey:@"userLevel"];
+[event setParam:@YES forKey:@"isTutorial"];
+[event setParam:[NSDate date] forKey:@"exampleTimestamp"];
+
+[[DDNASDK sharedInstance] recordEvent:event];
+```
+
+### Engage
+
+Change the behaviour of the game with an engagement.  Create a `DDNAEngagement` with the name of your decision point.  Engage will respond with a dictionary of key values for your player.  For example:
+
+```objective-c
+DDNAEngagement *engagement = [DDNAEngagement engagementWithDecisionPoint:@"gameLoaded"];
+[engagement setParam:@4 forKey:@"userLevel"];
+[engagement setParam:@1000 forKey:@"experience"];
+[engagement setParam:@"Disco Volante" forKey:@"missionName"];
+
+[[DDNASDK sharedInstance] requestEngagement:engagement completionHandler:^(NSDictionary* parameters, NSInteger statusCode, NSError* error) {
+    NSLog(@"Engagement request returned the following parameters:\n%@", parameters);
+}];
+```
+
 ### Further Integration
 
 Refer to our [documentation](http://docs.deltadna.com/advanced-integration/ios-sdk/) site for more details how to use the SDK.
+
+## License
+
+The sources are available under the Apache 2.0 license.
