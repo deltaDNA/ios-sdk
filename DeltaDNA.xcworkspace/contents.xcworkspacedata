@@ -5,7 +5,7 @@
       location = "group:DeltaDNA.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:/Users/david/Projects/ios-sdk-v4/Example/DeltaDNA Example.xcodeproj">
+      location = "group:Example/DeltaDNA Example.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:DeltaDNA.podspec">
