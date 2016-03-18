@@ -28,7 +28,7 @@
 
 SpecBegin(NSURL_DeltaDNA)
 
-describe(@"NSURL+DeltaDNA", ^{
+describe(@"Engage", ^{
    
     it(@"creates simple http url", ^{
        
@@ -76,5 +76,55 @@ describe(@"NSURL+DeltaDNA", ^{
     });
     
 });
+
+describe(@"Collect", ^{
+    
+    it(@"creates simple http url", ^{
+        
+        NSURL *url = [NSURL URLWithCollectEndpoint:@"http://collect1999abcd.deltadna.net" environmentKey:@"5582251763508113932"];
+        
+        NSURL *expectedURL = [NSURL URLWithString:@"http://collect1999abcd.deltadna.net/5582251763508113932/bulk"];
+        
+        expect(url).to.equal(expectedURL);
+    });
+    
+    it(@"creates hashed http url", ^{
+        
+        NSURL *url = [NSURL URLWithCollectEndpoint:@"http://collect1999abcd.deltadna.net"
+                                   environmentKey:@"5582251763508113932"
+                                          payload:@"{'foo': 'bar'}"
+                                       hashSecret:@"12345abcde"];
+        
+        NSURL *expectedURL = [NSURL URLWithString:@"http://collect1999abcd.deltadna.net/5582251763508113932/bulk/hash/6172f13895b22d30359c6d6172a31d3a"];
+        
+        expect(url).to.equal(expectedURL);
+        
+    });
+    
+    it(@"creates simple https url", ^{
+        
+        NSURL *url = [NSURL URLWithCollectEndpoint:@"https://collect1999abcd.deltadna.net" environmentKey:@"5582251763508113932"];
+        
+        NSURL *expectedURL = [NSURL URLWithString:@"https://collect1999abcd.deltadna.net/5582251763508113932/bulk"];
+        
+        expect(url).to.equal(expectedURL);
+        
+    });
+    
+    it(@"creates hashed https url", ^{
+        
+        NSURL *url = [NSURL URLWithCollectEndpoint:@"https://collect1999abcd.deltadna.net"
+                                   environmentKey:@"5582251763508113932"
+                                          payload:@"{'foo': 'bar'}"
+                                       hashSecret:@"12345abcde"];
+        
+        NSURL *expectedURL = [NSURL URLWithString:@"https://collect1999abcd.deltadna.net/5582251763508113932/bulk/hash/6172f13895b22d30359c6d6172a31d3a"];
+        
+        expect(url).to.equal(expectedURL);
+        
+    });
+    
+});
+
 
 SpecEnd

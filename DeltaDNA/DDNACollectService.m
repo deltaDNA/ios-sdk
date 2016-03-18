@@ -100,7 +100,7 @@
     
     NSString *jsonPayload = [collectRequest toJSON];
     
-    NSURL *url = [NSURL URLWithEngageEndpoint:self.collectURL
+    NSURL *url = [NSURL URLWithCollectEndpoint:self.collectURL
                                environmentKey:self.environmentKey
                                       payload:jsonPayload
                                    hashSecret:self.hashSecret];
