@@ -201,10 +201,7 @@
 
 - (NSString *) getLocale
 {
-    NSLocale *locale = [NSLocale currentLocale];
-    NSError *error = NULL;
-    NSRegularExpression *localeRegex = [NSRegularExpression regularExpressionWithPattern:@"^[a-z]{2}_[A-Z]{2}$" options:0 error:&error];
-    return [localeRegex numberOfMatchesInString:locale.localeIdentifier options:0 range:NSMakeRange(0, locale.localeIdentifier.length)] == 1 ? locale.localeIdentifier : @"zz_ZZ";
+    return [NSString stringWithFormat:@"%@_%@", [self getLanguageCode], [self getCountryCode]];
 }
 
 @end
