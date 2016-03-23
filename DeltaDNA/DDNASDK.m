@@ -215,6 +215,7 @@ static NSString *const kPushNotificationTokenKey = @"DeltaDNA PushNotificationTo
     NSMutableDictionary *eventSchema = [NSMutableDictionary dictionaryWithDictionary:[event dictionary]];
     [eventSchema setObject:self.userID forKey:@"userID"];
     [eventSchema setObject:self.sessionID forKey:@"sessionID"];
+    [eventSchema setObject:[[NSUUID UUID] UUIDString] forKey:@"eventUUID"];
     [eventSchema setObject:[DDNASDK getCurrentTimestamp] forKey:@"eventTimestamp"];
     
     if (![self.eventStore pushEvent:eventSchema]) {
