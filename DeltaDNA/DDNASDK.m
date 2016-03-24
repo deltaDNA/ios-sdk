@@ -218,9 +218,7 @@ static NSString *const kPushNotificationTokenKey = @"DeltaDNA PushNotificationTo
     [eventSchema setObject:[[NSUUID UUID] UUIDString] forKey:@"eventUUID"];
     [eventSchema setObject:[DDNASDK getCurrentTimestamp] forKey:@"eventTimestamp"];
     
-    if (![self.eventStore pushEvent:eventSchema]) {
-        DDNALogWarn(@"Event store full, dropping event");
-    }
+    [self.eventStore pushEvent:eventSchema];
 }
 
 - (void)recordEventWithName:(NSString *)eventName

@@ -59,7 +59,7 @@ static NSString *const kOutFileName = @"Out File";
 {
     @synchronized(self)
     {
-        if (initialised && [inFileHandle offsetInFile] < self.maxFileSizeBytes)
+        if (initialised)
         {
             @try
             {
@@ -70,22 +70,28 @@ static NSString *const kOutFileName = @"Out File";
                                                                        error:&error];
                 if (error != nil && error.code != 0)
                 {
-                    DDNALogDebug(@"Event Store failed to serialize event %@ to JSON, got %li", eventDictionary, (long)error.code);
+                    DDNALogWarn(@"Event Store failed to serialize '%@' event to JSON, got %li", eventDictionary[@"eventName"], (long)error.code);
                     return false;
                 }
                 
-                // Storage format is simply length:record in utf-8.
                 NSUInteger eventLength = eventData.length;
-                NSMutableData *bytes = [NSMutableData data];
-                [bytes appendBytes:&eventLength length:sizeof(eventLength)];
-                [bytes appendData:eventData];
                 
-                [inFileHandle writeData:bytes];
-                return true;
+                if ([inFileHandle offsetInFile] + eventLength < self.maxFileSizeBytes) {
+                    // Storage format is simply length:record in utf-8.
+                    NSMutableData *bytes = [NSMutableData data];
+                    [bytes appendBytes:&eventLength length:sizeof(eventLength)];
+                    [bytes appendData:eventData];
+                    
+                    [inFileHandle writeData:bytes];
+                    return true;
+                } else {
+                    DDNALogWarn(@"Event Store full, dropping '%@' event (%lu bytes).", eventDictionary[@"eventName"], eventLength);
+                    return false;
+                }
             }
             @catch (NSException *exception)
             {
-                DDNALogDebug(@"Problem pushing event to Event Store: %@", exception.reason);
+                DDNALogWarn(@"Problem pushing '%@' event to Event Store: %@", eventDictionary[@"eventName"], exception.reason);
             }
         }
         return false;

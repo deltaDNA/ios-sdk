@@ -67,7 +67,7 @@
                     [self.inQueue appendData:data];
                     
                 } else {
-                    DDNALogWarn(@"Event store full");
+                    DDNALogWarn(@"Event store full, dropping '%@' event (%lu bytes).", event[@"eventName"], data.length);
                     return NO;
                 }
                 
