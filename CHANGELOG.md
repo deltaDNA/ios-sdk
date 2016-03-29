@@ -1,6 +1,6 @@
 # Change Log
 
-## [Unreleased]
+## [4.0.1](https://github.com/deltaDNA/ios-sdk/releases/tag/4.0.1) (2016-03-29)
 ### Added
 - Support event deduplication with eventUUID field.
 

@@ -16,7 +16,7 @@
 
 #import "DDNASettings.h"
 
-NSString *const DDNA_SDK_VERSION = @"iOS SDK v4.1.0-beta.1";
+NSString *const DDNA_SDK_VERSION = @"iOS SDK v4.0.1";
 NSString *const DDNA_ENGAGE_API_VERSION = @"4";
 
 NSString *const DDNA_EVENT_STORAGE_PATH = @"{persistent_path}";
@@ -30,20 +30,20 @@ NSUInteger const DDNA_MAX_EVENT_STORE_BYTES = 1024 * 1024;
 {
     // Defines the default behaviour of the SDK.
     if ((self = [super init]))
-    {        
+    {
         self.onFirstRunSendNewPlayerEvent = YES;
         self.onStartSendClientDeviceEvent = YES;
         self.onStartSendGameStartedEvent = YES;
-        
+
         self.httpRequestRetryDelaySeconds = 2;
         self.httpRequestMaxTries = 5;
         self.httpRequestCollectTimeoutSeconds = 20;
         self.httpRequestEngageTimeoutSeconds = 5;
-        
+
         self.backgroundEventUpload = YES;
         self.backgroundEventUploadStartDelaySeconds = 0;
         self.backgroundEventUploadRepeatRateSeconds = 60;
-        
+
         #if TARGET_OS_TV
         self.useEventStore = NO;
         #else
