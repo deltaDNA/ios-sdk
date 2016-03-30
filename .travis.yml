@@ -1,1 +1,7 @@
 language: objective-c
+podfile: Tests/Podfile
+script:
+    - xctool -workspace DeltaDNA.xcworkspace -scheme "DeltaDNA iOS" -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
+    - xctool test -workspace DeltaDNA.xcworkspace -scheme "DeltaDNA iOS" -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
+    - xctool -workspace DeltaDNA.xcworkspace -scheme "DeltaDNA tvOS" -sdk appletvsimulator ONLY_ACTIVE_ARCH=NO
+    - xctool test -workspace DeltaDNA.xcworkspace -scheme "DeltaDNA tvOS" -sdk appletvsimulator ONLY_ACTIVE_ARCH=NO
