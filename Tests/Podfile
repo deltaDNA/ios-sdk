@@ -1,6 +1,6 @@
 source 'https://github.com/CocoaPods/Specs'
 
-project '../DeltaDNA'
+xcodeproj '../DeltaDNA'
 workspace '../DeltaDNA'
 #inhibit_all_warnings!
 
