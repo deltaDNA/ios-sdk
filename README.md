@@ -2,6 +2,8 @@
 
 ## deltaDNA Analytics iOS SDK
 
+[![Build Status](https://travis-ci.org/deltaDNA/ios-sdk.svg)](https://travis-ci.org/deltaDNA/ios-sdk)
+
 ### Installation with CocoaPods
 
 [CocoaPods](https://cocoapods.org/) is a dependency manager for Objective-C, which automates and simplifies using 3rd party libraries.
