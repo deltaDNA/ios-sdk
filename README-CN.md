@@ -60,7 +60,7 @@ deltaDNA的SDK可以直接从我们的私有项目库中找到，其URL必须作
 
 这个DeltaDNA案例项目展示了如何在你的游戏中使用我们的分析平台。这个iOS的案例展示了如何从Objective-C中调用它，这个tvOS的案例则展示了如何从Swift中调用它。
 
-### Custom Events
+### 自定义事件
 
 你可以轻松的通过使用`DDNAEvent`类标记自定义事件。使用你的事件项目名称创建一个`DDNAEvent`方法。调用`setParam:forKey`函数来添加事件属性。例如：
 
