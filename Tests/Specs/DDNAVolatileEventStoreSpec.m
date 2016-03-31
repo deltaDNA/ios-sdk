@@ -24,7 +24,7 @@
 #import <OCMockito/OCMockito.h>
 
 #import "DDNAVolatileEventStore.h"
-
+#import "EXPMatchers+equalJSONString.h"
 
 SpecBegin(DDNAVolatileEventStore)
 
@@ -116,8 +116,8 @@ describe(@"volatile event store", ^{
         NSArray *events = [store readOut];
         expect(events).toNot.beNil();
         expect(events.count).to.equal(2);
-        expect(events[0]).to.equal(@"{\"name\":\"Jan\",\"age\":6}");
-        expect(events[1]).to.equal(@"{\"name\":\"Ben\",\"age\":14}");
+        expect(events[0]).to.equalJSONString(@"{\"name\":\"Jan\",\"age\":6}");
+        expect(events[1]).to.equalJSONString(@"{\"name\":\"Ben\",\"age\":14}");
         expect([store swapBuffers]).to.beFalsy();
         
         [store clearOut];
@@ -129,8 +129,8 @@ describe(@"volatile event store", ^{
         events = [store readOut];
         expect(events).toNot.beNil();
         expect(events.count).to.equal(2);
-        expect(events[0]).to.equal(@"{\"name\":\"Jen\",\"age\":10}");
-        expect(events[1]).to.equal(@"{\"name\":\"Lou\",\"age\":8}");
+        expect(events[0]).to.equalJSONString(@"{\"name\":\"Jen\",\"age\":10}");
+        expect(events[1]).to.equalJSONString(@"{\"name\":\"Lou\",\"age\":8}");
         expect([store swapBuffers]).to.beFalsy();
         
         [store clearOut];
@@ -141,7 +141,7 @@ describe(@"volatile event store", ^{
         events = [store readOut];
         expect(events).toNot.beNil();
         expect(events.count).to.equal(1);
-        expect(events[0]).to.equal(@"{\"name\":\"Sam\",\"age\":12}");
+        expect(events[0]).to.equalJSONString(@"{\"name\":\"Sam\",\"age\":12}");
         
         [store clearOut];
         expect(store.isOutEmpty).to.beTruthy();

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		386735B8FEDABB9E4A4CA32C /* Pods_DeltaDNA_tvOS_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31BB975B0746DF1DA6D51C9A /* Pods_DeltaDNA_tvOS_Tests.framework */; };
+		6318EADF1CAD2A5900E9A72C /* EXPMatchers+equalJSONString.m in Sources */ = {isa = PBXBuildFile; fileRef = 6318EADB1CAD26FD00E9A72C /* EXPMatchers+equalJSONString.m */; };
+		6318EAE01CAD2A5A00E9A72C /* EXPMatchers+equalJSONString.m in Sources */ = {isa = PBXBuildFile; fileRef = 6318EADB1CAD26FD00E9A72C /* EXPMatchers+equalJSONString.m */; };
 		6327172D1C650D1B00AB2806 /* DDNACache.h in Headers */ = {isa = PBXBuildFile; fileRef = 6327172B1C650D1B00AB2806 /* DDNACache.h */; };
 		6327172E1C650D1B00AB2806 /* DDNACache.h in Headers */ = {isa = PBXBuildFile; fileRef = 6327172B1C650D1B00AB2806 /* DDNACache.h */; };
 		6327172F1C650D1B00AB2806 /* DDNACache.m in Sources */ = {isa = PBXBuildFile; fileRef = 6327172C1C650D1B00AB2806 /* DDNACache.m */; };
@@ -141,6 +143,8 @@
 /* Begin PBXFileReference section */
 		076B4EC072FBCA3FB406D2B4 /* libPods-DeltaDNA iOS Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DeltaDNA iOS Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		31BB975B0746DF1DA6D51C9A /* Pods_DeltaDNA_tvOS_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DeltaDNA_tvOS_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6318EADA1CAD26FD00E9A72C /* EXPMatchers+equalJSONString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "EXPMatchers+equalJSONString.h"; sourceTree = "<group>"; };
+		6318EADB1CAD26FD00E9A72C /* EXPMatchers+equalJSONString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "EXPMatchers+equalJSONString.m"; sourceTree = "<group>"; };
 		6327172B1C650D1B00AB2806 /* DDNACache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = DDNACache.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		6327172C1C650D1B00AB2806 /* DDNACache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = DDNACache.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		632D8F811C736DA4004738A7 /* DDNAEngagement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDNAEngagement.h; sourceTree = "<group>"; };
@@ -255,6 +259,16 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		6318EAD91CAD26FD00E9A72C /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				6318EADA1CAD26FD00E9A72C /* EXPMatchers+equalJSONString.h */,
+				6318EADB1CAD26FD00E9A72C /* EXPMatchers+equalJSONString.m */,
+			);
+			name = Extensions;
+			path = Tests/Extensions;
+			sourceTree = "<group>";
+		};
 		632A3BA91C7471DF00547A29 /* Engage */ = {
 			isa = PBXGroup;
 			children = (
@@ -352,6 +366,7 @@
 		6365569F1C60F758004153E7 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				6318EAD91CAD26FD00E9A72C /* Extensions */,
 				636556861C60F740004153E7 /* Specs */,
 				6365568C1C60F740004153E7 /* Fakes */,
 				636556911C60F740004153E7 /* iOS Tests */,
@@ -845,6 +860,7 @@
 				636556A41C60FCD5004153E7 /* NSURL+DeltaDNASpec.m in Sources */,
 				636556A51C60FCD5004153E7 /* DDNAFakeInstanceFactory.m in Sources */,
 				636556A61C60FCD5004153E7 /* DDNAFakeNetworkRequest.m in Sources */,
+				6318EAE01CAD2A5A00E9A72C /* EXPMatchers+equalJSONString.m in Sources */,
 				63A11FCA1C6E2F94008DEE99 /* DDNAProductSpec.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -862,6 +878,7 @@
 				636556BA1C60FDF1004153E7 /* NSURL+DeltaDNASpec.m in Sources */,
 				636556BB1C60FDF1004153E7 /* DDNAFakeInstanceFactory.m in Sources */,
 				636556BC1C60FDF1004153E7 /* DDNAFakeNetworkRequest.m in Sources */,
+				6318EADF1CAD2A5900E9A72C /* EXPMatchers+equalJSONString.m in Sources */,
 				63A11FCB1C6E2F94008DEE99 /* DDNAProductSpec.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
