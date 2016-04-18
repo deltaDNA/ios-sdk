@@ -36,8 +36,8 @@ NSUInteger const DDNA_MAX_EVENT_STORE_BYTES = 1024 * 1024;
         self.onStartSendGameStartedEvent = YES;
 
         self.httpRequestRetryDelaySeconds = 2;
-        self.httpRequestMaxTries = 5;
-        self.httpRequestCollectTimeoutSeconds = 20;
+        self.httpRequestMaxTries = 0;
+        self.httpRequestCollectTimeoutSeconds = 55;
         self.httpRequestEngageTimeoutSeconds = 5;
 
         self.backgroundEventUpload = YES;

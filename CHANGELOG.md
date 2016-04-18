@@ -8,6 +8,7 @@
 ### Changed
 - The `DDNAPopup` protocol and `DDNABasicPopup` have been deprecated and replaced by `DDNAImageMessage`.  This better matches the terminology used in the deltaDNA platform. The `DDNAImageMessage` is created from the `DDNAEngagement` object.
 - The `-requestImageMesaage:` methods are also deprecated, use `-requestEngagement:engagementHandler` with a `DDNAImageMessage` instead.
+- The automated event uploading no longer retries by default on a network connection error, instead it relies on the background timer to try again later.  The default timeout has also been increased.
 
 ## [4.0.1](https://github.com/deltaDNA/ios-sdk/releases/tag/4.0.1) (2016-03-29)
 ### Added
