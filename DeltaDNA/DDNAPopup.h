@@ -16,6 +16,7 @@
 
 #import <UIKit/UIKit.h>
 
+__attribute__((deprecated))
 @protocol DDNAPopup
 
 /**
@@ -83,7 +84,7 @@
 
 @end
 
-
+__attribute__((deprecated))
 @interface DDNABasicPopup : UIView <DDNAPopup>
 
 /**

@@ -25,7 +25,7 @@
 
 /**
  Change default SDK behaviour via the settings property.
- See DDNASettings.h for available options.
+ @see See DDNASettings.h for available options.
  */
 @property (nonatomic, strong) DDNASettings *settings;
 
@@ -76,14 +76,18 @@
 
 /**
  Singleton access to the deltaDNA SDK.
+ 
  @return The deltaDNA SDK instance.
  */
 + (instancetype)sharedInstance;
 
 /**
  The SDK must be started once before you can send events.
+ 
  @param environmentKey The games's unique environment key.
+ 
  @param collectURL The games's unique Collect URL.
+ 
  @param engageURL The games's unique EngageURL, use nil if not using Engage.
  */
 - (void)startWithEnvironmentKey: (NSString *) environmentKey
@@ -92,9 +96,13 @@
 
 /**
  The SDK must be started once before you can send events.
+ 
  @param environmentKey The games's unique environment key.
+ 
  @param collectURL The games's unique Collect URL.
+ 
  @param engageURL The games's unique EngageURL, use nil if not using Engage.
+ 
  @param userID The user id to associate the game events with, use nil if you want the SDK to generate a random one.
  */
 - (void)startWithEnvironmentKey: (NSString *) environmentKey
@@ -114,20 +122,30 @@
 
 /**
  Records an event using the DDNAEvent builder class.
+ 
  @param event The event to record.
+ 
+ @exception Throws @c DDNANotStartedException if @c -startWithEnvironmentKey: has not been called.
  */
 - (void)recordEvent:(DDNAEvent *)event;
 
 /**
  Records an event with no custom parameters.
+ 
  @param eventName The name of the event schema.
+ 
+ @exception Throws @c DDNANotStartedException if @c -startWithEnvironmentKey: has not been called.
  */
 - (void)recordEventWithName:(NSString *)eventName;
 
 /**
  Records an event with a dictionary of event parameters.  Structure the dictionary keys to match the @b eventParams structure of your event schema.
+ 
  @param eventName The name of the event schema.
+ 
  @param eventParams A dictionary of event parameters.
+ 
+ @exception Throws @c DDNANotStartedException if @c -startWithEnvironmentKey: has not been called.
  */
 - (void)recordEventWithName:(NSString *)eventName eventParams:(NSDictionary *)eventParams;
 
@@ -141,7 +159,9 @@ typedef void (^DDNAEngagementResponseBlock) (NSDictionary *engageResponse);
 /**
  Makes an Engage call for a decision point.  If the decision point is
  recognised, the callback block is called with the response parameters.
+ 
  @param decisionPoint The decision point.
+ 
  @param callback The block to call once Engage returns.
  */
 - (void)requestEngagement: (NSString *) decisionPoint
@@ -150,8 +170,11 @@ typedef void (^DDNAEngagementResponseBlock) (NSDictionary *engageResponse);
 /**
  Makes an Engage call for a decision point.  If the decision point is
  recognised, the callback block is called with the response parameters.
+ 
  @param decisionPoint The decision point.
+ 
  @param engageParams A dictionary of parameters for Engage.
+ 
  @param callback The block to call once Engage returns. Will be nil is no response is available.
  */
 - (void)requestEngagement: (NSString *) decisionPoint
@@ -159,17 +182,35 @@ typedef void (^DDNAEngagementResponseBlock) (NSDictionary *engageResponse);
             callbackBlock: (DDNAEngagementResponseBlock) callback DEPRECATED_ATTRIBUTE;
 
 /**
- Makes an Engage call.  Create a @c DDNAEngagement with a decision point and optional paramters.  If the engagement is recognised by the platform the completion handler returns the set of parameters to use.
+ Makes an Engage call.  Create a @c DDNAEngagement with a decision point and optional parameters.  If the engagement is recognised by the platform the completion handler returns the set of parameters to use.
+ 
  @param engagement The engagement to request.
+ 
  @param completionHandler Optional callback that reports the parameters the engagement returns.  The status code and error report any network failures.
+ 
+ @exception Throws @c DDNANotStartedException if @c -startWithEnvironmentKey: has not been called. Throws @c NSInvalidArgumentException if the engage URL has not been set or the parameters are nil.
  */
 - (void)requestEngagement:(DDNAEngagement *)engagement
         completionHandler:(void(^)(NSDictionary *parameters, NSInteger statusCode, NSError *error))completionHandler;
 
 /**
+ Request an engagement from Engage.  Create a @c DDNAEngagement with a decision point and optional parameters.  The engagementHandler is called once the request has completed.  If the engagement succeeded the @c -json property will no longer be nil and the <i> parameters</i> value should be inspected to see which parameters if any were returned.  Otherise the @c -error property will report why the engagement failed.  @see @c DDNAEngagement for more details.
+ 
+ @param engagement The engagement to send to Engage.
+ 
+ @param engagementHandler The block that is called with the popuplated engagement once the request has completed.
+ 
+ @exception Throws @c DDNANotStartedException if @c -startWithEnvironmentKey: has not been called.  Throws @c NSInvalidArgumentException if the engage URL has not been set or the parameters are nil.
+ */
+- (void)requestEngagement:(DDNAEngagement *)engagement engagementHandler:(void(^)(DDNAEngagement *))engagementHandler;
+
+/**
  Requests an image based engagement for popup on the screen.  This is a convienience around @c requestEngagement that loads the image resource automatically from the original engage request.  Register a block with the popup's afterPrepare block to be notified when the resource has loaded.
+ 
  @param decisionPoint The decisionPoint
+ 
  @param engageParams A dictionary of parameters for Engage.
+ 
  @param imagePopup An object that conforms to the @c DDNAPopup protocol that can handle the response.
  */
 - (void)requestImageMessage: (NSString *) decisionPoint
@@ -178,9 +219,13 @@ typedef void (^DDNAEngagementResponseBlock) (NSDictionary *engageResponse);
 
 /**
  Requests an image based engagement for popup on the screen.  This is a convienience around @c requestEngagement that loads the image resource automatically from the original engage request.  Register a block with the popup's afterPrepare block to be notified when the resource has loaded.
+ 
  @param decisionPoint The decisionPoint
+ 
  @param engageParams A dictionary of parameters for Engage.
+ 
  @param imagePopup An object that conforms to the @c DDNAPopup protocol that can handle the response.
+ 
  @param callbackBlock A block that is called with the full engage response for custom behaviour.
  */
 - (void)requestImageMessage: (NSString *) decisionPoint
@@ -190,13 +235,16 @@ typedef void (^DDNAEngagementResponseBlock) (NSDictionary *engageResponse);
 
 /**
  Requests an image message engagement.  The image resource is automatically loaded from the engage request.  Register a block with the popup's afterPrepare block to be notified when the resource has loaded.
+ 
  @param engagement The engagement the image message is an action for.
+ 
  @param popup An object that conforms to the @c DDNAPopup protocol that can handle the response, for example @c DDNABasicPopup.
+ 
  @param completionHandler Optional callback that reports the parameters the engagement returns.  The status code and error report any network failures.
  */
 - (void)requestImageMessage:(DDNAEngagement *)engagement
                       popup:(id<DDNAPopup>)popup
-          completionHandler:(void(^)(NSDictionary *parameters, NSInteger statusCode, NSError *error))completionHandler;
+          completionHandler:(void(^)(NSDictionary *parameters, NSInteger statusCode, NSError *error))completionHandler DEPRECATED_ATTRIBUTE;
 
 /**
  Records receiving a push notification.  Call from @c application:didFinishLaunchingWithOptions and @c application:didReceiveRemoteNotification so we can track the open rate of your notifications.  It is safe to call this method before @c startWithEnvironmentKey:collectURL:engageURL, the event will be queued.
@@ -207,7 +255,7 @@ typedef void (^DDNAEngagementResponseBlock) (NSDictionary *engageResponse);
 /**
  Sends recorded events to deltaDNA.  The default SDK behaviour is to call this
  periodically in the background for you.  If you disable background uploading
- you must call this method reguraly to send your game events.  The call is
+ you must call this method regularly to send your game events.  The call is
  non blocking.
  */
 - (void)upload;

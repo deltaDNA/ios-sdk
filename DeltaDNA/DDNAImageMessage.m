@@ -14,94 +14,99 @@
 // limitations under the License.
 //
 
-#import "DDNAPopup.h"
-#import "NSString+DeltaDNA.h"
-#import "DDNACache.h"
+#import "DDNAImageMessage.h"
+#import "DDNAEngagement.h"
 #import "DDNASDK.h"
 #import "DDNASettings.h"
+#import "DDNACache.h"
+#import "NSString+DeltaDNA.h"
 
-@interface DDNABasicPopup () {
-    
-    UIImage* _spriteMap;
-    UIView* _shimView;
-    UIView* _backgroundView;
-    
-    NSDictionary* _shimAction;
-    NSDictionary* _backgroundAction;
-    NSArray* _buttonActions;
-    
-    CGFloat _dimmedMaskAlpha;
-    CGFloat _backgroundScale;
-    
-    NSDictionary* _image;
-    
-    BOOL _isShowing;
-}
+@interface DDNAImageMessage ()
 
-- (void)buttonPressed:(id)sender;
+@property (nonatomic, strong) NSDictionary *parameters;
+@property (nonatomic, assign) BOOL resourcesDownloaded;
+@property (nonatomic, strong) UIImage *spriteMap;
+@property (nonatomic, strong) UIView *shimView;
+@property (nonatomic, strong) UIView *backgroundView;
+@property (nonatomic, strong) NSDictionary *shimAction;
+@property (nonatomic, strong) NSDictionary *backgroundAction;
+@property (nonatomic, strong) NSArray *buttonActions;
+@property (nonatomic, assign) CGFloat dimmedMaskAlpha;
+@property (nonatomic, assign) CGFloat backgroundScale;
+@property (nonatomic, strong) NSDictionary *configuration;
+@property (nonatomic, assign) BOOL isShowing;
 
 @end
 
-@implementation DDNABasicPopup
-
-- (id)init {
-    return [self initWithFrame:[[UIScreen mainScreen] bounds]];
+BOOL validConfiguration(NSDictionary *configuration)
+{
+    if (![configuration.allKeys containsObject:@"url"] ||
+        ![configuration.allKeys containsObject:@"height"] ||
+        ![configuration.allKeys containsObject:@"width"] ||
+        ![configuration.allKeys containsObject:@"spritemap"] ||
+        ![configuration.allKeys containsObject:@"layout"]) return NO;
+    
+    NSDictionary *layout = configuration[@"layout"];
+    if (![layout.allKeys containsObject:@"landscape"] && ![layout.allKeys containsObject:@"portrait"]) return NO;
+    
+    NSDictionary *spritemap = configuration[@"spritemap"];
+    if (![spritemap.allKeys containsObject:@"background"]) return NO;
+    
+    return YES;
 }
 
--(id)initWithFrame:(CGRect)frame {
-    self = [super initWithFrame:frame];
-    if (self) {
-        // More initialisation...
-        
-        _dimmedMaskAlpha = 0.5f;
-        _backgroundScale = 1.0f;
-        
-        _shimView = [[UIView alloc] init];
-        
-        _backgroundView = [[UIView alloc] init];
-        
-        
+
+@implementation DDNAImageMessage
+
++ (instancetype)imageMessageWithEngagement:(DDNAEngagement *)engagement delegate:(id<DDNAImageMessageDelegate>)delegate
+{
+    DDNAImageMessage *imageMessage = [[DDNAImageMessage alloc] initWithEngagement:engagement];
+    if (imageMessage != nil) {
+        imageMessage.delegate = delegate;
     }
-    
+    return imageMessage;
+}
+
+- (instancetype)init
+{
+    [self doesNotRecognizeSelector:_cmd];
+    return nil;
+}
+
+- (instancetype)initWithEngagement:(DDNAEngagement *)engagement
+{
+    return [self initWithFrame:[[UIScreen mainScreen] bounds] engagement:engagement];
+}
+
+- (instancetype)initWithFrame:(CGRect)frame engagement:(DDNAEngagement *)engagement
+{
+    if (engagement == nil ||
+        engagement.json == nil ||
+        engagement.json[@"image"] == nil ||
+        !validConfiguration(engagement.json[@"image"])) {
+        return nil;
+    }
+
+    if ((self = [super initWithFrame:frame])) {
+        self.configuration = [NSDictionary dictionaryWithDictionary:engagement.json[@"image"]];
+        self.parameters = engagement.json[@"parameters"] != nil ? [NSDictionary dictionaryWithDictionary:engagement.json[@"parameters"]] : [NSDictionary dictionary];
+        self.dimmedMaskAlpha = 0.5f;
+        self.backgroundScale = 1.0f;
+        self.shimView = [[UIView alloc] init];
+        self.backgroundView = [[UIView alloc] init];
+    }
     return self;
 }
 
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+- (void)fetchResources
 {
-    CGPoint locationPoint = [[touches anyObject] locationInView:self];
-    UIView* viewYouWishToObtain = [self hitTest:locationPoint withEvent:event];
-    
-    if (viewYouWishToObtain == _shimView) {
-        [self actionHandlerFor:@"shim" withAction:_shimAction];
-    }
-    
-    if (viewYouWishToObtain == _backgroundView) {
-        [self actionHandlerFor:@"background" withAction:_backgroundAction];
-    }
-}
-
-+ (DDNABasicPopup*)popup {
-    DDNABasicPopup* popup = [[[self class] alloc] init];
-    return popup;
-}
-
-- (void)prepareWithImage:(NSDictionary *)image {
-    
-    if (self.beforePrepare != nil) {
-        self.beforePrepare();
-    }
-    
-    __weak typeof(self) weakSelf = self;
-    
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-        
-        __strong __typeof__(weakSelf) strongSelf = weakSelf;
-       
-        if (image[@"url"]) {
-            
-            NSURL *url = [NSURL URLWithString:image[@"url"]];
+
+        if (self.configuration[@"url"]) {
+
+            NSURL *url = [NSURL URLWithString:self.configuration[@"url"]];
             NSMutableURLRequest* urlRequest = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:[DDNASDK sharedInstance].settings.httpRequestEngageTimeoutSeconds];
-            
+
             NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
             sessionConfiguration.requestCachePolicy = NSURLRequestReloadIgnoringCacheData;
             NSURLSession *session = [NSURLSession sessionWithConfiguration:sessionConfiguration];
@@ -109,27 +114,40 @@
             [[session dataTaskWithRequest:urlRequest completionHandler:^(NSData * data, NSURLResponse * response, NSError * error) {
                 if (data == nil) {
                     // try and load from cache
-                    data = [[DDNACache sharedCache] objectForKey:image[@"url"]];
+                    data = [[DDNACache sharedCache] objectForKey:self.configuration[@"url"]];
                 }
-                
+
                 if (data != nil) {
-                    [[DDNACache sharedCache] setObject:data forKey:image[@"url"]];
-                    _spriteMap = [UIImage imageWithData:data];
-                    _image = [NSDictionary dictionaryWithDictionary:image];
-                    
-                    if (strongSelf.afterPrepare != nil) {
-                        dispatch_async(dispatch_get_main_queue(), ^{
-                            strongSelf.afterPrepare();
-                        });
-                    }
+                    [[DDNACache sharedCache] setObject:data forKey:self.configuration[@"url"]];
+                    self.spriteMap = [UIImage imageWithData:data];
+                    self.resourcesDownloaded = YES;
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self.delegate didReceiveResourcesForImageMessage:self];
+                    });
+                } else {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        NSString *reason = error == nil ? @"Failed to download" : error.localizedDescription;
+                        [self.delegate didFailToReceiveResourcesForImageMessage:self withReason:reason];
+                    });
                 }
             }] resume];
+        } else {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.delegate didFailToReceiveResourcesForImageMessage:self withReason:@"Invalid configuration, missing \"url\" key"];
+            });
         }
     });
 }
 
-- (void)show {
-    
+- (BOOL)isReady
+{
+    return self.resourcesDownloaded;
+}
+
+- (void)showFromRootViewController:(UIViewController *)viewController
+{
+    NSLog(@"Show image message");
+        
     self.hidden = NO;
     self.alpha = 1.0;
     
@@ -138,16 +156,16 @@
     
     // sprite map
     
-    if (_image[@"spritemap"]) {
-        NSDictionary* spritemap = _image[@"spritemap"];
+    if (self.configuration[@"spritemap"]) {
+        NSDictionary* spritemap = self.configuration[@"spritemap"];
         
         if (spritemap[@"background"]) {
             NSDictionary* bg = spritemap[@"background"];
             CGRect cropRect = CGRectMake(
-                [bg[@"x"] integerValue],
-                [bg[@"y"] integerValue],
-                [bg[@"width"] integerValue],
-                [bg[@"height"] integerValue]);
+                                         [bg[@"x"] integerValue],
+                                         [bg[@"y"] integerValue],
+                                         [bg[@"width"] integerValue],
+                                         [bg[@"height"] integerValue]);
             
             CGImageRef imageRef = CGImageCreateWithImageInRect([_spriteMap CGImage], cropRect);
             
@@ -158,10 +176,10 @@
             NSArray* btns = spritemap[@"buttons"];
             for (NSDictionary *btn in btns) {
                 CGRect cropRect = CGRectMake(
-                    [btn[@"x"] integerValue],
-                    [btn[@"y"] integerValue],
-                    [btn[@"width"] integerValue],
-                    [btn[@"height"] integerValue]);
+                                             [btn[@"x"] integerValue],
+                                             [btn[@"y"] integerValue],
+                                             [btn[@"width"] integerValue],
+                                             [btn[@"height"] integerValue]);
                 
                 CGImageRef imageRef = CGImageCreateWithImageInRect([_spriteMap CGImage], cropRect);
                 UIImage* buttonImage = [UIImage imageWithCGImage:imageRef];
@@ -174,8 +192,8 @@
     
     // shim
     
-    if (_image[@"shim"]) {
-        NSDictionary* shim = _image[@"shim"];
+    if (self.configuration[@"shim"]) {
+        NSDictionary* shim = self.configuration[@"shim"];
         if (shim[@"mask"]) {
             NSString* mask = shim[@"mask"];
             if ([mask isEqualToStringCaseInsensitive:@"dimmed"]) {
@@ -187,7 +205,7 @@
                 _shimView.userInteractionEnabled = YES;
                 _shimView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
                 _shimView.frame = self.bounds;
-
+                
                 [self addSubview:_shimView];
             }
         }
@@ -198,14 +216,14 @@
     
     // background
     
-    if (_image[@"layout"]) {
-        NSDictionary* layout = _image[@"layout"];
+    if (self.configuration[@"layout"]) {
+        NSDictionary* layout = self.configuration[@"layout"];
         
         BOOL landscape = YES;
-        #ifndef TARGET_OS_TV
+#ifndef TARGET_OS_TV
         UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
         landscape = (orientation == UIInterfaceOrientationLandscapeLeft || orientation == UIInterfaceOrientationLandscapeRight);
-        #endif
+#endif
         
         NSDictionary * orientationDict = nil;
         if (layout[@"landscape"] && landscape) {
@@ -242,7 +260,7 @@
                 
                 
                 [self addSubview:_backgroundView];  // must do this before adding constraints
-
+                
                 [self addConstraint:leftConstraint];
                 [self addConstraint:topConstraint];
                 [_backgroundView addConstraint:widthConstraint];
@@ -273,11 +291,11 @@
                     btn.contentEdgeInsets = UIEdgeInsetsZero;
                     [btn setBackgroundImage:buttonImages[i] forState:UIControlStateNormal];
                     [btn setTag:i+1];   // help identify the button when clicked
-                    #ifdef TARGET_OS_TV
+#ifdef TARGET_OS_TV
                     [btn addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventPrimaryActionTriggered];
-                    #else
+#else
                     [btn addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
-                    #endif
+#endif
                     
                     NSLayoutConstraint* leftConstraint = [NSLayoutConstraint constraintWithItem:btn attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:_backgroundView attribute:NSLayoutAttributeLeft multiplier:1.0f constant:dim.origin.x];
                     NSLayoutConstraint* topConstraint = [NSLayoutConstraint constraintWithItem:btn attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:_backgroundView attribute:NSLayoutAttributeTop multiplier:1.0f constant:dim.origin.y];
@@ -298,42 +316,40 @@
                 
                 _buttonActions = [NSArray arrayWithArray:buttonActions];
             }
-
+            
         }
     }
     
     dispatch_async(dispatch_get_main_queue(), ^{
-        
-        // Add to the top window...
-        if (!self.superview) {
-            NSEnumerator *frontToBackWindows = [[[UIApplication sharedApplication] windows] reverseObjectEnumerator];
-            
-            for (UIWindow *window in frontToBackWindows) {
-                if (window.windowLevel == UIWindowLevelNormal && window.hidden == NO) {
-                    [window addSubview:self];
-                    _isShowing = YES;
-                    break;
-                }
-            }
-        }
+        [viewController.view addSubview:self];
+        self.isShowing = YES;
     });
 }
 
+
 - (void)close
 {
-    if (_isShowing) {
-        if (self.beforeClose != nil) {
-            self.beforeClose();
-        }
-        
+    if (self.isShowing) {
         [self removeFromSuperview];
-        
-        if (self.afterClose != nil) {
-            self.afterClose();
-        }
-        _isShowing = NO;
+        self.isShowing = NO;
+    }
+}
+
+
+#pragma mark - Private Methods
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    CGPoint locationPoint = [[touches anyObject] locationInView:self];
+    UIView* viewYouWishToObtain = [self hitTest:locationPoint withEvent:event];
+    
+    if (viewYouWishToObtain == _shimView) {
+        [self actionHandlerFor:@"shim" withAction:_shimAction];
     }
     
+    if (viewYouWishToObtain == _backgroundView) {
+        [self actionHandlerFor:@"background" withAction:_backgroundAction];
+    }
 }
 
 - (CGRect)renderAsCoverWithConstraints: (NSDictionary*)constraints andImage: (UIImage *)image
@@ -438,7 +454,7 @@
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"(\\d+)(px|%)" options:NSRegularExpressionCaseInsensitive error:nil];
     
     NSArray *matches = [regex matchesInString:constraint options:0 range:NSMakeRange(0, [constraint length])];
-
+    
     if ([matches count] > 0) {
         NSTextCheckingResult *match = matches[0];
         NSRange matchValueRange = [match rangeAtIndex:1];
@@ -471,22 +487,18 @@
         return; // do nothing
     }
     else if ([type isEqualToStringCaseInsensitive:@"action"]) {
-        if (value != nil && self.onAction != nil) {
-            self.onAction(name, type, value);
+        if (value != nil) {
+            [self.delegate onActionImageMessage:self name:name type:type value:value];
         }
     }
     else if ([type isEqualToStringCaseInsensitive:@"link"]) {
         if (value != nil) {
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:value]];
         }
-        if (self.onAction != nil) {
-            self.onAction(name, type, value);
-        }
+        [self.delegate onActionImageMessage:self name:name type:type value:value];
     }
     else if ([type isEqualToStringCaseInsensitive:@"dismiss"]) {
-        if (self.dismiss != nil) {
-            self.dismiss(name);
-        }
+        [self.delegate onDismissImageMessage:self name:name];
     }
     
     [self close];

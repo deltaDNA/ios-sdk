@@ -289,6 +289,47 @@ static NSString *const kPushNotificationTokenKey = @"DeltaDNA PushNotificationTo
     }
 }
 
+- (void)requestEngagement:(DDNAEngagement *)engagement engagementHandler:(void (^)(DDNAEngagement *))engagementHandler
+{
+    if (!self.started) {
+        @throw([NSException exceptionWithName:@"DDNANotStartedException" reason:@"You must first start the deltaDNA SDK" userInfo:nil]);
+    }
+    
+    if ([NSString stringIsNilOrEmpty:self.engageURL]) {
+        @throw([NSException exceptionWithName:NSInvalidArgumentException reason:@"Engage URL not set" userInfo:nil]);
+    }
+    
+    if (engagement == nil) {
+        @throw([NSException exceptionWithName:NSInvalidArgumentException reason:@"engagement cannot be nil" userInfo:nil]);
+    }
+    
+    if (engagementHandler == nil) {
+        @throw([NSException exceptionWithName:NSInvalidArgumentException reason:@"engagementHandler cannot be nil" userInfo:nil]);
+    }
+    
+    @try {
+        
+        NSDictionary *dict = [engagement dictionary];
+        
+        DDNAEngageRequest *engageRequest = [[DDNAEngageRequest alloc] initWithDecisionPoint:dict[@"decisionPoint"]
+                                                                                     userId:self.userID
+                                                                                  sessionId:self.sessionID];
+        engageRequest.flavour = dict[@"flavour"];
+        engageRequest.parameters = dict[@"parameters"];
+        
+        [self.engageService request:engageRequest handler:^(NSString *response, NSInteger statusCode, NSError *error) {
+            engagement.raw = response;
+            engagement.statusCode = statusCode;
+            engagement.error = error.localizedDescription;
+            
+            engagementHandler(engagement);
+        }];
+    }
+    @catch (NSException *exception) {
+        DDNALogWarn(@"Engagement request failed: %@", exception.reason);
+    }
+}
+
 - (void) requestImageMessage:(NSString *)decisionPoint withEngageParams:(NSDictionary *)engageParams imagePopup:(id <DDNAPopup>)popup
 {
     [self requestImageMessage:decisionPoint withEngageParams:engageParams imagePopup:popup callbackBlock:nil];

@@ -65,7 +65,7 @@
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"[CollectRequest] Events=%ld Bytes=%u",
+    return [NSString stringWithFormat:@"[CollectRequest] Events=%ld Bytes=%lu",
             (long)self.eventCount,
             [self.eventJSON dataUsingEncoding:NSUTF8StringEncoding].length];
 }

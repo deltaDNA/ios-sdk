@@ -77,7 +77,20 @@ DDNAEvent *event = [DDNAEvent eventWithName:@"keyTypes"];
 
 ### Engage
 
-Change the behaviour of the game with an engagement.  Create a `DDNAEngagement` with the name of your decision point.  Engage will respond with a dictionary of key values for your player.  For example:
+Change the behaviour of the game with an engagement.  Create a `DDNAEngagement` with the name of your decision point.  Engage will respond with a dictionary of key values for your player.  Depending on how the Engage campaign has been built on the platform, the response will look something like:
+
+```json
+{
+    "parameters":{},
+    "image":{},                         // optional
+    "heading":"An optional heading",    // optional
+    "message":"An optional message"     // optional
+}
+```
+
+The `parameters` key is always present if the request to Engage was successful, but will be empty if no parameters were returned.  The game can look in the parameters to customise it's behaviour for the player.
+
+For example:
 
 ```objective-c
 DDNAEngagement *engagement = [DDNAEngagement engagementWithDecisionPoint:@"gameLoaded"];
@@ -86,13 +99,34 @@ DDNAEngagement *engagement = [DDNAEngagement engagementWithDecisionPoint:@"gameL
 [engagement setParam:@"Disco Volante" forKey:@"missionName"];
 
 [[DDNASDK sharedInstance] requestEngagement:engagement completionHandler:^(NSDictionary* parameters, NSInteger statusCode, NSError* error) {
-    NSLog(@"Engagement request returned the following parameters:\n%@", parameters);
+    NSLog(@"Engagement request returned the following parameters:\n%@", parameters[@"parameters"]);
+}];
+```
+
+#### Image Message
+
+One of the actions Engage supports is an Image Message.  This displays a custom popup on the game screen.  To test if Engage returned an Image Message you can create one from a `DDNAEngagement`.  If no image is defined for the Engagement, the Image Message will be nil.  The following shows how you can dynamically display an image popup depending on Engage's response.
+
+```objective-c
+DDNAEngagement *engagement = [DDNAEngagement engagementWithDecisionPoint:@"imageMessage"];
+
+[[DDNASDK sharedInstance] requestEngagement:engagement engagementHandler:^(DDNAEngagement* response) {
+
+    DDNAImageMessage* imageMessage = [DDNAImageMessage imageMessageWithEngagement:response delegate:self];
+    if (imageMessage != nil) {
+        // Engagement contained a valid image message response!
+        [imageMessage fetchResources];
+        // -didReceiveResourcesForImageMessage will be called once the resources are available.
+    }
+    else {
+        NSLog(@"Engage response did not contain an image message.");
+    }
 }];
 ```
 
 ### Further Integration
 
-Refer to our [documentation](http://docs.deltadna.com/advanced-integration/ios-sdk/) site for more details how to use the SDK.
+Refer to our [documentation](http://docs.deltadna.com/advanced-integration/ios-sdk/) site for more details on how to use the SDK.
 
 ## License
 

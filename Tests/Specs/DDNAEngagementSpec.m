@@ -33,7 +33,7 @@ describe(@"engagement", ^{
             @"parameters": @{}
         };
         
-        expect(engagement.dictionary).to.equal(result);
+        expect([engagement.dictionary isEqualToDictionary:result]).to.beTruthy();
         
     });
     
@@ -52,7 +52,7 @@ describe(@"engagement", ^{
             }
         };
         
-        expect(engagement.dictionary).to.equal(result);
+        expect([engagement.dictionary isEqualToDictionary:result]).to.beTruthy();
     });
     
     it(@"create with nested parameters", ^{
@@ -72,7 +72,7 @@ describe(@"engagement", ^{
             }
         };
         
-        expect(engagement.dictionary).to.equal(result);
+        expect([engagement.dictionary isEqualToDictionary:result]).to.beTruthy();
         
     });
     
@@ -81,6 +81,34 @@ describe(@"engagement", ^{
         expect(^{[DDNAEngagement engagementWithDecisionPoint:nil];}).to.raiseWithReason(NSInvalidArgumentException, @"decisionPoint cannot be nil or empty");
         
         expect(^{[DDNAEngagement engagementWithDecisionPoint:@""];}).to.raiseWithReason(NSInvalidArgumentException, @"decisionPoint cannot be nil or empty");
+    });
+    
+    it(@"json is nil if raw is not json", ^{
+        
+        DDNAEngagement *engagement = [DDNAEngagement engagementWithDecisionPoint:@"myDecisionPoint"];
+        engagement.raw = @"Not valid JSON";
+        
+        expect(engagement.raw).to.equal(@"Not valid JSON");
+        expect(engagement.json).to.beNil();
+        
+    });
+    
+    it(@"json is valid if raw is json", ^{
+       
+        DDNAEngagement *engagement = [DDNAEngagement engagementWithDecisionPoint:@"myDecisionPoint"];
+        engagement.raw = @"{\"x\": 1,\"y\": \"Hello\",\"z\": [{\"1\": \"a\"}]}";
+        
+        expect(engagement.raw).to.equal(@"{\"x\": 1,\"y\": \"Hello\",\"z\": [{\"1\": \"a\"}]}");
+        expect(engagement.json).toNot.beNil();
+    
+        NSDictionary *result = @{
+            @"x": @1,
+            @"y": @"Hello",
+            @"z": @[@{ @"1": @"a" }]
+        };
+        
+        expect([engagement.json isEqualToDictionary:result]).to.beTruthy();
+        
     });
     
 });

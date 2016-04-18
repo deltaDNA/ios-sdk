@@ -25,5 +25,6 @@
 #import <DeltaDNA/DDNATransaction.h>
 #import <DeltaDNA/DDNAEngagement.h>
 #import <DeltaDNA/DDNAPopup.h>
+#import <DeltaDNA/DDNAImageMessage.h>
 
 #endif /* _DELTADNA_ */

@@ -17,7 +17,7 @@
 import UIKit
 import DeltaDNA
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, DDNAImageMessageDelegate {
 
     @IBOutlet weak var sdkVersion: UILabel!
     
@@ -75,38 +75,49 @@ class ViewController: UIViewController {
     }
 
     @IBAction func onEngage(sender: AnyObject) {
-        DDNASDK.sharedInstance().requestEngagement("gameLoaded",
-            withEngageParams: [
-                "userLevel" : 4,
-                "experience" : 1000,
-                "missionName" : "Disco Volante"],
-            callbackBlock: {(response) -> () in
-                NSLog("Engage returned: %@", response)
+        let engagement = DDNAEngagement(decisionPoint: "gameLoaded")
+        engagement.setParam(4, forKey: "userLevel")
+        engagement.setParam(1000, forKey: "experience")
+        engagement.setParam("Disco Volante", forKey: "missionName")
+        
+        DDNASDK.sharedInstance().requestEngagement(engagement, engagementHandler:{ (response)->() in
+            if response.json != nil {
+                print("Engagement returned: \(response.json["parameters"])")
+            } else {
+                print("Engagement failed: \(response.error)")
+            }
         })
     }
     
     @IBAction func onImageMessage(sender: AnyObject) {
-        let popup:DDNAPopup = DDNABasicPopup()
-        weak var weakPopup = popup
-        popup.afterPrepare = {()->() in
-            weakPopup!.show()
-        }
-        popup.dismiss = {(name)->() in
-            NSLog("Dismiss by %@", name)
-        }
-        popup.onAction = {(name, type, value)->() in
-            NSLog("OnAction by %@ type %@ value %@", name, type, value)
-        }
-        DDNASDK.sharedInstance().requestImageMessage("imageMessage",
-            withEngageParams: nil,
-            imagePopup: popup,
-            callbackBlock: {(response)->() in
-                NSLog("Engage returned: %@", response)
+        let engagement = DDNAEngagement(decisionPoint: "imageMessage");
+        
+        DDNASDK.sharedInstance().requestEngagement(engagement, engagementHandler:{ (response)->() in
+            if let imageMessage = DDNAImageMessage(engagement: response, delegate: self) {
+                imageMessage.fetchResources()
+            }
         })
     }
     
     @IBAction func onUploadEvents(sender: AnyObject) {
         DDNASDK.sharedInstance().upload();
+    }
+    
+    func onDismissImageMessage(imageMessage: DDNAImageMessage!, name: String!) {
+        print("Image message dismissed by \(name)")
+    }
+    
+    func onActionImageMessage(imageMessage: DDNAImageMessage!, name: String!, type: String!, value: String!) {
+        print("Image message actioned by \(name) with \(type) and \(value)")
+    }
+    
+    func didReceiveResourcesForImageMessage(imageMessage: DDNAImageMessage!) {
+        print("Image message received resources")
+        imageMessage.showFromRootViewController(self)
+    }
+    
+    func didFailToReceiveResourcesForImageMessage(imageMessage: DDNAImageMessage!, withReason reason: String!) {
+        print("Image message failed to receive resources: \(reason)")
     }
 }
 

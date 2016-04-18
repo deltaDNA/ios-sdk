@@ -32,15 +32,10 @@
     // Let the device know we want to receive push notifications
     // Modified to handle changes in iOS8 (this is Xcode 6 code, Xcode 5 you will need to use conditional compiling)
     if([application respondsToSelector:@selector(registerUserNotificationSettings:)]){
-        // iOS8 use registerUserNotificationSettings
         [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:
                                                                              (UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
         
         [[UIApplication sharedApplication] registerForRemoteNotifications];
-    } else {
-        // <iOS 8 use registerForRemoteNotifications
-        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:
-         (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
     }
     
     return YES;

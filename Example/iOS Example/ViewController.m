@@ -17,7 +17,7 @@
 #import "ViewController.h"
 @import DeltaDNA;
 
-@interface ViewController ()
+@interface ViewController () <DDNAImageMessageDelegate>
 
 @end
 
@@ -118,32 +118,32 @@
     [engagement setParam:@1000 forKey:@"experience"];
     [engagement setParam:@"Disco Volante" forKey:@"missionName"];
     
-    [[DDNASDK sharedInstance] requestEngagement:engagement completionHandler:^(NSDictionary *parameters, NSInteger statusCode, NSError *error) {
-        NSLog(@"Engagement request returned the following parameters:\n%@", parameters);
+    [[DDNASDK sharedInstance] requestEngagement:engagement engagementHandler:^(DDNAEngagement *response) {
+        if (response.json) {
+            NSLog(@"Engagement request returned the following parameters:\n%@", response.json[@"parameters"]);
+        } else {
+            NSLog(@"Engagement failed: %@", response.error);
+        }
     }];
     
 }
 
 - (IBAction)imageMessage:(id)sender {
-    DDNABasicPopup* popup = [DDNABasicPopup popup];
-    __weak DDNABasicPopup* weakPopup = popup;
-    popup.afterPrepare = ^{
-        [weakPopup show];
-    };
-    
-    popup.dismiss = ^(NSString *name){
-        NSLog(@"Dismiss by %@", name);
-    };
-    
-    popup.onAction = ^(NSString *name, NSString *type, NSString *value){
-        NSLog(@"OnAction by %@ type %@ value %@", name, type, value);
-    };
-    
+
     DDNAEngagement *engagement = [DDNAEngagement engagementWithDecisionPoint:@"imageMessage"];
     
-    [[DDNASDK sharedInstance] requestImageMessage:engagement popup:popup completionHandler:^(NSDictionary *parameters, NSInteger statusCode, NSError *error) {
-        NSLog(@"Image message request returned the following parameters:\n%@", parameters);
+    [[DDNASDK sharedInstance] requestEngagement:engagement engagementHandler:^(DDNAEngagement *response) {
+        
+        DDNAImageMessage *imageMessage = [DDNAImageMessage imageMessageWithEngagement:response delegate:self];
+        if (imageMessage != nil) {
+          // Engagement contained a valid image message response!
+            [imageMessage fetchResources];
+        }
+        else {
+            NSLog(@"Engage response did not contain an image message.");
+        }
     }];
+    
 }
 
 - (IBAction)pushNotification:(id)sender {
@@ -179,6 +179,28 @@
 - (IBAction)newSession:(id)sender {
     DDNASDK * sdk = [DDNASDK sharedInstance];
     [sdk newSession];
+}
+
+#pragma mark - ImageMessageDelegate
+
+- (void)didReceiveResourcesForImageMessage:(DDNAImageMessage *)imageMessage
+{
+    [imageMessage showFromRootViewController:self];
+}
+
+- (void)didFailToReceiveResourcesForImageMessage:(DDNAImageMessage *)imageMessage withReason:(NSString *)reason
+{
+    NSLog(@"Failed to download resources for the image message: %@", reason);
+}
+
+- (void)onDismissImageMessage:(DDNAImageMessage *)imageMessage name:(NSString *)name
+{
+    NSLog(@"ImageMessage dismissed by %@", name);
+}
+
+- (void)onActionImageMessage:(DDNAImageMessage *)imageMessage name:(NSString *)name type:(NSString *)type value:(NSString *)value
+{
+    NSLog(@"ImageMessage action from %@ with type %@ value %@", name, type, value);
 }
 
 
