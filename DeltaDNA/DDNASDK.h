@@ -112,6 +112,8 @@
 
 /**
  Generates a new session id, subsequent events will belong to a new session.
+ 
+ @discussion New sessions are generated automatically if the app leaves the foreground and returns after a period of time (default: 5 minutes).  This behaviour can be configured in the settings.
  */
 - (void)newSession;
 

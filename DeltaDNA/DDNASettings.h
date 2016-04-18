@@ -91,6 +91,11 @@ extern NSUInteger const DDNA_MAX_EVENT_STORE_BYTES;
 @property (nonatomic, assign) BOOL useEventStore;
 
 /**
+ Controls the amount of time the app can be backgrounded before we consider a new session to have started.  A value of 0 disables automatically generating new sessions.
+ */
+@property (nonatomic, assign) int sessionTimeoutSeconds;
+
+/**
  Returns the path to the privates settings directory on 
  this device.
  */

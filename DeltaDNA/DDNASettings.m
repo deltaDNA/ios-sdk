@@ -49,6 +49,8 @@ NSUInteger const DDNA_MAX_EVENT_STORE_BYTES = 1024 * 1024;
         #else
         self.useEventStore = YES;
         #endif
+        
+        self.sessionTimeoutSeconds = 5 * 60;
     }
     return self;
 }

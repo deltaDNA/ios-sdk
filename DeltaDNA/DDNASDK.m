@@ -48,6 +48,7 @@
 @property (nonatomic, copy, readwrite) NSString *userID;
 @property (nonatomic, copy, readwrite) NSString *sessionID;
 @property (nonatomic, copy, readwrite) NSString *platform;
+@property (nonatomic, strong) NSDate *lastActiveDate;
 
 - (void)didReceiveNotification:(NSNotification *) notification;
 
@@ -98,7 +99,9 @@ static NSString *const kPushNotificationTokenKey = @"DeltaDNA PushNotificationTo
         _taskQueue = dispatch_queue_create("com.deltadna.TaskQueue", NULL);
         dispatch_suspend(_taskQueue);
         
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveNotification:) name:DD_EVENT_STARTED object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appDidReceiveNotification:) name:DD_EVENT_STARTED object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appWillResignActive:) name:UIApplicationWillResignActiveNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appWillEnterForeground:) name:UIApplicationWillEnterForegroundNotification object:nil];
         
         if (self.settings.useEventStore) {
             DDNALogDebug(@"Using persistent event store for session.");
@@ -152,7 +155,8 @@ static NSString *const kPushNotificationTokenKey = @"DeltaDNA PushNotificationTo
         DDNALogDebug(@"Starting SDK with user id %@", self.userID);
         
         self.platform = [DDNAClientInfo sharedInstance].platform;
-        self.sessionID = [DDNASDK generateSessionID];
+        [self newSession];
+        
         self.engageService = [[DDNAInstanceFactory sharedInstance] buildEngageService];
         self.collectService = [[DDNAInstanceFactory sharedInstance] buildCollectService];
         
@@ -183,6 +187,7 @@ static NSString *const kPushNotificationTokenKey = @"DeltaDNA PushNotificationTo
 - (void) newSession
 {
     self.sessionID = [DDNASDK generateSessionID];
+    DDNALogDebug(@"Starting new session %@", self.sessionID);
 }
 
 - (void) stop
@@ -618,13 +623,29 @@ static NSString *const kPushNotificationTokenKey = @"DeltaDNA PushNotificationTo
     }
 }
 
-- (void) didReceiveNotification:(NSNotification *)notification
+- (void)appDidReceiveNotification:(NSNotification *)notification
 {
     if ([[notification name] isEqualToString:DD_EVENT_STARTED])
     {
         DDNALogDebug(@"Received SDK started notification");
         if (!_started) {
             dispatch_resume(_taskQueue);
+        }
+    }
+}
+
+- (void)appWillResignActive:(NSNotification *)notification
+{
+    self.lastActiveDate = [NSDate date];
+}
+
+- (void)appWillEnterForeground:(NSNotification *)notification
+{
+    if (self.settings.sessionTimeoutSeconds > 0) {
+        NSTimeInterval backgroundSeconds = [[NSDate date] timeIntervalSinceDate:self.lastActiveDate];
+        if (backgroundSeconds > self.settings.sessionTimeoutSeconds) {
+            self.lastActiveDate = nil;
+            [self newSession];
         }
     }
 }
