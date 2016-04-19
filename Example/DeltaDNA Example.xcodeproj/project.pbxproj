@@ -413,7 +413,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/iOS Example/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.deltadna.ios.DeltaDNA-iOS-Example";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.deltadna.ios.iOS-Example";
 				PRODUCT_NAME = "iOS Example";
 			};
 			name = Debug;
@@ -429,7 +429,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/iOS Example/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.deltadna.ios.DeltaDNA-iOS-Example";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.deltadna.ios.iOS-Example";
 				PRODUCT_NAME = "iOS Example";
 			};
 			name = Release;
