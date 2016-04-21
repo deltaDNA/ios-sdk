@@ -16,6 +16,7 @@
 
 #import "DDNAEngagement.h"
 #import "DDNAParams.h"
+#import "NSDictionary+DeltaDNA.h"
 
 @interface DDNAEngagement ()
 
@@ -61,17 +62,7 @@
 
 - (void)setRaw:(NSString *)raw
 {
-    if (raw != nil && raw.length > 0) {
-        NSData * data = [raw dataUsingEncoding:NSUTF8StringEncoding];
-        NSError * error = nil;
-        NSDictionary * result = [NSJSONSerialization JSONObjectWithData:data
-                                                                options:kNilOptions
-                                                                  error:&error];
-        self.json = (error == 0) ? result : nil;
-    } else {
-        self.json = nil;
-    }
-    
+    _json = [NSDictionary dictionaryWithJSONString:raw];
     _raw = raw;
 }
 

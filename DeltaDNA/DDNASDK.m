@@ -50,8 +50,6 @@
 @property (nonatomic, copy, readwrite) NSString *platform;
 @property (nonatomic, strong) NSDate *lastActiveDate;
 
-- (void)didReceiveNotification:(NSNotification *) notification;
-
 @end
 
 static NSString *const EV_KEY_NAME = @"eventName";
@@ -282,15 +280,17 @@ static NSString *const kPushNotificationTokenKey = @"DeltaDNA PushNotificationTo
         engageRequest.parameters = dict[@"parameters"];
         
         [self.engageService request:engageRequest handler:^(NSString *response, NSInteger statusCode, NSError *error) {
-            if (response && completionHandler) {
+            if (error || statusCode != 200) {
+                DDNALogWarn(@"Engagement for '%@' failed with %ld: %@",
+                            engagement.decisionPoint, (long)statusCode, error ? error.localizedDescription : response);
+            }
+            if (completionHandler) {
                 completionHandler([NSDictionary dictionaryWithJSONString:response], statusCode, error);
-            } else {
-                DDNALogWarn(@"Engagement failed with status code %ld: %@", (long)statusCode, [error localizedDescription]);
             }
         }];
     }
     @catch (NSException *exception) {
-        DDNALogWarn(@"Engagement request failed: %@", exception.reason);
+        DDNALogWarn(@"Engagement for '%@' failed: %@", engagement.decisionPoint, exception.reason);
     }
 }
 
@@ -323,15 +323,19 @@ static NSString *const kPushNotificationTokenKey = @"DeltaDNA PushNotificationTo
         engageRequest.parameters = dict[@"parameters"];
         
         [self.engageService request:engageRequest handler:^(NSString *response, NSInteger statusCode, NSError *error) {
+            if (error || statusCode != 200) {
+                DDNALogWarn(@"Engagement for '%@' failed with %ld: %@",
+                            engagement.decisionPoint, (long)statusCode, error ? error.localizedDescription : response);
+            }
             engagement.raw = response;
             engagement.statusCode = statusCode;
-            engagement.error = error.localizedDescription;
+            engagement.error = error;
             
             engagementHandler(engagement);
         }];
     }
     @catch (NSException *exception) {
-        DDNALogWarn(@"Engagement request failed: %@", exception.reason);
+        DDNALogWarn(@"Engagement for '%@' failed: %@", engagement.decisionPoint, exception.reason);
     }
 }
 

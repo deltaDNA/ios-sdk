@@ -119,11 +119,7 @@
     [engagement setParam:@"Disco Volante" forKey:@"missionName"];
     
     [[DDNASDK sharedInstance] requestEngagement:engagement engagementHandler:^(DDNAEngagement *response) {
-        if (response.json) {
-            NSLog(@"Engagement request returned the following parameters:\n%@", response.json[@"parameters"]);
-        } else {
-            NSLog(@"Engagement failed: %@", response.error);
-        }
+        NSLog(@"Engagement request returned the following parameters:\n%@", response.json);
     }];
     
 }

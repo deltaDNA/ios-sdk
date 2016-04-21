@@ -83,13 +83,13 @@ describe(@"engagement", ^{
         expect(^{[DDNAEngagement engagementWithDecisionPoint:@""];}).to.raiseWithReason(NSInvalidArgumentException, @"decisionPoint cannot be nil or empty");
     });
     
-    it(@"json is nil if raw is not json", ^{
+    it(@"json is empty if raw is not json", ^{
         
         DDNAEngagement *engagement = [DDNAEngagement engagementWithDecisionPoint:@"myDecisionPoint"];
         engagement.raw = @"Not valid JSON";
         
         expect(engagement.raw).to.equal(@"Not valid JSON");
-        expect(engagement.json).to.beNil();
+        expect([engagement.json isEqualToDictionary:@{}]).to.beTruthy();
         
     });
     

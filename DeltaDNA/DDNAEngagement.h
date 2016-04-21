@@ -26,6 +26,11 @@
 @interface DDNAEngagement : NSObject
 
 /**
+ The decision point for this engagement.
+ */
+@property (nonatomic, copy, readonly) NSString *decisionPoint;
+
+/**
  The raw response from the Engage service.  This will be nil if the request has not been made or
  an error occurred.  If the Engagement could return a valid JSON response it will be a JSON string, else
  it will be a message with additional intformation.
@@ -39,12 +44,12 @@
 @property (nonatomic, assign) NSInteger statusCode;
 
 /**
- If the Engage request had an error, it is recorded here.
+ If the Engage request had a connection error, it is recorded here.
  */
-@property (nonatomic, copy) NSString *error;
+@property (nonatomic, copy) NSError *error;
 
 /**
- The Engage response as an NSDictionary.  If the request failed or has yet to made this is nil.
+ The Engage response as an NSDictionary.  If has yet to made this is nil, if there was a problem with engage this will be empty.
  */
 @property (nonatomic, strong) NSDictionary *json;
 
