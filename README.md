@@ -16,7 +16,7 @@ source 'https://github.com/deltaDNA/CocoaPods.git'
 
 platform :ios, '7.0'
 
-pod 'DeltaDNA', '~> 4.0'
+pod 'DeltaDNA', '~> 4.1'
 ```
 
 The deltaDNA SDKs are available from our private spec repository, its url must be added as a source to your podfile.  
@@ -82,13 +82,13 @@ Change the behaviour of the game with an engagement.  Create a `DDNAEngagement` 
 ```json
 {
     "parameters":{},
-    "image":{},                         // optional
-    "heading":"An optional heading",    // optional
-    "message":"An optional message"     // optional
+    "image":{},
+    "heading":"An optional heading",
+    "message":"An optional message"
 }
 ```
 
-The `parameters` key is always present if the request to Engage was successful, but will be empty if no parameters were returned.  The game can look in the parameters to customise it's behaviour for the player.
+The `parameters` key is always present if the request to Engage was successful, but will be empty if no parameters were returned.  The image, heading and message are optional.  The game can look in the parameters to customise it's behaviour for the player.
 
 For example:
 
