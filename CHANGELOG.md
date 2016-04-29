@@ -1,6 +1,6 @@
 # Change Log
 
-## [Unreleased]() (unknown)
+## [4.1.0](https://github.com/deltaDNA/ios-sdk/releases/tag/4.1.0) (2016-04-29)
 ### Added
 - Additional API for Engagements `-requestEngagement:engagementHandler` allows the caller to query the `DDNAEngagement` object directly for the parameters returned by the Engage service.  See the [README](README.md) for an example.
 - Will automatically generate a new session id if the app has been in the background for more than 5 minutes.  This behaviour can be configured from the settings.
