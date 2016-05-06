@@ -17,6 +17,7 @@
 #import "DDNAClientInfo.h"
 #import <UIKit/UIDevice.h>
 #import <sys/sysctl.h>
+#import "NSString+DeltaDNA.h"
 
 
 @implementation DDNAClientInfo

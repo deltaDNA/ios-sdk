@@ -59,4 +59,9 @@
     return (string && [string caseInsensitiveCompare:self] == NSOrderedSame);
 }
 
+- (BOOL) containsString: (NSString *) substring
+{
+    return [self rangeOfString:substring].location != NSNotFound;
+}
+
 @end

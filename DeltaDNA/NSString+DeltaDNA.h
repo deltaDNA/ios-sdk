@@ -26,4 +26,6 @@
 
 - (BOOL)isEqualToStringCaseInsensitive:(NSString *)string;
 
+- (BOOL)containsString:(NSString *)substring;
+
 @end
