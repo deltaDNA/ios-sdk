@@ -2,9 +2,11 @@
 
 ## deltaDNA分析iOS SDK
 
+[![Build Status](https://travis-ci.org/deltaDNA/ios-sdk.svg)](https://travis-ci.org/deltaDNA/ios-sdk)
+
 ### 使用CocoaPods安装
 
-[CocoaPods](https://cocoapods.org/)是一个独立的Objective-C管理器，可以非常简便的自动使用第三方库。
+[CocoaPods](https://cocoapods.org/)是一个Objective-C的依赖关系管理器，可以非常简便的自动使用第三方库。
 
 #### Podfile
 
@@ -14,7 +16,7 @@ source 'https://github.com/deltaDNA/CocoaPods.git'
 
 platform :ios, '7.0'
 
-pod 'DeltaDNA', '~> 4.0'
+pod 'DeltaDNA', '~> 4.1'
 ```
 
 deltaDNA的SDK可以直接从我们的私有项目库中找到，其URL必须作为一个源路径添加到你的Podfile。
@@ -75,7 +77,20 @@ DDNAEvent *event = [DDNAEvent eventWithName:@"keyTypes"];
 
 ### 吸引（Engage）
 
-通过一个吸引（Engagement）改变游戏的行为。使用你的决策点的名字创建一个`DDNAEngagement`方法。吸引（Engage）将会通过一个键值字典为你的玩家做出响应。例如：
+通过一个吸引（Engagement）改变游戏的行为。使用你的决策点的名字创建一个`DDNAEngagement`方法。吸引（Engage）将会通过一个键值字典为你的玩家做出响应。根据在平台上吸引（Engage）活动如何被创建，响应看起来像：
+
+```json
+{
+    "parameters":{},
+    "image":{},
+    "heading":"An optional heading",
+    "message":"An optional message"
+}
+```
+
+如果吸引（Engage）的请求成功，`parameters`（参数）键值将一直存在。但是如果没有参数返回，其将为空。图像（image）、标题（heading）和消息（message）都是可选的。游戏可以通过这些参数来为玩家定制其行为。
+
+例如：
 
 ```objective-c
 DDNAEngagement *engagement = [DDNAEngagement engagementWithDecisionPoint:@"gameLoaded"];
@@ -84,13 +99,34 @@ DDNAEngagement *engagement = [DDNAEngagement engagementWithDecisionPoint:@"gameL
 [engagement setParam:@"Disco Volante" forKey:@"missionName"];
 
 [[DDNASDK sharedInstance] requestEngagement:engagement completionHandler:^(NSDictionary* parameters, NSInteger statusCode, NSError* error) {
-    NSLog(@"Engagement request returned the following parameters:\n%@", parameters);
+    NSLog(@"Engagement request returned the following parameters:\n%@", parameters[@"parameters"]);
+}];
+```
+
+#### 图片消息
+
+吸引（Engage）支持的行为之一就是图片消息。其将在游戏屏幕展示一个自定义的弹出内容。你可以用`DDNAEngagement`创建一个来测试是否吸引（Engage）返回了一个图片消息。如果在这个吸引（Engage）中没有图片被定义，那么这个图片消息将为空（NIL）。下面的代码展示了你如何依靠吸引（Engage）的响应动态的显示一张弹出图片。
+
+```objective-c
+DDNAEngagement *engagement = [DDNAEngagement engagementWithDecisionPoint:@"imageMessage"];
+
+[[DDNASDK sharedInstance] requestEngagement:engagement engagementHandler:^(DDNAEngagement* response) {
+
+    DDNAImageMessage* imageMessage = [DDNAImageMessage imageMessageWithEngagement:response delegate:self];
+    if (imageMessage != nil) {
+        // Engagement contained a valid image message response!
+        [imageMessage fetchResources];
+        // -didReceiveResourcesForImageMessage will be called once the resources are available.
+    }
+    else {
+        NSLog(@"Engage response did not contain an image message.");
+    }
 }];
 ```
 
 ### 进一步整合
 
-请参阅我们的[文档](http://docs.deltadna.com/advanced-integration/ios-sdk/)网站以了解如何使用这个SDK的更多细节。
+请参阅我们的[文档](http://docs.deltadna.com/zh/advanced-integration/ios-sdk/)网站以了解如何使用这个SDK的更多细节。
 
 ## 授权
 

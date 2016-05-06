@@ -1,5 +1,9 @@
 # Change Log
 
+## [4.1.1](https://github.com/deltaDNA/ios-sdk/releases/tag/4.1.1) (2016-05-06)
+### Fixed
+- Replaced iOS8 method `NSString (BOOL)containsString:(NSString *)` with own method.
+
 ## [4.1.0](https://github.com/deltaDNA/ios-sdk/releases/tag/4.1.0) (2016-04-29)
 ### Added
 - Additional API for Engagements `-requestEngagement:engagementHandler` allows the caller to query the `DDNAEngagement` object directly for the parameters returned by the Engage service.  See the [README](README.md) for an example.

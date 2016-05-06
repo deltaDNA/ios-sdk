@@ -2,7 +2,7 @@
 
 ## deltaDNA Analytics iOS SDK
 
-[![Build Status](https://travis-ci.org/deltaDNA/ios-sdk.svg)](https://travis-ci.org/deltaDNA/ios-sdk)
+[![Build Status](https://travis-ci.org/deltaDNA/ios-sdk.svg?branch=master)](https://travis-ci.org/deltaDNA/ios-sdk)
 
 ### Installation with CocoaPods
 
