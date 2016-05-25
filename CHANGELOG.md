@@ -1,5 +1,9 @@
 # Change Log
 
+## [4.1.2](https://github.com/deltaDNA/ios-sdk/releases/tag/4.1.2) (2016-05-27)
+### Added
+- Post notification when a new session is started.
+
 ## [4.1.1](https://github.com/deltaDNA/ios-sdk/releases/tag/4.1.1) (2016-05-06)
 ### Fixed
 - Replaced iOS8 method `NSString (BOOL)containsString:(NSString *)` with own method.

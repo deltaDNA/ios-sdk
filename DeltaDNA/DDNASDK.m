@@ -68,6 +68,7 @@ static NSString *const PP_KEY_CLIENT_VERSION = @"DDSDK_CLIENT_VERSION";
 static NSString *const PP_KEY_PUSH_NOTIFICATION_TOKEN = @"DDSDK_PUSH_NOTIFICATION_TOKEN";
 
 static NSString *const DD_EVENT_STARTED = @"DDNASDKStarted";
+static NSString *const DD_EVENT_NEW_SESSION = @"DDNASDKNewSession";
 
 static NSString *const kUserIdKey = @"DeltaDNA UserId";
 static NSString *const kPushNotificationTokenKey = @"DeltaDNA PushNotificationToken";
@@ -186,6 +187,7 @@ static NSString *const kPushNotificationTokenKey = @"DeltaDNA PushNotificationTo
 {
     self.sessionID = [DDNASDK generateSessionID];
     DDNALogDebug(@"Starting new session %@", self.sessionID);
+    [[NSNotificationCenter defaultCenter] postNotificationName:DD_EVENT_NEW_SESSION object:self];
 }
 
 - (void) stop
