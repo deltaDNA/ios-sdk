@@ -3,6 +3,7 @@
 ## deltaDNA Analytics iOS SDK
 
 [![Build Status](https://travis-ci.org/deltaDNA/ios-sdk.svg?branch=master)](https://travis-ci.org/deltaDNA/ios-sdk)
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
 ### Installation with CocoaPods
 
