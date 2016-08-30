@@ -1,5 +1,9 @@
 # Change Log
 
+## [4.2.0](https://github.com/deltaDNA/ios-sdk/releases/tag/4.2.0) (YYYY-MM-DD)
+### Fixed
+- Time zone offsets being misreported for some time zones.
+
 ## [4.1.2](https://github.com/deltaDNA/ios-sdk/releases/tag/4.1.2) (2016-05-27)
 ### Added
 - Post notification when a new session is started.

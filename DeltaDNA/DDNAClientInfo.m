@@ -179,9 +179,12 @@
 
 - (NSString *) getTimezoneOffset
 {
-    long secondsFromGMT = [[NSTimeZone localTimeZone] secondsFromGMT];
-    int hoursFromGMT = floor(secondsFromGMT / 3600.0);
-    return [NSString stringWithFormat:@"%+03i", hoursFromGMT];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setTimeZone:[NSTimeZone localTimeZone]];
+    [dateFormatter setDateFormat:@"Z"];
+    [dateFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
+    NSString *formatted = [dateFormatter stringFromDate:[NSDate date]];
+    return [NSString stringWithFormat:@"%@:%@", [formatted substringToIndex:3], [formatted substringFromIndex:3]];
 }
 
 - (NSString *) getCountryCode
