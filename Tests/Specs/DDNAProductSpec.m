@@ -144,6 +144,44 @@ describe(@"product", ^{
         }).to.raiseWithReason(NSInvalidArgumentException, @"type cannot be nil or empty");
     });
     
+    it(@"converts currency", ^{
+        expect([DDNAProduct convertCurrencyCode:@"EUR" value:[NSDecimalNumber decimalNumberWithString:@"1.23"]])
+            .to.equal([NSNumber numberWithInt:123]);
+        expect([DDNAProduct convertCurrencyCode:@"JPY" value:[NSDecimalNumber decimalNumberWithString:@"123"]])
+            .to.equal([NSNumber numberWithInt:123]);
+        expect([DDNAProduct convertCurrencyCode:@"KWD" value:[NSDecimalNumber decimalNumberWithString:@"1.234"]])
+            .to.equal([NSNumber numberWithInt:1234]);
+    });
+    
+    it(@"converts currency flooring", ^{
+        expect([DDNAProduct convertCurrencyCode:@"EUR" value:[NSDecimalNumber decimalNumberWithString:@"1.235"]])
+            .to.equal([NSNumber numberWithInt:123]);
+    });
+    
+    it(@"converts currency when zero", ^{
+        expect([DDNAProduct convertCurrencyCode:@"EUR" value:[NSDecimalNumber decimalNumberWithString:@"0"]])
+            .to.equal([NSNumber numberWithInt:0]);
+    });
+    
+    it(@"converts currency with invalid code", ^{
+        expect([DDNAProduct convertCurrencyCode:@"ZZZ" value:[NSDecimalNumber decimalNumberWithString:@"1.23"]])
+            .to.equal([NSNumber numberWithInt:0]);
+    });
+    
+    it(@"throws if currency conversion code is nil or empty", ^{
+        expect(^{
+            [DDNAProduct convertCurrencyCode:nil value:[NSDecimalNumber decimalNumberWithString:@"1.23"]];
+        }).to.raiseWithReason(NSInvalidArgumentException, @"code cannot be nil or empty");
+        expect(^{
+            [DDNAProduct convertCurrencyCode:@"" value:[NSDecimalNumber decimalNumberWithString:@"1.23"]];
+        }).to.raiseWithReason(NSInvalidArgumentException, @"code cannot be nil or empty");
+    });
+    
+    it(@"throws if currency conversion value is nil", ^{
+        expect(^{
+            [DDNAProduct convertCurrencyCode:@"EUR" value:nil];
+        }).to.raiseWithReason(NSInvalidArgumentException, @"value cannot be nil");
+    });
 });
 
 SpecEnd

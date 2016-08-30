@@ -80,7 +80,7 @@
 
 - (IBAction)achievementEvent:(id)sender {
     DDNAProduct *product = [DDNAProduct product];
-    [product setRealCurrencyType:@"USD" amount:5000];
+    [product setRealCurrencyType:@"USD" amount:[DDNAProduct convertCurrencyCode:@"USD" value:[NSDecimalNumber decimalNumberWithString:@"4.99"]]]; // 4.99 USD
     [product addVirtualCurrencyName:@"VIP Points" type:@"GRIND" amount:20];
     [product addItemName:@"Sunday Showdown Medal" type:@"Victory Badge" amount:1];
     

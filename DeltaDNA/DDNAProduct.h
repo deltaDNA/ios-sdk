@@ -27,4 +27,17 @@
 
 - (void)addItemName:(NSString *)name type:(NSString *)type amount:(NSInteger)amount;
 
+/**
+ Converts a currency in a decimal number format with a decimal point,
+ such as '1.23' EUR, into an integer representation which can be used
+ with setRealCurrency. This method will also work for currencies which
+ don't use a minor currency unit, for example such as the Japanese Yen (JPY).
+ 
+ @param code The ISO 4217 currency code.
+ @param value The currency value to convert.
+ 
+ @return The converted integer value.
+ */
++ (NSInteger)convertCurrencyCode:(NSString *)code value:(NSDecimalNumber *)value;
+
 @end
