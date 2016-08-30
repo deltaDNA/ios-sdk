@@ -395,6 +395,20 @@ static NSString *const kPushNotificationTokenKey = @"DeltaDNA PushNotificationTo
         if (notificationName) {
             [eventParams setObject:notificationName forKey:@"notificationName"];
         }
+        
+        NSString *campaignId = pushNotification[@"_ddCampaign"];
+        NSString *cohortId = pushNotification[@"_ddCohort"];
+        if (campaignId) {
+            [eventParams setObject:[NSNumber numberWithLong:[campaignId longLongValue]] forKey:@"campaignId"];
+        }
+        if (cohortId) {
+            [eventParams setObject:[NSNumber numberWithLong:[cohortId longLongValue]] forKey:@"cohortId"];
+        }
+        if (campaignId || cohortId) {
+            [eventParams setObject:@"APPLE_NOTIFICATION" forKey:@"communicationSender"];
+            [eventParams setObject:@"OPEN" forKey:@"communicationState"];
+        }
+        
         [eventParams setObject:[NSNumber numberWithBool:didLaunch] forKey:@"notificationLaunch"];
         
         [self recordEventWithName:@"notificationOpened" eventParams:eventParams];
