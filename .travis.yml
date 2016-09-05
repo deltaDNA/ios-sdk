@@ -1,5 +1,4 @@
 before_install:
-    - gem install activesupport # workaround for https://github.com/github/pages-gem/issues/181
     - gem install cocoapods
 language: objective-c
 matrix:
