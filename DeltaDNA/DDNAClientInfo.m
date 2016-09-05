@@ -186,17 +186,27 @@
 
 - (NSString *) getCountryCode
 {
+    NSLocale *locale = [NSLocale currentLocale];
+    if (!locale) {
+        return @"ZZ";
+    }
+    
     NSError *error = NULL;
     NSRegularExpression *countryRegex = [NSRegularExpression regularExpressionWithPattern:@"^[A-Z]{2}$" options:0 error:&error];
-    NSString *countryCode = [[NSLocale currentLocale] objectForKey:NSLocaleCountryCode];
+    NSString *countryCode = [locale objectForKey:NSLocaleCountryCode];
     return [countryRegex numberOfMatchesInString:countryCode options:0 range:NSMakeRange(0, countryCode.length)] == 1 ? countryCode : @"ZZ";
 }
 
 - (NSString *) getLanguageCode
 {
+    NSLocale *locale = [NSLocale currentLocale];
+    if (!locale) {
+        return @"zz";
+    }
+    
     NSError *error = NULL;
     NSRegularExpression *languageRegex = [NSRegularExpression regularExpressionWithPattern:@"^[a-z]{2}$" options:0 error:&error];
-    NSString *languageCode = [[NSLocale currentLocale] objectForKey:NSLocaleLanguageCode];
+    NSString *languageCode = [locale objectForKey:NSLocaleLanguageCode];
     return [languageRegex numberOfMatchesInString:languageCode options:0 range:NSMakeRange(0, languageCode.length)] == 1 ? languageCode : @"zz";
 }
 

@@ -4,6 +4,9 @@
 ### Added
 - Helper in DDNAProduct for converting currencues from a decimal number representation.
 
+### Fixed
+- Crash when reported device locale is null.
+
 ## [4.1.2](https://github.com/deltaDNA/ios-sdk/releases/tag/4.1.2) (2016-05-27)
 ### Added
 - Post notification when a new session is started.
