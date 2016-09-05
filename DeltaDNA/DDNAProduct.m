@@ -15,6 +15,7 @@
 //
 
 #import "DDNAProduct.h"
+#import "DDNALog.h"
 
 @interface DDNAProduct ()
 
@@ -23,7 +24,16 @@
 
 @end
 
+@interface XmlParserDelegate : NSObject<NSXMLParserDelegate>
+
+@property (readonly) NSDictionary *dictionary;
+
+@end
+
 @implementation DDNAProduct
+
+static NSDictionary* ISO4217 = nil;
+static dispatch_once_t onceToken;
 
 + (instancetype)product
 {
@@ -85,6 +95,92 @@
         [self setParam:self.items forKey:@"items"];
     } else {
         [self.items addObject:item];
+    }
+}
+
++ (NSInteger)convertCurrencyCode:(NSString *)code value:(NSDecimalNumber *)value
+{
+    if (code == nil || code.length == 0) {
+        @throw([NSException exceptionWithName:NSInvalidArgumentException reason:@"code cannot be nil or empty" userInfo:nil]);
+    }
+    if (value == nil) {
+        @throw([NSException exceptionWithName:NSInvalidArgumentException reason:@"value cannot be nil" userInfo:nil]);
+    }
+    
+    dispatch_once(&onceToken, ^{
+        NSString *xmlPath = [[NSBundle bundleWithIdentifier:@"com.deltadna.ios.DeltaDNA"] pathForResource:@"iso_4217" ofType:@"xml"];
+        NSData *xmlData = [NSData dataWithContentsOfFile:xmlPath];
+        NSXMLParser *xmlParser = [[NSXMLParser alloc] initWithData:xmlData];
+        XmlParserDelegate *xmlParserDelegate = [[XmlParserDelegate alloc] init];
+        [xmlParser setDelegate:xmlParserDelegate];
+        [xmlParser parse];
+        
+        ISO4217 = xmlParserDelegate.dictionary;
+    });
+    
+    NSNumber *minorUnits = [ISO4217 objectForKey:code];
+    if (minorUnits) {
+        return [[value decimalNumberByMultiplyingBy:[NSDecimalNumber decimalNumberWithMantissa:pow(10, [minorUnits intValue]) exponent:0 isNegative:NO]] integerValue];
+    } else {
+        DDNALogWarn(@"Failed to find currency for %@", code);
+        return 0;
+    }
+}
+
+@end
+
+@implementation XmlParserDelegate
+
+NSString *code;
+NSNumber *value;
+bool expectingCode;
+bool expectingValue;
+
+- (id)init {
+    self = [super init];
+    
+    if (self) {
+        _dictionary = [NSMutableDictionary dictionary];
+    }
+    
+    return self;
+}
+
+- (void)parser:(NSXMLParser *)parser didStartElement:(nonnull NSString *)elementName namespaceURI:(nullable NSString *)namespaceURI qualifiedName:(nullable NSString *)qName attributes:(nonnull NSDictionary<NSString *,NSString *> *)attributeDict
+{
+    if ([elementName isEqualToString:@"Ccy"]) {
+        expectingCode = YES;
+        expectingValue = NO;
+    } else if ([elementName isEqualToString:@"CcyMnrUnts"]) {
+        expectingCode = NO;
+        expectingValue = YES;
+    } else {
+        expectingCode = NO;
+        expectingValue = NO;
+    }
+}
+
+- (void)parser:(NSXMLParser *)parser didEndElement:(nonnull NSString *)elementName namespaceURI:(nullable NSString *)namespaceURI qualifiedName:(nullable NSString *)qName
+{
+    if ([elementName isEqualToString:@"CcyNtry"]) {
+        if (code && value) {
+            [_dictionary setValue:value forKey:code];
+        }
+        
+        code = nil;
+        value = nil;
+    }
+    
+    expectingCode = NO;
+    expectingValue = NO;
+}
+
+- (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string
+{
+    if (expectingCode) {
+        code = string;
+    } else if (expectingValue) {
+        value = [NSNumber numberWithInt:[string intValue]];
     }
 }
 
