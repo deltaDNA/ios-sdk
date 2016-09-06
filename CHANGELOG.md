@@ -1,12 +1,12 @@
 # Change Log
 
-## [4.2.1](https://github.com/deltaDNA/ios-sdk/releases/tag/4.1.2) (YYYY-MM-DD)
+## [4.2.1](https://github.com/deltaDNA/ios-sdk/releases/tag/4.2.1) (YYYY-MM-DD)
 ### Fixed
 - Currency conversion helper on tvOS.
 
-## [4.2.0](https://github.com/deltaDNA/ios-sdk/releases/tag/4.1.2) (2016-09-05)
+## [4.2.0](https://github.com/deltaDNA/ios-sdk/releases/tag/4.2.0) (2016-09-05)
 ### Added
-- Helper in DDNAProduct for converting currencues from a decimal number representation.
+- Helper in DDNAProduct for converting currencies from a decimal number representation.
 
 ### Fixed
 - Crash when reported device locale is null.
