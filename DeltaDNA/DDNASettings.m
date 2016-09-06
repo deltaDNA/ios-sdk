@@ -16,7 +16,7 @@
 
 #import "DDNASettings.h"
 
-NSString *const DDNA_SDK_VERSION = @"iOS SDK v4.2.0";
+NSString *const DDNA_SDK_VERSION = @"iOS SDK v4.2.1";
 NSString *const DDNA_ENGAGE_API_VERSION = @"4";
 
 NSString *const DDNA_EVENT_STORAGE_PATH = @"{persistent_path}";
@@ -49,7 +49,7 @@ NSUInteger const DDNA_MAX_EVENT_STORE_BYTES = 1024 * 1024;
         #else
         self.useEventStore = YES;
         #endif
-        
+
         self.sessionTimeoutSeconds = 5 * 60;
     }
     return self;

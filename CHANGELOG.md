@@ -1,6 +1,6 @@
 # Change Log
 
-## [4.2.1](https://github.com/deltaDNA/ios-sdk/releases/tag/4.2.1) (YYYY-MM-DD)
+## [4.2.1](https://github.com/deltaDNA/ios-sdk/releases/tag/4.2.1) (2016-09-06)
 ### Fixed
 - Currency conversion helper on tvOS.
 
