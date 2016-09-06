@@ -108,7 +108,12 @@ static dispatch_once_t onceToken;
     }
     
     dispatch_once(&onceToken, ^{
-        NSString *xmlPath = [[NSBundle bundleWithIdentifier:@"com.deltadna.ios.DeltaDNA"] pathForResource:@"iso_4217" ofType:@"xml"];
+        #if TARGET_OS_IOS
+        NSString *bundle = @"com.deltadna.ios.DeltaDNA";
+        #elif TARGET_OS_TV
+        NSString *bundle = @"com.deltadna.ios.DeltaDNA-tvOS";
+        #endif
+        NSString *xmlPath = [[NSBundle bundleWithIdentifier:bundle] pathForResource:@"iso_4217" ofType:@"xml"];
         NSData *xmlData = [NSData dataWithContentsOfFile:xmlPath];
         NSXMLParser *xmlParser = [[NSXMLParser alloc] initWithData:xmlData];
         XmlParserDelegate *xmlParserDelegate = [[XmlParserDelegate alloc] init];
