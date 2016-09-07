@@ -1,5 +1,9 @@
 # Change Log
 
+## [4.2.2](https://github.com/deltaDNA/ios-sdk/releases/tag/4.2.2) (2016-06-07)
+### Fixed
+- Added resources for CocoaPods.
+
 ## [4.2.1](https://github.com/deltaDNA/ios-sdk/releases/tag/4.2.1) (2016-09-06)
 ### Fixed
 - Currency conversion helper on tvOS.

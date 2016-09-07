@@ -15,9 +15,18 @@
 source 'https://github.com/CocoaPods/Specs.git'
 source 'https://github.com/deltaDNA/CocoaPods.git'
 
-platform :ios, '7.0'
+target 'MyApp' do
+  # Uncomment this line if you're using Swift or would like to use dynamic frameworks
+  use_frameworks!
 
-pod 'DeltaDNA', '~> 4.2'
+  pod 'DeltaDNA', '~> 4.2'
+
+  target 'MyAppTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+end
 ```
 
 The deltaDNA SDKs are available from our private spec repository, its url must be added as a source to your podfile.  
