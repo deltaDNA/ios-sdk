@@ -13,4 +13,5 @@ Pod::Spec.new do |s|
     s.public_header_files = 'DeltaDNA/**/*.h'
     s.source_files = 'DeltaDNA/**/*.{h,m}'
     s.header_mappings_dir = 'DeltaDNA'
+    s.resources  = 'DeltaDNA/Resources/**/*'
 end
