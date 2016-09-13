@@ -1,6 +1,10 @@
 # Change Log
 
-## [4.2.2](https://github.com/deltaDNA/ios-sdk/releases/tag/4.2.2) (2016-06-07)
+## [4.2.3](https://github.com/deltaDNA/ios-sdk/releases/tag/4.2.3) (2016-09-13)
+### Fixed
+- Support for Xcode 8.
+
+## [4.2.2](https://github.com/deltaDNA/ios-sdk/releases/tag/4.2.2) (2016-09-07)
 ### Fixed
 - Added resources for CocoaPods.
 
