@@ -66,8 +66,9 @@ static dispatch_once_t onceToken;
     };
     
     if (![self paramForKey:@"virtualCurrencies"]) {
-        self.virtualCurrencies = [NSMutableArray arrayWithObject:virtualCurrency];
-        [self setParam:self.virtualCurrencies forKey:@"virtualCurrencies"];
+        NSMutableArray *virtualCurrencies = [NSMutableArray arrayWithObject:virtualCurrency];
+        [self setParam:virtualCurrencies forKey:@"virtualCurrencies"];
+        self.virtualCurrencies = virtualCurrencies;
     } else {
         [self.virtualCurrencies addObject:virtualCurrency];
     }
@@ -91,8 +92,9 @@ static dispatch_once_t onceToken;
     };
     
     if (![self paramForKey:@"items"]) {
-        self.items = [NSMutableArray arrayWithObject:item];
-        [self setParam:self.items forKey:@"items"];
+        NSMutableArray *items = [NSMutableArray arrayWithObject:item];
+        [self setParam:items forKey:@"items"];
+        self.items = items;
     } else {
         [self.items addObject:item];
     }
