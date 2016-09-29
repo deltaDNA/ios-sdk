@@ -220,7 +220,7 @@ BOOL validConfiguration(NSDictionary *configuration)
         NSDictionary* layout = self.configuration[@"layout"];
         
         BOOL landscape = YES;
-#ifndef TARGET_OS_TV
+#if !TARGET_OS_TV
         UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
         landscape = (orientation == UIInterfaceOrientationLandscapeLeft || orientation == UIInterfaceOrientationLandscapeRight);
 #endif
@@ -291,7 +291,7 @@ BOOL validConfiguration(NSDictionary *configuration)
                     btn.contentEdgeInsets = UIEdgeInsetsZero;
                     [btn setBackgroundImage:buttonImages[i] forState:UIControlStateNormal];
                     [btn setTag:i+1];   // help identify the button when clicked
-#ifdef TARGET_OS_TV
+#if TARGET_OS_TV
                     [btn addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventPrimaryActionTriggered];
 #else
                     [btn addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
