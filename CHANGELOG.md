@@ -1,5 +1,12 @@
 # Change Log
 
+## [4.2.4](https://github.com/deltaDNA/ios-sdk/releases/tag/4.2.4) (2016-09-29)
+### Added
+- Support iPhone 7 device names.
+
+### Fixed
+- TARGET_TV_OS was always defined.
+
 ## [4.2.3](https://github.com/deltaDNA/ios-sdk/releases/tag/4.2.3) (2016-09-13)
 ### Fixed
 - Support for Xcode 8.
