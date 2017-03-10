@@ -1,4 +1,7 @@
 # Change Log
+## [4.3.0](https://github.com/deltaDNA/ios-sdk/releases/tag/4.3.0) (2017-03-10)
+### Added
+- The platform can now be overridden.  Set the property before calling Start.
 
 ## [4.2.4](https://github.com/deltaDNA/ios-sdk/releases/tag/4.2.4) (2016-09-29)
 ### Added
