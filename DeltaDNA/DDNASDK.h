@@ -66,7 +66,7 @@
 /// The Session ID for this game.
 @property (nonatomic, copy, readonly) NSString *sessionID;
 /// The platform this game is running on.
-@property (nonatomic, copy, readonly) NSString *platform;
+@property (nonatomic, copy) NSString *platform;
 
 /// Has the SDK been started yet.
 @property (nonatomic, assign, getter = hasStarted) BOOL started;

@@ -47,7 +47,6 @@
 @property (nonatomic, copy, readwrite) NSString *engageURL;
 @property (nonatomic, copy, readwrite) NSString *userID;
 @property (nonatomic, copy, readwrite) NSString *sessionID;
-@property (nonatomic, copy, readwrite) NSString *platform;
 @property (nonatomic, strong) NSDate *lastActiveDate;
 
 @end
@@ -153,7 +152,9 @@ static NSString *const kPushNotificationTokenKey = @"DeltaDNA PushNotificationTo
         
         DDNALogDebug(@"Starting SDK with user id %@", self.userID);
         
-        self.platform = [DDNAClientInfo sharedInstance].platform;
+        if ([NSString stringIsNilOrEmpty:self.platform]) {
+            self.platform = [DDNAClientInfo sharedInstance].platform;
+        }
         [self newSession];
         
         self.engageService = [[DDNAInstanceFactory sharedInstance] buildEngageService];
