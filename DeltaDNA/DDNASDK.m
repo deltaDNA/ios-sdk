@@ -16,7 +16,6 @@
 
 #import "DDNASDK.h"
 #import "DDNASettings.h"
-#import "DDNAPopup.h"
 #import "DDNAEvent.h"
 #import "DDNAEngagement.h"
 #import "DDNALog.h"
@@ -31,6 +30,8 @@
 #import "DDNAEngageService.h"
 #import "DDNAInstanceFactory.h"
 #import "DDNACollectService.h"
+
+#import <UIKit/UIKit.h>
 
 @interface DDNASDK ()
 {
@@ -242,26 +243,6 @@ static NSString *const kPushNotificationTokenKey = @"DeltaDNA PushNotificationTo
     [self recordEvent:event];
 }
 
-- (void) requestEngagement: (NSString *) decisionPoint
-             callbackBlock: (DDNAEngagementResponseBlock) callback
-{
-    [self requestEngagement:decisionPoint withEngageParams:nil callbackBlock:callback];
-}
-
-- (void) requestEngagement: (NSString *) decisionPoint
-          withEngageParams: (NSDictionary *) engageParams
-             callbackBlock: (DDNAEngagementResponseBlock) callback
-{
-    DDNAEngagement *engagement = [DDNAEngagement engagementWithDecisionPoint:decisionPoint];
-    for (NSString *key in engageParams) {
-        [engagement setParam:engageParams[key] forKey:key];
-    }
-    
-    [self requestEngagement:engagement completionHandler:^(NSDictionary *parameters, NSInteger statusCode, NSError *error) {
-        if (callback) callback(parameters);
-    }];
-}
-
 - (void)requestEngagement:(DDNAEngagement *)engagement completionHandler:(void (^)(NSDictionary *, NSInteger, NSError *))completionHandler
 {
     if (!self.started) {
@@ -340,44 +321,6 @@ static NSString *const kPushNotificationTokenKey = @"DeltaDNA PushNotificationTo
     @catch (NSException *exception) {
         DDNALogWarn(@"Engagement for '%@' failed: %@", engagement.decisionPoint, exception.reason);
     }
-}
-
-- (void) requestImageMessage:(NSString *)decisionPoint withEngageParams:(NSDictionary *)engageParams imagePopup:(id <DDNAPopup>)popup
-{
-    [self requestImageMessage:decisionPoint withEngageParams:engageParams imagePopup:popup callbackBlock:nil];
-}
-
-- (void) requestImageMessage:(NSString *)decisionPoint withEngageParams:(NSDictionary *)engageParams imagePopup:(id <DDNAPopup>)popup callbackBlock:(DDNAEngagementResponseBlock)callback
-{
-    [self requestEngagement:decisionPoint
-          withEngageParams:engageParams
-             callbackBlock:^(NSDictionary * response) {
-                 if (response != nil) {
-                     if (response[@"image"]) {
-                         [popup prepareWithImage:response[@"image"]];
-                     }
-                     
-                     if (callback != nil) {
-                         callback(response);
-                     }
-                 }
-             }
-     ];
-}
-
-- (void)requestImageMessage:(DDNAEngagement *)engagement popup:(id<DDNAPopup>)popup completionHandler:(void (^)(NSDictionary *, NSInteger, NSError *))completionHandler
-{
-    [self requestEngagement:engagement completionHandler:^(NSDictionary *parameters, NSInteger statusCode, NSError *error) {
-        if (parameters) {
-            if (parameters[@"image"]) {
-                [popup prepareWithImage:parameters[@"image"]];
-            }
-        }
-
-        if (completionHandler) {
-            completionHandler(parameters, statusCode, error);
-        }
-    }];
 }
 
 - (void) recordPushNotification:(NSDictionary *)pushNotification didLaunch:(BOOL)didLaunch
