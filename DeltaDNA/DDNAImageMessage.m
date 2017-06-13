@@ -19,6 +19,7 @@
 #import "DDNASDK.h"
 #import "DDNASettings.h"
 #import "DDNACache.h"
+#import "DDNAEvent.h"
 #import "NSString+DeltaDNA.h"
 
 @interface DDNAImageMessage ()
@@ -35,6 +36,7 @@
 @property (nonatomic, assign) CGFloat backgroundScale;
 @property (nonatomic, strong) NSDictionary *configuration;
 @property (nonatomic, assign) BOOL isShowing;
+@property (nonatomic, strong) DDNAEvent *actionEvent;
 
 @end
 
@@ -94,6 +96,11 @@ BOOL validConfiguration(NSDictionary *configuration)
         self.backgroundScale = 1.0f;
         self.shimView = [[UIView alloc] init];
         self.backgroundView = [[UIView alloc] init];
+        
+        DDNAEvent *actionEvent = [DDNAEvent eventWithName:@"imageMessageAction"];
+        [actionEvent setParam:engagement.decisionPoint forKey:@"responseDecisionpointName"];
+        [actionEvent setParam:engagement.json[@"transactionID"] forKey:@"responseTransactionID"];
+        self.actionEvent = actionEvent;
     }
     return self;
 }
@@ -500,6 +507,11 @@ BOOL validConfiguration(NSDictionary *configuration)
     else if ([type isEqualToStringCaseInsensitive:@"dismiss"]) {
         [self.delegate onDismissImageMessage:self name:name];
     }
+    
+    [self.actionEvent setParam:name forKey:@"imActionName"];
+    [self.actionEvent setParam:type forKey:@"imActionType"];
+    [self.actionEvent setParam:value forKey:@"imActionValue"];
+    [[DDNASDK sharedInstance] recordEvent:self.actionEvent];
     
     [self close];
 }

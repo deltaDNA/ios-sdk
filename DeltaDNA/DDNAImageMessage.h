@@ -132,7 +132,7 @@
  
  @param imageMessage The image message.
  
- @param name The name of the image message component that trigger the action (background, shim, button1 etc).
+ @param name The name of the image message component that triggers the action (background, shim, button1 etc).
  
  @param type The type of action (link or action).
  
