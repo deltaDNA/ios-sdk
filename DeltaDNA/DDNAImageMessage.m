@@ -505,12 +505,15 @@ BOOL validConfiguration(NSDictionary *configuration)
         [self.delegate onActionImageMessage:self name:name type:type value:value];
     }
     else if ([type isEqualToStringCaseInsensitive:@"dismiss"]) {
+        value = nil;
         [self.delegate onDismissImageMessage:self name:name];
     }
     
     [self.actionEvent setParam:name forKey:@"imActionName"];
     [self.actionEvent setParam:type forKey:@"imActionType"];
-    [self.actionEvent setParam:value forKey:@"imActionValue"];
+    if (value != nil) {
+        [self.actionEvent setParam:value forKey:@"imActionValue"];
+    }
     [[DDNASDK sharedInstance] recordEvent:self.actionEvent];
     
     [self close];
