@@ -98,8 +98,17 @@ BOOL validConfiguration(NSDictionary *configuration)
         self.backgroundView = [[UIView alloc] init];
         
         DDNAEvent *actionEvent = [DDNAEvent eventWithName:@"imageMessageAction"];
-        [actionEvent setParam:engagement.decisionPoint forKey:@"responseDecisionpointName"];
-        [actionEvent setParam:engagement.json[@"transactionID"] forKey:@"responseTransactionID"];
+        if (engagement.json[@"eventParams"] != nil) {
+            NSDictionary *eventParams = engagement.json[@"eventParams"];
+            [actionEvent setParam:eventParams[@"responseDecisionpointName"] forKey:@"responseDecisionpointName"];
+            [actionEvent setParam:eventParams[@"responseEngagementID"] forKey:@"responseEngagementID"];
+            [actionEvent setParam:eventParams[@"responseEngagementName"] forKey:@"responseEngagementName"];
+            [actionEvent setParam:eventParams[@"responseEngagementType"] forKey:@"responseEngagementType"];
+            [actionEvent setParam:eventParams[@"responseMessageSequence"] forKey:@"responseMessageSequence"];
+            [actionEvent setParam:eventParams[@"responseVariantName"] forKey:@"responseVariantName"];
+            [actionEvent setParam:eventParams[@"responseTransactionID"] forKey:@"responseTransactionID"];
+        }
+        
         self.actionEvent = actionEvent;
     }
     return self;
