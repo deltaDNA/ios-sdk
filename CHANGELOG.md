@@ -1,4 +1,8 @@
 # Change Log
+## [4.5.0](https://github.com/deltaDNA/ios-sdk/releases/tag/4.5.0) (2019-06-27)
+## Added
+- Send an imageMessageAction event when interacting with image messages.
+
 ## [4.3.0](https://github.com/deltaDNA/ios-sdk/releases/tag/4.3.0) (2017-03-13)
 ### Added
 - The platform can now be overridden.  Set the property before calling Start.

@@ -20,6 +20,9 @@
       location = "group:README.md">
    </FileRef>
    <FileRef
+      location = "group:README-CN.md">
+   </FileRef>
+   <FileRef
       location = "group:Tests/Pods/Pods.xcodeproj">
    </FileRef>
 </Workspace>
