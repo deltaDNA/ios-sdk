@@ -5,13 +5,13 @@ workspace '../DeltaDNA'
 #inhibit_all_warnings!
 
 def shared_pods
-    pod 'Specta', '~> 1.0'
-    pod 'Expecta', '~> 1.0'
-    pod 'OCMockito', '~> 4.1.0'
+    pod 'Specta', '~> 1.0.7'
+    pod 'Expecta', '~> 1.0.6'
+    pod 'OCMockito', '~> 5.0.1'
 end
 
 target 'DeltaDNA iOS Tests' do
-    platform :ios, '7.0'
+    platform :ios, '8.0'
     shared_pods
 end
 

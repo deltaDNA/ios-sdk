@@ -18,7 +18,7 @@ import UIKit
 import DeltaDNA
 
 class ViewController: UIViewController, DDNAImageMessageDelegate {
-
+    
     @IBOutlet weak var sdkVersion: UILabel!
     
     override func viewDidLoad() {
@@ -28,9 +28,11 @@ class ViewController: UIViewController, DDNAImageMessageDelegate {
         
         DDNASDK.sharedInstance().clientVersion = "tvOS Example v1.0"
         DDNASDK.sharedInstance().hashSecret = "KmMBBcNwStLJaq6KsEBxXc6HY3A4bhGw"
-        DDNASDK.sharedInstance().startWithEnvironmentKey("55822530117170763508653519413932",
+        DDNASDK.sharedInstance().start(
+            withEnvironmentKey: "55822530117170763508653519413932",
             collectURL: "http://collect2010stst.deltadna.net/collect/api",
-            engageURL: "http://engage2010stst.deltadna.net")
+            engageURL: "http://engage2010stst.deltadna.net"
+        )
         
         
     }
@@ -40,8 +42,8 @@ class ViewController: UIViewController, DDNAImageMessageDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func onSimpleEvent(sender: AnyObject) {
-        DDNASDK.sharedInstance().recordEventWithName("achievement", eventParams: [
+    @IBAction func onSimpleEvent(_ sender: AnyObject) {
+        DDNASDK.sharedInstance().recordEvent(withName: "achievement", eventParams: [
             "achievementName" : "Sunday Showdown Tournament Win",
             "achievementID" : "SS-2014-03-02-01",
             "reward" : [
@@ -74,49 +76,49 @@ class ViewController: UIViewController, DDNAImageMessageDelegate {
         ])
     }
 
-    @IBAction func onEngage(sender: AnyObject) {
-        let engagement = DDNAEngagement(decisionPoint: "gameLoaded")
-        engagement.setParam(4, forKey: "userLevel")
-        engagement.setParam(1000, forKey: "experience")
-        engagement.setParam("Disco Volante", forKey: "missionName")
+    @IBAction func onEngage(_ sender: AnyObject) {
+        let engagement = DDNAEngagement(decisionPoint: "gameLoaded")!
+        engagement.setParam(4 as NSNumber, forKey: "userLevel")
+        engagement.setParam(1000 as NSNumber, forKey: "experience")
+        engagement.setParam("Disco Volante" as NSString, forKey: "missionName")
         
-        DDNASDK.sharedInstance().requestEngagement(engagement, engagementHandler:{ (response)->() in
-            if response.json != nil {
-                print("Engagement returned: \(response.json["parameters"])")
+        DDNASDK.sharedInstance().request(engagement, engagementHandler:{ (response)->() in
+            if response?.json != nil {
+                print("Engagement returned: \(String(describing: response?.json["parameters"]))")
             } else {
-                print("Engagement failed: \(response.error)")
+                print("Engagement failed: \(String(describing: response?.error))")
             }
         })
     }
     
-    @IBAction func onImageMessage(sender: AnyObject) {
+    @IBAction func onImageMessage(_ sender: AnyObject) {
         let engagement = DDNAEngagement(decisionPoint: "imageMessage");
         
-        DDNASDK.sharedInstance().requestEngagement(engagement, engagementHandler:{ (response)->() in
+        DDNASDK.sharedInstance().request(engagement, engagementHandler:{ (response)->() in
             if let imageMessage = DDNAImageMessage(engagement: response, delegate: self) {
                 imageMessage.fetchResources()
             }
         })
     }
     
-    @IBAction func onUploadEvents(sender: AnyObject) {
+    @IBAction func onUploadEvents(_ sender: AnyObject) {
         DDNASDK.sharedInstance().upload();
     }
     
-    func onDismissImageMessage(imageMessage: DDNAImageMessage!, name: String!) {
+    func onDismiss(_ imageMessage: DDNAImageMessage!, name: String!) {
         print("Image message dismissed by \(name)")
     }
     
-    func onActionImageMessage(imageMessage: DDNAImageMessage!, name: String!, type: String!, value: String!) {
+    func onActionImageMessage(_ imageMessage: DDNAImageMessage!, name: String!, type: String!, value: String!) {
         print("Image message actioned by \(name) with \(type) and \(value)")
     }
     
-    func didReceiveResourcesForImageMessage(imageMessage: DDNAImageMessage!) {
+    func didReceiveResources(for imageMessage: DDNAImageMessage!) {
         print("Image message received resources")
-        imageMessage.showFromRootViewController(self)
+        imageMessage.show(fromRootViewController: self)
     }
     
-    func didFailToReceiveResourcesForImageMessage(imageMessage: DDNAImageMessage!, withReason reason: String!) {
+    func didFailToReceiveResources(for imageMessage: DDNAImageMessage!, withReason reason: String!) {
         print("Image message failed to receive resources: \(reason)")
     }
 }
