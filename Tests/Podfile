@@ -21,14 +21,3 @@ target 'DeltaDNA tvOS Tests' do
     shared_pods
 end
 
-# Enable extra logging
-post_install do |installer|
-    installer.pods_project.targets.each do |target|
-        if target.name == 'DeltaDNA'
-            target.build_configurations.each do |config|
-                config.build_settings['GCC_PREPROCESSOR_DEFINITIONS'] ||= ['$(inherited)']
-                config.build_settings['GCC_PREPROCESSOR_DEFINITIONS'] << 'DDNA_DEBUG=1'
-            end
-        end
-    end
-end

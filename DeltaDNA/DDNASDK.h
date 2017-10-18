@@ -20,6 +20,7 @@
 @class DDNAEvent;
 @class DDNAEngagement;
 @protocol DDNAPopup;
+typedef NS_OPTIONS(NSUInteger, DDNALogLevel);
 
 @interface DDNASDK : NSObject
 
@@ -196,5 +197,12 @@
  again.
  */
 - (void)clearPersistentData;
+
+/**
+ Changes the default log level from warning.
+ 
+ @param logLevel The log level to set.
+ */
++ (void)setLogLevel:(DDNALogLevel)logLevel;
 
 @end

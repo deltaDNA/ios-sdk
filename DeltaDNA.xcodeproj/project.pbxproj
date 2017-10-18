@@ -33,7 +33,7 @@
 		6365564A1C60F5F2004153E7 /* DDNAEngageService.m in Sources */ = {isa = PBXBuildFile; fileRef = 636556201C60F5F2004153E7 /* DDNAEngageService.m */; };
 		6365564F1C60F5F2004153E7 /* DDNAInstanceFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = 636556251C60F5F2004153E7 /* DDNAInstanceFactory.h */; };
 		636556501C60F5F2004153E7 /* DDNAInstanceFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 636556261C60F5F2004153E7 /* DDNAInstanceFactory.m */; };
-		636556511C60F5F2004153E7 /* DDNALog.h in Headers */ = {isa = PBXBuildFile; fileRef = 636556271C60F5F2004153E7 /* DDNALog.h */; };
+		636556511C60F5F2004153E7 /* DDNALog.h in Headers */ = {isa = PBXBuildFile; fileRef = 636556271C60F5F2004153E7 /* DDNALog.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		636556521C60F5F2004153E7 /* DDNALog.m in Sources */ = {isa = PBXBuildFile; fileRef = 636556281C60F5F2004153E7 /* DDNALog.m */; };
 		636556531C60F5F2004153E7 /* DDNANetworkRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 636556291C60F5F2004153E7 /* DDNANetworkRequest.h */; };
 		636556541C60F5F2004153E7 /* DDNANetworkRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6365562A1C60F5F2004153E7 /* DDNANetworkRequest.m */; };
@@ -75,7 +75,7 @@
 		636556D41C6108DF004153E7 /* DDNAClientInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 636556191C60F5F2004153E7 /* DDNAClientInfo.h */; };
 		636556D71C6108DF004153E7 /* DDNAEngageService.h in Headers */ = {isa = PBXBuildFile; fileRef = 6365561F1C60F5F2004153E7 /* DDNAEngageService.h */; };
 		636556DA1C6108DF004153E7 /* DDNAInstanceFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = 636556251C60F5F2004153E7 /* DDNAInstanceFactory.h */; };
-		636556DB1C6108DF004153E7 /* DDNALog.h in Headers */ = {isa = PBXBuildFile; fileRef = 636556271C60F5F2004153E7 /* DDNALog.h */; };
+		636556DB1C6108DF004153E7 /* DDNALog.h in Headers */ = {isa = PBXBuildFile; fileRef = 636556271C60F5F2004153E7 /* DDNALog.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		636556DC1C6108DF004153E7 /* DDNANetworkRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 636556291C60F5F2004153E7 /* DDNANetworkRequest.h */; };
 		636556DD1C6108DF004153E7 /* DDNAPlayerPrefs.h in Headers */ = {isa = PBXBuildFile; fileRef = 6365562B1C60F5F2004153E7 /* DDNAPlayerPrefs.h */; };
 		636556E11C6108DF004153E7 /* DDNASDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 636556331C60F5F2004153E7 /* DDNASDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1049,7 +1049,6 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
-					"DDNA_DEBUG=1",
 				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -1168,7 +1167,6 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
-					"DDNA_DEBUG=1",
 				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;

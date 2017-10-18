@@ -31,6 +31,9 @@
     
     // Test DD SDK
     
+    // Set a logging level (default warning)
+    [DDNASDK setLogLevel:DDNALogLevelDebug];
+    
     // Grab a handle to the singleton.
     DDNASDK *sdk = [DDNASDK sharedInstance];
     

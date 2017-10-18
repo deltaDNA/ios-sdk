@@ -16,10 +16,46 @@
 
 #import "DDNALog.h"
 
+@interface DDNALog ()
+
+@property (nonatomic, assign) DDNALogLevel logLevel;
+
+@end
+
 @implementation DDNALog
 
-+ (void) log:(int)flag file:(const char *)file function:(const char *)function line:(int)line format:(NSString *)format, ...
+- (instancetype)init
 {
+    if (self = [super init]) {
+        _logLevel = DDNALogLevelWarn;
+    }
+    return self;
+}
+
++ (instancetype)sharedLog
+{
+    static dispatch_once_t pred = 0;
+    __strong static id _sharedObject = nil;
+    dispatch_once(&pred, ^{
+        _sharedObject = [[self alloc] init];
+    });
+    return _sharedObject;
+}
+
++ (void)setLogLevel:(DDNALogLevel)logLevel
+{
+    [DDNALog sharedLog].logLevel = logLevel;
+}
+
++ (void) log:(int)flag file:(const char *)file function:(const char *)function line:(int)line format:(NSString *)format, ...
+{    
+    // support legacy compilation flag
+    if (DDNA_DEBUG && [DDNALog sharedLog].logLevel < DDNALogLevelDebug) {
+        [DDNALog sharedLog].logLevel = DDNALogLevelDebug;
+    }
+    
+    if ([DDNALog sharedLog].logLevel < flag) return;
+    
     va_list args;
     if (format)
     {

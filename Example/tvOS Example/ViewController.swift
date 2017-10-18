@@ -26,6 +26,7 @@ class ViewController: UIViewController, DDNAImageMessageDelegate {
         
         self.sdkVersion.text = DDNA_SDK_VERSION;
         
+        DDNASDK.setLogLevel(.debug)
         DDNASDK.sharedInstance().clientVersion = "tvOS Example v1.0"
         DDNASDK.sharedInstance().hashSecret = "KmMBBcNwStLJaq6KsEBxXc6HY3A4bhGw"
         DDNASDK.sharedInstance().start(

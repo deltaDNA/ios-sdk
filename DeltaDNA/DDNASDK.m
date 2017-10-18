@@ -423,6 +423,11 @@ static NSString *const kPushNotificationTokenKey = @"DeltaDNA PushNotificationTo
     _reset = YES;
 }
 
++ (void)setLogLevel:(DDNALogLevel)logLevel
+{
+    [DDNALog setLogLevel:logLevel];
+}
+
 #pragma mark - Client Configuration Properties
 
 - (NSString *) userID

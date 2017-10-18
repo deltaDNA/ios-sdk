@@ -18,6 +18,7 @@
 #define _DELTADNA_
 
 #import <DeltaDNA/DDNASDK.h>
+#import <DeltaDNA/DDNALog.h>
 #import <DeltaDNA/DDNASettings.h>
 #import <DeltaDNA/DDNAParams.h>
 #import <DeltaDNA/DDNAEvent.h>

@@ -3,6 +3,10 @@
 ### Changed
 - Min version to iOS 8.
 - tvOS example with Swift 4.
+- Deprecated DDNA_DEBUG for controlling logging.
+
+### Added
+- Control the log verbosity directly on the sdk with +setLogLevel on DDNASDK.  If DDNA_DEBUG=1 is still set, it will override setLogLevel.
 
 ## [4.5.0](https://github.com/deltaDNA/ios-sdk/releases/tag/4.5.0) (2017-06-27)
 ### Added
