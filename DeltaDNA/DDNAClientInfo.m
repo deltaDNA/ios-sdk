@@ -55,9 +55,7 @@
 - (NSString *) getPlatform
 {
     NSString * model = [UIDevice currentDevice].model;
-    if ([model hasPrefix:@"iPad"]) return @"IOS_TABLET";
-    else if ([model hasPrefix:@"iPhone"]) return @"IOS_MOBILE";
-    else if ([model isEqualToString:@"Apple TV"]) return @"IOS_TV";
+    if ([model isEqualToString:@"Apple TV"]) return @"IOS_TV";
     return @"IOS";
 }
 
