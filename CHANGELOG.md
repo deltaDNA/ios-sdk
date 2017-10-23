@@ -5,6 +5,7 @@
 - tvOS example with Swift 4.
 - Deprecated DDNA_DEBUG for controlling logging.
 - Updated device name mappings.
+- Report platform as 'IOS' by default.
 
 ### Added
 - Control the log verbosity directly on the sdk with +setLogLevel on DDNASDK.  If DDNA_DEBUG=1 is still set, it will override setLogLevel.
