@@ -31,8 +31,8 @@ class ViewController: UIViewController, DDNAImageMessageDelegate {
         DDNASDK.sharedInstance().hashSecret = "KmMBBcNwStLJaq6KsEBxXc6HY3A4bhGw"
         DDNASDK.sharedInstance().start(
             withEnvironmentKey: "55822530117170763508653519413932",
-            collectURL: "http://collect2010stst.deltadna.net/collect/api",
-            engageURL: "http://engage2010stst.deltadna.net"
+            collectURL: "https://collect2010stst.deltadna.net/collect/api",
+            engageURL: "https://engage2010stst.deltadna.net"
         )
         
         
