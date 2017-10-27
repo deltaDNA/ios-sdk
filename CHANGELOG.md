@@ -1,4 +1,8 @@
 # Change Log
+## [4.6.1](https://github.com/deltaDNA/ios-sdk/releases/tag/4.6.1) (2017-10-30)
+### Fixed
+- Better compatibility with ObjectiveC++ code.
+
 ## [4.6.0](https://github.com/deltaDNA/ios-sdk/releases/tag/4.6.0) (2017-10-23)
 ### Changed
 - Min version to iOS 8.

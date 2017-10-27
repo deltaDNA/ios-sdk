@@ -15,12 +15,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "DDNALog.h"
 
 @class DDNASettings;
 @class DDNAEvent;
 @class DDNAEngagement;
 @protocol DDNAPopup;
-typedef NS_OPTIONS(NSUInteger, DDNALogLevel);
 
 @interface DDNASDK : NSObject
 
