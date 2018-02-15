@@ -145,18 +145,6 @@
     
 }
 
-- (IBAction)pushNotification:(id)sender {
-    NSDictionary *apnsPayload = @{
-        @"aps": @{
-            @"alert": @"Play now to collect your reward"
-        },
-        @"_ddName": @"NotificationName",
-        @"_ddId": @"42"
-    };
-    
-    [[DDNASDK sharedInstance] recordPushNotification:apnsPayload didLaunch:YES];
-}
-
 - (IBAction)uploadEvents:(id)sender {
     [[DDNASDK sharedInstance] upload];
 }

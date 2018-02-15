@@ -26,7 +26,6 @@
 - (IBAction)transactionEvent:(id)sender;
 - (IBAction)engage:(id)sender;
 - (IBAction)imageMessage:(id)sender;
-- (IBAction)pushNotification:(id)sender;
 - (IBAction)uploadEvents:(id)sender;
 - (IBAction)startSDK:(id)sender;
 - (IBAction)stopSDK:(id)sender;
