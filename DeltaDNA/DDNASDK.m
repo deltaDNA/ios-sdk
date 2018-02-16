@@ -150,20 +150,19 @@ static NSString *const kPushNotificationTokenKey = @"DeltaDNA PushNotificationTo
             }
         }
         
-        self.userID = userID;
+        self.engageService = [[DDNAInstanceFactory sharedInstance] buildEngageService];
+        self.collectService = [[DDNAInstanceFactory sharedInstance] buildCollectService];
         
+        self.userID = userID;
         DDNALogDebug(@"Starting SDK with user id %@", self.userID);
         
         if ([NSString stringIsNilOrEmpty:self.platform]) {
             self.platform = [DDNAClientInfo sharedInstance].platform;
         }
-        [self newSession];
-        
-        self.engageService = [[DDNAInstanceFactory sharedInstance] buildEngageService];
-        self.collectService = [[DDNAInstanceFactory sharedInstance] buildCollectService];
         
         [[NSNotificationCenter defaultCenter] postNotificationName:DD_EVENT_STARTED object:self];
         _started = YES;
+        [self newSession];
         
         // Once we're started, send default events.
         [self triggerDefaultEvents:newPlayer];
