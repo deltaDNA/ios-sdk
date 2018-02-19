@@ -1,13 +1,46 @@
 before_install:
     - gem install cocoapods
-    - pod repo update
+    - pod repo update > /dev/null
 language: objective-c
-matrix:
-    include:
-        - osx_image: xcode7.3
-          env: TEST_SDK=iphonesimulator9.3 SDK=iphonesimulator SCHEME="DeltaDNA iOS"
-        - osx_image: xcode7.3
-          env: TEST_SDK=appletvsimulator9.2 SDK=appletvsimulator SCHEME="DeltaDNA tvOS"
 podfile: Tests/Podfile
+xcode_workspace: DeltaDNA.xcworkspace
+matrix:
+    fast_finish: true
+    include:
+        - {osx_image: xcode9.2,     env: 'SDK=iphonesimulator  SCHEME="DeltaDNA iOS"  DST="OS=11.2,name=iPhone 6"'}
+        - {osx_image: xcode9.2,     env: 'SDK=iphonesimulator  SCHEME="DeltaDNA iOS"  DST="OS=8.4,name=iPhone 6"'}
+
+        - {osx_image: xcode9.2,     env: 'SDK=appletvsimulator SCHEME="DeltaDNA tvOS" DST="OS=11.2,name=Apple TV"'}
+        - {osx_image: xcode9.2,     env: 'SDK=appletvsimulator SCHEME="DeltaDNA tvOS" DST="OS=9.2,name=Apple TV 1080p"'}
+
+        - {osx_image: xcode9.3beta, env: 'SDK=iphonesimulator  SCHEME="DeltaDNA iOS"  DST="OS=11.3,name=iPhone 6"'}
+        - {osx_image: xcode9.3beta, env: 'SDK=iphonesimulator  SCHEME="DeltaDNA iOS"  DST="OS=8.4,name=iPhone 6"'}
+
+        - {osx_image: xcode9.3beta, env: 'SDK=appletvsimulator SCHEME="DeltaDNA tvOS" DST="OS=11.3,name=Apple TV"'}
+        - {osx_image: xcode9.3beta, env: 'SDK=appletvsimulator SCHEME="DeltaDNA tvOS" DST="OS=9.2,name=Apple TV 1080p"'}
+
+    allow_failures:
+        - {osx_image: xcode9.3beta, env: 'SDK=iphonesimulator  SCHEME="DeltaDNA iOS"  DST="OS=11.3,name=iPhone 6"'}
+        - {osx_image: xcode9.3beta, env: 'SDK=iphonesimulator  SCHEME="DeltaDNA iOS"  DST="OS=8.4,name=iPhone 6"'}
+
+        - {osx_image: xcode9.3beta, env: 'SDK=appletvsimulator SCHEME="DeltaDNA tvOS" DST="OS=11.3,name=Apple TV"'}
+        - {osx_image: xcode9.3beta, env: 'SDK=appletvsimulator SCHEME="DeltaDNA tvOS" DST="OS=9.2,name=Apple TV 1080p"'}
+
 script:
-    - xctool test -test-sdk $TEST_SDK -workspace DeltaDNA.xcworkspace -scheme "$SCHEME" -sdk $SDK ONLY_ACTIVE_ARCH=NO
+    - "xcodebuild -version"
+    - "set -o pipefail"
+    - "xcodebuild \
+        -workspace $TRAVIS_XCODE_WORKSPACE \
+        -scheme \"$SCHEME\" \
+        -sdk $SDK \
+        -quiet \
+        -destination \"$DST\" \
+        -enableCodeCoverage YES \
+        clean build-for-testing | xcpretty"
+    - "xcodebuild \
+        -workspace $TRAVIS_XCODE_WORKSPACE \
+        -scheme \"$SCHEME\" \
+        -sdk $SDK \
+        -quiet \
+        -destination \"$DST\" \
+        test-without-building | xcpretty"
