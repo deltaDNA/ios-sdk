@@ -21,6 +21,7 @@
 #import "DDNALog.h"
 #import "DDNAPlayerPrefs.h"
 #import "DDNAClientInfo.h"
+#import "DDNAUtils.h"
 #import "NSString+DeltaDNA.h"
 #import "NSDictionary+DeltaDNA.h"
 #import <CommonCrypto/CommonDigest.h>
@@ -134,8 +135,8 @@ static NSString *const kPushNotificationTokenKey = @"DeltaDNA PushNotificationTo
     @synchronized(self)
     {
         self.environmentKey = environmentKey;
-        self.collectURL = [self mungeUrl: collectURL];
-        self.engageURL = [self mungeUrl: engageURL];
+        self.collectURL = [DDNAUtils fixURL: collectURL];
+        self.engageURL = [DDNAUtils fixURL: engageURL];
         
         BOOL newPlayer = NO;
         if ([NSString stringIsNilOrEmpty:self.userID]) {    // first time!
@@ -469,16 +470,6 @@ static NSString *const kPushNotificationTokenKey = @"DeltaDNA PushNotificationTo
 
 
 #pragma mark - Private Helpers
-
-- (NSString *) mungeUrl: (NSString *)url
-{
-    NSString *lowerCase = [url lowercaseString];
-    if (![lowerCase hasPrefix:@"http://"] && ![lowerCase hasPrefix:@"https://"]) {
-        return [@"http://" stringByAppendingString:url];
-    } else {
-        return url;
-    }
-}
 
 + (NSString *) getCurrentTimestamp
 {

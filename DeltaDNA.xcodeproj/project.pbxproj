@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		304F13D72029F88200FA367B /* DDNAUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 304F13D52029F88100FA367B /* DDNAUtils.h */; };
+		304F13D82029F88200FA367B /* DDNAUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 304F13D62029F88200FA367B /* DDNAUtils.m */; };
+		304F13D92029F9E100FA367B /* DDNAUtilsSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 304F13D32029F63C00FA367B /* DDNAUtilsSpec.m */; };
+		304F13DA2029F9E200FA367B /* DDNAUtilsSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 304F13D32029F63C00FA367B /* DDNAUtilsSpec.m */; };
+		304F13DB2029FB7500FA367B /* DDNAUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 304F13D52029F88100FA367B /* DDNAUtils.h */; };
+		304F13DC2029FB7800FA367B /* DDNAUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 304F13D62029F88200FA367B /* DDNAUtils.m */; };
 		386735B8FEDABB9E4A4CA32C /* Pods_DeltaDNA_tvOS_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31BB975B0746DF1DA6D51C9A /* Pods_DeltaDNA_tvOS_Tests.framework */; };
 		630458851CAE724800875B71 /* DDNAImageMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = 630458831CAE724800875B71 /* DDNAImageMessage.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		630458861CAE724800875B71 /* DDNAImageMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = 630458831CAE724800875B71 /* DDNAImageMessage.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -145,6 +151,9 @@
 
 /* Begin PBXFileReference section */
 		076B4EC072FBCA3FB406D2B4 /* libPods-DeltaDNA iOS Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DeltaDNA iOS Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		304F13D32029F63C00FA367B /* DDNAUtilsSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = DDNAUtilsSpec.m; sourceTree = "<group>"; };
+		304F13D52029F88100FA367B /* DDNAUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = DDNAUtils.h; sourceTree = "<group>"; };
+		304F13D62029F88200FA367B /* DDNAUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = DDNAUtils.m; sourceTree = "<group>"; };
 		30F944A81D786E3A0021E6FA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		31BB975B0746DF1DA6D51C9A /* Pods_DeltaDNA_tvOS_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DeltaDNA_tvOS_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		630458831CAE724800875B71 /* DDNAImageMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDNAImageMessage.h; sourceTree = "<group>"; };
@@ -345,6 +354,7 @@
 		636556861C60F740004153E7 /* Specs */ = {
 			isa = PBXGroup;
 			children = (
+				304F13D32029F63C00FA367B /* DDNAUtilsSpec.m */,
 				636556881C60F740004153E7 /* DDNAEngageServiceSpec.m */,
 				636556891C60F740004153E7 /* DDNANetworkRequestSpec.m */,
 				6365568A1C60F740004153E7 /* DDNAVolatileEventStoreSpec.m */,
@@ -466,6 +476,8 @@
 		63A11FE91C71F903008DEE99 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				304F13D52029F88100FA367B /* DDNAUtils.h */,
+				304F13D62029F88200FA367B /* DDNAUtils.m */,
 				636556191C60F5F2004153E7 /* DDNAClientInfo.h */,
 				6365561A1C60F5F2004153E7 /* DDNAClientInfo.m */,
 				636556251C60F5F2004153E7 /* DDNAInstanceFactory.h */,
@@ -523,6 +535,7 @@
 				63A11FDE1C71F7F7008DEE99 /* DDNAPersistentEventStore.h in Headers */,
 				630458851CAE724800875B71 /* DDNAImageMessage.h in Headers */,
 				636556431C60F5F2004153E7 /* DDNAClientInfo.h in Headers */,
+				304F13D72029F88200FA367B /* DDNAUtils.h in Headers */,
 				63A11FAD1C6B77D6008DEE99 /* DDNACollectService.h in Headers */,
 				636556661C60F5F2004153E7 /* NSURL+DeltaDNA.h in Headers */,
 				636556101C60F598004153E7 /* DeltaDNA.h in Headers */,
@@ -542,6 +555,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				63A11FBA1C6CF2A4008DEE99 /* DDNAProduct.h in Headers */,
+				304F13DB2029FB7500FA367B /* DDNAUtils.h in Headers */,
 				630458861CAE724800875B71 /* DDNAImageMessage.h in Headers */,
 				636556D41C6108DF004153E7 /* DDNAClientInfo.h in Headers */,
 				63A11FD21C71E77D008DEE99 /* DDNAParams.h in Headers */,
@@ -850,6 +864,7 @@
 				636556651C60F5F2004153E7 /* NSString+DeltaDNA.m in Sources */,
 				636556631C60F5F2004153E7 /* NSDictionary+DeltaDNA.m in Sources */,
 				636556501C60F5F2004153E7 /* DDNAInstanceFactory.m in Sources */,
+				304F13D82029F88200FA367B /* DDNAUtils.m in Sources */,
 				636556671C60F5F2004153E7 /* NSURL+DeltaDNA.m in Sources */,
 				63A11FD31C71E77D008DEE99 /* DDNAParams.m in Sources */,
 				630458871CAE724800875B71 /* DDNAImageMessage.m in Sources */,
@@ -879,6 +894,7 @@
 				636556C71C6108BE004153E7 /* DDNANetworkRequest.m in Sources */,
 				636556C81C6108BE004153E7 /* DDNAPlayerPrefs.m in Sources */,
 				63A11FD41C71E77D008DEE99 /* DDNAParams.m in Sources */,
+				304F13DC2029FB7800FA367B /* DDNAUtils.m in Sources */,
 				630458881CAE724800875B71 /* DDNAImageMessage.m in Sources */,
 				632717301C650D1B00AB2806 /* DDNACache.m in Sources */,
 				636556CC1C6108BE004153E7 /* DDNASDK.m in Sources */,
@@ -901,6 +917,7 @@
 				636556A11C60FCD5004153E7 /* DDNAEngageServiceSpec.m in Sources */,
 				636556A21C60FCD5004153E7 /* DDNANetworkRequestSpec.m in Sources */,
 				63A11FCD1C6E3BCC008DEE99 /* DDNATransactionSpec.m in Sources */,
+				304F13D92029F9E100FA367B /* DDNAUtilsSpec.m in Sources */,
 				63A11FC41C6E26FF008DEE99 /* DDNAEventSpec.m in Sources */,
 				632D8F881C737830004738A7 /* DDNAEngagementSpec.m in Sources */,
 				636556A31C60FCD5004153E7 /* DDNAVolatileEventStoreSpec.m in Sources */,
@@ -920,6 +937,7 @@
 				636556B71C60FDF1004153E7 /* DDNAEngageServiceSpec.m in Sources */,
 				636556B81C60FDF1004153E7 /* DDNANetworkRequestSpec.m in Sources */,
 				63A11FCE1C6E3BCC008DEE99 /* DDNATransactionSpec.m in Sources */,
+				304F13DA2029F9E200FA367B /* DDNAUtilsSpec.m in Sources */,
 				63A11FC51C6E26FF008DEE99 /* DDNAEventSpec.m in Sources */,
 				632D8F891C737830004738A7 /* DDNAEngagementSpec.m in Sources */,
 				636556B91C60FDF1004153E7 /* DDNAVolatileEventStoreSpec.m in Sources */,
@@ -974,8 +992,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				TVOS_DEPLOYMENT_TARGET = 9.2;
 			};
 			name = Debug;
 		};
@@ -1005,7 +1025,9 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				SDKROOT = iphoneos;
+				TVOS_DEPLOYMENT_TARGET = 9.2;
 			};
 			name = Release;
 		};
@@ -1058,7 +1080,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = Framework/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = Framework/module.modulemap;
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -1116,7 +1138,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = Framework/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = Framework/module.modulemap;
 				MTL_ENABLE_DEBUG_INFO = NO;
@@ -1185,7 +1207,7 @@
 				SDKROOT = appletvos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 9.0;
+				TVOS_DEPLOYMENT_TARGET = 9.2;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -1238,7 +1260,7 @@
 				SDKROOT = appletvos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 9.0;
+				TVOS_DEPLOYMENT_TARGET = 9.2;
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -1283,7 +1305,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "Tests/iOS Tests/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1325,7 +1347,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "Tests/iOS Tests/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.deltadna.ios.DeltaDNA-iOS-Tests";
@@ -1378,7 +1400,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.deltadna.ios.DeltaDNA-tvOS-Tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
-				TVOS_DEPLOYMENT_TARGET = 9.1;
+				TVOS_DEPLOYMENT_TARGET = 9.2;
 			};
 			name = Debug;
 		};
@@ -1418,7 +1440,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.deltadna.ios.DeltaDNA-tvOS-Tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
-				TVOS_DEPLOYMENT_TARGET = 9.1;
+				TVOS_DEPLOYMENT_TARGET = 9.2;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;

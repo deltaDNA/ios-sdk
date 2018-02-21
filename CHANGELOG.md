@@ -1,4 +1,9 @@
 # Change Log
+
+## [4.6.2](https://github.com/deltaDNA/ios-sdk/releases/tag/4.6.2) (2018-02-06)
+### Changed
+- Collect and Engage URLs will be forced to use HTTPS.
+
 ## [4.6.1](https://github.com/deltaDNA/ios-sdk/releases/tag/4.6.1) (2017-10-30)
 ### Fixed
 - Better compatibility with ObjectiveC++ code.
