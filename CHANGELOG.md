@@ -1,5 +1,9 @@
 # Change Log
 
+## [4.7.0](https://github.com/deltaDNA/ios-sdk/releases/tag/4.7.0) (YYYY-YY-YY)
+### Changed
+- Automatic ad registration when using ads.
+
 ## [4.6.2](https://github.com/deltaDNA/ios-sdk/releases/tag/4.6.2) (2018-02-06)
 ### Changed
 - Collect and Engage URLs will be forced to use HTTPS.
