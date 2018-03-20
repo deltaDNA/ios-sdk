@@ -31,6 +31,7 @@
 #import "DDNAEngageService.h"
 #import "DDNAInstanceFactory.h"
 #import "DDNACollectService.h"
+#import "DDNAEngageFactory.h"
 
 #import <UIKit/UIKit.h>
 
@@ -50,6 +51,7 @@
 @property (nonatomic, copy, readwrite) NSString *userID;
 @property (nonatomic, copy, readwrite) NSString *sessionID;
 @property (nonatomic, strong) NSDate *lastActiveDate;
+@property (nonatomic, strong) DDNAEngageFactory *engageFactory;
 
 @end
 
@@ -152,6 +154,7 @@ static NSString *const kPushNotificationTokenKey = @"DeltaDNA PushNotificationTo
         
         self.engageService = [[DDNAInstanceFactory sharedInstance] buildEngageService];
         self.collectService = [[DDNAInstanceFactory sharedInstance] buildCollectService];
+        self.engageFactory = [[DDNAEngageFactory alloc] initWithDDNASDK:self];
         
         self.userID = userID;
         DDNALogDebug(@"Starting SDK with user id %@", self.userID);

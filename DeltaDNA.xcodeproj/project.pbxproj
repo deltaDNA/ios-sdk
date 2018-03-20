@@ -20,6 +20,10 @@
 		630458881CAE724800875B71 /* DDNAImageMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 630458841CAE724800875B71 /* DDNAImageMessage.m */; };
 		6318EADF1CAD2A5900E9A72C /* EXPMatchers+equalJSONString.m in Sources */ = {isa = PBXBuildFile; fileRef = 6318EADB1CAD26FD00E9A72C /* EXPMatchers+equalJSONString.m */; };
 		6318EAE01CAD2A5A00E9A72C /* EXPMatchers+equalJSONString.m in Sources */ = {isa = PBXBuildFile; fileRef = 6318EADB1CAD26FD00E9A72C /* EXPMatchers+equalJSONString.m */; };
+		632513BE206E5C4A00BB0088 /* DDNAEngageFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = 632513BC206E5C4A00BB0088 /* DDNAEngageFactory.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		632513BF206E5C4A00BB0088 /* DDNAEngageFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = 632513BC206E5C4A00BB0088 /* DDNAEngageFactory.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		632513C0206E5C4A00BB0088 /* DDNAEngageFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 632513BD206E5C4A00BB0088 /* DDNAEngageFactory.m */; };
+		632513C1206E5C4A00BB0088 /* DDNAEngageFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 632513BD206E5C4A00BB0088 /* DDNAEngageFactory.m */; };
 		6327172D1C650D1B00AB2806 /* DDNACache.h in Headers */ = {isa = PBXBuildFile; fileRef = 6327172B1C650D1B00AB2806 /* DDNACache.h */; };
 		6327172E1C650D1B00AB2806 /* DDNACache.h in Headers */ = {isa = PBXBuildFile; fileRef = 6327172B1C650D1B00AB2806 /* DDNACache.h */; };
 		6327172F1C650D1B00AB2806 /* DDNACache.m in Sources */ = {isa = PBXBuildFile; fileRef = 6327172C1C650D1B00AB2806 /* DDNACache.m */; };
@@ -32,6 +36,8 @@
 		632D8F891C737830004738A7 /* DDNAEngagementSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 632D8F871C737830004738A7 /* DDNAEngagementSpec.m */; };
 		632D9EDD1CBE625C00145331 /* DDNAImageMessageSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 632D9EDC1CBE625C00145331 /* DDNAImageMessageSpec.m */; };
 		632D9EDE1CBE625C00145331 /* DDNAImageMessageSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 632D9EDC1CBE625C00145331 /* DDNAImageMessageSpec.m */; };
+		6343D583207659B900CC5A46 /* DDNAEngageFactorySpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 6343D582207659B900CC5A46 /* DDNAEngageFactorySpec.m */; };
+		6343D584207659B900CC5A46 /* DDNAEngageFactorySpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 6343D582207659B900CC5A46 /* DDNAEngageFactorySpec.m */; };
 		636556101C60F598004153E7 /* DeltaDNA.h in Headers */ = {isa = PBXBuildFile; fileRef = 6365560E1C60F598004153E7 /* DeltaDNA.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		636556431C60F5F2004153E7 /* DDNAClientInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 636556191C60F5F2004153E7 /* DDNAClientInfo.h */; };
 		636556441C60F5F2004153E7 /* DDNAClientInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 6365561A1C60F5F2004153E7 /* DDNAClientInfo.m */; };
@@ -160,12 +166,15 @@
 		630458841CAE724800875B71 /* DDNAImageMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDNAImageMessage.m; sourceTree = "<group>"; };
 		6318EADA1CAD26FD00E9A72C /* EXPMatchers+equalJSONString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "EXPMatchers+equalJSONString.h"; sourceTree = "<group>"; };
 		6318EADB1CAD26FD00E9A72C /* EXPMatchers+equalJSONString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "EXPMatchers+equalJSONString.m"; sourceTree = "<group>"; };
+		632513BC206E5C4A00BB0088 /* DDNAEngageFactory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DDNAEngageFactory.h; sourceTree = "<group>"; };
+		632513BD206E5C4A00BB0088 /* DDNAEngageFactory.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DDNAEngageFactory.m; sourceTree = "<group>"; };
 		6327172B1C650D1B00AB2806 /* DDNACache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = DDNACache.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		6327172C1C650D1B00AB2806 /* DDNACache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = DDNACache.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		632D8F811C736DA4004738A7 /* DDNAEngagement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDNAEngagement.h; sourceTree = "<group>"; };
 		632D8F821C736DA4004738A7 /* DDNAEngagement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDNAEngagement.m; sourceTree = "<group>"; };
 		632D8F871C737830004738A7 /* DDNAEngagementSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDNAEngagementSpec.m; sourceTree = "<group>"; };
 		632D9EDC1CBE625C00145331 /* DDNAImageMessageSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDNAImageMessageSpec.m; sourceTree = "<group>"; };
+		6343D582207659B900CC5A46 /* DDNAEngageFactorySpec.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DDNAEngageFactorySpec.m; sourceTree = "<group>"; };
 		636555F71C60F4BD004153E7 /* DeltaDNA.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DeltaDNA.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		636556051C60F4F6004153E7 /* DeltaDNA.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DeltaDNA.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6365560E1C60F598004153E7 /* DeltaDNA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = DeltaDNA.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -217,7 +226,7 @@
 		63A11FC31C6E26FF008DEE99 /* DDNAEventSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = DDNAEventSpec.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		63A11FC91C6E2F94008DEE99 /* DDNAProductSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = DDNAProductSpec.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		63A11FCC1C6E3BCC008DEE99 /* DDNATransactionSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = DDNATransactionSpec.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		63A11FCF1C71E77D008DEE99 /* DDNAParams.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = DDNAParams.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		63A11FCF1C71E77D008DEE99 /* DDNAParams.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = DDNAParams.h; sourceTree = "<group>"; };
 		63A11FD01C71E77D008DEE99 /* DDNAParams.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = DDNAParams.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		63A11FD71C71F7F7008DEE99 /* DDNAEventStoreProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = DDNAEventStoreProtocol.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		63A11FD81C71F7F7008DEE99 /* DDNAPersistentEventStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = DDNAPersistentEventStore.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -299,6 +308,8 @@
 				632D8F821C736DA4004738A7 /* DDNAEngagement.m */,
 				630458831CAE724800875B71 /* DDNAImageMessage.h */,
 				630458841CAE724800875B71 /* DDNAImageMessage.m */,
+				632513BC206E5C4A00BB0088 /* DDNAEngageFactory.h */,
+				632513BD206E5C4A00BB0088 /* DDNAEngageFactory.m */,
 			);
 			name = Engage;
 			sourceTree = "<group>";
@@ -364,6 +375,7 @@
 				63A11FCC1C6E3BCC008DEE99 /* DDNATransactionSpec.m */,
 				632D8F871C737830004738A7 /* DDNAEngagementSpec.m */,
 				632D9EDC1CBE625C00145331 /* DDNAImageMessageSpec.m */,
+				6343D582207659B900CC5A46 /* DDNAEngageFactorySpec.m */,
 			);
 			name = Specs;
 			path = Tests/Specs;
@@ -540,6 +552,7 @@
 				636556661C60F5F2004153E7 /* NSURL+DeltaDNA.h in Headers */,
 				636556101C60F598004153E7 /* DeltaDNA.h in Headers */,
 				6365565D1C60F5F2004153E7 /* DDNASDK.h in Headers */,
+				632513BE206E5C4A00BB0088 /* DDNAEngageFactory.h in Headers */,
 				636556621C60F5F2004153E7 /* NSDictionary+DeltaDNA.h in Headers */,
 				6365564F1C60F5F2004153E7 /* DDNAInstanceFactory.h in Headers */,
 				63A11FD11C71E77D008DEE99 /* DDNAParams.h in Headers */,
@@ -562,6 +575,7 @@
 				6327172E1C650D1B00AB2806 /* DDNACache.h in Headers */,
 				636556D71C6108DF004153E7 /* DDNAEngageService.h in Headers */,
 				636556DA1C6108DF004153E7 /* DDNAInstanceFactory.h in Headers */,
+				632513BF206E5C4A00BB0088 /* DDNAEngageFactory.h in Headers */,
 				63A11FE31C71F7F7008DEE99 /* DDNAVolatileEventStore.h in Headers */,
 				636556DB1C6108DF004153E7 /* DDNALog.h in Headers */,
 				636556DC1C6108DF004153E7 /* DDNANetworkRequest.h in Headers */,
@@ -866,6 +880,7 @@
 				636556501C60F5F2004153E7 /* DDNAInstanceFactory.m in Sources */,
 				304F13D82029F88200FA367B /* DDNAUtils.m in Sources */,
 				636556671C60F5F2004153E7 /* NSURL+DeltaDNA.m in Sources */,
+				632513C0206E5C4A00BB0088 /* DDNAEngageFactory.m in Sources */,
 				63A11FD31C71E77D008DEE99 /* DDNAParams.m in Sources */,
 				630458871CAE724800875B71 /* DDNAImageMessage.m in Sources */,
 				6327172F1C650D1B00AB2806 /* DDNACache.m in Sources */,
@@ -895,6 +910,7 @@
 				636556C81C6108BE004153E7 /* DDNAPlayerPrefs.m in Sources */,
 				63A11FD41C71E77D008DEE99 /* DDNAParams.m in Sources */,
 				304F13DC2029FB7800FA367B /* DDNAUtils.m in Sources */,
+				632513C1206E5C4A00BB0088 /* DDNAEngageFactory.m in Sources */,
 				630458881CAE724800875B71 /* DDNAImageMessage.m in Sources */,
 				632717301C650D1B00AB2806 /* DDNACache.m in Sources */,
 				636556CC1C6108BE004153E7 /* DDNASDK.m in Sources */,
@@ -924,6 +940,7 @@
 				636556A41C60FCD5004153E7 /* NSURL+DeltaDNASpec.m in Sources */,
 				636556A51C60FCD5004153E7 /* DDNAFakeInstanceFactory.m in Sources */,
 				636556A61C60FCD5004153E7 /* DDNAFakeNetworkRequest.m in Sources */,
+				6343D583207659B900CC5A46 /* DDNAEngageFactorySpec.m in Sources */,
 				6318EAE01CAD2A5A00E9A72C /* EXPMatchers+equalJSONString.m in Sources */,
 				63A11FCA1C6E2F94008DEE99 /* DDNAProductSpec.m in Sources */,
 			);
@@ -944,6 +961,7 @@
 				636556BA1C60FDF1004153E7 /* NSURL+DeltaDNASpec.m in Sources */,
 				636556BB1C60FDF1004153E7 /* DDNAFakeInstanceFactory.m in Sources */,
 				636556BC1C60FDF1004153E7 /* DDNAFakeNetworkRequest.m in Sources */,
+				6343D584207659B900CC5A46 /* DDNAEngageFactorySpec.m in Sources */,
 				6318EADF1CAD2A5900E9A72C /* EXPMatchers+equalJSONString.m in Sources */,
 				63A11FCB1C6E2F94008DEE99 /* DDNAProductSpec.m in Sources */,
 			);
