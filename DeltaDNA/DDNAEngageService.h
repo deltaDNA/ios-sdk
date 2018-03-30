@@ -46,6 +46,7 @@ typedef void (^DDNAEngageResponse) (NSString *response, NSInteger statusCode, NS
                             apiVersion:(NSString *)apiVersion
                             sdkVersion:(NSString *)sdkVersion
                               platform:(NSString *)platform
+                                locale:(NSString *)locale
                         timezoneOffset:(NSString *)timezoneOffset
                           manufacturer:(NSString *)manufacturer
                 operatingSystemVersion:(NSString *)operatingSystemVersion

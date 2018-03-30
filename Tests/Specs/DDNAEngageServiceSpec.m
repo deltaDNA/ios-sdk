@@ -73,6 +73,7 @@ describe(@"engage service", ^{
                                                                apiVersion:@"1.0.0"
                                                                sdkVersion:@"1.0.0"
                                                                  platform:@"iOS"
+                                                                   locale:@"en_UK"
                                                            timezoneOffset:@"-05"
                                                              manufacturer:@"Apple Inc."
                                                    operatingSystemVersion:@"iOS 9.1"
@@ -118,6 +119,7 @@ describe(@"engage service", ^{
             @"version": @"1.0.0",
             @"sdkVersion": @"1.0.0",
             @"platform": @"iOS",
+            @"locale": @"en_UK",
             @"timezoneOffset": @"-05",
             @"manufacturer": @"Apple Inc.",
             @"operatingSystemVersion": @"iOS 9.1",
