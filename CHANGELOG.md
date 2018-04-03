@@ -1,6 +1,6 @@
 # Change Log
 
-## [4.6.3](https://github.com/deltaDNA/ios-sdk/releases/tag/4.6.3) (????-??-??)
+## [4.6.3](https://github.com/deltaDNA/ios-sdk/releases/tag/4.6.3) (2018-04-03)
 ### Fixed
 - Missing locale in engage requests.
 
