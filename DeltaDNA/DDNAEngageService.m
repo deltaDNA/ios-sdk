@@ -67,6 +67,7 @@ static NSString *const kEngagementCacheKey = @"Engagement %@(%@)";
 @property (nonatomic, copy) NSString *apiVersion;
 @property (nonatomic, copy) NSString *sdkVersion;
 @property (nonatomic, copy) NSString *platform;
+@property (nonatomic, copy) NSString *locale;
 @property (nonatomic, copy) NSString *timezoneOffset;
 @property (nonatomic, copy) NSString *manufacturer;
 @property (nonatomic, copy) NSString *operatingSystemVersion;
@@ -83,6 +84,7 @@ static NSString *const kEngagementCacheKey = @"Engagement %@(%@)";
                             apiVersion:(NSString *)apiVersion
                             sdkVersion:(NSString *)sdkVersion
                               platform:(NSString *)platform
+                                locale:(NSString *)locale
                         timezoneOffset:(NSString *)timezoneOffset
                           manufacturer:(NSString *)manufacturer
                 operatingSystemVersion:(NSString *)operatingSystemVersion
@@ -95,6 +97,7 @@ static NSString *const kEngagementCacheKey = @"Engagement %@(%@)";
         self.apiVersion = apiVersion;
         self.sdkVersion = sdkVersion;
         self.platform = platform;
+        self.locale = locale;
         self.timezoneOffset = timezoneOffset;
         self.manufacturer = manufacturer;
         self.operatingSystemVersion = operatingSystemVersion;
@@ -117,6 +120,7 @@ static NSString *const kEngagementCacheKey = @"Engagement %@(%@)";
         @"version": self.apiVersion,
         @"sdkVersion": self.sdkVersion,
         @"platform": self.platform,
+        @"locale": self.locale,
         @"timezoneOffset": self.timezoneOffset,
         @"manufacturer": self.manufacturer,
         @"operatingSystemVersion": self.operatingSystemVersion

@@ -55,6 +55,7 @@
                                                                               apiVersion:DDNA_ENGAGE_API_VERSION
                                                                               sdkVersion:DDNA_SDK_VERSION
                                                                                 platform:ddnaci.platform
+                                                                                  locale:ddnaci.locale
                                                                           timezoneOffset:ddnaci.timezoneOffset
                                                                             manufacturer:ddnaci.manufacturer
                                                                   operatingSystemVersion:ddnaci.operatingSystemVersion
