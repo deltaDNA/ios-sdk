@@ -115,34 +115,28 @@
     [[DDNASDK sharedInstance] recordEvent:event];
 }
 
-- (IBAction)engage:(id)sender {
-    DDNAEngagement *engagement = [DDNAEngagement engagementWithDecisionPoint:@"gameLoaded"];
-    [engagement setParam:@4 forKey:@"userLevel"];
-    [engagement setParam:@1000 forKey:@"experience"];
-    [engagement setParam:@"Disco Volante" forKey:@"missionName"];
+- (IBAction)engage:(id)sender
+{
+    DDNAParams *customParams = [[DDNAParams alloc] init];
+    [customParams setParam:@4 forKey:@"userLevel"];
+    [customParams setParam:@1000 forKey:@"experience"];
+    [customParams setParam:@"Disco Volante" forKey:@"missionName"];
     
-    [[DDNASDK sharedInstance] requestEngagement:engagement engagementHandler:^(DDNAEngagement *response) {
-        NSLog(@"Engagement request returned the following parameters:\n%@", response.json);
+    [[DDNASDK sharedInstance].engageFactory requestGameParametersForDecisionPoint:@"gameLoaded" parameters:customParams handler:^(NSDictionary * gameParameters) {
+        NSLog(@"The following game parameters were returned:\n%@", gameParameters);
     }];
-    
 }
 
-- (IBAction)imageMessage:(id)sender {
-
-    DDNAEngagement *engagement = [DDNAEngagement engagementWithDecisionPoint:@"imageMessage"];
-    
-    [[DDNASDK sharedInstance] requestEngagement:engagement engagementHandler:^(DDNAEngagement *response) {
-        
-        DDNAImageMessage *imageMessage = [DDNAImageMessage imageMessageWithEngagement:response delegate:self];
+- (IBAction)imageMessage:(id)sender
+{
+    [[DDNASDK sharedInstance].engageFactory requestImageMessageForDecisionPoint:@"imageMessage" handler:^(DDNAImageMessage * _Nullable imageMessage) {
         if (imageMessage != nil) {
-          // Engagement contained a valid image message response!
+            imageMessage.delegate = self;
             [imageMessage fetchResources];
-        }
-        else {
+        } else {
             NSLog(@"Engage response did not contain an image message.");
         }
     }];
-    
 }
 
 - (IBAction)uploadEvents:(id)sender {

@@ -19,7 +19,7 @@ target 'MyApp' do
   # Uncomment this line if you're using Swift or would like to use dynamic frameworks
   use_frameworks!
 
-  pod 'DeltaDNA', '~> 4.6.3'
+  pod 'DeltaDNA', '~> 4.7.0'
 
   target 'MyAppTests' do
     inherit! :search_paths
@@ -29,7 +29,7 @@ target 'MyApp' do
 end
 ```
 
-The deltaDNA SDKs are available from our private spec repository, its url must be added as a source to your podfile.  
+The deltaDNA SDKs are available from our private spec repository, its url must be added as a source to your podfile.
 
 ### Installation as a Framework
 
@@ -113,22 +113,29 @@ DDNAEngagement *engagement = [DDNAEngagement engagementWithDecisionPoint:@"gameL
 }];
 ```
 
-#### Image Message
-
-One of the actions Engage supports is an Image Message.  This displays a custom popup on the game screen.  To test if Engage returned an Image Message you can create one from a `DDNAEngagement`.  If no image is defined for the Engagement, the Image Message will be nil.  The following shows how you can dynamically display an image popup depending on Engage's response.
+If you're only interested in receiving game parameters from Engage, this can be simplified by using the `DDNAEngageFactory`:
 
 ```objective-c
-DDNAEngagement *engagement = [DDNAEngagement engagementWithDecisionPoint:@"imageMessage"];
+DDNAParams *customParams = [[DDNAParams alloc] init];
+[customParams setParam:@4 forKey:@"userLevel"];
+[customParams setParam:@1000 forKey:@"experience"];
+[customParams setParam:@"Disco Volante" forKey:@"missionName"];
 
-[[DDNASDK sharedInstance] requestEngagement:engagement engagementHandler:^(DDNAEngagement* response) {
+[[DDNASDK sharedInstance].engageFactory requestGameParametersForDecisionPoint:@"gameLoaded" parameters:customParams handler:^(NSDictionary * gameParameters) {
+    NSLog(@"The following game parameters were returned:\n%@", gameParameters);
+}];
+```
 
-    DDNAImageMessage* imageMessage = [DDNAImageMessage imageMessageWithEngagement:response delegate:self];
+#### Image Message
+
+One of the actions Engage supports is an Image Message.  This displays a custom popup on the game screen.  To ask Engage for an image message use the `DDNAEngageFactory`:
+
+```objective-c
+[[DDNASDK sharedInstance].engageFactory requestImageMessageForDecisionPoint:@"imageMessage" handler:^(DDNAImageMessage * _Nullable imageMessage) {
     if (imageMessage != nil) {
-        // Engagement contained a valid image message response!
+        imageMessage.delegate = self;
         [imageMessage fetchResources];
-        // -didReceiveResourcesForImageMessage will be called once the resources are available.
-    }
-    else {
+    } else {
         NSLog(@"Engage response did not contain an image message.");
     }
 }];

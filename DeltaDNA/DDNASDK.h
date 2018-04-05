@@ -20,6 +20,7 @@
 @class DDNASettings;
 @class DDNAEvent;
 @class DDNAEngagement;
+@class DDNAEngageFactory;
 @protocol DDNAPopup;
 
 @interface DDNASDK : NSObject
@@ -74,6 +75,9 @@
 
 /// Is the SDK uploading events.
 @property (nonatomic, assign, getter = isUploading) BOOL uploading;
+
+/// The @c DDNAEngageFactory helps making Engage requests.
+@property (nonatomic, strong, readonly) DDNAEngageFactory *engageFactory;
 
 /**
  Singleton access to the deltaDNA SDK.
