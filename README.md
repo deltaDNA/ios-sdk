@@ -148,3 +148,7 @@ Refer to our [documentation](http://docs.deltadna.com/advanced-integration/ios-s
 ## License
 
 The sources are available under the Apache 2.0 license.
+
+## Contact Us
+
+For more information, please visit [deltadna.com](https://deltadna.com/). For questions or assistance, please email us at [support@deltadna.com](mailto:support@deltadna.com).

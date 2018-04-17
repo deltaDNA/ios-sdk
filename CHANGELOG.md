@@ -1,6 +1,6 @@
 # Change Log
 
-## [4.7.0](https://github.com/deltaDNA/ios-sdk/releases/tag/4.7.0) (YYYY-YY-YY)
+## [4.7.0](https://github.com/deltaDNA/ios-sdk/releases/tag/4.7.0) (2018-04-17)
 ### Changed
 - Automatic ad registration when using ads.
 - Added `DDNAEngageFactory` to simplfy Engage requests.
