@@ -141,6 +141,10 @@ One of the actions Engage supports is an Image Message.  This displays a custom 
 }];
 ```
 
+### Forget Me API
+
+In order to help with GDPR compliance, calling `forgetMe` on the sdk sends an event to the platform indicating the user wishes their previously collected data to be deleted.  Once called the sdk will no longer record events or respond to Engage requests.  The sdk can be reset by either calling `clearPersistantData` or starting with a new user id.
+
 ### Further Integration
 
 Refer to our [documentation](http://docs.deltadna.com/advanced-integration/ios-sdk/) site for more details on how to use the SDK.

@@ -1,5 +1,9 @@
 # Change Log
 
+## [4.8.0](https://github.com/deltaDNA/ios-sdk/releases/tag/4.8.0) (2018-??-??)
+### Added
+- ForgetMe API notifies the platform the user no longer wishes to be tracked and stops the sdk sending further events.
+
 ## [4.7.0](https://github.com/deltaDNA/ios-sdk/releases/tag/4.7.0) (2018-04-17)
 ### Changed
 - Automatic ad registration when using ads.

@@ -71,10 +71,10 @@
 @property (nonatomic, copy) NSString *platform;
 
 /// Has the SDK been started yet.
-@property (nonatomic, assign, getter = hasStarted) BOOL started;
+@property (nonatomic, assign, readonly, getter = hasStarted) BOOL started;
 
 /// Is the SDK uploading events.
-@property (nonatomic, assign, getter = isUploading) BOOL uploading;
+@property (nonatomic, assign, readonly, getter = isUploading) BOOL uploading;
 
 /// The @c DDNAEngageFactory helps making Engage requests.
 @property (nonatomic, strong, readonly) DDNAEngageFactory *engageFactory;
@@ -208,5 +208,11 @@
  @param logLevel The log level to set.
  */
 + (void)setLogLevel:(DDNALogLevel)logLevel;
+
+/**
+ Notifies our platform that this user id should be forgotten inline with GDPR regulations.
+ Once called, StartSDK will no longer function unless started with a different user id.
+ */
+- (void)forgetMe;
 
 @end

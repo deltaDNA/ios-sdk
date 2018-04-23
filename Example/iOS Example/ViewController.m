@@ -162,6 +162,14 @@
     [sdk newSession];
 }
 
+- (IBAction)forgetMe:(id)sender {
+    [[DDNASDK sharedInstance] forgetMe];
+}
+
+- (IBAction)newUser:(id)sender {
+    [[DDNASDK sharedInstance] clearPersistentData];
+}
+
 #pragma mark - ImageMessageDelegate
 
 - (void)didReceiveResourcesForImageMessage:(DDNAImageMessage *)imageMessage

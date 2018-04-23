@@ -16,14 +16,15 @@
 
 #import <Foundation/Foundation.h>
 
-@interface DDNAUtils : NSObject
+@interface DDNAUserManager : NSObject
 
-+ (NSString*) fixURL: (NSString*) url;
+@property (nonatomic, copy) NSString *userId;
+@property (nonatomic, assign) BOOL doNotTrack;
+@property (nonatomic, assign) BOOL forgotten;
+@property (nonatomic, assign, getter=isNewPlayer) BOOL newPlayer;
 
-+ (NSString *) getCurrentTimestamp;
+- (instancetype)initWithUserDefaults:(NSUserDefaults *)userDefaults;
 
-+ (NSString *) generateUserID;
-
-+ (NSString *) generateSessionID;
+- (void)clearPersistentData;
 
 @end

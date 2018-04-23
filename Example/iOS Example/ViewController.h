@@ -30,6 +30,8 @@
 - (IBAction)startSDK:(id)sender;
 - (IBAction)stopSDK:(id)sender;
 - (IBAction)newSession:(id)sender;
+- (IBAction)forgetMe:(id)sender;
+- (IBAction)newUser:(id)sender;
 
 @end
 

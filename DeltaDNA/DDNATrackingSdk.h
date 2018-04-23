@@ -15,15 +15,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "DDNASdkInterface.h"
 
-@interface DDNAUtils : NSObject
+@class DDNASDK;
 
-+ (NSString*) fixURL: (NSString*) url;
+@interface DDNATrackingSdk : NSObject <DDNASdkInterface>
 
-+ (NSString *) getCurrentTimestamp;
-
-+ (NSString *) generateUserID;
-
-+ (NSString *) generateSessionID;
+- (instancetype)initWithSdk:(DDNASDK *)sdk;
 
 @end
