@@ -26,6 +26,7 @@
 #import "DDNASdkInterface.h"
 #import "DDNATrackingSdk.h"
 #import "DDNANonTrackingSdk.h"
+#import "DDNAInstanceFactory.h"
 
 #import <UIKit/UIKit.h>
 
@@ -97,9 +98,9 @@
         self.userManager.userId = userID;
         
         if (self.userManager.doNotTrack) {
-            self.impl = [[DDNANonTrackingSdk alloc] initWithSdk:self];
+            self.impl = [[DDNANonTrackingSdk alloc] initWithSdk:self instanceFactory:DDNAInstanceFactory.sharedInstance];
         } else {
-            self.impl = [[DDNATrackingSdk alloc] initWithSdk:self];
+            self.impl = [[DDNATrackingSdk alloc] initWithSdk:self instanceFactory:DDNAInstanceFactory.sharedInstance];
         }
         
         [self.impl startWithNewPlayer:self.userManager];
@@ -193,7 +194,7 @@
         DDNALogDebug(@"Switching tracking sdk to non tracking sdk");
         self.userManager.doNotTrack = YES;
         [self.impl stop];
-        self.impl = [[DDNANonTrackingSdk alloc] initWithSdk:self];
+        self.impl = [[DDNANonTrackingSdk alloc] initWithSdk:self instanceFactory:DDNAInstanceFactory.sharedInstance];
         [self.impl startWithNewPlayer:self.userManager];
     }
 }

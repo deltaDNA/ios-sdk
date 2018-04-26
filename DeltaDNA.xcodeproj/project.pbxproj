@@ -111,6 +111,8 @@
 		636556E61C6108DF004153E7 /* NSURL+DeltaDNA.h in Headers */ = {isa = PBXBuildFile; fileRef = 6365563C1C60F5F2004153E7 /* NSURL+DeltaDNA.h */; };
 		636557001C610E20004153E7 /* DeltaDNA.h in Headers */ = {isa = PBXBuildFile; fileRef = 6365560E1C60F598004153E7 /* DeltaDNA.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		637373011C6B4B41007B789D /* DeltaDNA.h in Headers */ = {isa = PBXBuildFile; fileRef = 637373001C6B4B41007B789D /* DeltaDNA.h */; };
+		639F2EC52090CB24007EEBB5 /* DDNANonTrackingSdkSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 639F2EC22090CB0C007EEBB5 /* DDNANonTrackingSdkSpec.m */; };
+		639F2EC62090CB25007EEBB5 /* DDNANonTrackingSdkSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 639F2EC22090CB0C007EEBB5 /* DDNANonTrackingSdkSpec.m */; };
 		63A11FAD1C6B77D6008DEE99 /* DDNACollectService.h in Headers */ = {isa = PBXBuildFile; fileRef = 63A11FAB1C6B77D6008DEE99 /* DDNACollectService.h */; };
 		63A11FAE1C6B77D6008DEE99 /* DDNACollectService.h in Headers */ = {isa = PBXBuildFile; fileRef = 63A11FAB1C6B77D6008DEE99 /* DDNACollectService.h */; };
 		63A11FAF1C6B77D6008DEE99 /* DDNACollectService.m in Sources */ = {isa = PBXBuildFile; fileRef = 63A11FAC1C6B77D6008DEE99 /* DDNACollectService.m */; };
@@ -238,6 +240,7 @@
 		636556AB1C60FD6C004153E7 /* DeltaDNA tvOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "DeltaDNA tvOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		636556E81C610A12004153E7 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		637373001C6B4B41007B789D /* DeltaDNA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = DeltaDNA.h; sourceTree = "<group>"; };
+		639F2EC22090CB0C007EEBB5 /* DDNANonTrackingSdkSpec.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DDNANonTrackingSdkSpec.m; sourceTree = "<group>"; };
 		63A11FAB1C6B77D6008DEE99 /* DDNACollectService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = DDNACollectService.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		63A11FAC1C6B77D6008DEE99 /* DDNACollectService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = DDNACollectService.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		63A11FB11C6CF20A008DEE99 /* DDNAEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = DDNAEvent.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -401,6 +404,7 @@
 				632D9EDC1CBE625C00145331 /* DDNAImageMessageSpec.m */,
 				6343D582207659B900CC5A46 /* DDNAEngageFactorySpec.m */,
 				63E78AB9208F807C00DDD48D /* DDNAUserManagerSpec.m */,
+				639F2EC22090CB0C007EEBB5 /* DDNANonTrackingSdkSpec.m */,
 			);
 			name = Specs;
 			path = Tests/Specs;
@@ -932,6 +936,7 @@
 				636556A21C60FCD5004153E7 /* DDNANetworkRequestSpec.m in Sources */,
 				63A11FCD1C6E3BCC008DEE99 /* DDNATransactionSpec.m in Sources */,
 				304F13D92029F9E100FA367B /* DDNAUtilsSpec.m in Sources */,
+				639F2EC52090CB24007EEBB5 /* DDNANonTrackingSdkSpec.m in Sources */,
 				63A11FC41C6E26FF008DEE99 /* DDNAEventSpec.m in Sources */,
 				632D8F881C737830004738A7 /* DDNAEngagementSpec.m in Sources */,
 				63E78ABC208F80B800DDD48D /* DDNAUserManagerSpec.m in Sources */,
@@ -954,6 +959,7 @@
 				636556B81C60FDF1004153E7 /* DDNANetworkRequestSpec.m in Sources */,
 				63A11FCE1C6E3BCC008DEE99 /* DDNATransactionSpec.m in Sources */,
 				304F13DA2029F9E200FA367B /* DDNAUtilsSpec.m in Sources */,
+				639F2EC62090CB25007EEBB5 /* DDNANonTrackingSdkSpec.m in Sources */,
 				63A11FC51C6E26FF008DEE99 /* DDNAEventSpec.m in Sources */,
 				632D8F891C737830004738A7 /* DDNAEngagementSpec.m in Sources */,
 				63E78ABD208F80B800DDD48D /* DDNAUserManagerSpec.m in Sources */,

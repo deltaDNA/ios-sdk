@@ -29,6 +29,7 @@
 @interface DDNANonTrackingSdk ()
 
 @property (nonatomic, weak) DDNASDK *sdk;
+@property (nonatomic, weak) DDNAInstanceFactory *instanceFactory;
 @property (nonatomic, assign, readwrite) BOOL started;
 @property (nonatomic, strong) DDNACollectService *collectService;
 
@@ -36,10 +37,11 @@
 
 @implementation DDNANonTrackingSdk
 
-- (instancetype)initWithSdk:(DDNASDK *)sdk
+- (instancetype)initWithSdk:(DDNASDK *)sdk instanceFactory:(DDNAInstanceFactory *)instanceFactory
 {
     if ((self = [super init])) {
         self.sdk = sdk;
+        self.instanceFactory = instanceFactory;
     }
     return self;
 }
@@ -65,7 +67,7 @@
         DDNACollectRequest *request = [[DDNACollectRequest alloc] initWithEventList:events timeoutSeconds:self.sdk.settings.httpRequestCollectTimeoutSeconds retries:self.sdk.settings.httpRequestMaxTries retryDelaySeconds:self.sdk.settings.httpRequestRetryDelaySeconds];
         if (request) {
             DDNALogDebug(@"Sending forget me event to Collect: %@", request);
-            DDNACollectService *collectService = [[DDNAInstanceFactory sharedInstance] buildCollectService];
+            DDNACollectService *collectService = [self.instanceFactory buildCollectService];
             [collectService request:request handler:^(NSString *response, NSInteger statusCode, NSString *error) {
                 if (statusCode >= 200 && statusCode < 400) {
                     DDNALogDebug(@"Forget me event successfully sent.");

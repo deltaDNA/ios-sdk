@@ -18,7 +18,13 @@
 
 @class DDNAInstanceFactory;
 
-@interface DDNACollectRequest : NSObject
+@interface DDNACollectRequest : NSObject <NSCopying>
+
+@property (nonatomic, assign, readonly) NSInteger eventCount;
+@property (nonatomic, assign, readonly) NSInteger timeoutSeconds;
+@property (nonatomic, assign, readonly) NSInteger retries;
+@property (nonatomic, assign, readonly) NSInteger retryDelaySeconds;
+
 
 - (instancetype)initWithEventList:(NSArray *)eventList
                    timeoutSeconds:(NSInteger)timeoutSeconds

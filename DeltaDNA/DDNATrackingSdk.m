@@ -43,6 +43,7 @@
 @property (nonatomic, strong) dispatch_queue_t taskQueue;
 
 @property (nonatomic, weak) DDNASDK *sdk;
+@property (nonatomic, weak) DDNAInstanceFactory *instanceFactory;
 @property (nonatomic, strong) id<DDNAEventStoreProtocol> eventStore;
 @property (nonatomic, strong) DDNAEngageService *engageService;
 @property (nonatomic, strong) DDNACollectService *collectService;
@@ -75,10 +76,11 @@ static NSString *const DD_EVENT_NEW_SESSION = @"DDNASDKNewSession";
 
 @implementation DDNATrackingSdk
 
-- (instancetype)initWithSdk:(DDNASDK *)sdk
+- (instancetype)initWithSdk:(DDNASDK *)sdk instanceFactory:(DDNAInstanceFactory *)instanceFactory
 {
     if ((self = [super init])) {
         self.sdk = sdk;
+        self.instanceFactory = instanceFactory;
         
         self.reset = NO;
         self.uploading = NO;
@@ -110,8 +112,8 @@ static NSString *const DD_EVENT_NEW_SESSION = @"DDNASDKNewSession";
 
 - (void)startWithNewPlayer:(DDNAUserManager *)userManager
 {
-    self.engageService = [[DDNAInstanceFactory sharedInstance] buildEngageService];
-    self.collectService = [[DDNAInstanceFactory sharedInstance] buildCollectService];
+    self.engageService = [self.instanceFactory buildEngageService];
+    self.collectService = [self.instanceFactory buildCollectService];
     
     DDNALogDebug(@"Starting SDK with user id %@", self.sdk.userID);
     

@@ -18,9 +18,10 @@
 #import "DDNASdkInterface.h"
 
 @class DDNASDK;
+@class DDNAInstanceFactory;
 
 @interface DDNANonTrackingSdk : NSObject <DDNASdkInterface>
 
-- (instancetype)initWithSdk:(DDNASDK *)sdk;
+- (instancetype)initWithSdk:(DDNASDK *)sdk instanceFactory:(DDNAInstanceFactory *)instanceFactory;
 
 @end

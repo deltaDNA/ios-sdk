@@ -70,6 +70,25 @@
             [self.eventJSON dataUsingEncoding:NSUTF8StringEncoding].length];
 }
 
+- (instancetype)copyWithZone:(NSZone *)zone
+{
+    id copy = [[[self class] alloc] init];
+    
+    if (copy)
+    {
+        // Copy NSObject subclasses
+        [copy setEventJSON:[self.eventJSON copyWithZone:zone]];
+        
+        // Set primitives
+        [copy setEventCount:self.eventCount];
+        [copy setTimeoutSeconds:self.timeoutSeconds];
+        [copy setRetries:self.retries];
+        [copy setRetryDelaySeconds:self.retryDelaySeconds];
+    }
+    
+    return copy;
+}
+
 @end
 
 @interface DDNACollectService () <DDNANetworkRequestDelegate>
