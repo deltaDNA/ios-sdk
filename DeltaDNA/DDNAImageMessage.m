@@ -18,7 +18,7 @@
 #import "DDNAEngagement.h"
 #import "DDNASDK.h"
 #import "DDNASettings.h"
-#import "DDNACache.h"
+#import "DDNAImageCache.h"
 #import "DDNAEvent.h"
 #import "NSString+DeltaDNA.h"
 
@@ -119,34 +119,44 @@ BOOL validConfiguration(NSDictionary *configuration)
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
 
         if (self.configuration[@"url"]) {
-
-            NSURL *url = [NSURL URLWithString:self.configuration[@"url"]];
-            NSMutableURLRequest* urlRequest = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:[DDNASDK sharedInstance].settings.httpRequestEngageTimeoutSeconds];
-
-            NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
-            sessionConfiguration.requestCachePolicy = NSURLRequestReloadIgnoringCacheData;
-            NSURLSession *session = [NSURLSession sessionWithConfiguration:sessionConfiguration];
             
-            [[session dataTaskWithRequest:urlRequest completionHandler:^(NSData * data, NSURLResponse * response, NSError * error) {
-                if (data == nil) {
-                    // try and load from cache
-                    data = [[DDNACache sharedCache] objectForKey:self.configuration[@"url"]];
-                }
+            NSURL *url = [NSURL URLWithString:self.configuration[@"url"]];
 
-                if (data != nil) {
-                    [[DDNACache sharedCache] setObject:data forKey:self.configuration[@"url"]];
-                    self.spriteMap = [UIImage imageWithData:data];
-                    self.resourcesDownloaded = YES;
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        [self.delegate didReceiveResourcesForImageMessage:self];
-                    });
-                } else {
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        NSString *reason = error == nil ? @"Failed to download" : error.localizedDescription;
-                        [self.delegate didFailToReceiveResourcesForImageMessage:self withReason:reason];
-                    });
-                }
-            }] resume];
+            UIImage *spriteMap = [[DDNAImageCache sharedInstance] imageForURL:url];
+            if (spriteMap != nil) {
+                self.spriteMap = spriteMap;
+                self.resourcesDownloaded = YES;
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.delegate didReceiveResourcesForImageMessage:self];
+                });
+            }
+            else {
+                DDNALogDebug(@"Sprite map cache miss, requesting directly");
+
+                NSURLRequestCachePolicy cachePolicy = NSURLRequestUseProtocolCachePolicy;
+                NSMutableURLRequest* urlRequest = [NSMutableURLRequest requestWithURL:url cachePolicy:cachePolicy timeoutInterval:[DDNASDK sharedInstance].settings.httpRequestEngageTimeoutSeconds];
+
+                NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
+                sessionConfiguration.requestCachePolicy = cachePolicy;
+                NSURLSession *session = [NSURLSession sessionWithConfiguration:sessionConfiguration];
+                
+                [[session dataTaskWithRequest:urlRequest completionHandler:^(NSData * data, NSURLResponse * response, NSError * error) {
+                    if (data != nil) {
+                        UIImage *spriteMap = [UIImage imageWithData:data];
+                        [[DDNAImageCache sharedInstance] setImage:spriteMap forURL:url];
+                        self.spriteMap = spriteMap;
+                        self.resourcesDownloaded = YES;
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [self.delegate didReceiveResourcesForImageMessage:self];
+                        });
+                    } else {
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            NSString *reason = error == nil ? @"Failed to download" : error.localizedDescription;
+                            [self.delegate didFailToReceiveResourcesForImageMessage:self withReason:reason];
+                        });
+                    }
+                }] resume];
+            }
         } else {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.delegate didFailToReceiveResourcesForImageMessage:self withReason:@"Invalid configuration, missing \"url\" key"];
