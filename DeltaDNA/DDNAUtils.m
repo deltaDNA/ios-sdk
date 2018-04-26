@@ -16,6 +16,7 @@
 
 #import "DDNAUtils.h"
 #import "DDNALog.h"
+#import "NSString+DeltaDNA.h"
 
 @interface DDNAUtils()
 @end
@@ -33,6 +34,29 @@
     } else {
         return url;
     }
+}
+
++ (NSString *) getCurrentTimestamp
+{
+    NSCalendar *gregorianCalendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    NSTimeZone *timeZone = [NSTimeZone timeZoneWithName:@"UTC"];
+    NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
+    [dateFormatter setCalendar:gregorianCalendar];
+    [dateFormatter setTimeZone:timeZone];
+    [dateFormatter setLocale:locale];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss.SSS"];
+    return [dateFormatter stringFromDate:[NSDate date]];
+}
+
++ (NSString *) generateUserID
+{
+    return [[NSUUID UUID] UUIDString];
+}
+
++ (NSString *) generateSessionID
+{
+    return [[NSUUID UUID] UUIDString];
 }
 
 @end
