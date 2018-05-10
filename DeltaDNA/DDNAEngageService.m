@@ -174,8 +174,9 @@ static NSString *const kEngagementCacheKey = @"Engagement %@(%@)";
     }
 }
 
-- (void)request:(DDNANetworkRequest *)request didFailWithResponse: (NSString *)response statusCode:(NSInteger)statusCode error:(NSError *)error
+- (void)request:(DDNANetworkRequest *)request didFailWithResponse:(NSString *)response statusCode:(NSInteger)statusCode error:(NSError *)error
 {
+    DDNALogDebug(@"Live engage request failed, using cache -- %ld %@", (long)statusCode, response);
     NSDictionary *engagement = [self.requests objectForKey:request];
     if (engagement != nil) {
         DDNAEngageRequest *engageRequest = engagement[@"request"];

@@ -17,8 +17,11 @@
 #import <Foundation/Foundation.h>
 
 @class DDNAEvent;
+@class DDNAEventAction;
 @class DDNAEngagement;
 @class DDNAUserManager;
+
+@protocol DDNAEngageActionHandler;
 
 @protocol DDNASdkInterface <NSObject>
 
@@ -29,9 +32,9 @@
 
 - (void)newSession;
 - (void)stop;
-- (void)recordEvent:(DDNAEvent *)event;
+- (DDNAEventAction *)recordEvent:(DDNAEvent *)event;
 - (void)requestEngagement:(DDNAEngagement *)engagement
-        completionHandler:(void(^)(NSDictionary *parameters, NSInteger statusCode, NSError *error))completionHandler;
+        completionHandler:(void(^)(NSDictionary *response, NSInteger statusCode, NSError *error))completionHandler;
 - (void)requestEngagement:(DDNAEngagement *)engagement engagementHandler:(void(^)(DDNAEngagement *))engagementHandler;
 - (void)recordPushNotification:(NSDictionary *) pushNotification
                      didLaunch:(BOOL) didLaunch;

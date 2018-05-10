@@ -20,6 +20,10 @@
 
 + (instancetype)params;
 
++ (instancetype)paramsWithParams:(DDNAParams *)params;
+
+- (instancetype)initWithParams:(DDNAParams *)params;
+
 - (void)setParam:(NSObject *)param forKey:(NSString *)key;
 
 - (NSObject *)paramForKey:(NSString *)key;

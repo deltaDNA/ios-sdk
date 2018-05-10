@@ -176,7 +176,7 @@ describe(@"tracking sdk", ^{
         [given([mockSdk delegate]) willReturn:mockDelegate];
         [givenVoid([mockEngageService request:anything() handler:anything()]) willDo:^id _Nonnull(NSInvocation * _Nonnull invocation) {
             void (^handler)(NSString *response, NSInteger statusCode, NSError *error) = [invocation mkt_arguments][1];
-            handler(@"{\"isCachedResponse\":false}", 200, nil);
+            handler(@"{\"parameters\":{\"isCachedResponse\":false}}", 200, nil);
             return nil;
         }];
         
@@ -191,7 +191,7 @@ describe(@"tracking sdk", ^{
         [given([mockSdk delegate]) willReturn:mockDelegate];
         [givenVoid([mockEngageService request:anything() handler:anything()]) willDo:^id _Nonnull(NSInvocation * _Nonnull invocation) {
             void (^handler)(NSString *response, NSInteger statusCode, NSError *error) = [invocation mkt_arguments][1];
-            handler(@"{\"isCachedResponse\":true}", 200, nil);
+            handler(@"{\"parameters\":{\"isCachedResponse\":true}}", 200, nil);
             return nil;
         }];
         
@@ -221,7 +221,7 @@ describe(@"tracking sdk", ^{
     it(@"reads event whitelist from session configuration", ^{
         [givenVoid([mockEngageService request:anything() handler:anything()]) willDo:^id _Nonnull(NSInvocation * _Nonnull invocation) {
             void (^handler)(NSString *response, NSInteger statusCode, NSError *error) = [invocation mkt_arguments][1];
-            handler(@"{\"eventsWhitelist\":[\"event1\",\"event2\"]}", 200, nil);
+            handler(@"{\"parameters\":{\"eventsWhitelist\":[\"event1\",\"event2\"]}}", 200, nil);
             return nil;
         }];
         
@@ -238,7 +238,7 @@ describe(@"tracking sdk", ^{
     it(@"handles missing event whitelist from session configuration", ^{
         [givenVoid([mockEngageService request:anything() handler:anything()]) willDo:^id _Nonnull(NSInvocation * _Nonnull invocation) {
             void (^handler)(NSString *response, NSInteger statusCode, NSError *error) = [invocation mkt_arguments][1];
-            handler(@"{}", 200, nil);
+            handler(@"{\"parameters\":{}}", 200, nil);
             return nil;
         }];
         
@@ -253,7 +253,7 @@ describe(@"tracking sdk", ^{
     it(@"reads decision point whitelist from session configuration", ^{
         [givenVoid([mockEngageService request:anything() handler:anything()]) willDo:^id _Nonnull(NSInvocation * _Nonnull invocation) {
             void (^handler)(NSString *response, NSInteger statusCode, NSError *error) = [invocation mkt_arguments][1];
-            handler(@"{\"dpWhitelist\":[\"dp1\",\"dp2\"]}", 200, nil);
+            handler(@"{\"parameters\":{\"dpWhitelist\":[\"dp1\",\"dp2\"]}}", 200, nil);
             return nil;
         }];
         
@@ -267,10 +267,25 @@ describe(@"tracking sdk", ^{
         expect(trackingSdk.decisionPointWhitelist).to.contain(@"dp2");
     });
     
+    it(@"reads event triggers from session configuration", ^{
+        [givenVoid([mockEngageService request:anything() handler:anything()]) willDo:^id _Nonnull(NSInvocation * _Nonnull invocation) {
+            void (^handler)(NSString *response, NSInteger statusCode, NSError *error) = [invocation mkt_arguments][1];
+            handler(@"{\"parameters\":{\"triggers\":[{\"campaignID\": 28440,\"condition\": [{\"p\": \"userScore\"},{\"i\": 5},{\"o\": \"greater than\"}],\"eventName\":\"achievement\",\"priority\": 0,\"response\": {\"parameters\": {},\"transactionID\":2473687550473027584},\"variantID\": 36625},{\"campaignID\": 28441,\"condition\": [{\"p\": \"userScore\"},{\"i\": 5},{\"o\": \"less than\"}],\"eventName\":\"transaction\",\"priority\": 0,\"response\": {\"parameters\": {},\"transactionID\":2473687550473027584},\"variantID\": 36625}]}}", 200, nil);
+            return nil;
+        }];
+        
+        expect(trackingSdk.eventTriggers.count).to.equal(0);
+        
+        [trackingSdk startWithNewPlayer:mockUserManager];
+        [trackingSdk requestSessionConfiguration:mockUserManager];
+        
+        expect(trackingSdk.eventTriggers.count).to.equal(2);
+    });
+    
     it(@"handles missing decision point whitelist from session configuration", ^{
         [givenVoid([mockEngageService request:anything() handler:anything()]) willDo:^id _Nonnull(NSInvocation * _Nonnull invocation) {
             void (^handler)(NSString *response, NSInteger statusCode, NSError *error) = [invocation mkt_arguments][1];
-            handler(@"{}", 200, nil);
+            handler(@"{\"parameters\":{}}", 200, nil);
             return nil;
         }];
         
@@ -285,7 +300,7 @@ describe(@"tracking sdk", ^{
     it(@"reads image cache from session configuration", ^{
         [givenVoid([mockEngageService request:anything() handler:anything()]) willDo:^id _Nonnull(NSInvocation * _Nonnull invocation) {
             void (^handler)(NSString *response, NSInteger statusCode, NSError *error) = [invocation mkt_arguments][1];
-            handler(@"{\"imageCache\":[\"/image1.png\",\"/image2.png\"]}", 200, nil);
+            handler(@"{\"parameters\":{\"imageCache\":[\"/image1.png\",\"/image2.png\"]}}", 200, nil);
             return nil;
         }];
         
@@ -303,7 +318,7 @@ describe(@"tracking sdk", ^{
     it(@"handles missing image cache list from session configuration", ^{
         [givenVoid([mockEngageService request:anything() handler:anything()]) willDo:^id _Nonnull(NSInvocation * _Nonnull invocation) {
             void (^handler)(NSString *response, NSInteger statusCode, NSError *error) = [invocation mkt_arguments][1];
-            handler(@"{}", 200, nil);
+            handler(@"{\"parameters\":{}}", 200, nil);
             return nil;
         }];
         
@@ -317,7 +332,7 @@ describe(@"tracking sdk", ^{
     it(@"populates image cache after session configuration", ^{
         [givenVoid([mockEngageService request:anything() handler:anything()]) willDo:^id _Nonnull(NSInvocation * _Nonnull invocation) {
             void (^handler)(NSString *response, NSInteger statusCode, NSError *error) = [invocation mkt_arguments][1];
-            handler(@"{\"imageCache\":[\"/image1.png\",\"/image2.png\"]}", 200, nil);
+            handler(@"{\"parameters\":{\"imageCache\":[\"/image1.png\",\"/image2.png\"]}}", 200, nil);
             return nil;
         }];
         
@@ -347,7 +362,7 @@ describe(@"tracking sdk", ^{
     it(@"reports if image cache fails to populate", ^{
         [givenVoid([mockEngageService request:anything() handler:anything()]) willDo:^id _Nonnull(NSInvocation * _Nonnull invocation) {
             void (^handler)(NSString *response, NSInteger statusCode, NSError *error) = [invocation mkt_arguments][1];
-            handler(@"{\"imageCache\":[\"/image1.png\",\"/image2.png\"]}", 200, nil);
+            handler(@"{\"parameters\":{\"imageCache\":[\"/image1.png\",\"/image2.png\"]}}", 200, nil);
             return nil;
         }];
         
@@ -392,7 +407,7 @@ describe(@"tracking sdk", ^{
 
         [givenVoid([mockEngageService request:anything() handler:anything()]) willDo:^id _Nonnull(NSInvocation * _Nonnull invocation) {
             void (^handler)(NSString *response, NSInteger statusCode, NSError *error) = [invocation mkt_arguments][1];
-            handler(@"{\"eventsWhitelist\":[\"allowedEvent\"]}", 200, nil);
+            handler(@"{\"parameters\":{\"eventsWhitelist\":[\"allowedEvent\"]}}", 200, nil);
             return nil;
         }];
         
@@ -439,7 +454,7 @@ describe(@"tracking sdk", ^{
         
         [givenVoid([mockEngageService request:anything() handler:anything()]) willDo:^id _Nonnull(NSInvocation * _Nonnull invocation) {
             void (^handler)(NSString *response, NSInteger statusCode, NSError *error) = [invocation mkt_arguments][1];
-            handler(@"{\"dpWhitelist\":[\"allowedDp@engagement\"]}", 200, nil);
+            handler(@"{\"parameters\":{\"dpWhitelist\":[\"allowedDp@engagement\"]}}", 200, nil);
             return nil;
         }];
         

@@ -35,6 +35,8 @@
 #import "DDNACollectService.h"
 #import "DDNAEngageFactory.h"
 #import "DDNAImageCache.h"
+#import "DDNAEventAction.h"
+#import "DDNAEventTrigger.h"
 
 #import <UIKit/UIKit.h>
 
@@ -62,6 +64,7 @@
 @property (nonatomic, strong) NSSet<NSString *> *eventWhitelist;
 @property (nonatomic, strong) NSSet<NSString *> *decisionPointWhitelist;
 @property (nonatomic, strong) NSSet<NSString *> *imageCacheList;
+@property (nonatomic, strong) NSOrderedSet<DDNAEventTrigger *> *eventTriggers;
 
 @property (nonatomic, assign, readwrite) BOOL started;
 @property (nonatomic, assign, readwrite) BOOL uploading;
@@ -203,7 +206,7 @@ static NSString *const DD_EVENT_NEW_SESSION = @"DDNASDKNewSession";
     }
 }
 
-- (void)recordEvent:(DDNAEvent *)event
+- (DDNAEventAction *)recordEvent:(DDNAEvent *)event
 {
     if (!self.started) {
         @throw([NSException exceptionWithName:@"DDNANotStartedException" reason:@"The deltaDNA SDK must be started before it can record events." userInfo:nil]);
@@ -211,7 +214,7 @@ static NSString *const DD_EVENT_NEW_SESSION = @"DDNASDKNewSession";
     
     if (self.eventWhitelist && ![self.eventWhitelist containsObject:event.eventName]) {
         DDNALogDebug(@"Ignoring non whitelisted event \"%@\"", event.eventName);
-        return;
+        return [[DDNAEventAction alloc] init];
     }
     
     [event setParam:self.sdk.platform forKey:@"platform"];
@@ -224,6 +227,8 @@ static NSString *const DD_EVENT_NEW_SESSION = @"DDNASDKNewSession";
     [eventSchema setObject:[DDNAUtils getCurrentTimestamp] forKey:@"eventTimestamp"];
         
     [self.eventStore pushEvent:eventSchema];
+    
+    return [[DDNAEventAction alloc] initWithEventSchema:eventSchema eventTriggers:self.eventTriggers sdk:self];
 }
 
 - (void)requestEngagement:(DDNAEngagement *)engagement completionHandler:(void (^)(NSDictionary *, NSInteger, NSError *))completionHandler
@@ -407,12 +412,26 @@ static NSString *const DD_EVENT_NEW_SESSION = @"DDNASDKNewSession";
     configEngagement.flavour = @"internal";
     [configEngagement setParam:[NSNumber numberWithUnsignedInteger:userManager.msSinceFirstSession]  forKey:@"timeSinceFirstSession"];
     [configEngagement setParam:[NSNumber numberWithUnsignedInteger:userManager.msSinceLastSession] forKey:@"timeSinceLastSession"];
-    [self requestEngagement:configEngagement completionHandler:^(NSDictionary *parameters, NSInteger statusCode, NSError *error) {
-        if (statusCode == 200) {
+    [self requestEngagement:configEngagement completionHandler:^(NSDictionary *response, NSInteger statusCode, NSError *error) {
+        if (response && response[@"parameters"]) {
+            NSDictionary *parameters = response[@"parameters"];
             self.eventWhitelist = parameters[@"eventsWhitelist"] ? [NSSet setWithArray:parameters[@"eventsWhitelist"]] : nil;
             self.decisionPointWhitelist = parameters[@"dpWhitelist"] ? [NSSet setWithArray:parameters[@"dpWhitelist"]] : nil;
             if (parameters[@"imageCache"]) {
                 self.imageCacheList = [NSSet setWithArray:parameters[@"imageCache"]];
+            }
+            if (parameters[@"triggers"]) {
+                NSMutableArray<DDNAEventTrigger *> *triggers = [NSMutableArray<DDNAEventTrigger *> array];
+                for (NSDictionary *triggerDict in parameters[@"triggers"]) {
+                    DDNAEventTrigger *t = [[DDNAEventTrigger alloc] initWithDictionary:triggerDict];
+                    if (t != nil) {
+                        [triggers addObject:t];
+                    }
+                }
+                NSSortDescriptor *sortName = [NSSortDescriptor sortDescriptorWithKey:@"eventName" ascending:NO];
+                NSSortDescriptor *sortPriority = [NSSortDescriptor sortDescriptorWithKey:@"priority" ascending:NO];
+                NSArray<DDNAEventTrigger *> *sorted = [triggers sortedArrayUsingDescriptors:@[sortName, sortPriority]];
+                self.eventTriggers = [NSOrderedSet orderedSetWithArray:sorted];
             }
             
             if ([self.sdk.delegate respondsToSelector:@selector(didConfigureSessionWithCache:)]) {

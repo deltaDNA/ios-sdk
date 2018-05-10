@@ -16,7 +16,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface DDNAEvent : NSObject
+@interface DDNAEvent : NSObject <NSCopying>
 
 @property (nonatomic, copy, readonly) NSString *eventName;
 

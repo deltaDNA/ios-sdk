@@ -85,6 +85,34 @@ DDNAEvent *event = [DDNAEvent eventWithName:@"keyTypes"];
 [[DDNASDK sharedInstance] recordEvent:event];
 ```
 
+### Event Triggers
+
+All `recordEvent:` methods return a `DDNAEventAction` instance that accepts `DDNAEventActionHandler` callbacks via `addHandler:`.  If a corresponding event-triggered campaign has been setup, the handler that matches the trigger will be actioned as soon as `run` is called on the action.  The current supported actions are Game Parameters and Image Messages.  
+
+```objective-c
+DDNAEvent *event = [[DDNAEvent alloc] initWithName:@"matchStarted"];
+[event setParam:@1 forKey:@"matchID"];
+[event setParam:@"Blue Meadow" forKey:@"matchName"];
+[event setParam:@10 forKey:@"userLevel"];
+
+DDNAEventAction *eventAction = [[DDNASDK sharedInstance] recordEvent:event];
+
+DDNAGameParametersHandler *gameParametersHandler = [[DDNAGameParametersHandler alloc] initWithHandler:^(NSDictionary *gameParameters) {
+    // do something with the game parameters
+}];
+
+[eventAction addHandler:gameParametersHandler];
+
+DDNAImageMessageHandler *imageHandler = [[DDNAImageMessageHandler alloc] initWithHandler:^(DDNAImageMessage *imageMessage){
+    // the image message is already prepared so show instantly
+    imageMessage.delegate = self;
+    [imageMessage showFromRootViewController:self];
+}];
+
+[eventAction addHandler:imageHandler];
+[eventAction run];
+```
+
 ### Engage
 
 Change the behaviour of the game with an engagement.  Create a `DDNAEngagement` with the name of your decision point.  Engage will respond with a dictionary of key values for your player.  Depending on how the Engage campaign has been built on the platform, the response will look something like:

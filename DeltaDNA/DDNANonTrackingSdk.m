@@ -95,13 +95,18 @@
     self.started = NO;
 }
 
-- (void)recordEvent:(DDNAEvent *)event
+- (DDNAEventAction *)recordEvent:(DDNAEvent *)event
+{
+    return [[DDNAEventAction alloc] init];
+}
+
+- (void)recordEvent:(DDNAEvent *)event actionHandler:(id<DDNAEngageActionHandler>)actionHandler
 {
     // do nothing
 }
 
 - (void)requestEngagement:(DDNAEngagement *)engagement
-        completionHandler:(void(^)(NSDictionary *parameters, NSInteger statusCode, NSError *error))completionHandler
+        completionHandler:(void(^)(NSDictionary *response, NSInteger statusCode, NSError *error))completionHandler
 {
     if (completionHandler) {
         completionHandler(@{@"parameters":@{}}, 200, nil);

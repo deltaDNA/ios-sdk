@@ -124,26 +124,26 @@
     }
 }
 
-- (void)recordEvent:(DDNAEvent *)event
+- (DDNAEventAction *)recordEvent:(DDNAEvent *)event
 {
     @synchronized(self) {
-        [self.impl recordEvent:event];
+        return [self.impl recordEvent:event];
     }
 }
 
-- (void)recordEventWithName:(NSString *)eventName
+- (DDNAEventAction *)recordEventWithName:(NSString *)eventName
 {
-    [self recordEvent:[DDNAEvent eventWithName:eventName]];
+    return [self recordEvent:[DDNAEvent eventWithName:eventName]];
 }
 
-- (void)recordEventWithName:(NSString *)eventName eventParams:(NSDictionary *)eventParams
+- (DDNAEventAction *)recordEventWithName:(NSString *)eventName eventParams:(NSDictionary *)eventParams
 {
     DDNAEvent *event = [DDNAEvent eventWithName:eventName];
     for (NSString *key in eventParams) {
         [event setParam:eventParams[key] forKey:key];
     }
     
-    [self recordEvent:event];
+    return [self recordEvent:event];
 }
 
 - (void)requestEngagement:(DDNAEngagement *)engagement completionHandler:(void (^)(NSDictionary *, NSInteger, NSError *))completionHandler

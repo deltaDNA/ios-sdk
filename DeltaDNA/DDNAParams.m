@@ -29,6 +29,11 @@
     return [[DDNAParams alloc] init];
 }
 
++ (instancetype)paramsWithParams:(DDNAParams *)params
+{
+    return [[DDNAParams alloc] initWithParams:params];
+}
+
 - (instancetype)init
 {
     if ((self = [super init])) {
@@ -37,23 +42,31 @@
     return self;
 }
 
+- (instancetype)initWithParams:(DDNAParams *)params
+{
+    if ((self = [super init])) {
+        self.params = [NSMutableDictionary dictionaryWithDictionary:params.params];
+    }
+    return self;
+}
+
 - (void)setParam:(NSObject *)param forKey:(NSString *)key
 {
-    @try {
-        if ([param isKindOfClass:[DDNAParams class]]) {
-            [self.params setObject:[((DDNAParams *)param) dictionary] forKey:key];
-        } else if ([param isKindOfClass:[NSDate class]]) {
-            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-            NSLocale *enUSPOSIXLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
-            [dateFormatter setLocale:enUSPOSIXLocale];
-            [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss.SSS"];
-            [self.params setObject:[dateFormatter stringFromDate:((NSDate *)param)] forKey:key];
-        } else {
-            [self.params setObject:param forKey:key];
-        }
+    if (param == nil) {
+        [self.params removeObjectForKey:key];
+        return;
     }
-    @catch (NSException *e) {
-        @throw;
+    
+    if ([param isKindOfClass:[DDNAParams class]]) {
+        [self.params setObject:[((DDNAParams *)param) dictionary] forKey:key];
+    } else if ([param isKindOfClass:[NSDate class]]) {
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        NSLocale *enUSPOSIXLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
+        [dateFormatter setLocale:enUSPOSIXLocale];
+        [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss.SSS"];
+        [self.params setObject:[dateFormatter stringFromDate:((NSDate *)param)] forKey:key];
+    } else {
+        [self.params setObject:param forKey:key];
     }
 }
 

@@ -54,4 +54,17 @@
     };
 }
 
+- (instancetype)copyWithZone:(NSZone *)zone
+{
+    id copy = [[[self class] alloc] init];
+    
+    if (copy)
+    {
+        [copy setEventName:self.eventName];
+        [copy setEventParams:[DDNAParams paramsWithParams:self.eventParams]];
+    }
+    
+    return copy;
+}
+
 @end
