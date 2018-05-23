@@ -15,10 +15,15 @@
 //
 
 #import "DDNAImageCache.h"
+#import "DDNALog.h"
 
-@interface DDNAImageCache () <NSCacheDelegate>
+static const NSURLRequestCachePolicy kCachePolicy = NSURLRequestUseProtocolCachePolicy;
+static const NSTimeInterval kTimeoutInterval = 180;
 
-@property (nonatomic, strong) NSCache<NSURL *, UIImage *> *cache;
+@interface DDNAImageCache ()
+
+@property (nonatomic, strong) NSURLSession *session;
+@property (nonatomic, strong) NSString *cacheDir;
 
 @end
 
@@ -30,37 +35,110 @@
     static id sharedInstance;
     
     dispatch_once(&once, ^{
-        sharedInstance = [[self alloc] init];
+        NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
+        sessionConfiguration.requestCachePolicy = kCachePolicy;
+        NSURLSession *session = [NSURLSession sessionWithConfiguration:sessionConfiguration];
+        sharedInstance = [[self alloc] initWithURLSession:session cacheDir:@"ImageCache"];
     });
     
     return sharedInstance;
 }
 
-- (instancetype)init
+- (instancetype)initWithURLSession:(NSURLSession *)session cacheDir:(NSString *)cacheDir
 {
     self = [super init];
     if (self) {
-        NSCache *cache = [[NSCache alloc] init];
-        cache.delegate = self;
-        cache.name = @"ddna-asset-cache";
-        self.cache = cache;
+        self.session = session;
+        self.cacheDir = cacheDir;
     }
     return self;
 }
 
 - (void)setImage:(UIImage *)image forURL:(NSURL *)url
 {
-    [self.cache setObject:image forKey:url];
+    NSString *location = [[self getCacheLocation] stringByAppendingPathComponent:[url lastPathComponent]];   // filenames are unique
+    [UIImagePNGRepresentation(image) writeToFile:location atomically:YES];
 }
 
 - (UIImage *)imageForURL:(NSURL *)url
 {
-    return [self.cache objectForKey:url];
+    NSString *location = [[self getCacheLocation] stringByAppendingPathComponent:[url lastPathComponent]];
+    UIImage *image = [UIImage imageWithContentsOfFile:location];
+    return image;
 }
 
-- (void)cache:(NSCache *)cache willEvictObject:(id)obj
+- (void)requestImageForURL:(NSURL *)url completionHandler:(void (^)(UIImage * _Nullable))completionHandler
 {
-    NSLog(@"Cache %@ evicting %@", cache.name, obj);
+    UIImage *image = [self imageForURL:url];
+    if (image != nil) {
+        DDNALogDebug(@"Cache hit for image at %@", url);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            completionHandler(image);
+        });
+    }
+    else {
+        DDNALogDebug(@"Cache miss for image at %@", url);
+        NSMutableURLRequest* urlRequest = [NSMutableURLRequest requestWithURL:url cachePolicy:kCachePolicy timeoutInterval:kTimeoutInterval];
+        
+        [[_session downloadTaskWithRequest:urlRequest completionHandler:^(NSURL * location, NSURLResponse * response, NSError * error) {
+            if (location != nil) {
+                UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:location]];
+                if (image != nil) {
+                    DDNALogDebug(@"Downloaded image at %@", url);
+                    [self setImage:image forURL:url];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        completionHandler(image);
+                    });
+                } else {
+                    DDNALogWarn(@"Failed to create image from downloaded data.");
+                    completionHandler(nil);
+                }
+            } else {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    DDNALogWarn(@"Failed to download image asset: %@", error);
+                    completionHandler(nil);
+                });
+            }
+        }] resume];
+    }
+}
+
+- (void)prefechImagesForURLs:(NSArray<NSURL *> *)urls completionHandler:(void (^)(void))completionHandler
+{
+    __block NSInteger remainingTasks = [urls count];
+    
+    for (NSURL *url in urls) {
+        NSMutableURLRequest* urlRequest = [NSMutableURLRequest requestWithURL:url cachePolicy:kCachePolicy timeoutInterval:kTimeoutInterval];
+        [[_session downloadTaskWithRequest:urlRequest completionHandler:^(NSURL * location, NSURLResponse * response, NSError * error) {
+            if (location != nil) {
+                DDNALogDebug(@"Downloaded image at %@", url);
+                UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:location]];
+                if (image != nil) {
+                    [self setImage:image forURL:url];
+                } else {
+                    DDNALogWarn(@"Failed to create image from downloaded data.");
+                }
+            } else {
+                DDNALogWarn(@"Failed to download image asset: %@", error);
+            }
+            if ((--remainingTasks) == 0) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    completionHandler();
+                });
+            }
+        }] resume];
+    }
+}
+
+- (NSString *)getCacheLocation
+{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    documentsDirectory = [[documentsDirectory stringByAppendingPathComponent:@"DeltaDNA"] stringByAppendingString:self.cacheDir];
+    
+    NSError *error = nil;
+    [[NSFileManager defaultManager] createDirectoryAtPath:documentsDirectory withIntermediateDirectories:YES attributes:nil error:&error];
+    return documentsDirectory;
 }
 
 @end

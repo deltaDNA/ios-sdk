@@ -21,8 +21,16 @@
 
 + (instancetype)sharedInstance;
 
+- (instancetype)initWithURLSession:(NSURLSession *)session cacheDir:(NSString *)cacheDir;
+
 - (void)setImage:(UIImage *)image forURL:(NSURL *)url;
 
 - (UIImage *)imageForURL:(NSURL *)url;
+
+- (void)requestImageForURL:(NSURL *)url completionHandler:(void (^)(UIImage * _Nullable image))completionHandler;
+
+- (void)prefechImagesForURLs:(NSArray <NSURL *> *)urls completionHandler:(void (^)(void))completionHandler;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
