@@ -138,6 +138,25 @@
     self.sdk.pushNotificationToken = token;
 }
 
+- (void)downloadImageAssets
+{
+    // do nothing
+    if ([self.sdk.delegate respondsToSelector:@selector(didPopulateImageMessageCache)]) {
+        [self.sdk.delegate didPopulateImageMessageCache];
+    }
+}
+
+
+- (void)requestSessionConfiguration:(DDNAUserManager *)userManager
+{
+    // do nothing
+    if ([self.sdk.delegate respondsToSelector:@selector(didConfigureSessionWithCache:)]) {
+        [self.sdk.delegate didConfigureSessionWithCache:NO];
+    }
+    [self downloadImageAssets];
+}
+
+
 - (BOOL)isUploading
 {
     return NO;

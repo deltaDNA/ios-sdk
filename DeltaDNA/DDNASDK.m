@@ -111,6 +111,8 @@
 {
     @synchronized(self) {
         self.sessionID = [DDNAUtils generateSessionID];
+        [self.impl requestSessionConfiguration:self.userManager];
+        [self.userManager setLastSession:[NSDate date]];
         [self.impl newSession];
     }
 }
@@ -162,6 +164,20 @@
 {
     @synchronized(self) {
         [self.impl recordPushNotification:pushNotification didLaunch:didLaunch];
+    }
+}
+
+- (void)requestSessionConfiguration
+{
+    @synchronized(self) {
+        [self.impl requestSessionConfiguration:self.userManager];
+    }
+}
+
+- (void)downloadImageAssets
+{
+    @synchronized(self) {
+        [self.impl downloadImageAssets];
     }
 }
 

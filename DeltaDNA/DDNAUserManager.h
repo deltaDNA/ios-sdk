@@ -22,8 +22,13 @@
 @property (nonatomic, assign) BOOL doNotTrack;
 @property (nonatomic, assign) BOOL forgotten;
 @property (nonatomic, assign, getter=isNewPlayer) BOOL newPlayer;
+@property (nonatomic, strong) NSDate *firstSession;
+@property (nonatomic, strong) NSDate *lastSession;
 
 - (instancetype)initWithUserDefaults:(NSUserDefaults *)userDefaults;
+
+- (NSUInteger)msSinceFirstSession;
+- (NSUInteger)msSinceLastSession;
 
 - (void)clearPersistentData;
 

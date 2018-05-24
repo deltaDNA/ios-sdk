@@ -41,6 +41,7 @@ describe(@"not tracking sdk", ^{
     __block DDNAUserManager *mockUserManager;
     __block DDNASettings *mockSettings;
     __block DDNANonTrackingSdk *nonTrackingSdk;
+    __block id<DDNANetworkRequestDelegate> mockDelegate;
     
     beforeEach(^{
         mockSdk = mock([DDNASDK class]);
@@ -85,6 +86,21 @@ describe(@"not tracking sdk", ^{
         NSDictionary *eventParams = eventJson[@"eventParams"];
         expect(eventParams[@"platform"]).to.equal(@"test console");
         expect(eventParams[@"sdkVersion"]).to.equal(DDNA_SDK_VERSION);
+    });
+    
+    it(@"reports successful session configuration", ^{
+        
+        mockDelegate = mockProtocol(@protocol(DDNASDKDelegate));
+        [given([mockSdk delegate]) willReturn:mockDelegate];
+        
+        [nonTrackingSdk startWithNewPlayer:mockUserManager];
+        [nonTrackingSdk requestSessionConfiguration:mockUserManager];
+        
+        [verifyCount(mockDelegate, never()) didFailToConfigureSessionWithError:anything()];
+        [verify(mockDelegate) didConfigureSessionWithCache:NO];
+        
+        [verifyCount(mockDelegate, never()) didFailToPopulateImageMessageCacheWithError:anything()];
+        [verifyCount(mockDelegate, times(1)) didPopulateImageMessageCache];
     });
 });
 

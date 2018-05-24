@@ -22,6 +22,11 @@
 
 @interface DDNATrackingSdk : NSObject <DDNASdkInterface>
 
+@property (nonatomic, assign, readonly) BOOL taskQueueSuspended;
+@property (nonatomic, strong, readonly) NSSet<NSString *> *eventWhitelist;
+@property (nonatomic, strong, readonly) NSSet<NSString *> *decisionPointWhitelist;
+@property (nonatomic, strong, readonly) NSSet<NSString *> *imageCacheList;
+
 - (instancetype)initWithSdk:(DDNASDK *)sdk instanceFactory:(DDNAInstanceFactory *)instanceFactory;
 
 @end
