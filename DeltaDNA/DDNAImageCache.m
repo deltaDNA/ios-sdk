@@ -103,7 +103,7 @@ static const NSTimeInterval kTimeoutInterval = 180;
     }
 }
 
-- (void)prefechImagesForURLs:(NSArray<NSURL *> *)urls completionHandler:(void (^)(void))completionHandler
+- (void)prefechImagesForURLs:(NSArray<NSURL *> *)urls completionHandler:(void (^)(NSInteger downloaded, NSError *error))completionHandler
 {
     __block NSInteger remainingTasks = [urls count];
     
@@ -117,13 +117,19 @@ static const NSTimeInterval kTimeoutInterval = 180;
                     [self setImage:image forURL:url];
                 } else {
                     DDNALogWarn(@"Failed to create image from downloaded data.");
+                    NSDictionary *userInfo = @{
+                        NSLocalizedDescriptionKey: NSLocalizedString(@"Failed to create image from downloaded data.", nil),
+                    };
+                    NSError *imageError = [NSError errorWithDomain:@"deltaDNA" code:-57 userInfo:userInfo];
+                    completionHandler([urls count] - remainingTasks, imageError);
                 }
             } else {
                 DDNALogWarn(@"Failed to download image asset: %@", error);
+                completionHandler([urls count] - remainingTasks, error);
             }
             if ((--remainingTasks) == 0) {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    completionHandler();
+                    completionHandler([urls count] - remainingTasks, nil);
                 });
             }
         }] resume];

@@ -97,6 +97,68 @@ describe(@"user manager", ^{
         expect(userManager.doNotTrack).to.beFalsy();
         expect(userManager.forgotten).to.beFalsy();
     });
+    
+    it(@"can record the first session", ^{
+        
+        expect(userManager.firstSession).to.beNil();
+        NSDate *now = [NSDate date];
+        userManager.firstSession = now;
+        
+        DDNAUserManager *userManager2 = [[DDNAUserManager alloc] initWithUserDefaults:userDefaults];
+        expect(userManager2.firstSession).to.equal(now);
+    });
+    
+    it(@"clears the first session", ^{
+        
+        NSDate *now = [NSDate date];
+        userManager.firstSession = now;
+        
+        expect(userManager.firstSession).to.equal(now);
+        
+        [userManager clearPersistentData];
+        
+        expect(userManager.firstSession).to.beNil();
+        
+    });
+    
+    it(@"can record the last session", ^{
+        
+        expect(userManager.lastSession).to.beNil();
+        NSDate *now = [NSDate date];
+        userManager.lastSession = now;
+        
+        DDNAUserManager *userManager2 = [[DDNAUserManager alloc] initWithUserDefaults:userDefaults];
+        expect(userManager2.lastSession).to.equal(now);
+    });
+    
+    it(@"clears the last session", ^{
+        
+        NSDate *now = [NSDate date];
+        userManager.lastSession = now;
+        
+        expect(userManager.lastSession).to.equal(now);
+        
+        [userManager clearPersistentData];
+        
+        expect(userManager.lastSession).to.beNil();
+        
+    });
+    
+    it(@"returns ms since first session", ^{
+        
+        expect(userManager.msSinceFirstSession).to.equal(0);
+        NSDate *firstSession = [NSDate dateWithTimeIntervalSinceNow:-10];
+        userManager.firstSession = firstSession;
+        expect(userManager.msSinceFirstSession).to.equal(10000);
+    });
+    
+    it(@"returns ms since last session", ^{
+        
+        expect(userManager.msSinceLastSession).to.equal(0);
+        NSDate *lastSession = [NSDate dateWithTimeIntervalSinceNow:-10];
+        userManager.lastSession = lastSession;
+        expect(userManager.msSinceLastSession).to.equal(10000);
+    });
 });
 
 SpecEnd

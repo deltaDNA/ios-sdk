@@ -55,6 +55,22 @@
             (self.parameters ? self.parameters : @{})];
 }
 
+- (instancetype)copyWithZone:(NSZone *)zone
+{
+    id copy = [[[self class] alloc] init];
+    
+    if (copy)
+    {
+        [copy setDecisionPoint:self.decisionPoint];
+        [copy setUserId:self.userId];
+        [copy setSessionId:self.sessionId];
+        [copy setFlavour:self.flavour];
+        [copy setParameters:[self.parameters copyWithZone:zone]];
+    }
+    
+    return copy;
+}
+
 @end
 
 static NSString *const kEngagementCacheKey = @"Engagement %@(%@)";

@@ -34,13 +34,21 @@
 #import "DDNAInstanceFactory.h"
 #import "DDNACollectService.h"
 #import "DDNAEngageFactory.h"
+#import "DDNAImageCache.h"
 
 #import <UIKit/UIKit.h>
+
+@interface DDNAEngagement(DeltaDNAAds)
+
+@property (nonatomic, copy) NSString *flavour;
+
+@end
 
 @interface DDNATrackingSdk ()
 
 @property (nonatomic, strong) dispatch_source_t timer;
 @property (nonatomic, strong) dispatch_queue_t taskQueue;
+@property (nonatomic, assign) BOOL taskQueueSuspended;
 
 @property (nonatomic, weak) DDNASDK *sdk;
 @property (nonatomic, weak) DDNAInstanceFactory *instanceFactory;
@@ -50,6 +58,10 @@
 @property (nonatomic, assign) BOOL reset;
 @property (nonatomic, strong) NSDate *lastActiveDate;
 @property (nonatomic, strong) DDNAEngageFactory *engageFactory;
+
+@property (nonatomic, strong) NSSet<NSString *> *eventWhitelist;
+@property (nonatomic, strong) NSSet<NSString *> *decisionPointWhitelist;
+@property (nonatomic, strong) NSSet<NSString *> *imageCacheList;
 
 @property (nonatomic, assign, readwrite) BOOL started;
 @property (nonatomic, assign, readwrite) BOOL uploading;
@@ -87,8 +99,19 @@ static NSString *const DD_EVENT_NEW_SESSION = @"DDNASDKNewSession";
         
         self.taskQueue = dispatch_queue_create("com.deltadna.TaskQueue", NULL);
         dispatch_suspend(self.taskQueue);
+        self.taskQueueSuspended = YES;
+        self.imageCacheList = [NSSet set];
         
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appDidReceiveNotification:) name:DD_EVENT_STARTED object:nil];
+        __weak typeof(self) weakSelf = self;
+        NSNotificationCenter * __weak center = [NSNotificationCenter defaultCenter];
+        [center addObserverForName:DD_EVENT_STARTED object:self.sdk queue:nil usingBlock:^(NSNotification * _Nonnull note) {
+            DDNALogDebug(@"Received SDK started notification");
+            if (weakSelf.taskQueueSuspended) {
+                dispatch_resume(weakSelf.taskQueue);
+                weakSelf.taskQueueSuspended = NO;
+            }
+        }];
+        
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appWillResignActive:) name:UIApplicationWillResignActiveNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appWillEnterForeground:) name:UIApplicationWillEnterForegroundNotification object:nil];
         
@@ -107,7 +130,10 @@ static NSString *const DD_EVENT_NEW_SESSION = @"DDNASDKNewSession";
 
 - (void)dealloc
 {
-    dispatch_resume(self.taskQueue);    // doesn't like deallocing suspended queues!
+    if (self.taskQueueSuspended) {
+        dispatch_resume(self.taskQueue);    // doesn't like deallocing suspended queues!
+        self.taskQueueSuspended = NO;
+    }
 }
 
 - (void)startWithNewPlayer:(DDNAUserManager *)userManager
@@ -117,9 +143,16 @@ static NSString *const DD_EVENT_NEW_SESSION = @"DDNASDKNewSession";
     
     DDNALogDebug(@"Starting SDK with user id %@", self.sdk.userID);
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:DD_EVENT_STARTED object:self];
-    _started = YES;
+    [[NSNotificationCenter defaultCenter] postNotificationName:DD_EVENT_STARTED object:self.sdk];
+    self.started = YES;
+    if ([self.sdk.delegate respondsToSelector:@selector(didStartSdk)]) {
+        [self.sdk.delegate didStartSdk];
+    }
+    
     [self.sdk newSession];
+    if (userManager.isNewPlayer) {
+        [userManager setFirstSession:[NSDate date]];
+    }
     
     // Once we're started, send default events.
     [self triggerDefaultEvents:userManager.isNewPlayer];
@@ -157,13 +190,17 @@ static NSString *const DD_EVENT_NEW_SESSION = @"DDNASDKNewSession";
         dispatch_source_cancel(self.timer);
     }
     
-    [self.sdk recordEventWithName:@"gameEnded"];
+    [self recordEvent:[DDNAEvent eventWithName:@"gameEnded"]];
     [self upload];
     
-    if (self.started) {
+    if (!self.taskQueueSuspended) {
         dispatch_suspend(self.taskQueue);
+        self.taskQueueSuspended = YES;
     }
     self.started = NO;
+    if ([self.sdk.delegate respondsToSelector:@selector(didStopSdk)]) {
+        [self.sdk.delegate didStopSdk];
+    }
 }
 
 - (void)recordEvent:(DDNAEvent *)event
@@ -333,17 +370,18 @@ static NSString *const DD_EVENT_NEW_SESSION = @"DDNASDKNewSession";
                     self.uploading = NO;
                 } else {
                     DDNALogDebug(@"Sending latest events to Collect: %@", request);
+                    __weak typeof(self) weakSelf = self;
                     [self.collectService request:request handler:^(NSString *response, NSInteger statusCode, NSString *error) {
                         if (statusCode >= 200 && statusCode < 400) {
                             DDNALogDebug(@"Event upload completed successfully.");
-                            [self.eventStore clearOut];
+                            [weakSelf.eventStore clearOut];
                         } else if (statusCode == 400) {
                             DDNALogWarn(@"Collect rejected invalid events.");
-                            [self.eventStore clearOut];
+                            [weakSelf.eventStore clearOut];
                         } else {
                             DDNALogWarn(@"Event upload failed, try again later.");
                         }
-                        self.uploading = NO;
+                        weakSelf.uploading = NO;
                     }];
                 }
             } else {
@@ -379,6 +417,54 @@ static NSString *const DD_EVENT_NEW_SESSION = @"DDNASDKNewSession";
     [self.eventStore clearAll];
 }
 
+- (void)requestSessionConfiguration:(DDNAUserManager *)userManager
+{
+    DDNAEngagement *configEngagement = [DDNAEngagement engagementWithDecisionPoint:@"config"];
+    configEngagement.flavour = @"internal";
+    [configEngagement setParam:[NSNumber numberWithUnsignedInteger:userManager.msSinceFirstSession]  forKey:@"timeSinceFirstSession"];
+    [configEngagement setParam:[NSNumber numberWithUnsignedInteger:userManager.msSinceLastSession] forKey:@"timeSinceLastSession"];
+    [self requestEngagement:configEngagement completionHandler:^(NSDictionary *parameters, NSInteger statusCode, NSError *error) {
+        if (statusCode == 200) {
+            self.eventWhitelist = parameters[@"eventsWhitelist"] ? [NSSet setWithArray:parameters[@"eventsWhitelist"]] : nil;
+            self.decisionPointWhitelist = parameters[@"dpWhitelist"] ? [NSSet setWithArray:parameters[@"dpWhitelist"]] : nil;
+            if (parameters[@"imageCache"]) {
+                self.imageCacheList = [NSSet setWithArray:parameters[@"imageCache"]];
+            }
+            
+            if ([self.sdk.delegate respondsToSelector:@selector(didConfigureSessionWithCache:)]) {
+                [self.sdk.delegate didConfigureSessionWithCache:parameters[@"isCachedResponse"] && [parameters[@"isCachedResponse"] boolValue]];
+            }
+            
+            [self downloadImageAssets];
+            
+        } else {
+            // notify caller and let them retry later
+            if ([self.sdk.delegate respondsToSelector:@selector(didFailToConfigureSessionWithError:)]) {
+                [self.sdk.delegate didFailToConfigureSessionWithError:error];
+            }
+        }
+    }];
+}
+
+- (void)downloadImageAssets
+{
+    NSMutableArray<NSURL *> *urls = [NSMutableArray arrayWithCapacity:self.imageCacheList.count];
+    for (NSString *urlStr in self.imageCacheList) {
+        NSURL *url = [NSURL URLWithString:urlStr];
+        if (url != nil) {   // not malformed
+            [urls addObject:url];
+        }
+    }
+    
+    [[DDNAImageCache sharedInstance] prefechImagesForURLs:urls completionHandler:^(NSInteger downloaded, NSError *error) {
+        if (error == nil && [self.sdk.delegate respondsToSelector:@selector(didPopulateImageMessageCache)]) {
+            [self.sdk.delegate didPopulateImageMessageCache];
+        }
+        else if (error != nil && [self.sdk.delegate respondsToSelector:@selector(didFailToPopulateImageMessageCacheWithError:)]) {
+            [self.sdk.delegate didFailToPopulateImageMessageCacheWithError:error];
+        }
+    }];
+}
 
 #pragma mark - Private Helpers
 
@@ -388,66 +474,50 @@ static NSString *const DD_EVENT_NEW_SESSION = @"DDNASDKNewSession";
     {
         DDNALogDebug(@"Sending 'newPlayer' event");
         
-        NSMutableDictionary *eventParams = [NSMutableDictionary dictionary];
+        DDNAEvent *newPlayerEvent = [DDNAEvent eventWithName:@"newPlayer"];
         if ([DDNAClientInfo sharedInstance].countryCode!=nil) {
-            [eventParams setObject:[DDNAClientInfo sharedInstance].countryCode forKey:@"userCountry"];
+            [newPlayerEvent setParam:[DDNAClientInfo sharedInstance].countryCode forKey:@"userCountry"];
         }
-        
-        [self.sdk recordEventWithName:@"newPlayer" eventParams:eventParams];
+        [self recordEvent:newPlayerEvent];
     }
     
     if (self.sdk.settings.onStartSendGameStartedEvent)
     {
         DDNALogDebug(@"Sending 'gameStarted' event");
         
-        NSMutableDictionary *eventParams = [NSMutableDictionary dictionary];
+        DDNAEvent *gameStartedEvent = [DDNAEvent eventWithName:@"gameStarted"];
         if (self.sdk.clientVersion != nil)
         {
-            [eventParams setObject:self.sdk.clientVersion forKey:@"clientVersion"];
+            [gameStartedEvent setParam:self.sdk.clientVersion forKey:@"clientVersion"];
         }
-        
         if (self.sdk.pushNotificationToken != nil)
         {
-            [eventParams setObject:self.sdk.pushNotificationToken forKey:@"pushNotificationToken"];
+            [gameStartedEvent setParam:self.sdk.pushNotificationToken forKey:@"pushNotificationToken"];
         }
-        
         if ([DDNAClientInfo sharedInstance].locale != nil) {
-            [eventParams setObject:[DDNAClientInfo sharedInstance].locale forKey:@"userLocale"];
+            [gameStartedEvent setParam:[DDNAClientInfo sharedInstance].locale forKey:@"userLocale"];
         }
-        
-        [self.sdk recordEventWithName:@"gameStarted" eventParams:eventParams];
+        [self recordEvent:gameStartedEvent];
     }
     
     if (self.sdk.settings.onStartSendClientDeviceEvent)
     {
         DDNALogDebug(@"Sending 'clientDevice' event");
         
-        NSMutableDictionary *eventParams = [NSMutableDictionary dictionary];
-        [eventParams setObject:[DDNAClientInfo sharedInstance].deviceName forKey:@"deviceName"];
-        [eventParams setObject:[DDNAClientInfo sharedInstance].deviceType forKey:@"deviceType"];
+        DDNAEvent *clientDeviceEvent = [DDNAEvent eventWithName:@"clientDevice"];
+        [clientDeviceEvent setParam:[DDNAClientInfo sharedInstance].deviceName forKey:@"deviceName"];
+        [clientDeviceEvent setParam:[DDNAClientInfo sharedInstance].deviceType forKey:@"deviceType"];
         if ([DDNAClientInfo sharedInstance].hardwareVersion!=nil) {
-            [eventParams setObject:[DDNAClientInfo sharedInstance].hardwareVersion forKey:@"hardwareVersion"];
+            [clientDeviceEvent setParam:[DDNAClientInfo sharedInstance].hardwareVersion forKey:@"hardwareVersion"];
         }
-        [eventParams setObject:[DDNAClientInfo sharedInstance].operatingSystem forKey:@"operatingSystem"];
-        [eventParams setObject:[DDNAClientInfo sharedInstance].operatingSystemVersion forKey:@"operatingSystemVersion"];
-        [eventParams setObject:[DDNAClientInfo sharedInstance].manufacturer forKey:@"manufacturer"];
-        [eventParams setObject:[DDNAClientInfo sharedInstance].timezoneOffset forKey:@"timezoneOffset"];
+        [clientDeviceEvent setParam:[DDNAClientInfo sharedInstance].operatingSystem forKey:@"operatingSystem"];
+        [clientDeviceEvent setParam:[DDNAClientInfo sharedInstance].operatingSystemVersion forKey:@"operatingSystemVersion"];
+        [clientDeviceEvent setParam:[DDNAClientInfo sharedInstance].manufacturer forKey:@"manufacturer"];
+        [clientDeviceEvent setParam:[DDNAClientInfo sharedInstance].timezoneOffset forKey:@"timezoneOffset"];
         if ([DDNAClientInfo sharedInstance].languageCode!=nil) {
-            [eventParams setObject:[DDNAClientInfo sharedInstance].languageCode forKey:@"userLanguage"];
+            [clientDeviceEvent setParam:[DDNAClientInfo sharedInstance].languageCode forKey:@"userLanguage"];
         }
-        
-        [self.sdk recordEventWithName:@"clientDevice" eventParams:eventParams];
-    }
-}
-
-- (void)appDidReceiveNotification:(NSNotification *)notification
-{
-    if ([[notification name] isEqualToString:DD_EVENT_STARTED])
-    {
-        DDNALogDebug(@"Received SDK started notification");
-        if (!_started) {
-            dispatch_resume(_taskQueue);
-        }
+        [self recordEvent:clientDeviceEvent];
     }
 }
 

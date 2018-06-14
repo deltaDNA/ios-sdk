@@ -29,7 +29,7 @@
 
 - (void)requestImageForURL:(NSURL *)url completionHandler:(void (^)(UIImage * _Nullable image))completionHandler;
 
-- (void)prefechImagesForURLs:(NSArray <NSURL *> *)urls completionHandler:(void (^)(void))completionHandler;
+- (void)prefechImagesForURLs:(NSArray <NSURL *> *)urls completionHandler:(void (^)(NSInteger downloaded, NSError *error))completionHandler;
 
 - (instancetype)init NS_UNAVAILABLE;
 

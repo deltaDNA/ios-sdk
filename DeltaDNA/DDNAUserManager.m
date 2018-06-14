@@ -22,7 +22,9 @@
 NSString * const kDDNAUserId = @"DeltaDNA UserId";
 NSString * const kDDNADoNotTrack = @"com.deltadna.doNotTrack";
 NSString * const kDDNAForgotten = @"com.deltadna.forgotten";
-NSString *const PP_KEY_USER_ID = @"DDSDK_USER_ID";
+NSString * const kDDNAFirstSession = @"com.deltadna.firstSession";
+NSString * const kDDNALastSession = @"com.deltadna.lastSession";
+NSString * const PP_KEY_USER_ID = @"DDSDK_USER_ID";
 
 @interface DDNAUserManager ()
 
@@ -94,11 +96,43 @@ NSString *const PP_KEY_USER_ID = @"DDSDK_USER_ID";
     [self.userDefaults setBool:forgotten forKey:kDDNAForgotten];
 }
 
+- (NSDate *)firstSession
+{
+    return [self.userDefaults objectForKey:kDDNAFirstSession];
+}
+
+- (void)setFirstSession:(NSDate *)firstSession
+{
+    [self.userDefaults setObject:firstSession forKey:kDDNAFirstSession];
+}
+
+- (NSUInteger)msSinceFirstSession
+{
+    return [self firstSession] ? [[NSDate date] timeIntervalSinceDate:[self firstSession]] * 1000 : 0;
+}
+
+- (NSDate *)lastSession
+{
+    return [self.userDefaults objectForKey:kDDNALastSession];
+}
+
+- (void)setLastSession:(NSDate *)lastSession
+{
+    [self.userDefaults setObject:lastSession forKey:kDDNALastSession];
+}
+
+- (NSUInteger)msSinceLastSession
+{
+    return [self lastSession] ? [[NSDate date] timeIntervalSinceDate:[self lastSession]] * 1000 : 0;
+}
+
 - (void)clearPersistentData
 {
     [self.userDefaults removeObjectForKey:kDDNAUserId];
     [self.userDefaults removeObjectForKey:kDDNADoNotTrack];
     [self.userDefaults removeObjectForKey:kDDNAForgotten];
+    [self.userDefaults removeObjectForKey:kDDNAFirstSession];
+    [self.userDefaults removeObjectForKey:kDDNALastSession];
     self.newPlayer = NO;
 }
 

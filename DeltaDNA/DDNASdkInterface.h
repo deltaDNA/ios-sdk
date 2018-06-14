@@ -35,6 +35,8 @@
 - (void)requestEngagement:(DDNAEngagement *)engagement engagementHandler:(void(^)(DDNAEngagement *))engagementHandler;
 - (void)recordPushNotification:(NSDictionary *) pushNotification
                      didLaunch:(BOOL) didLaunch;
+- (void)requestSessionConfiguration:(DDNAUserManager *)userManager;
+- (void)downloadImageAssets;
 - (void)upload;
 - (void)clearPersistentData;
 

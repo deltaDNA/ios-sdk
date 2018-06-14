@@ -18,7 +18,7 @@
 
 @class DDNAInstanceFactory;
 
-@interface DDNAEngageRequest : NSObject
+@interface DDNAEngageRequest : NSObject <NSCopying>
 
 @property (nonatomic, copy, readonly) NSString *decisionPoint;
 @property (nonatomic, copy, readonly) NSString *userId;

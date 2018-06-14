@@ -142,8 +142,10 @@ describe(@"image cache", ^{
         
         NSArray<NSURL *> *urls = @[mockURL, mockURL2];
         __block BOOL cached = NO;
-        [imageCache prefechImagesForURLs:urls completionHandler:^{
+        [imageCache prefechImagesForURLs:urls completionHandler:^(NSInteger downloaded, NSError *error){
             cached = YES;
+            expect(downloaded).to.equal(urls.count);
+            expect(error).to.beNil();
         }];
         expect(cached).will.beTruthy();
         
