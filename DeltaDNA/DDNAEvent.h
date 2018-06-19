@@ -18,6 +18,8 @@
 
 @interface DDNAEvent : NSObject
 
+@property (nonatomic, copy, readonly) NSString *eventName;
+
 + (instancetype)eventWithName:(NSString *)name;
 
 - (instancetype)initWithName:(NSString *)name;
