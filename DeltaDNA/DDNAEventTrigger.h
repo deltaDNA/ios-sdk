@@ -15,20 +15,23 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "DDNASdkInterface.h"
 
-@class DDNASDK;
-@class DDNAInstanceFactory;
-@class DDNAEventTrigger;
+@class DDNAEvent;
 
-@interface DDNATrackingSdk : NSObject <DDNASdkInterface>
+@interface DDNAEventTrigger : NSObject
 
-@property (nonatomic, assign, readonly) BOOL taskQueueSuspended;
-@property (nonatomic, strong, readonly) NSSet<NSString *> *eventWhitelist;
-@property (nonatomic, strong, readonly) NSSet<NSString *> *decisionPointWhitelist;
-@property (nonatomic, strong, readonly) NSSet<NSString *> *imageCacheList;
-@property (nonatomic, strong, readonly) NSOrderedSet<DDNAEventTrigger *> *eventTriggers;
+@property (nonatomic, copy, readonly) NSString *eventName;
+@property (nonatomic, copy, readonly) NSString *actionType;
+@property (nonatomic, strong, readonly) NSDictionary *response;
+@property (nonatomic, assign, readonly) NSUInteger campaignId;
+@property (nonatomic, assign, readonly) NSUInteger variantId;
+@property (nonatomic, assign, readonly) NSInteger priority;
+@property (nonatomic, strong, readonly) NSNumber *limit;
+@property (nonatomic, assign, readonly) NSUInteger count;
 
-- (instancetype)initWithSdk:(DDNASDK *)sdk instanceFactory:(DDNAInstanceFactory *)instanceFactory;
+- (instancetype)initWithDictionary:(NSDictionary *)dictionary;
+
+- (BOOL)respondsToEventSchema:(NSDictionary *)eventSchema;
 
 @end
+

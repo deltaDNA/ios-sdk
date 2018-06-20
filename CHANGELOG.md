@@ -1,5 +1,13 @@
 # Change Log
 
+## [4.9.0](https://github.com/deltaDNA/ios-sdk/releases/tag/4.9.0) (????-??-??)
+### Changed
+- Minimum iOS target set to iOS 9.
+- `recordEvent:` methods return a `DDNAEventAction` object, which can be used with event-triggered campaigns.
+
+### Added
+- Added support for event-triggered campaigns.
+
 ## [4.8.0](https://github.com/deltaDNA/ios-sdk/releases/tag/4.8.0) (2018-05-18)
 ### Added
 - ForgetMe API notifies the platform the user no longer wishes to be tracked and stops the sdk sending further events.

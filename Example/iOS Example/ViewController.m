@@ -17,6 +17,10 @@
 #import "ViewController.h"
 @import DeltaDNA;
 
+#define ENVIRONMENT_KEY @"55822530117170763508653519413932"
+#define COLLECT_URL @"https://collect2010stst.deltadna.net/collect/api"
+#define ENGAGE_URL @"https://engage2010stst.deltadna.net"
+
 @interface ViewController () <DDNAImageMessageDelegate>
 
 @end
@@ -54,9 +58,9 @@
     sdk.hashSecret = @"KmMBBcNwStLJaq6KsEBxXc6HY3A4bhGw";
     
     // Start the SDK.
-    [sdk startWithEnvironmentKey:@"55822530117170763508653519413932"
-                      collectURL:@"https://collect2010stst.deltadna.net/collect/api"
-                       engageURL:@"https://engage2010stst.deltadna.net"];
+    [sdk startWithEnvironmentKey:ENVIRONMENT_KEY
+                      collectURL:COLLECT_URL
+                       engageURL:ENGAGE_URL];
     
     // Default behaviour will automatically send 'newPlayer' if a new user id is used
     // and will send 'clientInfo' and 'gameStarted'.
@@ -115,6 +119,32 @@
     [[DDNASDK sharedInstance] recordEvent:event];
 }
 
+- (IBAction)eventTrigger:(id)sender
+{
+    DDNAEvent *event = [[DDNAEvent alloc] initWithName:@"matchStarted"];
+    [event setParam:@1 forKey:@"matchID"];
+    [event setParam:@"Blue Meadow" forKey:@"matchName"];
+    [event setParam:@10 forKey:@"userLevel"];
+
+    DDNAEventAction *eventAction = [[DDNASDK sharedInstance] recordEvent:event];
+    
+    DDNAGameParametersHandler *gameParametersHandler = [[DDNAGameParametersHandler alloc] initWithHandler:^(NSDictionary *gameParameters) {
+        // do something with the game parameters
+        NSLog(@"The following game parameters were returned:\n%@", gameParameters);
+    }];
+    
+    [eventAction addHandler:gameParametersHandler];
+    
+    DDNAImageMessageHandler *imageHandler = [[DDNAImageMessageHandler alloc] initWithHandler:^(DDNAImageMessage *imageMessage){
+        // the image message is already prepared so show instantly
+        imageMessage.delegate = self;
+        [imageMessage showFromRootViewController:self];
+    }];
+    
+    [eventAction addHandler:imageHandler];
+    [eventAction run];
+}
+
 - (IBAction)engage:(id)sender
 {
     DDNAParams *customParams = [[DDNAParams alloc] init];
@@ -145,9 +175,9 @@
 
 - (IBAction)startSDK:(id)sender {
     DDNASDK * sdk = [DDNASDK sharedInstance];
-    [sdk startWithEnvironmentKey:@"55822530117170763508653519413932"
-                      collectURL:@"http://collect2010stst.deltadna.net/collect/api"
-                       engageURL:@"http://engage2010stst.deltadna.net"];
+    [sdk startWithEnvironmentKey:ENVIRONMENT_KEY
+                      collectURL:COLLECT_URL
+                       engageURL:ENGAGE_URL];
 }
 
 - (IBAction)stopSDK:(id)sender {

@@ -79,8 +79,28 @@ describe(@"event", ^{
         expect(^{
             DDNAEvent *event = [DDNAEvent eventWithName:@"myEvent"];
             [event setParam:nil forKey:@"nilKey"];
-        }).to.raise(@"NSInvalidArgumentException");
+        }).toNot.raise(@"NSInvalidArgumentException");
         
+    });
+    
+    it(@"removes previously added param if set to nil", ^{
+        
+        DDNAEvent *event = [DDNAEvent eventWithName:@"myEvent"];
+        [event setParam:@"someValue" forKey:@"testKey"];
+        [event setParam:nil forKey:@"testKey"];
+        NSDictionary *eventParams = event.dictionary[@"eventParams"];
+        expect(eventParams.allKeys).toNot.contain(@"testKey");
+    });
+    
+    it(@"can copy an event", ^{
+        
+        DDNAEvent *event = [DDNAEvent eventWithName:@"myEvent"];
+        [event setParam:@{@"level2": @{@"yo!": @"greeting"}} forKey:@"level1"];
+        
+        DDNAEvent *eventCopy = [event copy];
+        expect(eventCopy).toNot.beNil();
+        expect(eventCopy).toNot.equal(event);
+        expect(eventCopy.dictionary).to.equal(event.dictionary);
     });
     
 });

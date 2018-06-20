@@ -58,6 +58,24 @@
 		6359F01320920BEE0087F5D8 /* DDNAImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 6359F00F20920BEE0087F5D8 /* DDNAImageCache.m */; };
 		6359F0152092282F0087F5D8 /* DDNAImageCacheSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 6359F0142092282F0087F5D8 /* DDNAImageCacheSpec.m */; };
 		6359F0162092282F0087F5D8 /* DDNAImageCacheSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 6359F0142092282F0087F5D8 /* DDNAImageCacheSpec.m */; };
+		635AC80720D272F1009027D5 /* DDNAEventTrigger.m in Sources */ = {isa = PBXBuildFile; fileRef = 635AC80520D272F1009027D5 /* DDNAEventTrigger.m */; };
+		635AC80820D272F1009027D5 /* DDNAEventTrigger.m in Sources */ = {isa = PBXBuildFile; fileRef = 635AC80520D272F1009027D5 /* DDNAEventTrigger.m */; };
+		635AC80920D272F1009027D5 /* DDNAEventTrigger.h in Headers */ = {isa = PBXBuildFile; fileRef = 635AC80620D272F1009027D5 /* DDNAEventTrigger.h */; };
+		635AC80A20D272F1009027D5 /* DDNAEventTrigger.h in Headers */ = {isa = PBXBuildFile; fileRef = 635AC80620D272F1009027D5 /* DDNAEventTrigger.h */; };
+		635AC80F20D27302009027D5 /* DDNAEventAction.h in Headers */ = {isa = PBXBuildFile; fileRef = 635AC80B20D27302009027D5 /* DDNAEventAction.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		635AC81020D27302009027D5 /* DDNAEventAction.h in Headers */ = {isa = PBXBuildFile; fileRef = 635AC80B20D27302009027D5 /* DDNAEventAction.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		635AC81120D27302009027D5 /* DDNAEventAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 635AC80C20D27302009027D5 /* DDNAEventAction.m */; };
+		635AC81220D27302009027D5 /* DDNAEventAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 635AC80C20D27302009027D5 /* DDNAEventAction.m */; };
+		635AC81320D27302009027D5 /* DDNAEventActionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 635AC80D20D27302009027D5 /* DDNAEventActionHandler.m */; };
+		635AC81420D27302009027D5 /* DDNAEventActionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 635AC80D20D27302009027D5 /* DDNAEventActionHandler.m */; };
+		635AC81520D27302009027D5 /* DDNAEventActionHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 635AC80E20D27302009027D5 /* DDNAEventActionHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		635AC81620D27302009027D5 /* DDNAEventActionHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 635AC80E20D27302009027D5 /* DDNAEventActionHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		635AC81920D2731B009027D5 /* DDNAEventTriggerSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 635AC81720D2731B009027D5 /* DDNAEventTriggerSpec.m */; };
+		635AC81A20D2731B009027D5 /* DDNAEventTriggerSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 635AC81720D2731B009027D5 /* DDNAEventTriggerSpec.m */; };
+		635AC81B20D2731B009027D5 /* DDNAEventActionSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 635AC81820D2731B009027D5 /* DDNAEventActionSpec.m */; };
+		635AC81C20D2731B009027D5 /* DDNAEventActionSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 635AC81820D2731B009027D5 /* DDNAEventActionSpec.m */; };
+		635AC81E20D27EBA009027D5 /* DDNAEventActionHandlerSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 635AC81D20D27EBA009027D5 /* DDNAEventActionHandlerSpec.m */; };
+		635AC81F20D27EBA009027D5 /* DDNAEventActionHandlerSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 635AC81D20D27EBA009027D5 /* DDNAEventActionHandlerSpec.m */; };
 		636556101C60F598004153E7 /* DeltaDNA.h in Headers */ = {isa = PBXBuildFile; fileRef = 6365560E1C60F598004153E7 /* DeltaDNA.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		636556431C60F5F2004153E7 /* DDNAClientInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 636556191C60F5F2004153E7 /* DDNAClientInfo.h */; };
 		636556441C60F5F2004153E7 /* DDNAClientInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 6365561A1C60F5F2004153E7 /* DDNAClientInfo.m */; };
@@ -211,6 +229,15 @@
 		6359F00E20920BEE0087F5D8 /* DDNAImageCache.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DDNAImageCache.h; sourceTree = "<group>"; };
 		6359F00F20920BEE0087F5D8 /* DDNAImageCache.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DDNAImageCache.m; sourceTree = "<group>"; };
 		6359F0142092282F0087F5D8 /* DDNAImageCacheSpec.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DDNAImageCacheSpec.m; sourceTree = "<group>"; };
+		635AC80520D272F1009027D5 /* DDNAEventTrigger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDNAEventTrigger.m; sourceTree = "<group>"; };
+		635AC80620D272F1009027D5 /* DDNAEventTrigger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDNAEventTrigger.h; sourceTree = "<group>"; };
+		635AC80B20D27302009027D5 /* DDNAEventAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDNAEventAction.h; sourceTree = "<group>"; };
+		635AC80C20D27302009027D5 /* DDNAEventAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDNAEventAction.m; sourceTree = "<group>"; };
+		635AC80D20D27302009027D5 /* DDNAEventActionHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDNAEventActionHandler.m; sourceTree = "<group>"; };
+		635AC80E20D27302009027D5 /* DDNAEventActionHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDNAEventActionHandler.h; sourceTree = "<group>"; };
+		635AC81720D2731B009027D5 /* DDNAEventTriggerSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDNAEventTriggerSpec.m; sourceTree = "<group>"; };
+		635AC81820D2731B009027D5 /* DDNAEventActionSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDNAEventActionSpec.m; sourceTree = "<group>"; };
+		635AC81D20D27EBA009027D5 /* DDNAEventActionHandlerSpec.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DDNAEventActionHandlerSpec.m; sourceTree = "<group>"; };
 		636555F71C60F4BD004153E7 /* DeltaDNA.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DeltaDNA.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		636556051C60F4F6004153E7 /* DeltaDNA.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DeltaDNA.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6365560E1C60F598004153E7 /* DeltaDNA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = DeltaDNA.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -343,6 +370,10 @@
 		632A3BA91C7471DF00547A29 /* Engage */ = {
 			isa = PBXGroup;
 			children = (
+				635AC80B20D27302009027D5 /* DDNAEventAction.h */,
+				635AC80C20D27302009027D5 /* DDNAEventAction.m */,
+				635AC80E20D27302009027D5 /* DDNAEventActionHandler.h */,
+				635AC80D20D27302009027D5 /* DDNAEventActionHandler.m */,
 				632D8F811C736DA4004738A7 /* DDNAEngagement.h */,
 				632D8F821C736DA4004738A7 /* DDNAEngagement.m */,
 				630458831CAE724800875B71 /* DDNAImageMessage.h */,
@@ -419,6 +450,9 @@
 				639F2EC22090CB0C007EEBB5 /* DDNANonTrackingSdkSpec.m */,
 				6359F0142092282F0087F5D8 /* DDNAImageCacheSpec.m */,
 				63BD747920C814E700F0DD97 /* DDNATrackingSdkSpec.m */,
+				635AC81820D2731B009027D5 /* DDNAEventActionSpec.m */,
+				635AC81720D2731B009027D5 /* DDNAEventTriggerSpec.m */,
+				635AC81D20D27EBA009027D5 /* DDNAEventActionHandlerSpec.m */,
 			);
 			name = Specs;
 			path = Tests/Specs;
@@ -512,6 +546,8 @@
 		63A11FE71C71F828008DEE99 /* Engage */ = {
 			isa = PBXGroup;
 			children = (
+				635AC80620D272F1009027D5 /* DDNAEventTrigger.h */,
+				635AC80520D272F1009027D5 /* DDNAEventTrigger.m */,
 				6365561F1C60F5F2004153E7 /* DDNAEngageService.h */,
 				636556201C60F5F2004153E7 /* DDNAEngageService.m */,
 			);
@@ -607,12 +643,15 @@
 				63A11FAD1C6B77D6008DEE99 /* DDNACollectService.h in Headers */,
 				636556661C60F5F2004153E7 /* NSURL+DeltaDNA.h in Headers */,
 				636556101C60F598004153E7 /* DeltaDNA.h in Headers */,
+				635AC80920D272F1009027D5 /* DDNAEventTrigger.h in Headers */,
 				6365565D1C60F5F2004153E7 /* DDNASDK.h in Headers */,
 				632513BE206E5C4A00BB0088 /* DDNAEngageFactory.h in Headers */,
 				636556621C60F5F2004153E7 /* NSDictionary+DeltaDNA.h in Headers */,
+				635AC81520D27302009027D5 /* DDNAEventActionHandler.h in Headers */,
 				6365564F1C60F5F2004153E7 /* DDNAInstanceFactory.h in Headers */,
 				633BEAAD208DEECF0080301A /* DDNAUserManager.h in Headers */,
 				63A11FD11C71E77D008DEE99 /* DDNAParams.h in Headers */,
+				635AC80F20D27302009027D5 /* DDNAEventAction.h in Headers */,
 				6365565F1C60F5F2004153E7 /* DDNASettings.h in Headers */,
 				636556641C60F5F2004153E7 /* NSString+DeltaDNA.h in Headers */,
 				636556551C60F5F2004153E7 /* DDNAPlayerPrefs.h in Headers */,
@@ -627,9 +666,11 @@
 				63A11FBA1C6CF2A4008DEE99 /* DDNAProduct.h in Headers */,
 				633BEAA8208DEE4D0080301A /* DDNANonTrackingSdk.h in Headers */,
 				304F13DB2029FB7500FA367B /* DDNAUtils.h in Headers */,
+				635AC80A20D272F1009027D5 /* DDNAEventTrigger.h in Headers */,
 				633BEA9E208DEC320080301A /* DDNASdkInterface.h in Headers */,
 				630458861CAE724800875B71 /* DDNAImageMessage.h in Headers */,
 				636556D41C6108DF004153E7 /* DDNAClientInfo.h in Headers */,
+				635AC81620D27302009027D5 /* DDNAEventActionHandler.h in Headers */,
 				63A11FD21C71E77D008DEE99 /* DDNAParams.h in Headers */,
 				6327172E1C650D1B00AB2806 /* DDNACache.h in Headers */,
 				636556D71C6108DF004153E7 /* DDNAEngageService.h in Headers */,
@@ -653,6 +694,7 @@
 				636556E41C6108DF004153E7 /* NSDictionary+DeltaDNA.h in Headers */,
 				636556E51C6108DF004153E7 /* NSString+DeltaDNA.h in Headers */,
 				636556E61C6108DF004153E7 /* NSURL+DeltaDNA.h in Headers */,
+				635AC81020D27302009027D5 /* DDNAEventAction.h in Headers */,
 				632D8F841C736DA4004738A7 /* DDNAEngagement.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -889,6 +931,7 @@
 				6365564A1C60F5F2004153E7 /* DDNAEngageService.m in Sources */,
 				63A11FBB1C6CF2A4008DEE99 /* DDNAProduct.m in Sources */,
 				632D8F851C736DA4004738A7 /* DDNAEngagement.m in Sources */,
+				635AC80720D272F1009027D5 /* DDNAEventTrigger.m in Sources */,
 				63A11FB51C6CF20A008DEE99 /* DDNAEvent.m in Sources */,
 				636556651C60F5F2004153E7 /* NSString+DeltaDNA.m in Sources */,
 				636556631C60F5F2004153E7 /* NSDictionary+DeltaDNA.m in Sources */,
@@ -896,6 +939,7 @@
 				304F13D82029F88200FA367B /* DDNAUtils.m in Sources */,
 				6359F01220920BEE0087F5D8 /* DDNAImageCache.m in Sources */,
 				636556671C60F5F2004153E7 /* NSURL+DeltaDNA.m in Sources */,
+				635AC81320D27302009027D5 /* DDNAEventActionHandler.m in Sources */,
 				632513C0206E5C4A00BB0088 /* DDNAEngageFactory.m in Sources */,
 				63A11FD31C71E77D008DEE99 /* DDNAParams.m in Sources */,
 				630458871CAE724800875B71 /* DDNAImageMessage.m in Sources */,
@@ -903,6 +947,7 @@
 				636556601C60F5F2004153E7 /* DDNASettings.m in Sources */,
 				63A11FC11C6CF435008DEE99 /* DDNATransaction.m in Sources */,
 				6365565E1C60F5F2004153E7 /* DDNASDK.m in Sources */,
+				635AC81120D27302009027D5 /* DDNAEventAction.m in Sources */,
 				633BEAAF208DEECF0080301A /* DDNAUserManager.m in Sources */,
 				636556441C60F5F2004153E7 /* DDNAClientInfo.m in Sources */,
 				63A11FE01C71F7F7008DEE99 /* DDNAPersistentEventStore.m in Sources */,
@@ -923,6 +968,7 @@
 				63A11FB61C6CF20A008DEE99 /* DDNAEvent.m in Sources */,
 				636556C21C6108BE004153E7 /* DDNAEngageService.m in Sources */,
 				632D8F861C736DA4004738A7 /* DDNAEngagement.m in Sources */,
+				635AC80820D272F1009027D5 /* DDNAEventTrigger.m in Sources */,
 				636556C51C6108BE004153E7 /* DDNAInstanceFactory.m in Sources */,
 				636556C61C6108BE004153E7 /* DDNALog.m in Sources */,
 				636556C71C6108BE004153E7 /* DDNANetworkRequest.m in Sources */,
@@ -930,6 +976,7 @@
 				63A11FD41C71E77D008DEE99 /* DDNAParams.m in Sources */,
 				6359F01320920BEE0087F5D8 /* DDNAImageCache.m in Sources */,
 				304F13DC2029FB7800FA367B /* DDNAUtils.m in Sources */,
+				635AC81420D27302009027D5 /* DDNAEventActionHandler.m in Sources */,
 				632513C1206E5C4A00BB0088 /* DDNAEngageFactory.m in Sources */,
 				630458881CAE724800875B71 /* DDNAImageMessage.m in Sources */,
 				632717301C650D1B00AB2806 /* DDNACache.m in Sources */,
@@ -937,6 +984,7 @@
 				636556CD1C6108BE004153E7 /* DDNASettings.m in Sources */,
 				63A11FC21C6CF435008DEE99 /* DDNATransaction.m in Sources */,
 				636556CE1C6108BE004153E7 /* NSDictionary+DeltaDNA.m in Sources */,
+				635AC81220D27302009027D5 /* DDNAEventAction.m in Sources */,
 				633BEAB0208DEECF0080301A /* DDNAUserManager.m in Sources */,
 				636556CF1C6108BE004153E7 /* NSString+DeltaDNA.m in Sources */,
 				63A11FE11C71F7F7008DEE99 /* DDNAPersistentEventStore.m in Sources */,
@@ -957,12 +1005,15 @@
 				636556A21C60FCD5004153E7 /* DDNANetworkRequestSpec.m in Sources */,
 				63A11FCD1C6E3BCC008DEE99 /* DDNATransactionSpec.m in Sources */,
 				304F13D92029F9E100FA367B /* DDNAUtilsSpec.m in Sources */,
+				635AC81B20D2731B009027D5 /* DDNAEventActionSpec.m in Sources */,
 				639F2EC52090CB24007EEBB5 /* DDNANonTrackingSdkSpec.m in Sources */,
 				63A11FC41C6E26FF008DEE99 /* DDNAEventSpec.m in Sources */,
 				632D8F881C737830004738A7 /* DDNAEngagementSpec.m in Sources */,
+				635AC81920D2731B009027D5 /* DDNAEventTriggerSpec.m in Sources */,
 				63E78ABC208F80B800DDD48D /* DDNAUserManagerSpec.m in Sources */,
 				636556A31C60FCD5004153E7 /* DDNAVolatileEventStoreSpec.m in Sources */,
 				636556A41C60FCD5004153E7 /* NSURL+DeltaDNASpec.m in Sources */,
+				635AC81E20D27EBA009027D5 /* DDNAEventActionHandlerSpec.m in Sources */,
 				636556A51C60FCD5004153E7 /* DDNAFakeInstanceFactory.m in Sources */,
 				636556A61C60FCD5004153E7 /* DDNAFakeNetworkRequest.m in Sources */,
 				6343D583207659B900CC5A46 /* DDNAEngageFactorySpec.m in Sources */,
@@ -982,12 +1033,15 @@
 				636556B81C60FDF1004153E7 /* DDNANetworkRequestSpec.m in Sources */,
 				63A11FCE1C6E3BCC008DEE99 /* DDNATransactionSpec.m in Sources */,
 				304F13DA2029F9E200FA367B /* DDNAUtilsSpec.m in Sources */,
+				635AC81C20D2731B009027D5 /* DDNAEventActionSpec.m in Sources */,
 				639F2EC62090CB25007EEBB5 /* DDNANonTrackingSdkSpec.m in Sources */,
 				63A11FC51C6E26FF008DEE99 /* DDNAEventSpec.m in Sources */,
 				632D8F891C737830004738A7 /* DDNAEngagementSpec.m in Sources */,
+				635AC81A20D2731B009027D5 /* DDNAEventTriggerSpec.m in Sources */,
 				63E78ABD208F80B800DDD48D /* DDNAUserManagerSpec.m in Sources */,
 				636556B91C60FDF1004153E7 /* DDNAVolatileEventStoreSpec.m in Sources */,
 				636556BA1C60FDF1004153E7 /* NSURL+DeltaDNASpec.m in Sources */,
+				635AC81F20D27EBA009027D5 /* DDNAEventActionHandlerSpec.m in Sources */,
 				636556BB1C60FDF1004153E7 /* DDNAFakeInstanceFactory.m in Sources */,
 				636556BC1C60FDF1004153E7 /* DDNAFakeNetworkRequest.m in Sources */,
 				6343D584207659B900CC5A46 /* DDNAEngageFactorySpec.m in Sources */,

@@ -27,5 +27,7 @@
 #import <DeltaDNA/DDNAEngagement.h>
 #import <DeltaDNA/DDNAEngageFactory.h>
 #import <DeltaDNA/DDNAImageMessage.h>
+#import <DeltaDNA/DDNAEventAction.h>
+#import <DeltaDNA/DDNAEventActionHandler.h>
 
 #endif /* _DELTADNA_ */

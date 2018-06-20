@@ -24,6 +24,7 @@
 - (IBAction)customEvent:(id)sender;
 - (IBAction)achievementEvent:(id)sender;
 - (IBAction)transactionEvent:(id)sender;
+- (IBAction)eventTrigger:(id)sender;
 - (IBAction)engage:(id)sender;
 - (IBAction)imageMessage:(id)sender;
 - (IBAction)uploadEvents:(id)sender;

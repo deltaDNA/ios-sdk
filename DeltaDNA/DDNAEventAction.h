@@ -15,20 +15,26 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "DDNASdkInterface.h"
+#import "DDNAEventActionHandler.h"
 
-@class DDNASDK;
-@class DDNAInstanceFactory;
 @class DDNAEventTrigger;
+@protocol DDNASdkInterface;
 
-@interface DDNATrackingSdk : NSObject <DDNASdkInterface>
+@interface DDNAEventAction : NSObject
 
-@property (nonatomic, assign, readonly) BOOL taskQueueSuspended;
-@property (nonatomic, strong, readonly) NSSet<NSString *> *eventWhitelist;
-@property (nonatomic, strong, readonly) NSSet<NSString *> *decisionPointWhitelist;
-@property (nonatomic, strong, readonly) NSSet<NSString *> *imageCacheList;
-@property (nonatomic, strong, readonly) NSOrderedSet<DDNAEventTrigger *> *eventTriggers;
+/**
+ An action associated with an event, and the event triggers that could contain a matching campaign.
+ */
+- (instancetype)initWithEventSchema:(NSDictionary *)eventSchema eventTriggers:(NSOrderedSet<DDNAEventTrigger *> *)eventTriggers sdk:(id<DDNASdkInterface>)sdk;
 
-- (instancetype)initWithSdk:(DDNASDK *)sdk instanceFactory:(DDNAInstanceFactory *)instanceFactory;
+/**
+ Register a handler to handle an event trigger campaign action.
+ */
+- (void)addHandler:(nonnull id<DDNAEventActionHandler>)handler;
+
+/**
+ Evaluates the event it was generated from against all event triggered campaigns, and calls the first matching handler.
+ */
+- (void)run;
 
 @end

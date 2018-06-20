@@ -16,6 +16,7 @@
 
 #import <Foundation/Foundation.h>
 #import "DDNALog.h"
+#import "DDNAEventAction.h"
 
 @class DDNASettings;
 @class DDNAEvent;
@@ -138,7 +139,7 @@
  
  @exception Throws @c DDNANotStartedException if @c -startWithEnvironmentKey: has not been called.
  */
-- (void)recordEvent:(DDNAEvent *)event;
+- (DDNAEventAction *)recordEvent:(DDNAEvent *)event;
 
 /**
  Records an event with no custom parameters.
@@ -147,7 +148,7 @@
  
  @exception Throws @c DDNANotStartedException if @c -startWithEnvironmentKey: has not been called.
  */
-- (void)recordEventWithName:(NSString *)eventName;
+- (DDNAEventAction *)recordEventWithName:(NSString *)eventName;
 
 /**
  Records an event with a dictionary of event parameters.  Structure the dictionary keys to match the @b eventParams structure of your event schema.
@@ -158,19 +159,19 @@
  
  @exception Throws @c DDNANotStartedException if @c -startWithEnvironmentKey: has not been called.
  */
-- (void)recordEventWithName:(NSString *)eventName eventParams:(NSDictionary *)eventParams;
+- (DDNAEventAction *)recordEventWithName:(NSString *)eventName eventParams:(NSDictionary *)eventParams;
 
 /**
  Makes an Engage call.  Create a @c DDNAEngagement with a decision point and optional parameters.  If the engagement is recognised by the platform the completion handler returns the set of parameters to use.
  
  @param engagement The engagement to request.
  
- @param completionHandler Optional callback that reports the parameters the engagement returns.  The status code and error report any network failures.
+ @param completionHandler Optional callback that reports the response the engagement returns.  The status code and error report any network failures.
  
  @exception Throws @c DDNANotStartedException if @c -startWithEnvironmentKey: has not been called. Throws @c NSInvalidArgumentException if the engage URL has not been set or the parameters are nil.
  */
 - (void)requestEngagement:(DDNAEngagement *)engagement
-        completionHandler:(void(^)(NSDictionary *parameters, NSInteger statusCode, NSError *error))completionHandler;
+        completionHandler:(void(^)(NSDictionary *response, NSInteger statusCode, NSError *error))completionHandler;
 
 /**
  Request an engagement from Engage.  Create a @c DDNAEngagement with a decision point and optional parameters.  The engagementHandler is called once the request has completed.  If the engagement succeeded the @c -json property will no longer be nil and the <i> parameters</i> value should be inspected to see which parameters if any were returned.  Otherise the @c -error property will report why the engagement failed.  @see @c DDNAEngagement for more details.
