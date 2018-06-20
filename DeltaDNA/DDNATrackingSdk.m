@@ -209,6 +209,11 @@ static NSString *const DD_EVENT_NEW_SESSION = @"DDNASDKNewSession";
         @throw([NSException exceptionWithName:@"DDNANotStartedException" reason:@"The deltaDNA SDK must be started before it can record events." userInfo:nil]);
     }
     
+    if (self.eventWhitelist && ![self.eventWhitelist containsObject:event.eventName]) {
+        DDNALogDebug(@"Ignoring non whitelisted event \"%@\"", event.eventName);
+        return;
+    }
+    
     [event setParam:self.sdk.platform forKey:@"platform"];
     [event setParam:DDNA_SDK_VERSION forKey:@"sdkVersion"];
     
@@ -217,43 +222,17 @@ static NSString *const DD_EVENT_NEW_SESSION = @"DDNASDKNewSession";
     [eventSchema setObject:self.sdk.sessionID forKey:@"sessionID"];
     [eventSchema setObject:[[NSUUID UUID] UUIDString] forKey:@"eventUUID"];
     [eventSchema setObject:[DDNAUtils getCurrentTimestamp] forKey:@"eventTimestamp"];
-    
+        
     [self.eventStore pushEvent:eventSchema];
 }
 
 - (void)requestEngagement:(DDNAEngagement *)engagement completionHandler:(void (^)(NSDictionary *, NSInteger, NSError *))completionHandler
-{
-    if (!self.started) {
-        @throw([NSException exceptionWithName:@"DDNANotStartedException" reason:@"You must first start the deltaDNA SDK" userInfo:nil]);
-    }
-    
-    if ([NSString stringIsNilOrEmpty:self.sdk.engageURL]) {
-        @throw([NSException exceptionWithName:NSInvalidArgumentException reason:@"Engage URL not set" userInfo:nil]);
-    }
-    
-    @try {
-        
-        NSDictionary *dict = [engagement dictionary];
-        
-        DDNAEngageRequest *engageRequest = [[DDNAEngageRequest alloc] initWithDecisionPoint:dict[@"decisionPoint"]
-                                                                                     userId:self.sdk.userID
-                                                                                  sessionId:self.sdk.sessionID];
-        engageRequest.flavour = dict[@"flavour"];
-        engageRequest.parameters = dict[@"parameters"];
-        
-        [self.engageService request:engageRequest handler:^(NSString *response, NSInteger statusCode, NSError *error) {
-            if (error || statusCode != 200) {
-                DDNALogWarn(@"Engagement for '%@' failed with %ld: %@",
-                            engagement.decisionPoint, (long)statusCode, error ? error.localizedDescription : response);
-            }
-            if (completionHandler) {
-                completionHandler([NSDictionary dictionaryWithJSONString:response], statusCode, error);
-            }
-        }];
-    }
-    @catch (NSException *exception) {
-        DDNALogWarn(@"Engagement for '%@' failed: %@", engagement.decisionPoint, exception.reason);
-    }
+{    
+    [self requestEngagement:engagement engagementHandler:^(DDNAEngagement *responseEngagement) {
+        if (completionHandler) {
+            completionHandler(engagement.json, engagement.statusCode, engagement.error);
+        }
+    }];
 }
 
 - (void)requestEngagement:(DDNAEngagement *)engagement engagementHandler:(void (^)(DDNAEngagement *))engagementHandler
@@ -272,6 +251,11 @@ static NSString *const DD_EVENT_NEW_SESSION = @"DDNASDKNewSession";
     
     if (engagementHandler == nil) {
         @throw([NSException exceptionWithName:NSInvalidArgumentException reason:@"engagementHandler cannot be nil" userInfo:nil]);
+    }
+    
+    if (self.decisionPointWhitelist && ![self.decisionPointWhitelist containsObject:[NSString stringWithFormat:@"%@@%@", engagement.decisionPoint, engagement.flavour]]) {
+        DDNALogDebug(@"Ignoring non whitelisted decision point \"%@\"", engagement.decisionPoint);
+        return;
     }
     
     @try {

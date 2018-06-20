@@ -46,7 +46,7 @@
 /**
  If the Engage request had a connection error, it is recorded here.
  */
-@property (nonatomic, copy) NSError *error;
+@property (nonatomic, strong) NSError *error;
 
 /**
  The Engage response as an NSDictionary.  If has yet to made this is nil, if there was a problem with engage this will be empty.

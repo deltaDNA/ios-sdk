@@ -32,6 +32,7 @@ describe(@"event", ^{
             @"eventParams": @{}
         };
         
+        expect(event.eventName).to.equal(@"myEvent");
         expect(event.dictionary).to.equal(result);
         
     });

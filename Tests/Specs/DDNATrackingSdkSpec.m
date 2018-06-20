@@ -32,6 +32,8 @@
 #import "DDNAUserManager.h"
 #import "DDNASettings.h"
 #import "NSDictionary+DeltaDNA.h"
+#import "DDNAEvent.h"
+#import "DDNAEngagement.h"
 
 SpecBegin(DDNATrackingSdkTest)
 
@@ -372,18 +374,98 @@ describe(@"tracking sdk", ^{
     it(@"sends started notification", ^{
         
         __block BOOL receivedStartedEvent = NO;
+        __block NSNotification *receivedNote = nil;
         
         [[NSNotificationCenter defaultCenter] addObserverForName:@"DDNASDKStarted" object:nil queue:nil usingBlock:^(NSNotification * _Nonnull note) {
             receivedStartedEvent = YES;
-            // check it passes the sdk back on the notification.
-            expect(note.object).to.equal(mockSdk);
-            // and that the task queue is now running.
-            expect(trackingSdk.taskQueueSuspended).to.beFalsy();
+            receivedNote = note;;
         }];
         
         [trackingSdk startWithNewPlayer:mockUserManager];
         
         expect(receivedStartedEvent).will.beTruthy();
+        expect(receivedNote.object).will.equal(mockSdk);
+        expect(trackingSdk.taskQueueSuspended).to.beFalsy();
+    });
+    
+    it(@"only sends whitelisted events", ^{
+
+        [givenVoid([mockEngageService request:anything() handler:anything()]) willDo:^id _Nonnull(NSInvocation * _Nonnull invocation) {
+            void (^handler)(NSString *response, NSInteger statusCode, NSError *error) = [invocation mkt_arguments][1];
+            handler(@"{\"eventsWhitelist\":[\"allowedEvent\"]}", 200, nil);
+            return nil;
+        }];
+        
+        [given([mockUserManager isNewPlayer]) willReturnBool:NO];
+        [trackingSdk startWithNewPlayer:mockUserManager];
+        [trackingSdk requestSessionConfiguration:mockUserManager];
+
+        DDNAEvent *allowedEvent = [DDNAEvent eventWithName:@"allowedEvent"];
+        DDNAEvent *disallowedEvent = [DDNAEvent eventWithName:@"disallowedEvent"];
+
+        [trackingSdk recordEvent:allowedEvent];
+        [trackingSdk recordEvent:disallowedEvent];
+        [trackingSdk upload];
+
+        HCArgumentCaptor *argument = [[HCArgumentCaptor alloc] init];
+        [verifyCount(mockCollectService, times(1)) request:(id)argument handler:anything()];
+        DDNACollectRequest *collectRequest = argument.value;
+        expect(collectRequest).toNot.beNil();
+        expect(collectRequest.eventCount).to.equal(1);
+
+    });
+    
+    it(@"sends all events when no whitelist", ^{
+        
+        [given([mockUserManager isNewPlayer]) willReturnBool:NO];
+        [trackingSdk startWithNewPlayer:mockUserManager];
+        
+        DDNAEvent *allowedEvent = [DDNAEvent eventWithName:@"allowedEvent"];
+        DDNAEvent *disallowedEvent = [DDNAEvent eventWithName:@"disallowedEvent"];
+        
+        [trackingSdk recordEvent:allowedEvent];
+        [trackingSdk recordEvent:disallowedEvent];
+        [trackingSdk upload];
+        
+        HCArgumentCaptor *argument = [[HCArgumentCaptor alloc] init];
+        [verifyCount(mockCollectService, times(1)) request:(id)argument handler:anything()];
+        DDNACollectRequest *collectRequest = argument.value;
+        expect(collectRequest).toNot.beNil();
+        expect(collectRequest.eventCount).to.equal(2);
+        
+    });
+    
+    it(@"only requests whitelisted decision points", ^{
+        
+        [givenVoid([mockEngageService request:anything() handler:anything()]) willDo:^id _Nonnull(NSInvocation * _Nonnull invocation) {
+            void (^handler)(NSString *response, NSInteger statusCode, NSError *error) = [invocation mkt_arguments][1];
+            handler(@"{\"dpWhitelist\":[\"allowedDp@engagement\"]}", 200, nil);
+            return nil;
+        }];
+        
+        [trackingSdk startWithNewPlayer:mockUserManager];
+        [trackingSdk requestSessionConfiguration:mockUserManager];
+        
+        DDNAEngagement *allowedEngagement = [DDNAEngagement engagementWithDecisionPoint:@"allowedDp"];
+        DDNAEngagement *disallowedEngagement = [DDNAEngagement engagementWithDecisionPoint:@"disallowedDp"];
+        
+        [trackingSdk requestEngagement:allowedEngagement completionHandler:nil];
+        [trackingSdk requestEngagement:disallowedEngagement completionHandler:nil];
+        
+        [verifyCount(mockEngageService, times(2)) request:anything() handler:anything()];
+    });
+    
+    it(@"sends all decision points when no whitelist", ^{
+    
+        [trackingSdk startWithNewPlayer:mockUserManager];
+        
+        DDNAEngagement *allowedEngagement = [DDNAEngagement engagementWithDecisionPoint:@"allowedDp"];
+        DDNAEngagement *disallowedEngagement = [DDNAEngagement engagementWithDecisionPoint:@"disallowedDp"];
+        
+        [trackingSdk requestEngagement:allowedEngagement completionHandler:nil];
+        [trackingSdk requestEngagement:disallowedEngagement completionHandler:nil];
+        
+        [verifyCount(mockEngageService, times(2)) request:anything() handler:anything()];
         
     });
 });
