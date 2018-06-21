@@ -17,9 +17,36 @@
 #import "ViewController.h"
 @import DeltaDNA;
 
-#define ENVIRONMENT_KEY @"55822530117170763508653519413932"
-#define COLLECT_URL @"https://collect2010stst.deltadna.net/collect/api"
-#define ENGAGE_URL @"https://engage2010stst.deltadna.net"
+@interface SdkConfig: NSObject
+@property (nonatomic, copy, readonly) NSString *environmentKey;
+@property (nonatomic, copy, readonly) NSString *collectUrl;
+@property (nonatomic, copy, readonly) NSString *engageUrl;
+@end
+
+@implementation SdkConfig
+
++ (NSString *)environmentKey {
+    if ([[NSProcessInfo processInfo] environment][@"ENVIRONMENT_KEY"]) {
+        return [[NSProcessInfo processInfo] environment][@"ENVIRONMENT_KEY"];
+    }
+    return @"55822530117170763508653519413932";
+}
+
++ (NSString *)collectUrl {
+    if ([[NSProcessInfo processInfo] environment][@"COLLECT_URL"]) {
+        return [[NSProcessInfo processInfo] environment][@"COLLECT_URL"];
+    }
+    return @"https://collect2010stst.deltadna.net/collect/api";
+}
+
++ (NSString *)engageUrl {
+    if ([[NSProcessInfo processInfo] environment][@"ENGAGE_URL"]) {
+        return [[NSProcessInfo processInfo] environment][@"ENGAGE_URL"];
+    }
+    return @"https://engage2010stst.deltadna.net";
+}
+
+@end
 
 @interface ViewController () <DDNAImageMessageDelegate>
 
@@ -58,9 +85,9 @@
     sdk.hashSecret = @"KmMBBcNwStLJaq6KsEBxXc6HY3A4bhGw";
     
     // Start the SDK.
-    [sdk startWithEnvironmentKey:ENVIRONMENT_KEY
-                      collectURL:COLLECT_URL
-                       engageURL:ENGAGE_URL];
+    [sdk startWithEnvironmentKey:[SdkConfig environmentKey]
+                      collectURL:[SdkConfig collectUrl]
+                       engageURL:[SdkConfig engageUrl]];
     
     // Default behaviour will automatically send 'newPlayer' if a new user id is used
     // and will send 'clientInfo' and 'gameStarted'.
@@ -175,9 +202,9 @@
 
 - (IBAction)startSDK:(id)sender {
     DDNASDK * sdk = [DDNASDK sharedInstance];
-    [sdk startWithEnvironmentKey:ENVIRONMENT_KEY
-                      collectURL:COLLECT_URL
-                       engageURL:ENGAGE_URL];
+    [sdk startWithEnvironmentKey:[SdkConfig environmentKey]
+                      collectURL:[SdkConfig collectUrl]
+                       engageURL:[SdkConfig engageUrl]];
 }
 
 - (IBAction)stopSDK:(id)sender {
