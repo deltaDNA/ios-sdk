@@ -48,7 +48,7 @@
 
 @end
 
-@interface ViewController () <DDNAImageMessageDelegate>
+@interface ViewController () <DDNASDKDelegate, DDNAImageMessageDelegate>
 
 @end
 
@@ -67,6 +67,7 @@
     
     // Grab a handle to the singleton.
     DDNASDK *sdk = [DDNASDK sharedInstance];
+    sdk.delegate = self;
     
     //[sdk clearPersistentData];
     
@@ -225,6 +226,38 @@
 
 - (IBAction)newUser:(id)sender {
     [[DDNASDK sharedInstance] clearPersistentData];
+}
+
+#pragma mark - DDNASDKDelegate
+
+- (void)didStartSdk
+{
+    NSLog(@"deltaDNA started.");
+}
+
+- (void)didStopSdk
+{
+    NSLog(@"deltaDNA stopped.");
+}
+
+- (void)didConfigureSessionWithCache:(BOOL)cache
+{
+    NSLog(@"Session configuration completed.");
+}
+
+- (void)didFailToConfigureSessionWithError:(NSError *)error
+{
+    NSLog(@"Failed to fetch session configuration.");
+}
+
+- (void)didPopulateImageMessageCache
+{
+    NSLog(@"Populated image message cache.");
+}
+
+- (void)didFailToPopulateImageMessageCacheWithError:(NSError *)error
+{
+    NSLog(@"Failed to populate image message cache.");
 }
 
 #pragma mark - ImageMessageDelegate

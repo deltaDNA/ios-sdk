@@ -240,20 +240,47 @@
 
 @end
 
+/**
+ Implement the @c DDNASDKDelegate methods to be informed of actions in deltaDNA's sdk.
+ */
 @protocol DDNASDKDelegate <NSObject>
 
 @optional
 
+/**
+ Called when the sdk has been started.
+ */
 - (void)didStartSdk;
 
+/**
+ Called when the sdk has been stopped.
+ */
 - (void)didStopSdk;
 
+/**
+ Called when the session configuration has completed.
+ 
+ @param cache. If the local cache was used due to lack of network.
+ */
 - (void)didConfigureSessionWithCache:(BOOL)cache;
 
+/**
+ Called when no session configuration was available, either live or cached.
+ 
+ @param error. Any error that may have been reported by the network.
+ */
 - (void)didFailToConfigureSessionWithError:(NSError *)error;
 
+/**
+ Called then the image cache has been fully populated.  This means all @c DDNAImageMessage used
+ by the game will load without a network connection.
+ */
 - (void)didPopulateImageMessageCache;
 
+/**
+ Called when we've not been able to fully populate the image cache.  This means @c DDNAImageMessage used by
+ event-triggered campaigns may not operate.
+ */
 - (void)didFailToPopulateImageMessageCacheWithError:(NSError *)error;
 
 @end
