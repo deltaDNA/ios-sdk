@@ -24,6 +24,7 @@ static const NSTimeInterval kTimeoutInterval = 180;
 
 @property (nonatomic, strong) NSURLSession *session;
 @property (nonatomic, strong) NSString *cacheDir;
+@property (nonatomic, strong) NSError *encounteredError;
 
 @end
 
@@ -118,18 +119,18 @@ static const NSTimeInterval kTimeoutInterval = 180;
                 } else {
                     DDNALogWarn(@"Failed to create image from downloaded data.");
                     NSDictionary *userInfo = @{
-                        NSLocalizedDescriptionKey: NSLocalizedString(@"Failed to create image from downloaded data.", nil),
-                    };
+                                               NSLocalizedDescriptionKey: NSLocalizedString(@"Failed to create image from downloaded data.", nil),
+                                               };
                     NSError *imageError = [NSError errorWithDomain:@"deltaDNA" code:-57 userInfo:userInfo];
-                    completionHandler([urls count] - remainingTasks, imageError);
+                    self.encounteredError = imageError;
                 }
             } else {
                 DDNALogWarn(@"Failed to download image asset: %@", error);
-                completionHandler([urls count] - remainingTasks, error);
+                self.encounteredError = error;
             }
             if ((--remainingTasks) == 0) {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    completionHandler([urls count] - remainingTasks, nil);
+                    completionHandler([urls count] - remainingTasks, self.encounteredError);
                 });
             }
         }] resume];

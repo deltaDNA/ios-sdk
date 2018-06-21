@@ -434,13 +434,19 @@ static NSString *const DD_EVENT_NEW_SESSION = @"DDNASDKNewSession";
                 self.eventTriggers = [NSOrderedSet orderedSetWithArray:sorted];
             }
             
+            if (response[@"isCachedResponse"] && [response[@"isCachedResponse"] boolValue]) {
+                DDNALogDebug(@"Updated session configuration from local cache.");
+            } else {
+                DDNALogDebug(@"Successfully updated session configuration.");
+            }
             if ([self.sdk.delegate respondsToSelector:@selector(didConfigureSessionWithCache:)]) {
-                [self.sdk.delegate didConfigureSessionWithCache:parameters[@"isCachedResponse"] && [parameters[@"isCachedResponse"] boolValue]];
+                [self.sdk.delegate didConfigureSessionWithCache:response[@"isCachedResponse"] && [response[@"isCachedResponse"] boolValue]];
             }
             
             [self downloadImageAssets];
             
         } else {
+            DDNALogDebug(@"Failed to retrieve session configuration.");
             // notify caller and let them retry later
             if ([self.sdk.delegate respondsToSelector:@selector(didFailToConfigureSessionWithError:)]) {
                 [self.sdk.delegate didFailToConfigureSessionWithError:error];
@@ -460,11 +466,17 @@ static NSString *const DD_EVENT_NEW_SESSION = @"DDNASDKNewSession";
     }
     
     [[DDNAImageCache sharedInstance] prefechImagesForURLs:urls completionHandler:^(NSInteger downloaded, NSError *error) {
-        if (error == nil && [self.sdk.delegate respondsToSelector:@selector(didPopulateImageMessageCache)]) {
-            [self.sdk.delegate didPopulateImageMessageCache];
+        if (error == nil) {
+            DDNALogDebug(@"Successfully populated image cache.");
+            if ([self.sdk.delegate respondsToSelector:@selector(didPopulateImageMessageCache)]) {
+                [self.sdk.delegate didPopulateImageMessageCache];
+            }
         }
-        else if (error != nil && [self.sdk.delegate respondsToSelector:@selector(didFailToPopulateImageMessageCacheWithError:)]) {
-            [self.sdk.delegate didFailToPopulateImageMessageCacheWithError:error];
+        else {
+            DDNALogDebug(@"Failed to populate image cache.");
+            if ([self.sdk.delegate respondsToSelector:@selector(didFailToPopulateImageMessageCacheWithError:)]) {
+                [self.sdk.delegate didFailToPopulateImageMessageCacheWithError:error];
+            }
         }
     }];
 }
