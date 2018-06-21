@@ -150,7 +150,7 @@
 - (IBAction)eventTrigger:(id)sender
 {
     DDNAEvent *event = [[DDNAEvent alloc] initWithName:@"matchStarted"];
-    [event setParam:@1 forKey:@"matchID"];
+    [event setParam:@"1" forKey:@"matchID"];
     [event setParam:@"Blue Meadow" forKey:@"matchName"];
     [event setParam:@10 forKey:@"userLevel"];
 

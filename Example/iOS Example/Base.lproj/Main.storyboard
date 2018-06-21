@@ -65,7 +65,6 @@
                                         <state key="normal" title="Event Trigger"/>
                                         <connections>
                                             <action selector="eventTrigger:" destination="BYZ-38-t0r" eventType="touchUpInside" id="YIG-w8-7UY"/>
-                                            <action selector="transactionEvent:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dXZ-am-sAO"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j6G-Pq-wKo">
