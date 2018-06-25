@@ -171,8 +171,9 @@ static NSString *const DD_EVENT_NEW_SESSION = @"DDNASDKNewSession";
             dispatch_source_set_event_handler(_timer, ^{
                 [self upload];
             });
+            __weak typeof(self) weakSelf = self;
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(self.sdk.settings.backgroundEventUploadStartDelaySeconds * NSEC_PER_SEC)), dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-                dispatch_resume(_timer);
+                dispatch_resume(weakSelf.timer);
             });
         }
     }
