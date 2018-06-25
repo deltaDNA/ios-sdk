@@ -20,6 +20,9 @@ matrix:
         - {osx_image: xcode10.0beta, env: 'SDK=appletvsimulator SCHEME="DeltaDNA tvOS" DST="OS=9.2,name=Apple TV 1080p"'}
 
     allow_failures:
+        # Missing simulator
+        - {osx_image: xcode9.4,     env: 'SDK=appletvsimulator SCHEME="DeltaDNA tvOS" DST="OS=9.2,name=Apple TV 1080p"'}
+
         - {osx_image: xcode10.0beta, env: 'SDK=iphonesimulator  SCHEME="DeltaDNA iOS"  DST="OS=12.0,name=iPhone 6"'}
         - {osx_image: xcode10.0beta, env: 'SDK=iphonesimulator  SCHEME="DeltaDNA iOS"  DST="OS=9.3,name=iPhone 6"'}
 
