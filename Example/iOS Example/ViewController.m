@@ -17,11 +17,38 @@
 #import "ViewController.h"
 @import DeltaDNA;
 
-#define ENVIRONMENT_KEY @"55822530117170763508653519413932"
-#define COLLECT_URL @"https://collect2010stst.deltadna.net/collect/api"
-#define ENGAGE_URL @"https://engage2010stst.deltadna.net"
+@interface SdkConfig: NSObject
+@property (nonatomic, copy, readonly) NSString *environmentKey;
+@property (nonatomic, copy, readonly) NSString *collectUrl;
+@property (nonatomic, copy, readonly) NSString *engageUrl;
+@end
 
-@interface ViewController () <DDNAImageMessageDelegate>
+@implementation SdkConfig
+
++ (NSString *)environmentKey {
+    if ([[NSProcessInfo processInfo] environment][@"ENVIRONMENT_KEY"]) {
+        return [[NSProcessInfo processInfo] environment][@"ENVIRONMENT_KEY"];
+    }
+    return @"55822530117170763508653519413932";
+}
+
++ (NSString *)collectUrl {
+    if ([[NSProcessInfo processInfo] environment][@"COLLECT_URL"]) {
+        return [[NSProcessInfo processInfo] environment][@"COLLECT_URL"];
+    }
+    return @"https://collect2010stst.deltadna.net/collect/api";
+}
+
++ (NSString *)engageUrl {
+    if ([[NSProcessInfo processInfo] environment][@"ENGAGE_URL"]) {
+        return [[NSProcessInfo processInfo] environment][@"ENGAGE_URL"];
+    }
+    return @"https://engage2010stst.deltadna.net";
+}
+
+@end
+
+@interface ViewController () <DDNASDKDelegate, DDNAImageMessageDelegate>
 
 @end
 
@@ -40,6 +67,7 @@
     
     // Grab a handle to the singleton.
     DDNASDK *sdk = [DDNASDK sharedInstance];
+    sdk.delegate = self;
     
     //[sdk clearPersistentData];
     
@@ -58,9 +86,9 @@
     sdk.hashSecret = @"KmMBBcNwStLJaq6KsEBxXc6HY3A4bhGw";
     
     // Start the SDK.
-    [sdk startWithEnvironmentKey:ENVIRONMENT_KEY
-                      collectURL:COLLECT_URL
-                       engageURL:ENGAGE_URL];
+    [sdk startWithEnvironmentKey:[SdkConfig environmentKey]
+                      collectURL:[SdkConfig collectUrl]
+                       engageURL:[SdkConfig engageUrl]];
     
     // Default behaviour will automatically send 'newPlayer' if a new user id is used
     // and will send 'clientInfo' and 'gameStarted'.
@@ -122,7 +150,7 @@
 - (IBAction)eventTrigger:(id)sender
 {
     DDNAEvent *event = [[DDNAEvent alloc] initWithName:@"matchStarted"];
-    [event setParam:@1 forKey:@"matchID"];
+    [event setParam:@"1" forKey:@"matchID"];
     [event setParam:@"Blue Meadow" forKey:@"matchName"];
     [event setParam:@10 forKey:@"userLevel"];
 
@@ -175,9 +203,9 @@
 
 - (IBAction)startSDK:(id)sender {
     DDNASDK * sdk = [DDNASDK sharedInstance];
-    [sdk startWithEnvironmentKey:ENVIRONMENT_KEY
-                      collectURL:COLLECT_URL
-                       engageURL:ENGAGE_URL];
+    [sdk startWithEnvironmentKey:[SdkConfig environmentKey]
+                      collectURL:[SdkConfig collectUrl]
+                       engageURL:[SdkConfig engageUrl]];
 }
 
 - (IBAction)stopSDK:(id)sender {
@@ -198,6 +226,38 @@
 
 - (IBAction)newUser:(id)sender {
     [[DDNASDK sharedInstance] clearPersistentData];
+}
+
+#pragma mark - DDNASDKDelegate
+
+- (void)didStartSdk
+{
+    NSLog(@"deltaDNA started.");
+}
+
+- (void)didStopSdk
+{
+    NSLog(@"deltaDNA stopped.");
+}
+
+- (void)didConfigureSessionWithCache:(BOOL)cache
+{
+    NSLog(@"Session configuration completed.");
+}
+
+- (void)didFailToConfigureSessionWithError:(NSError *)error
+{
+    NSLog(@"Failed to fetch session configuration.");
+}
+
+- (void)didPopulateImageMessageCache
+{
+    NSLog(@"Populated image message cache.");
+}
+
+- (void)didFailToPopulateImageMessageCacheWithError:(NSError *)error
+{
+    NSLog(@"Failed to populate image message cache.");
 }
 
 #pragma mark - ImageMessageDelegate

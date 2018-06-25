@@ -158,7 +158,24 @@ describe(@"image cache", ^{
         UIImage *image2 = [imageCache imageForURL:mockURL2];
         expect(image2).willNot.beNil();
         expect(UIImagePNGRepresentation(image2)).will.equal(UIImagePNGRepresentation(testImage2));
+    });
+    
+    it(@"reports once if any image fails", ^{
         
+        [givenVoid([mockSession downloadTaskWithRequest:anything() completionHandler:anything()]) willDo:^id _Nonnull(NSInvocation * _Nonnull invocation) {
+            void (^completionHandler)(NSURL * location, NSURLResponse * response, NSError * error) = [invocation mkt_arguments][1];
+            completionHandler(nil, nil, mock([NSError class]));
+            return nil;
+        }];
+        
+        NSArray<NSURL *> *urls = @[mockURL, mockURL2];
+        __block NSInteger called = 0;
+        [imageCache prefechImagesForURLs:urls completionHandler:^(NSInteger downloaded, NSError *error){
+            called++;
+            expect(error).toNot.beNil();
+        }];
+        
+        expect(called).after(1).to.equal(1);
     });
 });
 

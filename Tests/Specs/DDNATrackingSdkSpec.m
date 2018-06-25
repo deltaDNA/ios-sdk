@@ -176,7 +176,7 @@ describe(@"tracking sdk", ^{
         [given([mockSdk delegate]) willReturn:mockDelegate];
         [givenVoid([mockEngageService request:anything() handler:anything()]) willDo:^id _Nonnull(NSInvocation * _Nonnull invocation) {
             void (^handler)(NSString *response, NSInteger statusCode, NSError *error) = [invocation mkt_arguments][1];
-            handler(@"{\"parameters\":{\"isCachedResponse\":false}}", 200, nil);
+            handler(@"{\"isCachedResponse\":false,\"parameters\":{}}", 200, nil);
             return nil;
         }];
         
@@ -191,7 +191,7 @@ describe(@"tracking sdk", ^{
         [given([mockSdk delegate]) willReturn:mockDelegate];
         [givenVoid([mockEngageService request:anything() handler:anything()]) willDo:^id _Nonnull(NSInvocation * _Nonnull invocation) {
             void (^handler)(NSString *response, NSInteger statusCode, NSError *error) = [invocation mkt_arguments][1];
-            handler(@"{\"parameters\":{\"isCachedResponse\":true}}", 200, nil);
+            handler(@"{\"isCachedResponse\":true,\"parameters\":{}}", 200, nil);
             return nil;
         }];
         
