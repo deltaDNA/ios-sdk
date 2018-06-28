@@ -434,6 +434,8 @@ static NSString *const DD_EVENT_NEW_SESSION = @"DDNASDKNewSession";
                 self.eventTriggers = [NSOrderedSet orderedSetWithArray:sorted];
             }
             
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"DDNASDKSessionConfig" object:self.sdk userInfo:@{@"config": response}];
+            
             if (response[@"isCachedResponse"] && [response[@"isCachedResponse"] boolValue]) {
                 DDNALogDebug(@"Updated session configuration from local cache.");
             } else {

@@ -483,6 +483,31 @@ describe(@"tracking sdk", ^{
         [verifyCount(mockEngageService, times(2)) request:anything() handler:anything()];
         
     });
+    
+    it(@"posts session config notification", ^{
+        
+        [givenVoid([mockEngageService request:anything() handler:anything()]) willDo:^id _Nonnull(NSInvocation * _Nonnull invocation) {
+            void (^handler)(NSString *response, NSInteger statusCode, NSError *error) = [invocation mkt_arguments][1];
+            handler(@"{\"parameters\":{}}", 200, nil);
+            return nil;
+        }];
+        
+        __block BOOL receivedSessionConfigEvent = NO;
+        __block NSNotification *receivedNote = nil;
+        
+        [[NSNotificationCenter defaultCenter] addObserverForName:@"DDNASDKSessionConfig" object:mockSdk queue:nil usingBlock:^(NSNotification * _Nonnull note) {
+            receivedSessionConfigEvent = YES;
+            receivedNote = note;
+        }];
+        
+        [trackingSdk startWithNewPlayer:mockUserManager];
+        [trackingSdk requestSessionConfiguration:mockUserManager];
+        
+        expect(receivedSessionConfigEvent).will.beTruthy();
+        expect(receivedNote.object).will.equal(mockSdk);
+        expect(receivedNote.userInfo[@"config"]).will.equal(@{@"parameters":@{}});
+        
+    });
 });
 
 SpecEnd
