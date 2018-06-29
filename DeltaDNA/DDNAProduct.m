@@ -123,7 +123,9 @@ static dispatch_once_t onceToken;
     
     NSNumber *minorUnits = [ISO4217 objectForKey:code];
     if (minorUnits) {
-        return [[value decimalNumberByMultiplyingBy:[NSDecimalNumber decimalNumberWithMantissa:pow(10, [minorUnits intValue]) exponent:0 isNegative:NO]] integerValue];
+        NSDecimalNumber *number = [NSDecimalNumber decimalNumberWithMantissa:pow(10, [minorUnits intValue]) exponent:0 isNegative:NO];
+        value = [value decimalNumberByMultiplyingBy:number];
+        return (NSInteger)roundf([value floatValue]);
     } else {
         DDNALogWarn(@"Failed to find currency for %@", code);
         return 0;
