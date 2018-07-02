@@ -59,4 +59,15 @@
     return [[NSUUID UUID] UUIDString];
 }
 
++ (NSString *)getCacheDir
+{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    documentsDirectory = [documentsDirectory stringByAppendingPathComponent:@"DeltaDNA"];
+    
+    NSError *error = nil;
+    [[NSFileManager defaultManager] createDirectoryAtPath:documentsDirectory withIntermediateDirectories:YES attributes:nil error:&error];
+    return documentsDirectory;
+}
+
 @end

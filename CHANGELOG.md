@@ -4,6 +4,7 @@
 ### Changed
 - Minimum iOS target set to iOS 9.
 - `recordEvent:` methods return a `DDNAEventAction` object, which can be used with event-triggered campaigns.
+- Engage cache expires entries by default after 12 hours.  This can be controlled in the sdk settings.
 
 ### Added
 - Added support for event-triggered campaigns.

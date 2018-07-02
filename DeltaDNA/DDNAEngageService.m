@@ -21,7 +21,7 @@
 #import "NSString+DeltaDNA.h"
 #import "NSDictionary+DeltaDNA.h"
 #import "DDNALog.h"
-#import "DDNACache.h"
+#import "DDNAEngageCache.h"
 
 @interface DDNAEngageRequest ()
 
@@ -89,6 +89,7 @@ static NSString *const kEngagementCacheKey = @"Engagement %@(%@)";
 @property (nonatomic, copy) NSString *operatingSystemVersion;
 @property (nonatomic, assign) NSInteger timeoutSeconds;
 @property (nonatomic, strong) NSMapTable *requests;
+@property (nonatomic, strong) DDNAEngageCache *engageCache;
 
 @end
 
@@ -105,6 +106,7 @@ static NSString *const kEngagementCacheKey = @"Engagement %@(%@)";
                           manufacturer:(NSString *)manufacturer
                 operatingSystemVersion:(NSString *)operatingSystemVersion
                         timeoutSeconds:(NSInteger)timeoutSeconds
+                   cacheExpiryInterval:(NSTimeInterval)cacheExpiryInterval
 {
     if ((self = [super self])) {
         self.environmentKey = environmentKey;
@@ -119,6 +121,7 @@ static NSString *const kEngagementCacheKey = @"Engagement %@(%@)";
         self.operatingSystemVersion = operatingSystemVersion;
         self.timeoutSeconds = timeoutSeconds;
         self.requests = [NSMapTable strongToStrongObjectsMapTable];
+        self.engageCache = [[DDNAEngageCache alloc] initWithPath:@"EngageCache.plist" expiryTimeInterval:cacheExpiryInterval];
     }
     return self;
 }
@@ -157,6 +160,11 @@ static NSString *const kEngagementCacheKey = @"Engagement %@(%@)";
     }
 }
 
+- (void)clearCache
+{
+    [self.engageCache clear];
+}
+
 #pragma mark - DDNANetworkRequestDelegate;
 
 - (void)request:(DDNANetworkRequest *)request didReceiveResponse:(NSString *)response statusCode:(NSInteger)statusCode
@@ -166,7 +174,7 @@ static NSString *const kEngagementCacheKey = @"Engagement %@(%@)";
         DDNAEngageRequest *engageRequest = engagement[@"request"];
         DDNAEngageResponse responseHandler = engagement[@"response"];
         // We don't need to cache based on real-time criteria, better to use the last response that's close enough.
-        [[DDNACache sharedCache] setObject:response forKey:[NSString stringWithFormat:kEngagementCacheKey, engageRequest.decisionPoint, engageRequest.flavour]];
+        [self.engageCache setObject:response forKey:[NSString stringWithFormat:kEngagementCacheKey, engageRequest.decisionPoint, engageRequest.flavour]];
         if (responseHandler) responseHandler(response, statusCode, nil);
         [self.requests removeObjectForKey:request];
     } else {
@@ -181,8 +189,8 @@ static NSString *const kEngagementCacheKey = @"Engagement %@(%@)";
     if (engagement != nil) {
         DDNAEngageRequest *engageRequest = engagement[@"request"];
         DDNAEngageResponse responseHandler = engagement[@"response"];
-        NSString *cachedResponse = [[DDNACache sharedCache] objectForKey:[NSString stringWithFormat:kEngagementCacheKey, engageRequest.decisionPoint, engageRequest.flavour]];
         if (responseHandler != nil) {
+            NSString *cachedResponse = [self.engageCache objectForKey:[NSString stringWithFormat:kEngagementCacheKey, engageRequest.decisionPoint, engageRequest.flavour]];
             if (cachedResponse != nil) {
                 NSMutableDictionary *jsonObj = [NSMutableDictionary dictionaryWithDictionary:[NSDictionary dictionaryWithJSONString:cachedResponse]];
                 [jsonObj setObject:@YES forKey:@"isCachedResponse"];

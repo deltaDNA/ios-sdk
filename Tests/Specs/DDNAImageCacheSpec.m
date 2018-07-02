@@ -41,7 +41,7 @@ describe(@"image cache", ^{
     beforeEach(^{
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
         NSString *documentsDirectory = [paths objectAtIndex:0];
-        documentsDirectory = [[documentsDirectory stringByAppendingPathComponent:@"DeltaDNA"] stringByAppendingString:@"ImageCache"];
+        documentsDirectory = [[documentsDirectory stringByAppendingPathComponent:@"DeltaDNA"] stringByAppendingPathComponent:@"ImageCache"];
         [[NSFileManager defaultManager] removeItemAtPath:documentsDirectory error:nil];
         
         mockSession = mock([NSURLSession class]);

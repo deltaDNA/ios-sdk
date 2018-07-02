@@ -59,7 +59,8 @@
                                                                           timezoneOffset:ddnaci.timezoneOffset
                                                                             manufacturer:ddnaci.manufacturer
                                                                   operatingSystemVersion:ddnaci.operatingSystemVersion
-                                                                          timeoutSeconds:ddnasdk.settings.httpRequestEngageTimeoutSeconds];
+                                                                          timeoutSeconds:ddnasdk.settings.httpRequestEngageTimeoutSeconds
+                                                                     cacheExpiryInterval:ddnasdk.settings.engageCacheExpirySeconds];
     
     engageService.factory = self;
     return engageService;

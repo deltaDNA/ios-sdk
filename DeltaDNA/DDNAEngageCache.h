@@ -16,12 +16,17 @@
 
 #import <Foundation/Foundation.h>
 
-@interface DDNACache : NSObject
+/**
+ Provides a simple cache to record previous Engage responses.
+ */
+@interface DDNAEngageCache : NSObject
 
-+ (instancetype)sharedCache;
+- (instancetype)initWithPath:(NSString *)path expiryTimeInterval:(NSTimeInterval)expiryTimeInterval;
 
 - (void)setObject:(NSObject *)object forKey:(NSString *)key;
 - (id)objectForKey:(NSString *)key;
 - (void)clear;
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
