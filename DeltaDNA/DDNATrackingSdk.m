@@ -365,7 +365,6 @@ static NSString *const DD_EVENT_NEW_SESSION = @"DDNASDKNewSession";
         [self.sdk recordEventWithName:@"notificationServices" eventParams:@{
                 @"pushNotificationToken": token
             }];
-        self.sdk.pushNotificationToken = token;
     } else {
         __typeof(self) __weak weakSelf = self;
         dispatch_async(_taskQueue, ^{
