@@ -50,9 +50,12 @@ typedef void (^DDNAEngageResponse) (NSString *response, NSInteger statusCode, NS
                         timezoneOffset:(NSString *)timezoneOffset
                           manufacturer:(NSString *)manufacturer
                 operatingSystemVersion:(NSString *)operatingSystemVersion
-                        timeoutSeconds:(NSInteger)timeoutSeconds;
+                        timeoutSeconds:(NSInteger)timeoutSeconds
+                   cacheExpiryInterval:(NSTimeInterval)cacheExpiryInterval;
 
 - (void)request:(DDNAEngageRequest *)request handler:(DDNAEngageResponse)responseHander;
+
+- (void)clearCache;
 
 @end
 

@@ -26,4 +26,6 @@
 
 + (NSString *) generateSessionID;
 
++ (NSString *) getCacheDir;
+
 @end

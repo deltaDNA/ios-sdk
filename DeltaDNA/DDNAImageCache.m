@@ -16,6 +16,7 @@
 
 #import "DDNAImageCache.h"
 #import "DDNALog.h"
+#import "DDNAUtils.h"
 
 static const NSURLRequestCachePolicy kCachePolicy = NSURLRequestUseProtocolCachePolicy;
 static const NSTimeInterval kTimeoutInterval = 180;
@@ -139,13 +140,10 @@ static const NSTimeInterval kTimeoutInterval = 180;
 
 - (NSString *)getCacheLocation
 {
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    documentsDirectory = [[documentsDirectory stringByAppendingPathComponent:@"DeltaDNA"] stringByAppendingString:self.cacheDir];
-    
+    NSString * cacheDirectory = [[DDNAUtils getCacheDir] stringByAppendingPathComponent:self.cacheDir];
     NSError *error = nil;
-    [[NSFileManager defaultManager] createDirectoryAtPath:documentsDirectory withIntermediateDirectories:YES attributes:nil error:&error];
-    return documentsDirectory;
+    [[NSFileManager defaultManager] createDirectoryAtPath:cacheDirectory withIntermediateDirectories:YES attributes:nil error:&error];
+    return cacheDirectory;
 }
 
 @end

@@ -14,34 +14,28 @@
 // limitations under the License.
 //
 
-#import "DDNACache.h"
+#import "DDNAEngageCache.h"
 #import "DDNALog.h"
+#import "DDNAUtils.h"
 
-static NSString *const kCacheName = @"Cache.plist";
+static NSString *const kCacheName = @"EngageCache.plist";
+static NSTimeInterval const kDefaultExpiryTime = 12 * 60 * 60;  // 12 hours
 
-@interface DDNACache ()
+@interface DDNAEngageCache ()
 
 @property (nonatomic, strong) NSMutableDictionary *cache;
 @property (nonatomic, copy) NSString *cacheLocation;
+@property (nonatomic, assign) NSTimeInterval expiryTimeInterval;
 
 @end
 
-@implementation DDNACache
+@implementation DDNAEngageCache
 
-+ (instancetype)sharedCache
-{
-    static dispatch_once_t pred = 0;
-    __strong static id _sharedObject = nil;
-    dispatch_once(&pred, ^{
-        _sharedObject = [[self alloc] init];
-    });
-    return _sharedObject;
-}
-
-- (instancetype)init
+- (instancetype)initWithPath:(NSString *)path expiryTimeInterval:(NSTimeInterval)expiryTimeInterval
 {
     if ((self = [super init])) {
-        self.cacheLocation = [self getCacheLocation];
+        self.cacheLocation = [[DDNAUtils getCacheDir] stringByAppendingPathComponent:path];
+        self.expiryTimeInterval = expiryTimeInterval;
         self.cache = [NSMutableDictionary dictionaryWithContentsOfFile:self.cacheLocation];
         if (!self.cache) {
             self.cache = [NSMutableDictionary dictionary];
@@ -54,7 +48,7 @@ static NSString *const kCacheName = @"Cache.plist";
 {
     @try {
         if (object != nil) {
-            [self.cache setObject:object forKey:key];
+            [self.cache setObject:@{@"object": object, @"modified":[NSDate date]} forKey:key];
             [self.cache writeToFile:self.cacheLocation atomically:YES];
         }
     }
@@ -65,24 +59,17 @@ static NSString *const kCacheName = @"Cache.plist";
 
 - (id)objectForKey:(NSString *)key
 {
-    return [self.cache objectForKey:key];
+    NSDictionary *found = [self.cache objectForKey:key];
+    if (found && [[NSDate date] timeIntervalSinceDate:found[@"modified"]] < self.expiryTimeInterval) {
+        return found[@"object"];
+    }
+    return nil;
 }
 
 - (void)clear
 {
     [self.cache removeAllObjects];
     [self.cache writeToFile:self.cacheLocation atomically:YES];
-}
-
-- (NSString *)getCacheLocation
-{
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    documentsDirectory = [documentsDirectory stringByAppendingPathComponent:@"DeltaDNA"];
-    
-    NSError *error = nil;
-    [[NSFileManager defaultManager] createDirectoryAtPath:documentsDirectory withIntermediateDirectories:YES attributes:nil error:&error];
-    return [documentsDirectory stringByAppendingPathComponent:kCacheName];
 }
 
 @end

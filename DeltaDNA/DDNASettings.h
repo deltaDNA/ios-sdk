@@ -96,6 +96,11 @@ extern NSUInteger const DDNA_MAX_EVENT_STORE_BYTES;
 @property (nonatomic, assign) int sessionTimeoutSeconds;
 
 /**
+ Number of seconds Engage retains cached responses from the Engage server.  A value of 0 disables the Engage cache.
+ */
+@property (nonatomic, assign) int engageCacheExpirySeconds;
+
+/**
  Returns the path to the privates settings directory on 
  this device.
  */

@@ -26,7 +26,7 @@
 #import "DDNAEngageService.h"
 #import "DDNAFakeInstanceFactory.h"
 #import "DDNAFakeNetworkRequest.h"
-#import "DDNACache.h"
+#import "DDNAEngageCache.h"
 #import "../../DeltaDNA/NSString+DeltaDNA.h"
 
 
@@ -66,7 +66,6 @@ describe(@"engage service", ^{
     __block DDNAFakeInstanceFactory *fakeFactory;
     
     beforeEach(^{
-        [[DDNACache sharedCache] clear];
         engageService = [[DDNAEngageService alloc] initWithEnvironmentKey:@"12345abcde"
                                                                 engageURL:@"http://engage.net"
                                                                hashSecret:nil
@@ -77,7 +76,9 @@ describe(@"engage service", ^{
                                                            timezoneOffset:@"-05"
                                                              manufacturer:@"Apple Inc."
                                                    operatingSystemVersion:@"iOS 9.1"
-                                                           timeoutSeconds:5];
+                                                           timeoutSeconds:5
+                                                      cacheExpiryInterval:100];
+        [engageService clearCache];
         
         fakeFactory = [[DDNAFakeInstanceFactory alloc] init];
         fakeFactory.fakeNetworkRequest = [[DDNAFakeNetworkRequest alloc] init];
@@ -180,6 +181,175 @@ describe(@"engage service", ^{
         expect(resultResponse).to.beNil();
         expect(resultStatusCode).to.equal(-1);
         expect(resultError).to.equal([NSError errorWithDomain:NSURLErrorDomain code:-57 userInfo:nil]);
+        
+    });
+    
+    it(@"uses the cache correctly", ^{
+
+        DDNAEngageRequest *engageRequest = [[DDNAEngageRequest alloc] initWithDecisionPoint:@"testDecisionPoint"
+                                                                                     userId:@"user-id-12345"
+                                                                                  sessionId:@"session-id-12345"];
+        
+        __block NSString *resultResponse;
+        __block NSInteger resultStatusCode;
+        __block NSError *resultError;
+        
+        // Bad request with empty cache
+        fakeFactory.fakeNetworkRequest = [[DDNAFakeNetworkRequest alloc] initWithURL:@"http://engage.net"
+                                                                                data:@""
+                                                                          statusCode:400
+                                                                               error:nil];
+        
+        [engageService request:engageRequest handler:^(NSString *response, NSInteger statusCode, NSError *connectionError) {
+            resultResponse = response;
+            resultStatusCode = statusCode;
+            resultError = connectionError;
+        }];
+        
+        expect(resultResponse).will.equal(@"");
+        expect(resultStatusCode).will.equal(400);
+        expect(resultError).will.beNil();
+        
+        // Good response, which should be added to cache
+        fakeFactory.fakeNetworkRequest = [[DDNAFakeNetworkRequest alloc] initWithURL:@"http://engage.net"
+                                                                                data:@"{\"parameters\":{}}"
+                                                                          statusCode:200
+                                                                               error:nil];
+        
+        [engageService request:engageRequest handler:^(NSString *response, NSInteger statusCode, NSError *connectionError) {
+            resultResponse = response;
+            resultStatusCode = statusCode;
+            resultError = connectionError;
+        }];
+        
+        expect(resultResponse).will.equal(@"{\"parameters\":{}}");
+        expect(resultStatusCode).will.equal(200);
+        expect(resultError).will.beNil();
+        
+        // Bad request, returns value from cache
+        fakeFactory.fakeNetworkRequest = [[DDNAFakeNetworkRequest alloc] initWithURL:@"http://engage.net"
+                                                                                data:@""
+                                                                          statusCode:400
+                                                                               error:nil];
+        
+        [engageService request:engageRequest handler:^(NSString *response, NSInteger statusCode, NSError *connectionError) {
+            resultResponse = response;
+            resultStatusCode = statusCode;
+            resultError = connectionError;
+        }];
+        
+        expect(resultResponse).will.equal(@"{\"isCachedResponse\":true,\"parameters\":{}}");
+        expect(resultStatusCode).will.equal(400);
+        expect(resultError).will.beNil();
+        
+        // Good response again
+        fakeFactory.fakeNetworkRequest = [[DDNAFakeNetworkRequest alloc] initWithURL:@"http://engage.net"
+                                                                                data:@"{\"parameters\":{\"colour\":\"blue\"}}"
+                                                                          statusCode:200
+                                                                               error:nil];
+        
+        [engageService request:engageRequest handler:^(NSString *response, NSInteger statusCode, NSError *connectionError) {
+            resultResponse = response;
+            resultStatusCode = statusCode;
+            resultError = connectionError;
+        }];
+        
+        expect(resultResponse).will.equal(@"{\"parameters\":{\"colour\":\"blue\"}}");
+        expect(resultStatusCode).will.equal(200);
+        expect(resultError).will.beNil();
+        
+    });
+    
+    it(@"works with a disabled cache", ^{
+        
+        engageService = [[DDNAEngageService alloc] initWithEnvironmentKey:@"12345abcde"
+                                                                engageURL:@"http://engage.net"
+                                                               hashSecret:nil
+                                                               apiVersion:@"1.0.0"
+                                                               sdkVersion:@"1.0.0"
+                                                                 platform:@"iOS"
+                                                                   locale:@"en_UK"
+                                                           timezoneOffset:@"-05"
+                                                             manufacturer:@"Apple Inc."
+                                                   operatingSystemVersion:@"iOS 9.1"
+                                                           timeoutSeconds:5
+                                                      cacheExpiryInterval:0];
+        [engageService clearCache];
+        engageService.factory = fakeFactory;
+        
+        DDNAEngageRequest *engageRequest = [[DDNAEngageRequest alloc] initWithDecisionPoint:@"testDecisionPoint"
+                                                                                     userId:@"user-id-12345"
+                                                                                  sessionId:@"session-id-12345"];
+        
+        
+        
+        __block NSString *resultResponse;
+        __block NSInteger resultStatusCode;
+        __block NSError *resultError;
+        
+        // Bad request with empty cache
+        fakeFactory.fakeNetworkRequest = [[DDNAFakeNetworkRequest alloc] initWithURL:@"http://engage.net"
+                                                                                data:@""
+                                                                          statusCode:400
+                                                                               error:nil];
+        
+        [engageService request:engageRequest handler:^(NSString *response, NSInteger statusCode, NSError *connectionError) {
+            resultResponse = response;
+            resultStatusCode = statusCode;
+            resultError = connectionError;
+        }];
+
+        expect(resultResponse).will.equal(@"");
+        expect(resultStatusCode).will.equal(400);
+        expect(resultError).will.beNil();
+
+        // Good response, which should be ignored cache
+        fakeFactory.fakeNetworkRequest = [[DDNAFakeNetworkRequest alloc] initWithURL:@"http://engage.net"
+                                                                                data:@"{\"parameters\":{}}"
+                                                                          statusCode:200
+                                                                               error:nil];
+
+        [engageService request:engageRequest handler:^(NSString *response, NSInteger statusCode, NSError *connectionError) {
+            resultResponse = response;
+            resultStatusCode = statusCode;
+            resultError = connectionError;
+        }];
+
+        expect(resultResponse).will.equal(@"{\"parameters\":{}}");
+        expect(resultStatusCode).will.equal(200);
+        expect(resultError).will.beNil();
+
+        // Bad request, passes respose straight back
+        fakeFactory.fakeNetworkRequest = [[DDNAFakeNetworkRequest alloc] initWithURL:@"http://engage.net"
+                                                                                data:@""
+                                                                          statusCode:400
+                                                                               error:nil];
+
+        [engageService request:engageRequest handler:^(NSString *response, NSInteger statusCode, NSError *connectionError) {
+            resultResponse = response;
+            resultStatusCode = statusCode;
+            resultError = connectionError;
+        }];
+
+        expect(resultResponse).will.equal(@"");
+        expect(resultStatusCode).will.equal(400);
+        expect(resultError).will.beNil();
+
+        // Good response again
+        fakeFactory.fakeNetworkRequest = [[DDNAFakeNetworkRequest alloc] initWithURL:@"http://engage.net"
+                                                                                data:@"{\"parameters\":{\"colour\":\"blue\"}}"
+                                                                          statusCode:200
+                                                                               error:nil];
+
+        [engageService request:engageRequest handler:^(NSString *response, NSInteger statusCode, NSError *connectionError) {
+            resultResponse = response;
+            resultStatusCode = statusCode;
+            resultError = connectionError;
+        }];
+
+        expect(resultResponse).will.equal(@"{\"parameters\":{\"colour\":\"blue\"}}");
+        expect(resultStatusCode).will.equal(200);
+        expect(resultError).will.beNil();
         
     });
     
