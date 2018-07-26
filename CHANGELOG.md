@@ -1,5 +1,9 @@
 # Change Log
 
+## [4.8.1](https://github.com/deltaDNA/ios-sdk/releases/tag/4.8.1) (YYYY-MM-DD)
+### Fixed
+- Infinite loop when setting push notification token.
+
 ## [4.8.0](https://github.com/deltaDNA/ios-sdk/releases/tag/4.8.0) (2018-05-18)
 ### Added
 - ForgetMe API notifies the platform the user no longer wishes to be tracked and stops the sdk sending further events.
