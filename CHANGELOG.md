@@ -1,6 +1,6 @@
 # Change Log
 
-## [4.8.1](https://github.com/deltaDNA/ios-sdk/releases/tag/4.8.1) (YYYY-MM-DD)
+## [4.8.1](https://github.com/deltaDNA/ios-sdk/releases/tag/4.8.1) (2018-07-27)
 ### Fixed
 - Infinite loop when setting push notification token.
 
