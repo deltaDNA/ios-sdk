@@ -224,6 +224,7 @@
 
 - (void) setPushNotificationToken:(NSString *)pushNotificationToken
 {
+    _pushNotificationToken = pushNotificationToken;
     [self.impl setPushNotificationToken:pushNotificationToken];
 }
 
