@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name = 'DeltaDNA'
-    s.version = '4.9.0-beta.2'
+    s.version = '4.9.0-beta.3'
     s.license = { :type => 'APACHE', :file => 'LICENSE' }
     s.summary = 'A gaming analytics platform.'
     s.homepage = 'https://deltadna.com'
