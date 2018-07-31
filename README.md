@@ -19,7 +19,7 @@ target 'MyApp' do
   # Uncomment this line if you're using Swift or would like to use dynamic frameworks
   use_frameworks!
 
-  pod 'DeltaDNA', '~> 4.9.0-beta.3'
+  pod 'DeltaDNA', '~> 4.9.0-beta.4'
 
   target 'MyAppTests' do
     inherit! :search_paths
