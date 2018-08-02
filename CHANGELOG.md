@@ -1,6 +1,6 @@
 # Change Log
 
-## [4.9.0](https://github.com/deltaDNA/ios-sdk/releases/tag/4.9.0) (????-??-??)
+## [4.9.0](https://github.com/deltaDNA/ios-sdk/releases/tag/4.9.0) (2018-08-07)
 ### Changed
 - Minimum iOS target set to iOS 9.
 - `recordEvent:` methods return a `DDNAEventAction` object, which can be used with event-triggered campaigns.
