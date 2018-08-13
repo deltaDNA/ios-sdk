@@ -58,6 +58,7 @@ describe(@"not tracking sdk", ^{
         
         [given([mockUserManager doNotTrack]) willReturnBool:YES];
         [given([mockUserManager forgotten]) willReturnBool:NO];
+        [given([mockUserManager advertisingId]) willReturn:@"123-ASDF-456"];
         [given([mockSdk platform]) willReturn:@"test console"];
         [given([mockSdk userID]) willReturn:@"user123"];
         [given([mockSdk sessionID]) willReturn:@"session123"];
@@ -86,6 +87,7 @@ describe(@"not tracking sdk", ^{
         NSDictionary *eventParams = eventJson[@"eventParams"];
         expect(eventParams[@"platform"]).to.equal(@"test console");
         expect(eventParams[@"sdkVersion"]).to.equal(DDNA_SDK_VERSION);
+        expect(eventParams[@"ddnaAdvertisingId"]).to.equal(@"123-ASDF-456");
     });
     
     it(@"reports successful session configuration", ^{

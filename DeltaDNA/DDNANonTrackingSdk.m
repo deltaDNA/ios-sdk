@@ -55,6 +55,7 @@
         DDNAEvent *forgetMe = [DDNAEvent eventWithName:@"ddnaForgetMe"];
         [forgetMe setParam:self.sdk.platform forKey:@"platform"];
         [forgetMe setParam:DDNA_SDK_VERSION forKey:@"sdkVersion"];
+        [forgetMe setParam:userManager.advertisingId forKey:@"ddnaAdvertisingId"];
         
         NSMutableDictionary *eventSchema = [NSMutableDictionary dictionaryWithDictionary:[forgetMe dictionary]];
         [eventSchema setObject:self.sdk.userID forKey:@"userID"];
