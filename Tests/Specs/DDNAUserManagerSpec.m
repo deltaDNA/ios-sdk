@@ -159,6 +159,22 @@ describe(@"user manager", ^{
         userManager.lastSession = lastSession;
         expect(userManager.msSinceLastSession).to.beCloseToWithin(10000, 1);  // give/take 1 ms
     });
+    
+    it(@"records the advertising id", ^{
+        
+        expect(userManager.advertisingId).to.beNil();
+        userManager.advertisingId = @"123-ASDF-456";
+        expect(userManager.advertisingId).to.equal(@"123-ASDF-456");
+        
+    });
+    
+    it(@"clears the advertising id", ^{
+        
+        userManager.advertisingId = @"123-ASDF-456";
+        [userManager clearPersistentData];
+        expect(userManager.advertisingId).to.beNil();
+        
+    });
 });
 
 SpecEnd

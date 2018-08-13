@@ -24,6 +24,7 @@
 @property (nonatomic, assign, getter=isNewPlayer) BOOL newPlayer;
 @property (nonatomic, strong) NSDate *firstSession;
 @property (nonatomic, strong) NSDate *lastSession;
+@property (nonatomic, strong) NSString *advertisingId;
 
 - (instancetype)initWithUserDefaults:(NSUserDefaults *)userDefaults;
 
