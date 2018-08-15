@@ -25,6 +25,7 @@ NSString * const kDDNAForgotten = @"com.deltadna.forgotten";
 NSString * const kDDNAFirstSession = @"com.deltadna.firstSession";
 NSString * const kDDNALastSession = @"com.deltadna.lastSession";
 NSString * const PP_KEY_USER_ID = @"DDSDK_USER_ID";
+NSString * const kDDNAAdvertisingId = @"com.deltadna.advertisingId";
 
 @interface DDNAUserManager ()
 
@@ -126,6 +127,16 @@ NSString * const PP_KEY_USER_ID = @"DDSDK_USER_ID";
     return [self lastSession] ? [[NSDate date] timeIntervalSinceDate:[self lastSession]] * 1000 : 0;
 }
 
+- (void)setAdvertisingId:(NSString *)advertisingId
+{
+    [self.userDefaults setObject:advertisingId forKey:kDDNAAdvertisingId];
+}
+
+- (NSString *)advertisingId
+{
+    return [self.userDefaults objectForKey:kDDNAAdvertisingId];
+}
+
 - (void)clearPersistentData
 {
     [self.userDefaults removeObjectForKey:kDDNAUserId];
@@ -133,6 +144,7 @@ NSString * const PP_KEY_USER_ID = @"DDSDK_USER_ID";
     [self.userDefaults removeObjectForKey:kDDNAForgotten];
     [self.userDefaults removeObjectForKey:kDDNAFirstSession];
     [self.userDefaults removeObjectForKey:kDDNALastSession];
+    [self.userDefaults removeObjectForKey:kDDNAAdvertisingId];
     self.newPlayer = NO;
 }
 
