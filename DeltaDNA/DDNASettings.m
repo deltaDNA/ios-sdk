@@ -16,7 +16,7 @@
 
 #import "DDNASettings.h"
 
-NSString *const DDNA_SDK_VERSION = @"iOS SDK v4.9.0";
+NSString *const DDNA_SDK_VERSION = @"iOS SDK v4.10.0-beta.1";
 NSString *const DDNA_ENGAGE_API_VERSION = @"4";
 
 NSString *const DDNA_EVENT_STORAGE_PATH = @"{persistent_path}";
