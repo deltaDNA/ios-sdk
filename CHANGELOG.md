@@ -1,7 +1,7 @@
 # Change Log
 
-## [4.10.0](https://github.com/deltaDNA/ios-sdk/releases/tag/4.10.0) (2018-08-??)
-## Added
+## [4.10.0](https://github.com/deltaDNA/ios-sdk/releases/tag/4.10.0) (2018-08-22)
+### Added
 - Sends IDFA with the ForgetMe event if used with Smartads.
 
 ## [4.9.0](https://github.com/deltaDNA/ios-sdk/releases/tag/4.9.0) (2018-08-07)
