@@ -1,6 +1,6 @@
 # Change Log
 
-## [4.10.1](https://github.com/deltaDNA/ios-sdk/releases/tag/4.10.1) (YYYY-MM-DD)
+## [4.10.1](https://github.com/deltaDNA/ios-sdk/releases/tag/4.10.1) (2018-09-20)
 ### Fixed
 - Missing device identifiers for new iPads and iPhones.
 
