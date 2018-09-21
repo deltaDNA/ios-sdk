@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1563679A7BBA871614FF22A4 /* Pods_DeltaDNA_iOS_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBBF3347BE53332EC63C4DD1 /* Pods_DeltaDNA_iOS_Tests.framework */; };
 		304F13D72029F88200FA367B /* DDNAUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 304F13D52029F88100FA367B /* DDNAUtils.h */; };
 		304F13D82029F88200FA367B /* DDNAUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 304F13D62029F88200FA367B /* DDNAUtils.m */; };
 		304F13D92029F9E100FA367B /* DDNAUtilsSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 304F13D32029F63C00FA367B /* DDNAUtilsSpec.m */; };
 		304F13DA2029F9E200FA367B /* DDNAUtilsSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 304F13D32029F63C00FA367B /* DDNAUtilsSpec.m */; };
 		304F13DB2029FB7500FA367B /* DDNAUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 304F13D52029F88100FA367B /* DDNAUtils.h */; };
 		304F13DC2029FB7800FA367B /* DDNAUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 304F13D62029F88200FA367B /* DDNAUtils.m */; };
-		386735B8FEDABB9E4A4CA32C /* Pods_DeltaDNA_tvOS_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31BB975B0746DF1DA6D51C9A /* Pods_DeltaDNA_tvOS_Tests.framework */; };
 		630458851CAE724800875B71 /* DDNAImageMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = 630458831CAE724800875B71 /* DDNAImageMessage.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		630458861CAE724800875B71 /* DDNAImageMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = 630458831CAE724800875B71 /* DDNAImageMessage.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		630458871CAE724800875B71 /* DDNAImageMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 630458841CAE724800875B71 /* DDNAImageMessage.m */; };
@@ -181,7 +181,7 @@
 		63E78ABD208F80B800DDD48D /* DDNAUserManagerSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E78AB9208F807C00DDD48D /* DDNAUserManagerSpec.m */; };
 		63F8C5F81D8045D5004E5D66 /* iso_4217.xml in Resources */ = {isa = PBXBuildFile; fileRef = 63F8C5F71D8045D5004E5D66 /* iso_4217.xml */; };
 		63F8C5F91D8048F8004E5D66 /* iso_4217.xml in Resources */ = {isa = PBXBuildFile; fileRef = 63F8C5F71D8045D5004E5D66 /* iso_4217.xml */; };
-		A8B8DB3686B192A35B63F0A6 /* libPods-DeltaDNA iOS Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 076B4EC072FBCA3FB406D2B4 /* libPods-DeltaDNA iOS Tests.a */; };
+		BE8BC6CE991955F4F252F48F /* Pods_DeltaDNA_tvOS_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC5FDFD8337EC612AB2B8483 /* Pods_DeltaDNA_tvOS_Tests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -202,12 +202,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		076B4EC072FBCA3FB406D2B4 /* libPods-DeltaDNA iOS Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DeltaDNA iOS Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1545773A5B3C2343D5D24F5D /* Pods-DeltaDNA iOS Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DeltaDNA iOS Tests.release.xcconfig"; path = "Tests/Pods/Target Support Files/Pods-DeltaDNA iOS Tests/Pods-DeltaDNA iOS Tests.release.xcconfig"; sourceTree = "<group>"; };
 		304F13D32029F63C00FA367B /* DDNAUtilsSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = DDNAUtilsSpec.m; sourceTree = "<group>"; };
 		304F13D52029F88100FA367B /* DDNAUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = DDNAUtils.h; sourceTree = "<group>"; };
 		304F13D62029F88200FA367B /* DDNAUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = DDNAUtils.m; sourceTree = "<group>"; };
 		30F944A81D786E3A0021E6FA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		31BB975B0746DF1DA6D51C9A /* Pods_DeltaDNA_tvOS_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DeltaDNA_tvOS_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4230748C72C905B3FCB0D3E7 /* Pods-DeltaDNA iOS Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DeltaDNA iOS Tests.debug.xcconfig"; path = "Tests/Pods/Target Support Files/Pods-DeltaDNA iOS Tests/Pods-DeltaDNA iOS Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		630458831CAE724800875B71 /* DDNAImageMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDNAImageMessage.h; sourceTree = "<group>"; };
 		630458841CAE724800875B71 /* DDNAImageMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDNAImageMessage.m; sourceTree = "<group>"; };
 		6318EADA1CAD26FD00E9A72C /* EXPMatchers+equalJSONString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "EXPMatchers+equalJSONString.h"; sourceTree = "<group>"; };
@@ -303,10 +303,10 @@
 		63BD747920C814E700F0DD97 /* DDNATrackingSdkSpec.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DDNATrackingSdkSpec.m; sourceTree = "<group>"; };
 		63E78AB9208F807C00DDD48D /* DDNAUserManagerSpec.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DDNAUserManagerSpec.m; sourceTree = "<group>"; };
 		63F8C5F71D8045D5004E5D66 /* iso_4217.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = iso_4217.xml; path = DeltaDNA/Resources/iso_4217.xml; sourceTree = "<group>"; };
-		967F8058FFACDBF7FC90FFAF /* Pods-DeltaDNA tvOS Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DeltaDNA tvOS Tests.debug.xcconfig"; path = "Tests/Pods/Target Support Files/Pods-DeltaDNA tvOS Tests/Pods-DeltaDNA tvOS Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		DB4588CC66B911AF2CF345B6 /* Pods-DeltaDNA iOS Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DeltaDNA iOS Tests.release.xcconfig"; path = "Tests/Pods/Target Support Files/Pods-DeltaDNA iOS Tests/Pods-DeltaDNA iOS Tests.release.xcconfig"; sourceTree = "<group>"; };
-		E7E746D2E40D5762C4AF1097 /* Pods-DeltaDNA iOS Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DeltaDNA iOS Tests.debug.xcconfig"; path = "Tests/Pods/Target Support Files/Pods-DeltaDNA iOS Tests/Pods-DeltaDNA iOS Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		E884C48B5803EBAB8239FE90 /* Pods-DeltaDNA tvOS Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DeltaDNA tvOS Tests.release.xcconfig"; path = "Tests/Pods/Target Support Files/Pods-DeltaDNA tvOS Tests/Pods-DeltaDNA tvOS Tests.release.xcconfig"; sourceTree = "<group>"; };
+		D432A4CBC0CAD37B699A59A3 /* Pods-DeltaDNA tvOS Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DeltaDNA tvOS Tests.debug.xcconfig"; path = "Tests/Pods/Target Support Files/Pods-DeltaDNA tvOS Tests/Pods-DeltaDNA tvOS Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		D7BE3517D44F9BE8A36CB4A6 /* Pods-DeltaDNA tvOS Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DeltaDNA tvOS Tests.release.xcconfig"; path = "Tests/Pods/Target Support Files/Pods-DeltaDNA tvOS Tests/Pods-DeltaDNA tvOS Tests.release.xcconfig"; sourceTree = "<group>"; };
+		DBBF3347BE53332EC63C4DD1 /* Pods_DeltaDNA_iOS_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DeltaDNA_iOS_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DC5FDFD8337EC612AB2B8483 /* Pods_DeltaDNA_tvOS_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DeltaDNA_tvOS_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -328,7 +328,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A8B8DB3686B192A35B63F0A6 /* libPods-DeltaDNA iOS Tests.a in Frameworks */,
+				1563679A7BBA871614FF22A4 /* Pods_DeltaDNA_iOS_Tests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -336,28 +336,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				386735B8FEDABB9E4A4CA32C /* Pods_DeltaDNA_tvOS_Tests.framework in Frameworks */,
+				BE8BC6CE991955F4F252F48F /* Pods_DeltaDNA_tvOS_Tests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1F74FFAF1E4935FF99A22A51 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DBBF3347BE53332EC63C4DD1 /* Pods_DeltaDNA_iOS_Tests.framework */,
+				DC5FDFD8337EC612AB2B8483 /* Pods_DeltaDNA_tvOS_Tests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		30F944A71D786E3A0021E6FA /* DeltaDNA */ = {
 			isa = PBXGroup;
 			children = (
 				30F944A81D786E3A0021E6FA /* Info.plist */,
 			);
 			path = DeltaDNA;
-			sourceTree = "<group>";
-		};
-		3B22C9661D8347653333A0F3 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				31BB975B0746DF1DA6D51C9A /* Pods_DeltaDNA_tvOS_Tests.framework */,
-				076B4EC072FBCA3FB406D2B4 /* libPods-DeltaDNA iOS Tests.a */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		6318EAD91CAD26FD00E9A72C /* Extensions */ = {
@@ -396,8 +396,8 @@
 				6365560D1C60F598004153E7 /* Framework */,
 				30F944A71D786E3A0021E6FA /* DeltaDNA */,
 				636555F81C60F4BD004153E7 /* Products */,
-				B08C12C9735F5C3425C3E193 /* Pods */,
-				3B22C9661D8347653333A0F3 /* Frameworks */,
+				C0A0A3415B8D93441863560A /* Pods */,
+				1F74FFAF1E4935FF99A22A51 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -608,13 +608,13 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
-		B08C12C9735F5C3425C3E193 /* Pods */ = {
+		C0A0A3415B8D93441863560A /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				E7E746D2E40D5762C4AF1097 /* Pods-DeltaDNA iOS Tests.debug.xcconfig */,
-				DB4588CC66B911AF2CF345B6 /* Pods-DeltaDNA iOS Tests.release.xcconfig */,
-				967F8058FFACDBF7FC90FFAF /* Pods-DeltaDNA tvOS Tests.debug.xcconfig */,
-				E884C48B5803EBAB8239FE90 /* Pods-DeltaDNA tvOS Tests.release.xcconfig */,
+				4230748C72C905B3FCB0D3E7 /* Pods-DeltaDNA iOS Tests.debug.xcconfig */,
+				1545773A5B3C2343D5D24F5D /* Pods-DeltaDNA iOS Tests.release.xcconfig */,
+				D432A4CBC0CAD37B699A59A3 /* Pods-DeltaDNA tvOS Tests.debug.xcconfig */,
+				D7BE3517D44F9BE8A36CB4A6 /* Pods-DeltaDNA tvOS Tests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -746,10 +746,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 636556831C60F683004153E7 /* Build configuration list for PBXNativeTarget "DeltaDNA iOS Tests" */;
 			buildPhases = (
-				EAE7875AFF426E3A7AA7EA0F /* [CP] Check Pods Manifest.lock */,
+				BCEFA2B596F704ED7A6FF320 /* [CP] Check Pods Manifest.lock */,
 				636556771C60F683004153E7 /* Sources */,
 				636556781C60F683004153E7 /* Frameworks */,
 				636556791C60F683004153E7 /* Resources */,
+				AB69FD4C36E921D49ACA41A9 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -765,11 +766,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 636556B31C60FD6C004153E7 /* Build configuration list for PBXNativeTarget "DeltaDNA tvOS Tests" */;
 			buildPhases = (
-				FBE980C2E0B2356BDE34C385 /* [CP] Check Pods Manifest.lock */,
+				2FA6647ABB65F7ED8E88A45C /* [CP] Check Pods Manifest.lock */,
 				636556A71C60FD6C004153E7 /* Sources */,
 				636556A81C60FD6C004153E7 /* Frameworks */,
 				636556A91C60FD6C004153E7 /* Resources */,
-				91EE013F7C2E67BB34821B02 /* [CP] Embed Pods Frameworks */,
+				F85B738B43A39E6F5229273E /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -864,17 +865,35 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		91EE013F7C2E67BB34821B02 /* [CP] Embed Pods Frameworks */ = {
+		2FA6647ABB65F7ED8E88A45C /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Tests/Pods/Target Support Files/Pods-DeltaDNA tvOS Tests/Pods-DeltaDNA tvOS Tests-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Expecta-framework/Expecta.framework",
-				"${BUILT_PRODUCTS_DIR}/OCHamcrest-framework/OCHamcrest.framework",
-				"${BUILT_PRODUCTS_DIR}/OCMockito-framework/OCMockito.framework",
-				"${BUILT_PRODUCTS_DIR}/Specta-framework/Specta.framework",
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-DeltaDNA tvOS Tests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AB69FD4C36E921D49ACA41A9 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Tests/Pods/Target Support Files/Pods-DeltaDNA iOS Tests/Pods-DeltaDNA iOS Tests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Expecta-iOS/Expecta.framework",
+				"${BUILT_PRODUCTS_DIR}/OCHamcrest-iOS/OCHamcrest.framework",
+				"${BUILT_PRODUCTS_DIR}/OCMockito-iOS/OCMockito.framework",
+				"${BUILT_PRODUCTS_DIR}/Specta-iOS/Specta.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -885,10 +904,10 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Tests/Pods/Target Support Files/Pods-DeltaDNA tvOS Tests/Pods-DeltaDNA tvOS Tests-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Tests/Pods/Target Support Files/Pods-DeltaDNA iOS Tests/Pods-DeltaDNA iOS Tests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		EAE7875AFF426E3A7AA7EA0F /* [CP] Check Pods Manifest.lock */ = {
+		BCEFA2B596F704ED7A6FF320 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -906,22 +925,28 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		FBE980C2E0B2356BDE34C385 /* [CP] Check Pods Manifest.lock */ = {
+		F85B738B43A39E6F5229273E /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
+				"${SRCROOT}/Tests/Pods/Target Support Files/Pods-DeltaDNA tvOS Tests/Pods-DeltaDNA tvOS Tests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Expecta-tvOS/Expecta.framework",
+				"${BUILT_PRODUCTS_DIR}/OCHamcrest-tvOS/OCHamcrest.framework",
+				"${BUILT_PRODUCTS_DIR}/OCMockito-tvOS/OCMockito.framework",
+				"${BUILT_PRODUCTS_DIR}/Specta-tvOS/Specta.framework",
 			);
-			name = "[CP] Check Pods Manifest.lock";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-DeltaDNA tvOS Tests-checkManifestLockResult.txt",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Expecta.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OCHamcrest.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OCMockito.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Specta.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "\"${SRCROOT}/Tests/Pods/Target Support Files/Pods-DeltaDNA tvOS Tests/Pods-DeltaDNA tvOS Tests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1383,7 +1408,7 @@
 		};
 		636556841C60F683004153E7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E7E746D2E40D5762C4AF1097 /* Pods-DeltaDNA iOS Tests.debug.xcconfig */;
+			baseConfigurationReference = 4230748C72C905B3FCB0D3E7 /* Pods-DeltaDNA iOS Tests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -1432,7 +1457,7 @@
 		};
 		636556851C60F683004153E7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DB4588CC66B911AF2CF345B6 /* Pods-DeltaDNA iOS Tests.release.xcconfig */;
+			baseConfigurationReference = 1545773A5B3C2343D5D24F5D /* Pods-DeltaDNA iOS Tests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -1475,7 +1500,7 @@
 		};
 		636556B41C60FD6C004153E7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 967F8058FFACDBF7FC90FFAF /* Pods-DeltaDNA tvOS Tests.debug.xcconfig */;
+			baseConfigurationReference = D432A4CBC0CAD37B699A59A3 /* Pods-DeltaDNA tvOS Tests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -1523,7 +1548,7 @@
 		};
 		636556B51C60FD6C004153E7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E884C48B5803EBAB8239FE90 /* Pods-DeltaDNA tvOS Tests.release.xcconfig */;
+			baseConfigurationReference = D7BE3517D44F9BE8A36CB4A6 /* Pods-DeltaDNA tvOS Tests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";

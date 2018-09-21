@@ -149,7 +149,7 @@ describe(@"user manager", ^{
         expect(userManager.msSinceFirstSession).to.equal(0);
         NSDate *firstSession = [NSDate dateWithTimeIntervalSinceNow:-10];
         userManager.firstSession = firstSession;
-        expect(userManager.msSinceFirstSession).to.beCloseToWithin(10000, 1);  // give/take 1 ms
+        expect(userManager.msSinceFirstSession).to.beCloseToWithin(10000, 5);  // give/take 5 ms
     });
     
     it(@"returns ms since last session", ^{
@@ -157,7 +157,7 @@ describe(@"user manager", ^{
         expect(userManager.msSinceLastSession).to.equal(0);
         NSDate *lastSession = [NSDate dateWithTimeIntervalSinceNow:-10];
         userManager.lastSession = lastSession;
-        expect(userManager.msSinceLastSession).to.beCloseToWithin(10000, 1);  // give/take 1 ms
+        expect(userManager.msSinceLastSession).to.beCloseToWithin(10000, 5);  // give/take 5 ms
     });
     
     it(@"records the advertising id", ^{
