@@ -21,6 +21,7 @@ extern NSString *const DDNA_ENGAGE_API_VERSION;
 
 extern NSString *const DDNA_EVENT_STORAGE_PATH;
 extern NSString *const DDNA_ENGAGE_STORAGE_PATH;
+extern NSString *const DDNA_ACTION_STORAGE_PATH;
 
 extern NSUInteger const DDNA_MAX_EVENT_STORE_BYTES;
 

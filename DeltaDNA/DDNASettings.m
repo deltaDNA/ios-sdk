@@ -21,6 +21,7 @@ NSString *const DDNA_ENGAGE_API_VERSION = @"4";
 
 NSString *const DDNA_EVENT_STORAGE_PATH = @"{persistent_path}";
 NSString *const DDNA_ENGAGE_STORAGE_PATH = @"{persistent_path}";
+NSString *const DDNA_ACTION_STORAGE_PATH = @"{persistent_path}";
 
 NSUInteger const DDNA_MAX_EVENT_STORE_BYTES = 1024 * 1024;
 

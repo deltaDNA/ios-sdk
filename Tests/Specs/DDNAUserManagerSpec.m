@@ -160,6 +160,18 @@ describe(@"user manager", ^{
         expect(userManager.msSinceLastSession).to.beCloseToWithin(10000, 5);  // give/take 5 ms
     });
     
+    it (@"records the cross game user id", ^{
+        expect(userManager.crossGameUserId).to.beNil();
+        userManager.crossGameUserId = @"id";
+        expect(userManager.crossGameUserId).to.equal(@"id");
+    });
+    
+    it(@"clears the cross game user id", ^{
+        userManager.crossGameUserId = @"id";
+        [userManager clearPersistentData];
+        expect(userManager.crossGameUserId).to.beNil();
+    });
+    
     it(@"records the advertising id", ^{
         
         expect(userManager.advertisingId).to.beNil();

@@ -228,6 +228,11 @@
     [[DDNASDK sharedInstance] clearPersistentData];
 }
 
+- (IBAction)setCrossGameUserId:(id)sender {
+    NSString* crossId = [self.crossGameUserId text];
+    [[DDNASDK sharedInstance] setCrossGameUserId:crossId];
+}
+
 #pragma mark - DDNASDKDelegate
 
 - (void)didStartSdk

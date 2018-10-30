@@ -25,18 +25,20 @@
 @property (nonatomic, strong) NSDictionary *eventSchema;
 @property (nonatomic, strong) NSOrderedSet<DDNAEventTrigger *> *eventTriggers;
 @property (nonatomic, weak) id<DDNASdkInterface> sdk;
+@property (nonatomic, weak) DDNAActionStore *store;
 @property (nonatomic, strong) NSMutableOrderedSet< id<DDNAEventActionHandler> > *handlers;
 
 @end
 
 @implementation DDNAEventAction
 
-- (instancetype)initWithEventSchema:(NSDictionary *)eventSchema eventTriggers:(NSOrderedSet<DDNAEventTrigger *> *)eventTriggers sdk:(id<DDNASdkInterface>)sdk
+- (instancetype)initWithEventSchema:(NSDictionary *)eventSchema eventTriggers:(NSOrderedSet<DDNAEventTrigger *> *)eventTriggers sdk:(id<DDNASdkInterface>)sdk store:(DDNAActionStore *)store
 {
     if ((self = [super init])) {
         self.eventSchema = [NSDictionary dictionaryWithDictionary:eventSchema];
         self.eventTriggers = eventTriggers;
         self.sdk = sdk;
+        self.store = store;
         self.handlers = [NSMutableOrderedSet orderedSet];
     }
     return self;
@@ -52,7 +54,7 @@
     for (DDNAEventTrigger *t in self.eventTriggers) {
         if ([t respondsToEventSchema:self.eventSchema]) {
             for (id<DDNAEventActionHandler> h in self.handlers) {
-                if ([h handleEventTrigger:t]) {
+                if ([h handleEventTrigger:t store:self.store]) {
                     break;
                 }
             }

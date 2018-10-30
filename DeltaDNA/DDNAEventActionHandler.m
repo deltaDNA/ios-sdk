@@ -14,6 +14,7 @@
 // limitations under the License.
 //
 
+#import "DDNAActionStore.h"
 #import "DDNAEventActionHandler.h"
 #import "DDNAEventTrigger.h"
 #import "DDNAEngagement.h"
@@ -38,10 +39,18 @@
     return self;
 }
 
-- (BOOL)handleEventTrigger:(DDNAEventTrigger *)eventTrigger {
+- (BOOL)handleEventTrigger:(DDNAEventTrigger *)eventTrigger store:(DDNAActionStore *)store
+{
     if ([eventTrigger.actionType isEqualToString:self.type]) {
-        NSDictionary *parameters = [NSDictionary dictionaryWithDictionary:eventTrigger.response[@"parameters"]];
-        self.handler(parameters);
+        NSDictionary *persistedParams = [store parametersForTrigger:eventTrigger];
+        
+        if (persistedParams) {
+            [store removeForTrigger:eventTrigger];
+            self.handler(persistedParams);
+        } else {
+            self.handler([NSDictionary dictionaryWithDictionary:eventTrigger.response[@"parameters"]]);
+        }
+        
         return YES;
     }
     return NO;
@@ -71,22 +80,32 @@
     return self;
 }
 
-- (BOOL)handleEventTrigger:(DDNAEventTrigger *)eventTrigger
+- (BOOL)handleEventTrigger:(DDNAEventTrigger *)eventTrigger store:(DDNAActionStore *)store
 {
     if ([eventTrigger.actionType isEqualToString:self.type]) {
-        
         // Only fire if the resources are already loaded for the trigger
         NSString *imageUrl = eventTrigger.response[@"image"] ? eventTrigger.response[@"image"][@"url"] : nil;
         if (imageUrl && [DDNAImageCache.sharedInstance imageForURL:[NSURL URLWithString:imageUrl]]) {
+            NSDictionary *persistedParams = [store parametersForTrigger:eventTrigger];
+            NSDictionary *response = [NSMutableDictionary dictionaryWithDictionary:eventTrigger.response];
+            if (persistedParams) {
+                [response setValue:persistedParams forKey:@"parameters"];
+            }
+            
             DDNAEngagement *dummyEngagement = [[DDNAEngagement alloc] initWithDecisionPoint:@"trigger"];
             dummyEngagement.statusCode = 200;
-            dummyEngagement.raw = [NSString stringWithContentsOfDictionary:eventTrigger.response];
+            dummyEngagement.raw = [NSString stringWithContentsOfDictionary:response];
             
             DDNAImageMessage *imageMessage = [[DDNAImageMessage alloc] initWithEngagement:dummyEngagement];
             imageMessage.delegate = self;
             // the ImageMessage only holds a weak ref to us, this ensure we stick about to get the response
             // on the delegate
             self.strongSelf = self;
+            
+            if (persistedParams) {
+                [store removeForTrigger:eventTrigger];
+            }
+            
             [imageMessage fetchResources];
             
             return YES;
