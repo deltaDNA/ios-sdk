@@ -15,6 +15,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "DDNAActionStore.h"
 #import "DDNASdkInterface.h"
 
 @class DDNASDK;
@@ -24,6 +25,9 @@
 @interface DDNATrackingSdk : NSObject <DDNASdkInterface>
 
 @property (nonatomic, assign, readonly) BOOL taskQueueSuspended;
+
+@property (nonatomic, strong, readonly) DDNAActionStore *actionStore;
+
 @property (nonatomic, strong, readonly) NSSet<NSString *> *eventWhitelist;
 @property (nonatomic, strong, readonly) NSSet<NSString *> *decisionPointWhitelist;
 @property (nonatomic, strong, readonly) NSSet<NSString *> *imageCacheList;

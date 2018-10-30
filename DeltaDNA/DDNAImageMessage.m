@@ -20,6 +20,7 @@
 #import "DDNASettings.h"
 #import "DDNAImageCache.h"
 #import "DDNAEvent.h"
+#import "NSDictionary+DeltaDNA.h"
 #import "NSString+DeltaDNA.h"
 
 @interface DDNAImageMessage ()
@@ -485,21 +486,29 @@ BOOL validConfiguration(NSDictionary *configuration)
 - (void)actionHandlerFor:(NSString*)name withAction: (NSDictionary*)action
 {
     NSString* type = action[@"type"];
-    NSString* value = action[@"value"];
+    NSObject* value = action[@"value"];
     
     if ([type isEqualToStringCaseInsensitive:@"none"]) {
         return; // do nothing
     }
     else if ([type isEqualToStringCaseInsensitive:@"action"]) {
         if (value != nil) {
-            [self.delegate onActionImageMessage:self name:name type:type value:value];
+            [self.delegate onActionImageMessage:self name:name type:type value:(NSString *) value];
         }
     }
     else if ([type isEqualToStringCaseInsensitive:@"link"]) {
         if (value != nil) {
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:value]];
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:(NSString *)value]];
         }
-        [self.delegate onActionImageMessage:self name:name type:type value:value];
+        [self.delegate onActionImageMessage:self name:name type:type value:(NSString *)value];
+    }
+    else if ([type isEqualToStringCaseInsensitive:@"store"]) {
+        if (value != nil) {
+            NSString *v = ((NSDictionary *) value)[@"IOS"];
+            if (v) {
+                [self.delegate onActionImageMessage:self name:name type:type value:v];
+            }
+        }
     }
     else if ([type isEqualToStringCaseInsensitive:@"dismiss"]) {
         value = nil;

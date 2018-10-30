@@ -222,6 +222,17 @@
     return self.userManager.userId;
 }
 
+- (NSString *) crossGameUserId
+{
+    return self.userManager.crossGameUserId;
+}
+
+- (void) setCrossGameUserId:(NSString *)crossGameUserId
+{
+    [self.userManager setCrossGameUserId:crossGameUserId];
+    [self.impl setCrossGameUserId:crossGameUserId];
+}
+
 - (void) setPushNotificationToken:(NSString *)pushNotificationToken
 {
     _pushNotificationToken = pushNotificationToken;

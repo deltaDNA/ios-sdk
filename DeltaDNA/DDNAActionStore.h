@@ -16,22 +16,20 @@
 
 #import <Foundation/Foundation.h>
 
-@interface DDNAUserManager : NSObject
+#import "DDNAEventTrigger.h"
 
-@property (nonatomic, copy) NSString *userId;
-@property (nonatomic, assign) BOOL doNotTrack;
-@property (nonatomic, assign) BOOL forgotten;
-@property (nonatomic, assign, getter=isNewPlayer) BOOL newPlayer;
-@property (nonatomic, strong) NSDate *firstSession;
-@property (nonatomic, strong) NSDate *lastSession;
-@property (nonatomic, strong) NSString *crossGameUserId;
-@property (nonatomic, strong) NSString *advertisingId;
+/**
+ Provides a store for recording persistent actions.
+ */
+@interface DDNAActionStore : NSObject
 
-- (instancetype)initWithUserDefaults:(NSUserDefaults *)userDefaults;
+- (instancetype)initWithPath:(NSString *)path;
 
-- (NSUInteger)msSinceFirstSession;
-- (NSUInteger)msSinceLastSession;
+- (void)setParameters:(NSDictionary *)parameters forTrigger:(DDNAEventTrigger *)trigger;
+- (NSDictionary *)parametersForTrigger:(DDNAEventTrigger *)trigger;
+- (void)removeForTrigger:(DDNAEventTrigger *)trigger;
+- (void)clear;
 
-- (void)clearPersistentData;
+- (instancetype)init NS_UNAVAILABLE;
 
 @end

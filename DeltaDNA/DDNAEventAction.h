@@ -17,6 +17,7 @@
 #import <Foundation/Foundation.h>
 #import "DDNAEventActionHandler.h"
 
+@class DDNAActionStore;
 @class DDNAEventTrigger;
 @protocol DDNASdkInterface;
 
@@ -25,7 +26,7 @@
 /**
  An action associated with an event, and the event triggers that could contain a matching campaign.
  */
-- (instancetype)initWithEventSchema:(NSDictionary *)eventSchema eventTriggers:(NSOrderedSet<DDNAEventTrigger *> *)eventTriggers sdk:(id<DDNASdkInterface>)sdk;
+- (instancetype)initWithEventSchema:(NSDictionary *)eventSchema eventTriggers:(NSOrderedSet<DDNAEventTrigger *> *)eventTriggers sdk:(id<DDNASdkInterface>)sdk store:(DDNAActionStore *)store;
 
 /**
  Register a handler to handle an event trigger campaign action.

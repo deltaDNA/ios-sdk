@@ -43,6 +43,7 @@
 - (void)upload;
 - (void)clearPersistentData;
 
+- (void)setCrossGameUserId:(NSString *)crossGameUserId;
 - (void)setPushNotificationToken:(NSString *)pushNotificationToken;
 
 @end

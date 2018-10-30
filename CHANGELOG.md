@@ -1,5 +1,10 @@
 # Change Log
 
+## [4.11.0](https://github.com/deltaDNA/ios-sdk/releases/tag/4.11.0) (YYYY-MM-DD)
+### Added
+- Support for cross promotion.
+- Support for image message store action.
+
 ## [4.10.1](https://github.com/deltaDNA/ios-sdk/releases/tag/4.10.1) (2018-09-20)
 ### Fixed
 - Missing device identifiers for new iPads and iPhones.

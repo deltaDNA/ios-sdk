@@ -169,6 +169,16 @@ One of the actions Engage supports is an Image Message.  This displays a custom 
 }];
 ```
 
+### Cross Promotion
+
+To register a user for cross promotion between multiple games the user needs to sign into a service which can provide user identification. Once the user has been signed in the ID can be set in the SDK:
+```objective-c
+[[DDNASDK sharedInstance] setCrossGameUserId:crossGameUserId];
+```
+On the next session the SDK will download a new configuration with cross promotion campaigns relevant to the user.
+
+When a cross promotion campaign with a store action has been acted on by the user, the SDK will return the store link for the iOS platform.
+
 ### Forget Me API
 
 In order to help with GDPR compliance, calling `forgetMe` on the sdk sends an event to the platform indicating the user wishes their previously collected data to be deleted.  Once called the sdk will no longer record events and Engage requests will return empty responses.  No additional calls are required on the sdk since it will appear to work correctly from the caller's point of view.  The sdk can be reset by either calling `clearPersistantData` or starting with a new user id.
