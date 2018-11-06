@@ -105,6 +105,46 @@ describe(@"event action", ^{
         [given([t campaignId]) willReturnInt:1];
         [given([t priority]) willReturnInt:2];
         [given([t variantId]) willReturnInt:3];
+        [given([t campaignName]) willReturn:@"campaignName"];
+        [given([t variantName]) willReturn:@"variantName"];
+        [given([t actionType]) willReturn:@"gameParameters"];
+        [given([t count]) willReturnInt:4];
+        
+        DDNAEventAction *a = [[DDNAEventAction alloc] initWithEventSchema:e.dictionary eventTriggers:triggers sdk:mockSdk];
+        [a run];
+        
+        HCArgumentCaptor *argument = [[HCArgumentCaptor alloc] init];
+        [verify(mockSdk) recordEvent:(id)argument];
+        DDNAEvent *capturedEvent = argument.value;
+        NSDictionary *schema = capturedEvent.dictionary;
+        expect(schema[@"eventName"]).to.equal(@"ddnaEventTriggeredAction");
+        NSDictionary *eventParams = schema[@"eventParams"];
+        expect(eventParams.allKeys).to.contain(@"ddnaEventTriggeredCampaignID");
+        expect(eventParams[@"ddnaEventTriggeredCampaignID"]).to.equal(@1);
+        expect(eventParams.allKeys).to.contain(@"ddnaEventTriggeredCampaignPriority");
+        expect(eventParams[@"ddnaEventTriggeredCampaignPriority"]).to.equal(@2);
+        expect(eventParams.allKeys).to.contain(@"ddnaEventTriggeredVariantID");
+        expect(eventParams[@"ddnaEventTriggeredVariantID"]).to.equal(@3);
+        expect(eventParams.allKeys).to.contain(@"ddnaEventTriggeredCampaignName");
+        expect(eventParams[@"ddnaEventTriggeredCampaignName"]).to.equal(@"campaignName");
+        expect(eventParams.allKeys).to.contain(@"ddnaEventTriggeredVariantName");
+        expect(eventParams[@"ddnaEventTriggeredVariantName"]).to.equal(@"variantName");
+        expect(eventParams.allKeys).to.contain(@"ddnaEventTriggeredActionType");
+        expect(eventParams[@"ddnaEventTriggeredActionType"]).to.equal(@"gameParameters");
+        expect(eventParams.allKeys).to.contain(@"ddnaEventTriggeredSessionCount");
+        expect(eventParams[@"ddnaEventTriggeredSessionCount"]).to.equal(@4);
+    });
+    
+    it(@"posts actionTriggered event missing optional fields", ^{
+        DDNAEvent *e = mock([DDNAEvent class]);
+        DDNAEventTrigger *t = mock([DDNAEventTrigger class]);
+        NSOrderedSet *triggers = [NSOrderedSet orderedSetWithArray:@[t]];
+        id<DDNASdkInterface> mockSdk = mockProtocol(@protocol(DDNASdkInterface));
+        
+        [given([t respondsToEventSchema:anything()]) willReturnBool:YES];
+        [given([t campaignId]) willReturnInt:1];
+        [given([t priority]) willReturnInt:2];
+        [given([t variantId]) willReturnInt:3];
         [given([t actionType]) willReturn:@"gameParameters"];
         [given([t count]) willReturnInt:4];
         
@@ -127,8 +167,10 @@ describe(@"event action", ^{
         expect(eventParams[@"ddnaEventTriggeredActionType"]).to.equal(@"gameParameters");
         expect(eventParams.allKeys).to.contain(@"ddnaEventTriggeredSessionCount");
         expect(eventParams[@"ddnaEventTriggeredSessionCount"]).to.equal(@4);
+        
+        expect(eventParams.allKeys).notTo.contain(@"ddnaEventTriggeredCampaignName");
+        expect(eventParams.allKeys).notTo.contain(@"ddnaEventTriggeredVariantName");
     });
-    
 });
 
 SpecEnd
