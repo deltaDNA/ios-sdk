@@ -25,6 +25,8 @@
 @property (nonatomic, strong, readonly) NSDictionary *response;
 @property (nonatomic, assign, readonly) NSUInteger campaignId;
 @property (nonatomic, assign, readonly) NSUInteger variantId;
+@property (nonatomic, copy, readonly) NSString *campaignName;
+@property (nonatomic, copy, readonly) NSString *variantName;
 @property (nonatomic, assign, readonly) NSInteger priority;
 @property (nonatomic, strong, readonly) NSNumber *limit;
 @property (nonatomic, assign, readonly) NSUInteger count;

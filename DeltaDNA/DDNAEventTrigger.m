@@ -23,6 +23,8 @@
 @property (nonatomic, strong) NSDictionary *response;
 @property (nonatomic, assign) NSUInteger campaignId;
 @property (nonatomic, assign) NSUInteger variantId;
+@property (nonatomic, copy) NSString *campaignName;
+@property (nonatomic, copy) NSString *variantName;
 @property (nonatomic, assign) NSInteger priority;
 @property (nonatomic, strong) NSNumber *limit;
 @property (nonatomic, strong) NSArray<NSDictionary *> *condition;
@@ -39,6 +41,8 @@
         self.response = [NSDictionary dictionaryWithDictionary:dictionary[@"response"]];
         self.campaignId = [dictionary[@"campaignID"] unsignedIntegerValue];
         self.variantId = [dictionary[@"variantID"] unsignedIntegerValue];
+        self.campaignName = self.response[@"eventParams"][@"responseEngagementName"];
+        self.variantName = self.response[@"eventParams"][@"responseVariantName"];
         self.priority = [dictionary[@"priority"] integerValue];
         self.limit = dictionary[@"limit"];
         self.condition = [NSArray arrayWithArray:dictionary[@"condition"]];

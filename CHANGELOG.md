@@ -5,6 +5,10 @@
 - Support for cross promotion.
 - Support for image message store action.
 
+## [4.10.2](https://github.com/deltaDNA/ios-sdk/releases/tag/4.10.2) (2018-11-07)
+### Fixed
+- Missing fields in ddnaEventTriggeredAction event.
+
 ## [4.10.1](https://github.com/deltaDNA/ios-sdk/releases/tag/4.10.1) (2018-09-20)
 ### Fixed
 - Missing device identifiers for new iPads and iPhones.

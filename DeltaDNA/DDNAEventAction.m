@@ -66,6 +66,13 @@
             [actionTriggered setParam:t.actionType forKey:@"ddnaEventTriggeredActionType"];
             [actionTriggered setParam:[NSNumber numberWithUnsignedInteger:t.count] forKey:@"ddnaEventTriggeredSessionCount"];
             
+            if (t.campaignName) {
+                [actionTriggered setParam:t.campaignName forKey:@"ddnaEventTriggeredCampaignName"];
+            }
+            if (t.variantName) {
+                [actionTriggered setParam:t.variantName forKey:@"ddnaEventTriggeredVariantName"];
+            }
+            
             [self.sdk recordEvent:actionTriggered];
             return;
         }

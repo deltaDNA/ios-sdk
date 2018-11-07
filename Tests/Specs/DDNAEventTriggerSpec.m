@@ -40,7 +40,11 @@ describe(@"event trigger", ^{
         DDNAEventTrigger *t = [[DDNAEventTrigger alloc] initWithDictionary:@{
             @"eventName": @"testEvent",
             @"response": @{
-                @"parameters": @{ @"a": @1 }
+                @"parameters": @{ @"a": @1 },
+                @"eventParams": @{
+                    @"responseEngagementName": @"campaignName",
+                    @"responseVariantName": @"variantName"
+                }
             },
             @"campaignID": @1,
             @"variantID": @2,
@@ -50,9 +54,17 @@ describe(@"event trigger", ^{
         
         expect(t.eventName).to.equal(@"testEvent");
         expect(t.actionType).to.equal(@"gameParameters");
-        expect(t.response).to.equal(@{@"parameters": @{ @"a": @1 }});
+        expect(t.response).to.equal(@{
+            @"parameters": @{ @"a": @1 },
+            @"eventParams": @{
+                @"responseEngagementName": @"campaignName",
+                @"responseVariantName": @"variantName"
+            }
+        });
         expect(t.campaignId).to.equal(1);
         expect(t.variantId).to.equal(2);
+        expect(t.campaignName).to.equal(@"campaignName");
+        expect(t.variantName).to.equal(@"variantName");
         expect(t.priority).to.equal(3);
         expect(t.limit).to.equal(4);
     });
@@ -66,6 +78,8 @@ describe(@"event trigger", ^{
         expect(t.response).to.equal(@{});
         expect(t.campaignId).to.equal(0);
         expect(t.variantId).to.equal(0);
+        expect(t.campaignName).to.beNil();
+        expect(t.variantName).to.beNil();
         expect(t.priority).to.equal(0);
         expect(t.limit).to.beNil();
     });
