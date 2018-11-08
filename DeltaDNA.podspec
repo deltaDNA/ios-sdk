@@ -1,11 +1,11 @@
 Pod::Spec.new do |s|
     s.name = 'DeltaDNA'
-    s.version = '4.10.2'
+    s.version = '4.11-beta1'
     s.license = { :type => 'APACHE', :file => 'LICENSE' }
     s.summary = 'A gaming analytics platform.'
     s.homepage = 'https://deltadna.com'
-    s.authors = { 'David White' => 'david.white@deltadna.com' }
-    s.source = { :git => 'https://github.com/deltaDNA/ios-sdk.git', :tag => s.version }
+    s.authors = { 'David White' => 'david.white@deltadna.com', 'Martin Bella' => 'martin.bella@deltadna.com' }
+    s.source = { :git => 'https://github.com/deltaDNA/ios-sdk.git', :branch => 'beta', :tag => s.version }
     s.ios.deployment_target = '9.0'
     s.tvos.deployment_target = '9.0'
     s.requires_arc = true
