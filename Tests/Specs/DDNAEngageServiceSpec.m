@@ -229,7 +229,7 @@ describe(@"engage service", ^{
         // Bad request, returns value from cache
         fakeFactory.fakeNetworkRequest = [[DDNAFakeNetworkRequest alloc] initWithURL:@"http://engage.net"
                                                                                 data:@""
-                                                                          statusCode:400
+                                                                          statusCode:500
                                                                                error:nil];
         
         [engageService request:engageRequest handler:^(NSString *response, NSInteger statusCode, NSError *connectionError) {
@@ -239,7 +239,7 @@ describe(@"engage service", ^{
         }];
         
         expect(resultResponse).will.equal(@"{\"isCachedResponse\":true,\"parameters\":{}}");
-        expect(resultStatusCode).will.equal(400);
+        expect(resultStatusCode).will.equal(500);
         expect(resultError).will.beNil();
         
         // Good response again
@@ -258,6 +258,67 @@ describe(@"engage service", ^{
         expect(resultStatusCode).will.equal(200);
         expect(resultError).will.beNil();
         
+    });
+    
+    it(@"skips the cache on unavailable engagements", ^{
+        DDNAEngageRequest *engageRequest = [[DDNAEngageRequest alloc] initWithDecisionPoint:@"testDecisionPoint"
+            userId:@"user-id-12345"
+            sessionId:@"session-id-12345"];
+        
+        __block NSString *resultResponse;
+        __block NSInteger resultStatusCode;
+        __block NSError *resultError;
+        
+        // good response, which should be added to cache
+        fakeFactory.fakeNetworkRequest = [[DDNAFakeNetworkRequest alloc]
+            initWithURL:@"http://engage.net"
+            data:@"{\"parameters\":{}}"
+            statusCode:200
+            error:nil];
+        
+        [engageService request:engageRequest handler:^(NSString *response, NSInteger statusCode, NSError *connectionError) {
+            resultResponse = response;
+            resultStatusCode = statusCode;
+            resultError = connectionError;
+        }];
+        
+        expect(resultResponse).will.equal(@"{\"parameters\":{}}");
+        expect(resultStatusCode).will.equal(200);
+        expect(resultError).will.beNil();
+        
+        // bad request, should not return value from cache
+        fakeFactory.fakeNetworkRequest = [[DDNAFakeNetworkRequest alloc]
+            initWithURL:@"http://engage.net"
+            data:@""
+            statusCode:400
+            error:nil];
+        
+        [engageService request:engageRequest handler:^(NSString *response, NSInteger statusCode, NSError *connectionError) {
+            resultResponse = response;
+            resultStatusCode = statusCode;
+            resultError = connectionError;
+        }];
+        
+        expect(resultResponse).will.equal(@"");
+        expect(resultStatusCode).will.equal(400);
+        expect(resultError).will.beNil();
+        
+        // good response again
+        fakeFactory.fakeNetworkRequest = [[DDNAFakeNetworkRequest alloc]
+            initWithURL:@"http://engage.net"
+            data:@"{\"parameters\":{\"colour\":\"blue\"}}"
+            statusCode:200
+            error:nil];
+        
+        [engageService request:engageRequest handler:^(NSString *response, NSInteger statusCode, NSError *connectionError) {
+            resultResponse = response;
+            resultStatusCode = statusCode;
+            resultError = connectionError;
+        }];
+        
+        expect(resultResponse).will.equal(@"{\"parameters\":{\"colour\":\"blue\"}}");
+        expect(resultStatusCode).will.equal(200);
+        expect(resultError).will.beNil();
     });
     
     it(@"works with a disabled cache", ^{

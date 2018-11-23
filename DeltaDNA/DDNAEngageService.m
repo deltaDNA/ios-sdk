@@ -191,7 +191,7 @@ static NSString *const kEngagementCacheKey = @"Engagement %@(%@)";
         DDNAEngageResponse responseHandler = engagement[@"response"];
         if (responseHandler != nil) {
             NSString *cachedResponse = [self.engageCache objectForKey:[NSString stringWithFormat:kEngagementCacheKey, engageRequest.decisionPoint, engageRequest.flavour]];
-            if (cachedResponse != nil) {
+            if (cachedResponse != nil && !(statusCode >= 400 && statusCode < 500)) {
                 NSMutableDictionary *jsonObj = [NSMutableDictionary dictionaryWithDictionary:[NSDictionary dictionaryWithJSONString:cachedResponse]];
                 [jsonObj setObject:@YES forKey:@"isCachedResponse"];
                 cachedResponse = [NSString stringWithContentsOfDictionary:jsonObj];
