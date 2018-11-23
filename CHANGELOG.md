@@ -8,6 +8,7 @@
 ## [4.10.3](https://github.com/deltaDNA/ios-sdk/releases/tag/4.10.3) (YYYY-MM-DD)
 ### Fixed
 - Don't use cached Engage responses for invalid/deleted/disabled Engagements.
+- Crash when failing to retrieve device locale information on SDK initialisation.
 
 ## [4.10.2](https://github.com/deltaDNA/ios-sdk/releases/tag/4.10.2) (2018-11-07)
 ### Fixed
