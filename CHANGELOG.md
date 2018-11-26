@@ -5,7 +5,7 @@
 - Support for cross promotion.
 - Support for image message store action.
 
-## [4.10.3](https://github.com/deltaDNA/ios-sdk/releases/tag/4.10.3) (YYYY-MM-DD)
+## [4.10.3](https://github.com/deltaDNA/ios-sdk/releases/tag/4.10.3) (2018-11-26)
 ### Fixed
 - Don't use cached Engage responses for invalid/deleted/disabled Engagements.
 - Crash when failing to retrieve device locale information on SDK initialisation.
