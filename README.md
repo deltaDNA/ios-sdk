@@ -85,6 +85,35 @@ DDNAEvent *event = [DDNAEvent eventWithName:@"keyTypes"];
 [[DDNASDK sharedInstance] recordEvent:event];
 ```
 
+### Revenue Tracking
+
+Revenue and IAP data should be tracked on the `transaction` event. This event contains nested objects that allow for the tracking of both virtual and real currency spending. As detailed in the [ISO 4217 standard](https://en.wikipedia.org/wiki/ISO_4217#Active_codes "ISO 4217 standard"), not all real currencies have 2 minor units and thus require conversion into a common form. The `DDNAProduct.ConvertCurrency()` method can be used to ensure the correct currency value is sent. 
+
+For example, to track a purchase made with 550 JP¥: 
+
+```objective-c
+DDNAProduct *productsSpent = [DDNAProduct product];
+[productsSpent setRealCurrencyType:@"JPY" amount: [DDNAProduct convertCurrencyCode:@"JPY" value: 550]] // realCurrencyAmount: 550
+```
+
+And to track a $4.99 purchase: 
+
+```objective-c
+DDNAProduct *productsSpent = [DDNAProduct product];
+[productsSpent setRealCurrencyType:@"USD" amount: [DDNAProduct convertCurrencyCode:@"USD" value: 4.99]] // realCurrencyAmount: 499
+```
+
+These will be converted automatically into a `convertedProductAmount` parameter that is used as a common currency for reporting. 
+
+Receipt validation can also be performed against purchases made via the Apple App Store. To validate in-app purchases made through the Apple App Store the following parameters should be added to the `transaction` event:
+
+* `transactionServer` - the server for which the receipt should be validated against, in this case 'APPLE'
+* `transactionReceipt` - the purchase data as a string not as nested JSON 
+* `transactionID` - the ID of the in-app purchase e.g 100000576198248
+
+When a `transaction` event is received with the above parameters, the receipt will be checked against the store and the resulting event will be tagged with a `revenueValidated` parameter to allow for the filtering out of invalid revenue.
+
+
 ### Event Triggers
 
 All `recordEvent:` methods return a `DDNAEventAction` instance that accepts `DDNAEventActionHandler` callbacks via `addHandler:`.  If a corresponding event-triggered campaign has been setup, the handler that matches the trigger will be actioned as soon as `run` is called on the action.  The current supported actions are Game Parameters and Image Messages.  
