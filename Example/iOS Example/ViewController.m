@@ -29,21 +29,21 @@
     if ([[NSProcessInfo processInfo] environment][@"ENVIRONMENT_KEY"]) {
         return [[NSProcessInfo processInfo] environment][@"ENVIRONMENT_KEY"];
     }
-    return @"55822530117170763508653519413932";
+    return @"18736977816700314824859158415299";
 }
 
 + (NSString *)collectUrl {
     if ([[NSProcessInfo processInfo] environment][@"COLLECT_URL"]) {
         return [[NSProcessInfo processInfo] environment][@"COLLECT_URL"];
     }
-    return @"https://collect2010stst.deltadna.net/collect/api";
+    return @"https://collect13665ttrlv.deltadna.net/collect/api";
 }
 
 + (NSString *)engageUrl {
     if ([[NSProcessInfo processInfo] environment][@"ENGAGE_URL"]) {
         return [[NSProcessInfo processInfo] environment][@"ENGAGE_URL"];
     }
-    return @"https://engage2010stst.deltadna.net";
+    return @"https://engage13665ttrlv.deltadna.net";
 }
 
 @end
@@ -149,7 +149,7 @@
 
 - (IBAction)eventTrigger:(id)sender
 {
-    DDNAEvent *event = [[DDNAEvent alloc] initWithName:@"matchStarted"];
+    DDNAEvent *event = [[DDNAEvent alloc] initWithName:@"gameStarted"];
     [event setParam:@"1" forKey:@"matchID"];
     [event setParam:@"Blue Meadow" forKey:@"matchName"];
     [event setParam:@10 forKey:@"userLevel"];
