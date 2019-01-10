@@ -26,19 +26,21 @@
 @property (nonatomic, strong) NSOrderedSet<DDNAEventTrigger *> *eventTriggers;
 @property (nonatomic, weak) id<DDNASdkInterface> sdk;
 @property (nonatomic, weak) DDNAActionStore *store;
+@property (nonatomic, strong) DDNASettings * settings;
 @property (nonatomic, strong) NSMutableOrderedSet< id<DDNAEventActionHandler> > *handlers;
 
 @end
 
 @implementation DDNAEventAction
 
-- (instancetype)initWithEventSchema:(NSDictionary *)eventSchema eventTriggers:(NSOrderedSet<DDNAEventTrigger *> *)eventTriggers sdk:(id<DDNASdkInterface>)sdk store:(DDNAActionStore *)store
+- (instancetype)initWithEventSchema:(NSDictionary *)eventSchema eventTriggers:(NSOrderedSet<DDNAEventTrigger *> *)eventTriggers sdk:(id<DDNASdkInterface>)sdk store:(DDNAActionStore *)store settings:(DDNASettings *)settings
 {
     if ((self = [super init])) {
         self.eventSchema = [NSDictionary dictionaryWithDictionary:eventSchema];
         self.eventTriggers = eventTriggers;
         self.sdk = sdk;
         self.store = store;
+        self.settings = settings;
         self.handlers = [NSMutableOrderedSet orderedSet];
     }
     return self;
@@ -55,25 +57,27 @@
         if ([t respondsToEventSchema:self.eventSchema]) {
             for (id<DDNAEventActionHandler> h in self.handlers) {
                 if ([h handleEventTrigger:t store:self.store]) {
-                    break;
+                    
+                    // prepare event...
+                    DDNAEvent *actionTriggered = [DDNAEvent eventWithName:@"ddnaEventTriggeredAction"];
+                    [actionTriggered setParam:[NSNumber numberWithUnsignedInteger:t.campaignId] forKey:@"ddnaEventTriggeredCampaignID"];
+                    [actionTriggered setParam:[NSNumber numberWithInteger:t.priority] forKey:@"ddnaEventTriggeredCampaignPriority"];
+                    [actionTriggered setParam:[NSNumber numberWithUnsignedInteger:t.variantId] forKey:@"ddnaEventTriggeredVariantID"];
+                    [actionTriggered setParam:t.actionType forKey:@"ddnaEventTriggeredActionType"];
+                    [actionTriggered setParam:[NSNumber numberWithUnsignedInteger:t.count] forKey:@"ddnaEventTriggeredSessionCount"];
+                    
+                    // send event...
+                    [self.sdk recordEvent:actionTriggered];
+                    
+                    // check if multiple events need handling
+                    if (!self.settings.multipleActionsForEventTriggerEnabled) {
+                        return;
+                    }
+
+                    
                 }
             }
-            // send event...
-            DDNAEvent *actionTriggered = [DDNAEvent eventWithName:@"ddnaEventTriggeredAction"];
-            [actionTriggered setParam:[NSNumber numberWithUnsignedInteger:t.campaignId] forKey:@"ddnaEventTriggeredCampaignID"];
-            [actionTriggered setParam:[NSNumber numberWithInteger:t.priority] forKey:@"ddnaEventTriggeredCampaignPriority"];
-            [actionTriggered setParam:[NSNumber numberWithUnsignedInteger:t.variantId] forKey:@"ddnaEventTriggeredVariantID"];
-            [actionTriggered setParam:t.actionType forKey:@"ddnaEventTriggeredActionType"];
-            [actionTriggered setParam:[NSNumber numberWithUnsignedInteger:t.count] forKey:@"ddnaEventTriggeredSessionCount"];
-            
-            if (t.campaignName) {
-                [actionTriggered setParam:t.campaignName forKey:@"ddnaEventTriggeredCampaignName"];
-            }
-            if (t.variantName) {
-                [actionTriggered setParam:t.variantName forKey:@"ddnaEventTriggeredVariantName"];
-            }
-            
-            [self.sdk recordEvent:actionTriggered];
+
             return;
         }
     }
