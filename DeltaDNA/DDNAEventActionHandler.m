@@ -84,6 +84,7 @@
 {
     if ([eventTrigger.actionType isEqualToString:self.type]) {
         // Only fire if the resources are already loaded for the trigger
+        
         NSString *imageUrl = eventTrigger.response[@"image"] ? eventTrigger.response[@"image"][@"url"] : nil;
         if (imageUrl && [DDNAImageCache.sharedInstance imageForURL:[NSURL URLWithString:imageUrl]]) {
             NSDictionary *persistedParams = [store parametersForTrigger:eventTrigger];

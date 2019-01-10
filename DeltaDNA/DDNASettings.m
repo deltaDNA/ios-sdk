@@ -53,6 +53,8 @@ NSUInteger const DDNA_MAX_EVENT_STORE_BYTES = 1024 * 1024;
 
         self.sessionTimeoutSeconds = 5 * 60;
         self.engageCacheExpirySeconds = 12 * 60 * 60;
+        
+        self.multipleActionsForEventTriggerEnabled = NO;
     }
     return self;
 }
