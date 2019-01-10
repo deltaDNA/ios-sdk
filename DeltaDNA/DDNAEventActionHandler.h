@@ -16,6 +16,7 @@
 
 #import <Foundation/Foundation.h>
 #import "DDNAImageMessage.h"
+#import "DDNASettings.h"
 
 @class DDNAActionStore;
 @class DDNAEventTrigger;
@@ -28,6 +29,8 @@
 @required
 - (BOOL)handleEventTrigger:(DDNAEventTrigger *)eventTrigger store:(DDNAActionStore *)store;
 - (NSString *)type;
+@optional
+- (BOOL)handleEventTrigger:(DDNAEventTrigger *)eventTrigger store:(DDNAActionStore *)store settings:(DDNASettings *)settings;
 
 @end
 
@@ -48,7 +51,7 @@
 @interface DDNAImageMessageHandler : NSObject<DDNAEventActionHandler>
 
 - (instancetype)initWithHandler:(void(^)(DDNAImageMessage *))handler;
-- (BOOL)handleEventTrigger:(DDNAEventTrigger *)eventTrigger store:(DDNAActionStore *)store;
+- (BOOL)handleEventTrigger:(DDNAEventTrigger *)eventTrigger store:(DDNAActionStore *)store settings:(DDNASettings *)settings;
 - (NSString *)type;
 
 @end

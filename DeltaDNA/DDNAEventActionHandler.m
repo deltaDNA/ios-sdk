@@ -39,7 +39,7 @@
     return self;
 }
 
-- (BOOL)handleEventTrigger:(DDNAEventTrigger *)eventTrigger store:(DDNAActionStore *)store
+- (BOOL)handleEventTrigger:(DDNAEventTrigger *)eventTrigger store:(DDNAActionStore *)store settings:(DDNASettings *)settings
 {
     if ([eventTrigger.actionType isEqualToString:self.type]) {
         NSDictionary *persistedParams = [store parametersForTrigger:eventTrigger];
@@ -80,10 +80,14 @@
     return self;
 }
 
-- (BOOL)handleEventTrigger:(DDNAEventTrigger *)eventTrigger store:(DDNAActionStore *)store
+- (BOOL)handleEventTrigger:(DDNAEventTrigger *)eventTrigger store:(DDNAActionStore *)store settings:(DDNASettings *)settings
 {
-    if ([eventTrigger.actionType isEqualToString:self.type]) {
+    BOOL handleImageForMultipleActionsEnabled = NO;
+    
+    if ([eventTrigger.actionType isEqualToString:self.type] && !handleImageForMultipleActionsEnabled) {
         // Only fire if the resources are already loaded for the trigger
+        if (settings.multipleActionsForEventTriggerEnabled) handleImageForMultipleActionsEnabled = YES;
+        
         NSString *imageUrl = eventTrigger.response[@"image"] ? eventTrigger.response[@"image"][@"url"] : nil;
         if (imageUrl && [DDNAImageCache.sharedInstance imageForURL:[NSURL URLWithString:imageUrl]]) {
             NSDictionary *persistedParams = [store parametersForTrigger:eventTrigger];

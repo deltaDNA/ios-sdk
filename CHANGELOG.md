@@ -4,6 +4,7 @@
 ### Added
 - Support for cross promotion.
 - Support for image message store action.
+- Support for multiple Event-Triggered campaign actions from a single event.
 
 ## [4.10.3](https://github.com/deltaDNA/ios-sdk/releases/tag/4.10.3) (2018-11-26)
 ### Fixed

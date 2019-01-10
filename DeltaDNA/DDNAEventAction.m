@@ -56,7 +56,7 @@
     for (DDNAEventTrigger *t in self.eventTriggers) {
         if ([t respondsToEventSchema:self.eventSchema]) {
             for (id<DDNAEventActionHandler> h in self.handlers) {
-                if ([h handleEventTrigger:t store:self.store]) {
+                if ([h handleEventTrigger:t store:self.store settings:self.settings]) {
                     
                     // prepare event...
                     DDNAEvent *actionTriggered = [DDNAEvent eventWithName:@"ddnaEventTriggeredAction"];
