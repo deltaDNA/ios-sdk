@@ -102,6 +102,12 @@ extern NSUInteger const DDNA_MAX_EVENT_STORE_BYTES;
 @property (nonatomic, assign) int engageCacheExpirySeconds;
 
 /**
+ Controls if the SDK will handle multiple actions for a Single Event Trigger.
+ Disabled by default.
+ */
+@property (nonatomic, assign) BOOL multipleActionsForEventTriggerEnabled;
+
+/**
  Returns the path to the privates settings directory on 
  this device.
  */

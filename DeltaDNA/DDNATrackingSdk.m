@@ -229,7 +229,11 @@ static NSString *const DD_EVENT_NEW_SESSION = @"DDNASDKNewSession";
         
     [self.eventStore pushEvent:eventSchema];
     
+<<<<<<< Updated upstream
     return [[DDNAEventAction alloc] initWithEventSchema:eventSchema eventTriggers:self.eventTriggers sdk:self store:self.actionStore];
+=======
+    return [[DDNAEventAction alloc] initWithEventSchema:eventSchema eventTriggers:self.eventTriggers sdk:self andSettings:self.sdk.settings];
+>>>>>>> Stashed changes
 }
 
 - (void)requestEngagement:(DDNAEngagement *)engagement completionHandler:(void (^)(NSDictionary *, NSInteger, NSError *))completionHandler
