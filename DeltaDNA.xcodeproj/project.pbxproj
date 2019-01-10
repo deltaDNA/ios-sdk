@@ -187,6 +187,7 @@
 		63E78ABD208F80B800DDD48D /* DDNAUserManagerSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E78AB9208F807C00DDD48D /* DDNAUserManagerSpec.m */; };
 		63F8C5F81D8045D5004E5D66 /* iso_4217.xml in Resources */ = {isa = PBXBuildFile; fileRef = 63F8C5F71D8045D5004E5D66 /* iso_4217.xml */; };
 		63F8C5F91D8048F8004E5D66 /* iso_4217.xml in Resources */ = {isa = PBXBuildFile; fileRef = 63F8C5F71D8045D5004E5D66 /* iso_4217.xml */; };
+		7C71803D21E78B2B00A52EB9 /* DDNASettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 636556361C60F5F2004153E7 /* DDNASettings.m */; };
 		BE8BC6CE991955F4F252F48F /* Pods_DeltaDNA_tvOS_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC5FDFD8337EC612AB2B8483 /* Pods_DeltaDNA_tvOS_Tests.framework */; };
 /* End PBXBuildFile section */
 
@@ -1055,6 +1056,7 @@
 				635AC81B20D2731B009027D5 /* DDNAEventActionSpec.m in Sources */,
 				639F2EC52090CB24007EEBB5 /* DDNANonTrackingSdkSpec.m in Sources */,
 				63A11FC41C6E26FF008DEE99 /* DDNAEventSpec.m in Sources */,
+				7C71803D21E78B2B00A52EB9 /* DDNASettings.m in Sources */,
 				632D8F881C737830004738A7 /* DDNAEngagementSpec.m in Sources */,
 				635AC81920D2731B009027D5 /* DDNAEventTriggerSpec.m in Sources */,
 				63E78ABC208F80B800DDD48D /* DDNAUserManagerSpec.m in Sources */,

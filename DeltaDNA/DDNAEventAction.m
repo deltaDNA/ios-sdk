@@ -53,28 +53,34 @@
 
 - (void)run
 {
+    BOOL handledImageMessage = NO;
+    
     for (DDNAEventTrigger *t in self.eventTriggers) {
         if ([t respondsToEventSchema:self.eventSchema]) {
+            
+            // prepare event...
+            DDNAEvent *actionTriggered = [DDNAEvent eventWithName:@"ddnaEventTriggeredAction"];
+            [actionTriggered setParam:[NSNumber numberWithUnsignedInteger:t.campaignId] forKey:@"ddnaEventTriggeredCampaignID"];
+            [actionTriggered setParam:[NSNumber numberWithInteger:t.priority] forKey:@"ddnaEventTriggeredCampaignPriority"];
+            [actionTriggered setParam:[NSNumber numberWithUnsignedInteger:t.variantId] forKey:@"ddnaEventTriggeredVariantID"];
+            [actionTriggered setParam:t.actionType forKey:@"ddnaEventTriggeredActionType"];
+            [actionTriggered setParam:[NSNumber numberWithUnsignedInteger:t.count] forKey:@"ddnaEventTriggeredSessionCount"];
+            [actionTriggered setParam:t.campaignName forKey:@"ddnaEventTriggeredCampaignName"];
+            [actionTriggered setParam:t.variantName forKey:@"ddnaEventTriggeredVariantName"];
+            
+            // send event...
+            [self.sdk recordEvent:actionTriggered];
+            
             for (id<DDNAEventActionHandler> h in self.handlers) {
-                if ([h handleEventTrigger:t store:self.store settings:self.settings]) {
-                    
-                    // prepare event...
-                    DDNAEvent *actionTriggered = [DDNAEvent eventWithName:@"ddnaEventTriggeredAction"];
-                    [actionTriggered setParam:[NSNumber numberWithUnsignedInteger:t.campaignId] forKey:@"ddnaEventTriggeredCampaignID"];
-                    [actionTriggered setParam:[NSNumber numberWithInteger:t.priority] forKey:@"ddnaEventTriggeredCampaignPriority"];
-                    [actionTriggered setParam:[NSNumber numberWithUnsignedInteger:t.variantId] forKey:@"ddnaEventTriggeredVariantID"];
-                    [actionTriggered setParam:t.actionType forKey:@"ddnaEventTriggeredActionType"];
-                    [actionTriggered setParam:[NSNumber numberWithUnsignedInteger:t.count] forKey:@"ddnaEventTriggeredSessionCount"];
-                    
-                    // send event...
-                    [self.sdk recordEvent:actionTriggered];
-                    
-                    // check if multiple events need handling
-                    if (!self.settings.multipleActionsForEventTriggerEnabled) {
-                        return;
-                    }
-
-                    
+                
+                if (handledImageMessage && [t.actionType isEqualToString:@"imageMessage"]) break;
+                
+                BOOL handled = [h handleEventTrigger:t store:self.store];
+                
+                if (handled) {
+                    if (!self.settings.multipleActionsForEventTriggerEnabled) return;
+                    if ([t.actionType isEqualToString:@"imageMessage"]) handledImageMessage = YES;
+                    break;
                 }
             }
 
