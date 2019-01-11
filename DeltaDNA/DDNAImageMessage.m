@@ -38,6 +38,7 @@
 @property (nonatomic, strong) NSDictionary *configuration;
 @property (nonatomic, assign) BOOL isShowing;
 @property (nonatomic, strong) DDNAEvent *actionEvent;
+@property (nonatomic, weak) UIViewController * callerVC;
 
 @end
 
@@ -152,6 +153,8 @@ BOOL validConfiguration(NSDictionary *configuration)
 - (void)showFromRootViewController:(UIViewController *)viewController
 {
     NSLog(@"Show image message");
+    
+    self.callerVC = viewController;
         
     self.hidden = NO;
     self.alpha = 1.0;
@@ -258,6 +261,9 @@ BOOL validConfiguration(NSDictionary *configuration)
                 _backgroundView.autoresizesSubviews = NO;
                 _backgroundView.userInteractionEnabled = YES;
                 
+                #if !TARGET_OS_TV
+                [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRotate:) name:UIDeviceOrientationDidChangeNotification object:nil];
+                #endif
                 NSLayoutConstraint* leftConstraint = [NSLayoutConstraint constraintWithItem:_backgroundView attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeLeft multiplier:1.0f constant:dim.origin.x];
                 NSLayoutConstraint* topConstraint = [NSLayoutConstraint constraintWithItem:_backgroundView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTop multiplier:1.0f constant:dim.origin.y];
                 NSLayoutConstraint* widthConstraint = [NSLayoutConstraint constraintWithItem:_backgroundView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0f constant:dim.size.width];
@@ -337,6 +343,7 @@ BOOL validConfiguration(NSDictionary *configuration)
     if (self.isShowing) {
         [self removeFromSuperview];
         self.isShowing = NO;
+        [[NSNotificationCenter defaultCenter] removeObserver:self];
     }
 }
 
@@ -525,4 +532,10 @@ BOOL validConfiguration(NSDictionary *configuration)
     [self close];
 }
 
+- (void)didRotate:(NSNotification *)note {
+
+    for (id view in self.subviews) [view removeFromSuperview];
+    self.frame = [[UIScreen mainScreen] bounds];
+    if ([self isReady] && self.subviews.count == 0) [self showFromRootViewController:self.callerVC];
+}
 @end
