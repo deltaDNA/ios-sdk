@@ -83,8 +83,6 @@
                     break;
                 }
             }
-
-            return;
         }
     }
 }
