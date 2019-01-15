@@ -53,6 +53,13 @@
 @property (nonatomic, copy) NSString *clientVersion;
 
 /**
+ The cross game user ID. This is used for cross promotion
+ and should be set once the user signs into a service which
+ uniquely identifies the user.
+ */
+@property (nonatomic, copy) NSString *crossGameUserId;
+
+/**
  The Apple push notification token. Set this @b before starting
  the SDK to enable DeltaDNA to send push notifications to your
  game.  

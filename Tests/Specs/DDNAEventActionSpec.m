@@ -23,17 +23,25 @@
 #define MOCKITO_SHORTHAND
 #import <OCMockito/OCMockito.h>
 
+#import "DDNAActionStore.h"
 #import "DDNAEventAction.h"
 #import "DDNAEvent.h"
 #import "DDNAEventTrigger.h"
 #import "DDNAEventActionHandler.h"
 #import "NSDictionary+DeltaDNA.h"
 #import "DDNASdkInterface.h"
+#import "DDNASettings.h"
 
 
 SpecBegin(DDNAEventActionTest)
 
 describe(@"event action", ^{
+    
+    __block DDNAActionStore *store;
+    
+    beforeEach(^{
+        store = mock([DDNAActionStore class]);
+    });
     
     xit(@"tries triggers in order", ^{
         
@@ -46,8 +54,9 @@ describe(@"event action", ^{
         [given([t3 priority]) willReturnInt:1];
         NSOrderedSet *triggers = [NSOrderedSet orderedSetWithArray:@[t1, t2, t3]];
         id<DDNASdkInterface> mockSdk = mockProtocol(@protocol(DDNASdkInterface));
+        DDNASettings * mockSettings = mock([DDNASettings class]);
         
-        DDNAEventAction *a = [[DDNAEventAction alloc] initWithEventSchema:e.dictionary eventTriggers:triggers sdk:mockSdk];
+        DDNAEventAction *a = [[DDNAEventAction alloc] initWithEventSchema:e.dictionary eventTriggers:triggers sdk:mockSdk store:store settings:mockSettings];
         [a run];
         
         // Ah, can't verify the order mocks were called in.
@@ -63,20 +72,21 @@ describe(@"event action", ^{
         id<DDNAEventActionHandler> h1 = mockProtocol(@protocol(DDNAEventActionHandler));
         id<DDNAEventActionHandler> h2 = mockProtocol(@protocol(DDNAEventActionHandler));
         id<DDNAEventActionHandler> h3 = mockProtocol(@protocol(DDNAEventActionHandler));
+        DDNASettings * settings = mock([DDNASettings class]);
         
         [given([t respondsToEventSchema:anything()]) willReturnBool:YES];
-        [given([h1 handleEventTrigger:t]) willReturnBool:NO];
-        [given([h2 handleEventTrigger:t]) willReturnBool:YES];
+        [given([h1 handleEventTrigger:t store:store]) willReturnBool:NO];
+        [given([h2 handleEventTrigger:t store:store]) willReturnBool:YES];
         
-        DDNAEventAction *a = [[DDNAEventAction alloc] initWithEventSchema:e.dictionary eventTriggers:triggers sdk:mockSdk];
+        DDNAEventAction *a = [[DDNAEventAction alloc] initWithEventSchema:e.dictionary eventTriggers:triggers sdk:mockSdk store:store settings:settings];
         [a addHandler:h1];
         [a addHandler:h2];
         [a addHandler:h3];
         [a run];
         
-        [verifyCount(h1, times(1)) handleEventTrigger:t];
-        [verifyCount(h2, times(1)) handleEventTrigger:t];
-        [verifyCount(h3, never()) handleEventTrigger:t];
+        [verifyCount(h1, times(1)) handleEventTrigger:t store:store];
+        [verifyCount(h2, times(1)) handleEventTrigger:t store:store];
+        [verifyCount(h3, never()) handleEventTrigger:t store:store];
     });
     
     it(@"does nothing with an empty action", ^{
@@ -85,13 +95,13 @@ describe(@"event action", ^{
         id<DDNAEventActionHandler> h1 = mockProtocol(@protocol(DDNAEventActionHandler));
         
         [given([t respondsToEventSchema:anything()]) willReturnBool:YES];
-        [given([h1 handleEventTrigger:t]) willReturnBool:YES];
+        [given([h1 handleEventTrigger:t store:store]) willReturnBool:YES];
         
         DDNAEventAction *a = [[DDNAEventAction alloc] init];
         [a addHandler:h1];
         [a run];
         
-        [verifyCount(h1, never()) handleEventTrigger:t];
+        [verifyCount(h1, never()) handleEventTrigger:t store:store];
     });
     
     it(@"posts actionTriggered event", ^{
@@ -100,6 +110,8 @@ describe(@"event action", ^{
         DDNAEventTrigger *t = mock([DDNAEventTrigger class]);
         NSOrderedSet *triggers = [NSOrderedSet orderedSetWithArray:@[t]];
         id<DDNASdkInterface> mockSdk = mockProtocol(@protocol(DDNASdkInterface));
+        DDNASettings * settings = mock([DDNASettings class]);
+        settings.multipleActionsForEventTriggerEnabled = NO;
         
         [given([t respondsToEventSchema:anything()]) willReturnBool:YES];
         [given([t campaignId]) willReturnInt:1];
@@ -110,7 +122,7 @@ describe(@"event action", ^{
         [given([t actionType]) willReturn:@"gameParameters"];
         [given([t count]) willReturnInt:4];
         
-        DDNAEventAction *a = [[DDNAEventAction alloc] initWithEventSchema:e.dictionary eventTriggers:triggers sdk:mockSdk];
+        DDNAEventAction *a = [[DDNAEventAction alloc] initWithEventSchema:e.dictionary eventTriggers:triggers sdk:mockSdk store:store settings:settings];
         [a run];
         
         HCArgumentCaptor *argument = [[HCArgumentCaptor alloc] init];
@@ -140,6 +152,7 @@ describe(@"event action", ^{
         DDNAEventTrigger *t = mock([DDNAEventTrigger class]);
         NSOrderedSet *triggers = [NSOrderedSet orderedSetWithArray:@[t]];
         id<DDNASdkInterface> mockSdk = mockProtocol(@protocol(DDNASdkInterface));
+        DDNASettings * settings = mock([DDNASettings class]);
         
         [given([t respondsToEventSchema:anything()]) willReturnBool:YES];
         [given([t campaignId]) willReturnInt:1];
@@ -148,7 +161,7 @@ describe(@"event action", ^{
         [given([t actionType]) willReturn:@"gameParameters"];
         [given([t count]) willReturnInt:4];
         
-        DDNAEventAction *a = [[DDNAEventAction alloc] initWithEventSchema:e.dictionary eventTriggers:triggers sdk:mockSdk];
+        DDNAEventAction *a = [[DDNAEventAction alloc] initWithEventSchema:e.dictionary eventTriggers:triggers sdk:mockSdk store:store settings:settings];
         [a run];
         
         HCArgumentCaptor *argument = [[HCArgumentCaptor alloc] init];

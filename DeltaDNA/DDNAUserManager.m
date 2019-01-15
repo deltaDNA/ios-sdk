@@ -25,6 +25,7 @@ NSString * const kDDNAForgotten = @"com.deltadna.forgotten";
 NSString * const kDDNAFirstSession = @"com.deltadna.firstSession";
 NSString * const kDDNALastSession = @"com.deltadna.lastSession";
 NSString * const PP_KEY_USER_ID = @"DDSDK_USER_ID";
+NSString * const kDDNACrossGameUserId = @"com.deltadna.crossGameUserId";
 NSString * const kDDNAAdvertisingId = @"com.deltadna.advertisingId";
 
 @interface DDNAUserManager ()
@@ -127,6 +128,16 @@ NSString * const kDDNAAdvertisingId = @"com.deltadna.advertisingId";
     return [self lastSession] ? [[NSDate date] timeIntervalSinceDate:[self lastSession]] * 1000 : 0;
 }
 
+- (void)setCrossGameUserId:(NSString *)crossGameUserId
+{
+    [self.userDefaults setObject:crossGameUserId forKey:kDDNACrossGameUserId];
+}
+
+- (NSString *)crossGameUserId
+{
+    return [self.userDefaults objectForKey:kDDNACrossGameUserId];
+}
+
 - (void)setAdvertisingId:(NSString *)advertisingId
 {
     [self.userDefaults setObject:advertisingId forKey:kDDNAAdvertisingId];
@@ -144,6 +155,7 @@ NSString * const kDDNAAdvertisingId = @"com.deltadna.advertisingId";
     [self.userDefaults removeObjectForKey:kDDNAForgotten];
     [self.userDefaults removeObjectForKey:kDDNAFirstSession];
     [self.userDefaults removeObjectForKey:kDDNALastSession];
+    [self.userDefaults removeObjectForKey:kDDNACrossGameUserId];
     [self.userDefaults removeObjectForKey:kDDNAAdvertisingId];
     self.newPlayer = NO;
 }

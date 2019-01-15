@@ -16,15 +16,15 @@ source 'https://github.com/CocoaPods/Specs.git'
 source 'https://github.com/deltaDNA/CocoaPods.git'
 
 target 'MyApp' do
-  # Uncomment this line if you're using Swift or would like to use dynamic frameworks
-  use_frameworks!
+# Uncomment this line if you're using Swift or would like to use dynamic frameworks
+use_frameworks!
 
-  pod 'DeltaDNA', '~> 4.10.3'
+pod 'DeltaDNA', '~> 4.11.0'
 
-  target 'MyAppTests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
+target 'MyAppTests' do
+inherit! :search_paths
+# Pods for testing
+end
 
 end
 ```
@@ -49,8 +49,8 @@ Start the analytics SDK.
 [DDNASDK sharedInstance].clientVersion = @"1.0";
 
 [[DDNASDK sharedInstance] startWithEnvironmentKey:@"YOUR_ENVIRONMENT_KEY"
-                                       collectURL:@"YOUR_COLLECT_URL"
-                                        engageURL:@"YOUR_ENGAGE_URL"];
+collectURL:@"YOUR_COLLECT_URL"
+engageURL:@"YOUR_ENGAGE_URL"];
 
 ```
 
@@ -63,8 +63,8 @@ Since iOS 9, all HTTP connections are forced to be HTTPS.  To allow HTTP to be u
 ```xml
 <key>NSAppTransportSecurity</key>
 <dict>
-    <key>NSAllowsArbitraryLoads</key>
-    <true/>
+<key>NSAllowsArbitraryLoads</key>
+<true/>
 </dict>
 ```
 
@@ -85,6 +85,35 @@ DDNAEvent *event = [DDNAEvent eventWithName:@"keyTypes"];
 [[DDNASDK sharedInstance] recordEvent:event];
 ```
 
+### Revenue Tracking
+
+Revenue and IAP data should be tracked on the `transaction` event. This event contains nested objects that allow for the tracking of both virtual and real currency spending. As detailed in the [ISO 4217 standard](https://en.wikipedia.org/wiki/ISO_4217#Active_codes "ISO 4217 standard"), not all real currencies have 2 minor units and thus require conversion into a common form. The `DDNAProduct.ConvertCurrency()` method can be used to ensure the correct currency value is sent. 
+
+For example, to track a purchase made with 550 JP¥: 
+
+```objective-c
+DDNAProduct *productsSpent = [DDNAProduct product];
+[productsSpent setRealCurrencyType:@"JPY" amount: [DDNAProduct convertCurrencyCode:@"JPY" value: 550]] // realCurrencyAmount: 550
+```
+
+And to track a $4.99 purchase: 
+
+```objective-c
+DDNAProduct *productsSpent = [DDNAProduct product];
+[productsSpent setRealCurrencyType:@"USD" amount: [DDNAProduct convertCurrencyCode:@"USD" value: 4.99]] // realCurrencyAmount: 499
+```
+
+These will be converted automatically into a `convertedProductAmount` parameter that is used as a common currency for reporting. 
+
+Receipt validation can also be performed against purchases made via the Apple App Store. To validate in-app purchases made through the Apple App Store the following parameters should be added to the `transaction` event:
+
+* `transactionServer` - the server for which the receipt should be validated against, in this case 'APPLE'
+* `transactionReceipt` - the purchase data as a string not as nested JSON 
+* `transactionID` - the ID of the in-app purchase e.g 100000576198248
+
+When a `transaction` event is received with the above parameters, the receipt will be checked against the store and the resulting event will be tagged with a `revenueValidated` parameter to allow for the filtering out of invalid revenue.
+
+
 ### Event Triggers
 
 All `recordEvent:` methods return a `DDNAEventAction` instance that accepts `DDNAEventActionHandler` callbacks via `addHandler:`.  If a corresponding event-triggered campaign has been setup, the handler that matches the trigger will be actioned as soon as `run` is called on the action.  The current supported actions are Game Parameters and Image Messages.  
@@ -98,15 +127,15 @@ DDNAEvent *event = [[DDNAEvent alloc] initWithName:@"matchStarted"];
 DDNAEventAction *eventAction = [[DDNASDK sharedInstance] recordEvent:event];
 
 DDNAGameParametersHandler *gameParametersHandler = [[DDNAGameParametersHandler alloc] initWithHandler:^(NSDictionary *gameParameters) {
-    // do something with the game parameters
+// do something with the game parameters
 }];
 
 [eventAction addHandler:gameParametersHandler];
 
 DDNAImageMessageHandler *imageHandler = [[DDNAImageMessageHandler alloc] initWithHandler:^(DDNAImageMessage *imageMessage){
-    // the image message is already prepared so show instantly
-    imageMessage.delegate = self;
-    [imageMessage showFromRootViewController:self];
+// the image message is already prepared so show instantly
+imageMessage.delegate = self;
+[imageMessage showFromRootViewController:self];
 }];
 
 [eventAction addHandler:imageHandler];
@@ -119,10 +148,10 @@ Change the behaviour of the game with an engagement.  Create a `DDNAEngagement` 
 
 ```json
 {
-    "parameters":{},
-    "image":{},
-    "heading":"An optional heading",
-    "message":"An optional message"
+"parameters":{},
+"image":{},
+"heading":"An optional heading",
+"message":"An optional message"
 }
 ```
 
@@ -137,7 +166,7 @@ DDNAEngagement *engagement = [DDNAEngagement engagementWithDecisionPoint:@"gameL
 [engagement setParam:@"Disco Volante" forKey:@"missionName"];
 
 [[DDNASDK sharedInstance] requestEngagement:engagement completionHandler:^(NSDictionary* parameters, NSInteger statusCode, NSError* error) {
-    NSLog(@"Engagement request returned the following parameters:\n%@", parameters[@"parameters"]);
+NSLog(@"Engagement request returned the following parameters:\n%@", parameters[@"parameters"]);
 }];
 ```
 
@@ -150,7 +179,7 @@ DDNAParams *customParams = [[DDNAParams alloc] init];
 [customParams setParam:@"Disco Volante" forKey:@"missionName"];
 
 [[DDNASDK sharedInstance].engageFactory requestGameParametersForDecisionPoint:@"gameLoaded" parameters:customParams handler:^(NSDictionary * gameParameters) {
-    NSLog(@"The following game parameters were returned:\n%@", gameParameters);
+NSLog(@"The following game parameters were returned:\n%@", gameParameters);
 }];
 ```
 
@@ -160,14 +189,24 @@ One of the actions Engage supports is an Image Message.  This displays a custom 
 
 ```objective-c
 [[DDNASDK sharedInstance].engageFactory requestImageMessageForDecisionPoint:@"imageMessage" handler:^(DDNAImageMessage * _Nullable imageMessage) {
-    if (imageMessage != nil) {
-        imageMessage.delegate = self;
-        [imageMessage fetchResources];
-    } else {
-        NSLog(@"Engage response did not contain an image message.");
-    }
+if (imageMessage != nil) {
+imageMessage.delegate = self;
+[imageMessage fetchResources];
+} else {
+NSLog(@"Engage response did not contain an image message.");
+}
 }];
 ```
+
+### Cross Promotion
+
+To register a user for cross promotion between multiple games the user needs to sign into a service which can provide user identification. Once the user has been signed in the ID can be set in the SDK:
+```objective-c
+[[DDNASDK sharedInstance] setCrossGameUserId:crossGameUserId];
+```
+On the next session the SDK will download a new configuration with cross promotion campaigns relevant to the user.
+
+When a cross promotion campaign with a store action has been acted on by the user, the SDK will return the store link for the iOS platform.
 
 ### Forget Me API
 
@@ -184,3 +223,4 @@ The sources are available under the Apache 2.0 license.
 ## Contact Us
 
 For more information, please visit [deltadna.com](https://deltadna.com/). For questions or assistance, please email us at [support@deltadna.com](mailto:support@deltadna.com).
+

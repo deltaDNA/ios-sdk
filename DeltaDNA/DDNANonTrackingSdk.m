@@ -139,6 +139,11 @@
     // do nothing
 }
 
+- (void)setCrossGameUserId:(NSString *)crossGameUserId
+{
+    // do nothing
+}
+
 - (void)setPushNotificationToken:(NSString *)token
 {
     self.sdk.pushNotificationToken = token;

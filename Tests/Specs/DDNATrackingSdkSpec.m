@@ -282,6 +282,32 @@ describe(@"tracking sdk", ^{
         expect(trackingSdk.eventTriggers.count).to.equal(2);
     });
     
+    it(@"does not store non-persistent actions from session configuration", ^{
+        [givenVoid([mockEngageService request:anything() handler:anything()]) willDo:^id _Nonnull(NSInvocation * _Nonnull invocation) {
+            void (^handler)(NSString *response, NSInteger statusCode, NSError *error) = [invocation mkt_arguments][1];
+            handler(@"{\"parameters\":{\"triggers\":[{\"campaignID\":1,\"condition\":[],\"eventName\":\"event\",\"priority\":0,\"response\":{\"parameters\":{\"a\":1}},\"variantID\":1}]}}", 200, nil);
+            return nil;
+        }];
+        
+        [trackingSdk startWithNewPlayer:mockUserManager];
+        [trackingSdk requestSessionConfiguration:mockUserManager];
+        
+        expect([trackingSdk.actionStore parametersForTrigger:trackingSdk.eventTriggers[0]]).to.beNil();
+    });
+    
+    it(@"stores persistent actions from session configuration", ^{
+        [givenVoid([mockEngageService request:anything() handler:anything()]) willDo:^id _Nonnull(NSInvocation * _Nonnull invocation) {
+            void (^handler)(NSString *response, NSInteger statusCode, NSError *error) = [invocation mkt_arguments][1];
+            handler(@"{\"parameters\":{\"triggers\":[{\"campaignID\":1,\"condition\":[],\"eventName\":\"event\",\"priority\":0,\"response\":{\"parameters\":{\"a\":1,\"ddnaIsPersistent\":true}},\"variantID\":1}]}}", 200, nil);
+            return nil;
+        }];
+        
+        [trackingSdk startWithNewPlayer:mockUserManager];
+        [trackingSdk requestSessionConfiguration:mockUserManager];
+        
+        expect([trackingSdk.actionStore parametersForTrigger:trackingSdk.eventTriggers[0]]).to.equal(@{@"ddnaIsPersistent":@YES,@"a":@1});
+    });
+    
     it(@"handles missing decision point whitelist from session configuration", ^{
         [givenVoid([mockEngageService request:anything() handler:anything()]) willDo:^id _Nonnull(NSInvocation * _Nonnull invocation) {
             void (^handler)(NSString *response, NSInteger statusCode, NSError *error) = [invocation mkt_arguments][1];
@@ -507,6 +533,41 @@ describe(@"tracking sdk", ^{
         expect(receivedNote.object).will.equal(mockSdk);
         expect(receivedNote.userInfo[@"config"]).will.equal(@{@"parameters":@{}});
         
+    });
+    
+    it(@"sends collect event when cross game user id set", ^{
+        [given([mockUserManager isNewPlayer]) willReturnBool:NO];
+        [trackingSdk startWithNewPlayer:mockUserManager];
+        [trackingSdk setCrossGameUserId:@"id"];
+        
+        [verify(mockSdk) recordEventWithName:@"ddnaRegisterCrossGameUserID" eventParams:@{@"ddnaCrossGameUserID": @"id"}];
+    });
+    
+    it(@"does not send collect event when cross game user id is null or empty", ^{
+        [given([mockUserManager isNewPlayer]) willReturnBool:NO];
+        [trackingSdk startWithNewPlayer:mockUserManager];
+        [trackingSdk setCrossGameUserId:nil];
+        [trackingSdk setCrossGameUserId:@""];
+        
+        [verifyCount(mockSdk, never()) recordEventWithName:@"ddnaRegisterCrossGameUserID" eventParams:anything()];
+    });
+    
+    it(@"sends cross game user id on game started event", ^{
+        [given([mockUserManager isNewPlayer]) willReturnBool:YES];
+        [given([mockSdk crossGameUserId]) willReturn:@"id"];
+        [given([mockSettings onStartSendGameStartedEvent]) willReturnBool:YES];
+        
+        [trackingSdk startWithNewPlayer:mockUserManager];
+        [trackingSdk upload];
+        
+        HCArgumentCaptor *argument = [[HCArgumentCaptor alloc] init];
+        [verify(mockCollectService) request:(id)argument handler:anything()];
+        DDNACollectRequest *collectRequest = argument.value;
+        expect(collectRequest).toNot.beNil();
+        
+        NSDictionary *json = [NSDictionary dictionaryWithJSONString:collectRequest.toJSON];
+        expect(json[@"eventList"][0][@"eventName"]).to.equal(@"gameStarted");
+        expect(json[@"eventList"][0][@"eventParams"][@"ddnaCrossGameUserID"]).to.equal(@"id");
     });
 });
 

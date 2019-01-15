@@ -21,6 +21,7 @@ extern NSString *const DDNA_ENGAGE_API_VERSION;
 
 extern NSString *const DDNA_EVENT_STORAGE_PATH;
 extern NSString *const DDNA_ENGAGE_STORAGE_PATH;
+extern NSString *const DDNA_ACTION_STORAGE_PATH;
 
 extern NSUInteger const DDNA_MAX_EVENT_STORE_BYTES;
 
@@ -99,6 +100,11 @@ extern NSUInteger const DDNA_MAX_EVENT_STORE_BYTES;
  Number of seconds Engage retains cached responses from the Engage server.  A value of 0 disables the Engage cache.
  */
 @property (nonatomic, assign) int engageCacheExpirySeconds;
+
+/**
+ Controls if the SDK will handle multiple actions on single event trigger
+ */
+@property (nonatomic, assign) BOOL multipleActionsForEventTriggerEnabled;
 
 /**
  Returns the path to the privates settings directory on 

@@ -55,6 +55,7 @@
 @property (nonatomic, weak) DDNASDK *sdk;
 @property (nonatomic, weak) DDNAInstanceFactory *instanceFactory;
 @property (nonatomic, strong) id<DDNAEventStoreProtocol> eventStore;
+@property (nonatomic, strong) DDNAActionStore *actionStore;
 @property (nonatomic, strong) DDNAEngageService *engageService;
 @property (nonatomic, strong) DDNACollectService *collectService;
 @property (nonatomic, assign) BOOL reset;
@@ -79,12 +80,6 @@ static NSString *const EV_KEY_PARAMS = @"eventParams";
 
 static NSString *const EP_KEY_PLATFORM = @"platform";
 static NSString *const EP_KEY_SDK_VERSION = @"sdkVersion";
-
-static NSString *const PP_KEY_FIRST_RUN = @"DDSDK_FIRST_RUN";
-static NSString *const PP_KEY_USER_ID = @"DDSDK_USER_ID";
-static NSString *const PP_KEY_HASH_SECRET = @"DDSDK_HASH_SECRET";
-static NSString *const PP_KEY_CLIENT_VERSION = @"DDSDK_CLIENT_VERSION";
-static NSString *const PP_KEY_PUSH_NOTIFICATION_TOKEN = @"DDSDK_PUSH_NOTIFICATION_TOKEN";
 
 static NSString *const DD_EVENT_STARTED = @"DDNASDKStarted";
 static NSString *const DD_EVENT_NEW_SESSION = @"DDNASDKNewSession";
@@ -126,7 +121,8 @@ static NSString *const DD_EVENT_NEW_SESSION = @"DDNASDKNewSession";
             DDNALogDebug(@"Using volatile event store for session.");
             self.eventStore = [[DDNAVolatileEventStore alloc] initWithSizeBytes:DDNA_MAX_EVENT_STORE_BYTES];
         }
-        
+        NSString *actionStoragePath = [DDNA_ACTION_STORAGE_PATH stringByReplacingOccurrencesOfString:@"{persistent_path}" withString:[DDNASettings getPrivateSettingsDirectoryPath]];
+        self.actionStore = [[DDNAActionStore alloc] initWithPath:actionStoragePath];
     }
     return self;
 }
@@ -150,6 +146,10 @@ static NSString *const DD_EVENT_NEW_SESSION = @"DDNASDKNewSession";
     self.started = YES;
     if ([self.sdk.delegate respondsToSelector:@selector(didStartSdk)]) {
         [self.sdk.delegate didStartSdk];
+    }
+    
+    if (userManager.isNewPlayer) {
+        [self.actionStore clear];
     }
     
     [self.sdk newSession];
@@ -229,7 +229,7 @@ static NSString *const DD_EVENT_NEW_SESSION = @"DDNASDKNewSession";
         
     [self.eventStore pushEvent:eventSchema];
     
-    return [[DDNAEventAction alloc] initWithEventSchema:eventSchema eventTriggers:self.eventTriggers sdk:self];
+    return [[DDNAEventAction alloc] initWithEventSchema:eventSchema eventTriggers:self.eventTriggers sdk:self store:self.actionStore settings:self.sdk.settings];
 }
 
 - (void)requestEngagement:(DDNAEngagement *)engagement completionHandler:(void (^)(NSDictionary *, NSInteger, NSError *))completionHandler
@@ -385,6 +385,24 @@ static NSString *const DD_EVENT_NEW_SESSION = @"DDNASDKNewSession";
     }
 }
 
+- (void) setCrossGameUserId:(NSString *)crossGameUserId
+{
+    if (_started) {
+        if ([crossGameUserId length] == 0) {
+            DDNALogWarn(@"crossGameUserId cannot be nil or empty");
+        } else if (![self.sdk.crossGameUserId isEqualToString:crossGameUserId]) {
+            [self.sdk recordEventWithName:@"ddnaRegisterCrossGameUserID" eventParams:@{
+                    @"ddnaCrossGameUserID": crossGameUserId
+            }];
+        }
+    } else {
+        __typeof(self) __weak weakSelf = self;
+        dispatch_async(_taskQueue, ^{
+            [weakSelf setCrossGameUserId:crossGameUserId];
+        });
+    }
+}
+
 - (void) setPushNotificationToken:(NSString *)pushNotificationToken
 {
     if (_started) {
@@ -404,6 +422,7 @@ static NSString *const DD_EVENT_NEW_SESSION = @"DDNASDKNewSession";
 - (void)clearPersistentData
 {
     [self.eventStore clearAll];
+    [self.actionStore clear];
 }
 
 - (void)requestSessionConfiguration:(DDNAUserManager *)userManager
@@ -426,6 +445,10 @@ static NSString *const DD_EVENT_NEW_SESSION = @"DDNASDKNewSession";
                     DDNAEventTrigger *t = [[DDNAEventTrigger alloc] initWithDictionary:triggerDict];
                     if (t != nil) {
                         [triggers addObject:t];
+                        
+                        if ([[t response][@"parameters"][@"ddnaIsPersistent"] boolValue]) {
+                            [self.actionStore setParameters:[t response][@"parameters"] forTrigger:t];
+                        }
                     }
                 }
                 NSSortDescriptor *sortName = [NSSortDescriptor sortDescriptorWithKey:@"eventName" ascending:NO];
@@ -503,17 +526,20 @@ static NSString *const DD_EVENT_NEW_SESSION = @"DDNASDKNewSession";
         DDNALogDebug(@"Sending 'gameStarted' event");
         
         DDNAEvent *gameStartedEvent = [DDNAEvent eventWithName:@"gameStarted"];
-        if (self.sdk.clientVersion != nil)
-        {
+        if (self.sdk.clientVersion != nil) {
             [gameStartedEvent setParam:self.sdk.clientVersion forKey:@"clientVersion"];
-        }
-        if (self.sdk.pushNotificationToken != nil)
-        {
-            [gameStartedEvent setParam:self.sdk.pushNotificationToken forKey:@"pushNotificationToken"];
         }
         if ([DDNAClientInfo sharedInstance].locale != nil) {
             [gameStartedEvent setParam:[DDNAClientInfo sharedInstance].locale forKey:@"userLocale"];
         }
+        
+        if (self.sdk.crossGameUserId != nil && [self.sdk.crossGameUserId length] != 0) {
+            [gameStartedEvent setParam:self.sdk.crossGameUserId forKey:@"ddnaCrossGameUserID"];
+        }
+        if (self.sdk.pushNotificationToken != nil) {
+            [gameStartedEvent setParam:self.sdk.pushNotificationToken forKey:@"pushNotificationToken"];
+        }
+        
         [self recordEvent:gameStartedEvent];
     }
     

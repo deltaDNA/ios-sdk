@@ -19,6 +19,7 @@
 @interface ViewController : UIViewController
 
 @property (nonatomic, strong) IBOutlet UILabel *labelSDK;
+@property (nonatomic, strong) IBOutlet UITextField *crossGameUserId;
 
 - (IBAction)basicEvent:(id)sender;
 - (IBAction)customEvent:(id)sender;
@@ -33,6 +34,6 @@
 - (IBAction)newSession:(id)sender;
 - (IBAction)forgetMe:(id)sender;
 - (IBAction)newUser:(id)sender;
+- (IBAction)setCrossGameUserId:(id)sender;
 
 @end
-
