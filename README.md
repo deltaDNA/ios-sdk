@@ -16,15 +16,15 @@ source 'https://github.com/CocoaPods/Specs.git'
 source 'https://github.com/deltaDNA/CocoaPods.git'
 
 target 'MyApp' do
-  # Uncomment this line if you're using Swift or would like to use dynamic frameworks
-  use_frameworks!
+# Uncomment this line if you're using Swift or would like to use dynamic frameworks
+use_frameworks!
 
-  pod 'DeltaDNA', '~> 4.10.3'
+pod 'DeltaDNA', '~> 4.10.3'
 
-  target 'MyAppTests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
+target 'MyAppTests' do
+inherit! :search_paths
+# Pods for testing
+end
 
 end
 ```
@@ -49,8 +49,8 @@ Start the analytics SDK.
 [DDNASDK sharedInstance].clientVersion = @"1.0";
 
 [[DDNASDK sharedInstance] startWithEnvironmentKey:@"YOUR_ENVIRONMENT_KEY"
-                                       collectURL:@"YOUR_COLLECT_URL"
-                                        engageURL:@"YOUR_ENGAGE_URL"];
+collectURL:@"YOUR_COLLECT_URL"
+engageURL:@"YOUR_ENGAGE_URL"];
 
 ```
 
@@ -63,8 +63,8 @@ Since iOS 9, all HTTP connections are forced to be HTTPS.  To allow HTTP to be u
 ```xml
 <key>NSAppTransportSecurity</key>
 <dict>
-    <key>NSAllowsArbitraryLoads</key>
-    <true/>
+<key>NSAllowsArbitraryLoads</key>
+<true/>
 </dict>
 ```
 
@@ -127,15 +127,15 @@ DDNAEvent *event = [[DDNAEvent alloc] initWithName:@"matchStarted"];
 DDNAEventAction *eventAction = [[DDNASDK sharedInstance] recordEvent:event];
 
 DDNAGameParametersHandler *gameParametersHandler = [[DDNAGameParametersHandler alloc] initWithHandler:^(NSDictionary *gameParameters) {
-    // do something with the game parameters
+// do something with the game parameters
 }];
 
 [eventAction addHandler:gameParametersHandler];
 
 DDNAImageMessageHandler *imageHandler = [[DDNAImageMessageHandler alloc] initWithHandler:^(DDNAImageMessage *imageMessage){
-    // the image message is already prepared so show instantly
-    imageMessage.delegate = self;
-    [imageMessage showFromRootViewController:self];
+// the image message is already prepared so show instantly
+imageMessage.delegate = self;
+[imageMessage showFromRootViewController:self];
 }];
 
 [eventAction addHandler:imageHandler];
@@ -148,10 +148,10 @@ Change the behaviour of the game with an engagement.  Create a `DDNAEngagement` 
 
 ```json
 {
-    "parameters":{},
-    "image":{},
-    "heading":"An optional heading",
-    "message":"An optional message"
+"parameters":{},
+"image":{},
+"heading":"An optional heading",
+"message":"An optional message"
 }
 ```
 
@@ -166,7 +166,7 @@ DDNAEngagement *engagement = [DDNAEngagement engagementWithDecisionPoint:@"gameL
 [engagement setParam:@"Disco Volante" forKey:@"missionName"];
 
 [[DDNASDK sharedInstance] requestEngagement:engagement completionHandler:^(NSDictionary* parameters, NSInteger statusCode, NSError* error) {
-    NSLog(@"Engagement request returned the following parameters:\n%@", parameters[@"parameters"]);
+NSLog(@"Engagement request returned the following parameters:\n%@", parameters[@"parameters"]);
 }];
 ```
 
@@ -179,7 +179,7 @@ DDNAParams *customParams = [[DDNAParams alloc] init];
 [customParams setParam:@"Disco Volante" forKey:@"missionName"];
 
 [[DDNASDK sharedInstance].engageFactory requestGameParametersForDecisionPoint:@"gameLoaded" parameters:customParams handler:^(NSDictionary * gameParameters) {
-    NSLog(@"The following game parameters were returned:\n%@", gameParameters);
+NSLog(@"The following game parameters were returned:\n%@", gameParameters);
 }];
 ```
 
@@ -189,12 +189,12 @@ One of the actions Engage supports is an Image Message.  This displays a custom 
 
 ```objective-c
 [[DDNASDK sharedInstance].engageFactory requestImageMessageForDecisionPoint:@"imageMessage" handler:^(DDNAImageMessage * _Nullable imageMessage) {
-    if (imageMessage != nil) {
-        imageMessage.delegate = self;
-        [imageMessage fetchResources];
-    } else {
-        NSLog(@"Engage response did not contain an image message.");
-    }
+if (imageMessage != nil) {
+imageMessage.delegate = self;
+[imageMessage fetchResources];
+} else {
+NSLog(@"Engage response did not contain an image message.");
+}
 }];
 ```
 
@@ -223,3 +223,4 @@ The sources are available under the Apache 2.0 license.
 ## Contact Us
 
 For more information, please visit [deltadna.com](https://deltadna.com/). For questions or assistance, please email us at [support@deltadna.com](mailto:support@deltadna.com).
+

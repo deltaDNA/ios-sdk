@@ -1,10 +1,11 @@
 # Change Log
 
-## [4.11.0](https://github.com/deltaDNA/ios-sdk/releases/tag/4.11.0) (YYYY-MM-DD)
+## [4.11.0](https://github.com/deltaDNA/ios-sdk/releases/tag/4.11.0)
 ### Added
 - Support for cross promotion.
 - Support for image message store action.
 - Support for multiple Event-Triggered campaign actions from a single event.
+- Support for re-drawing image messages on change in device-orientation.
 
 ## [4.10.3](https://github.com/deltaDNA/ios-sdk/releases/tag/4.10.3) (2018-11-26)
 ### Fixed
