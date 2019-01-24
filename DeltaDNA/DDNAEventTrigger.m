@@ -69,7 +69,7 @@
     NSMutableArray *stack = [NSMutableArray array];
     for (NSDictionary *token in self.condition) {
         if (token[@"o"]) {
-            NSString *op = token[@"o"];
+            NSString *op = [token[@"o"] lowercaseString];
             NSDictionary *rightToken = [stack lastObject];
             [stack removeLastObject];
             NSDictionary *leftToken = [stack lastObject];
