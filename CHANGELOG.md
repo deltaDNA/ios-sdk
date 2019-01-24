@@ -1,5 +1,9 @@
 # Change Log
 
+## [4.11.1](https://github.com/deltaDNA/ios-sdk/releases/tag/4.11.1)
+### Fixed
+-  Issue with certain event-trigger criteria failing to evaluate correctly.
+
 ## [4.11.0](https://github.com/deltaDNA/ios-sdk/releases/tag/4.11.0)
 ### Added
 - Support for cross promotion.
