@@ -142,6 +142,23 @@ imageMessage.delegate = self;
 [eventAction run];
 ```
 
+In Addition to the above mechanism, default handlers can be specified. These will be used every time `run()` is called on an EventAction, after any handlers which have been registered via the `add` method.
+These should be Specified before the SDK is started so they can be used to handle internal events such as `newPlayer` and `gameStarted` but they must be registered after the SDK is initialized. 
+You can specify these handlers like so:
+```objective-c
+
+//Game Parameters Handler
+[[DDNASDK sharedInstance].settings setDefaultGameParametersHandler:[[DDNAGameParametersHandler alloc] initWithHandler:^(NSDictionary *gameParameters){
+// do something with game parameters here
+}]];
+
+//Image Message Handler
+[[DDNASDK sharedInstance].settings setDefaultImageMessageHandler:[[DDNAImageMessageHandler alloc] initWithHandler:^(DDNAIMageMessage * imageMessage) {
+imageMessage.delegate = self;
+[imageMessage showFromRootViewController:self];
+}]];
+
+
 ### Engage
 
 Change the behaviour of the game with an engagement.  Create a `DDNAEngagement` with the name of your decision point.  Engage will respond with a dictionary of key values for your player.  Depending on how the Engage campaign has been built on the platform, the response will look something like:
