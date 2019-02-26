@@ -16,7 +16,6 @@
 
 #import <Foundation/Foundation.h>
 #import "DDNAImageMessage.h"
-#import "DDNASettings.h"
 
 @class DDNAActionStore;
 @class DDNAEventTrigger;

@@ -19,7 +19,7 @@ target 'MyApp' do
 # Uncomment this line if you're using Swift or would like to use dynamic frameworks
 use_frameworks!
 
-pod 'DeltaDNA', '~> 4.11.1'
+pod 'DeltaDNA', '~> 4.11.2'
 
 target 'MyAppTests' do
 inherit! :search_paths
@@ -141,6 +141,23 @@ imageMessage.delegate = self;
 [eventAction addHandler:imageHandler];
 [eventAction run];
 ```
+
+In Addition to the above mechanism, default handlers can be specified. These will be used every time `run()` is called on an EventAction, after any handlers which have been registered via the `add` method.
+These should be Specified before the SDK is started so they can be used to handle internal events such as `newPlayer` and `gameStarted` but they must be registered after the SDK is initialized. 
+You can specify these handlers like so:
+```objective-c
+
+//Game Parameters Handler
+[[DDNASDK sharedInstance].settings setDefaultGameParametersHandler:[[DDNAGameParametersHandler alloc] initWithHandler:^(NSDictionary *gameParameters){
+// do something with game parameters here
+}]];
+
+//Image Message Handler
+[[DDNASDK sharedInstance].settings setDefaultImageMessageHandler:[[DDNAImageMessageHandler alloc] initWithHandler:^(DDNAIMageMessage * imageMessage) {
+imageMessage.delegate = self;
+[imageMessage showFromRootViewController:self];
+}]];
+
 
 ### Engage
 

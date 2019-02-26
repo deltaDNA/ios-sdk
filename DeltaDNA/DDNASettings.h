@@ -15,6 +15,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "DDNAEventActionHandler.h"
 
 extern NSString *const DDNA_SDK_VERSION;
 extern NSString *const DDNA_ENGAGE_API_VERSION;
@@ -112,4 +113,23 @@ extern NSUInteger const DDNA_MAX_EVENT_STORE_BYTES;
  */
 + (NSString *)getPrivateSettingsDirectoryPath;
 
+/**
+ Set Default Game Parameters Handler
+ */
+- (void)setDefaultGameParametersHandlerWith:(DDNAGameParametersHandler *)handler;
+
+/**
+ Set Default Image Message Handler
+ */
+- (void)setDefaultImageMessageHandlerWith:(DDNAImageMessageHandler *)handler;
+
+/**
+ Get Default Game Parameter Handler
+ */
+- (DDNAGameParametersHandler *)getDefaultGameParametersHandler;
+
+/**
+ Get Default Image Message Handler
+ */
+- (DDNAImageMessageHandler *)getDefaultImageParameterHandler;
 @end
