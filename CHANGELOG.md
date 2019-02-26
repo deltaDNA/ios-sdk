@@ -1,5 +1,9 @@
 # Change Log
 
+## [4.11.2](https://github.com/deltaDNA/ios-sdk/releases/tag/4.11.2)
+### Added
+- Capability for developers to set default game and image handlers
+
 ## [4.11.1](https://github.com/deltaDNA/ios-sdk/releases/tag/4.11.1)
 ### Fixed
 -  Issue with certain event-trigger criteria failing to evaluate correctly.
