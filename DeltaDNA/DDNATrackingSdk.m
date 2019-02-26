@@ -69,6 +69,7 @@
 
 @property (nonatomic, assign, readwrite) BOOL started;
 @property (nonatomic, assign, readwrite) BOOL uploading;
+@property (nonatomic, assign, readwrite) BOOL sentDefaultEvents;
 
 @end
 
@@ -94,6 +95,7 @@ static NSString *const DD_EVENT_NEW_SESSION = @"DDNASDKNewSession";
         
         self.reset = NO;
         self.uploading = NO;
+        self.sentDefaultEvents = NO;
         
         self.taskQueue = dispatch_queue_create("com.deltadna.TaskQueue", NULL);
         dispatch_suspend(self.taskQueue);
@@ -157,8 +159,6 @@ static NSString *const DD_EVENT_NEW_SESSION = @"DDNASDKNewSession";
         [userManager setFirstSession:[NSDate date]];
     }
     
-    // Once we're started, send default events.
-    [self triggerDefaultEvents:userManager.isNewPlayer];
     userManager.newPlayer = NO;
     
     // Setup automated event uploads in the background.
@@ -194,7 +194,7 @@ static NSString *const DD_EVENT_NEW_SESSION = @"DDNASDKNewSession";
         dispatch_source_cancel(self.timer);
     }
     
-    [self recordEvent:[DDNAEvent eventWithName:@"gameEnded"]];
+    [[self recordEvent:[DDNAEvent eventWithName:@"gameEnded"]] run];
     [self upload];
     
     if (!self.taskQueueSuspended) {
@@ -323,7 +323,7 @@ static NSString *const DD_EVENT_NEW_SESSION = @"DDNASDKNewSession";
         
         [eventParams setObject:[NSNumber numberWithBool:didLaunch] forKey:@"notificationLaunch"];
         
-        [self.sdk recordEventWithName:@"notificationOpened" eventParams:eventParams];
+        [[self.sdk recordEventWithName:@"notificationOpened" eventParams:eventParams] run];
     }
     else {
         // wait until the SDK has been started
@@ -391,9 +391,9 @@ static NSString *const DD_EVENT_NEW_SESSION = @"DDNASDKNewSession";
         if ([crossGameUserId length] == 0) {
             DDNALogWarn(@"crossGameUserId cannot be nil or empty");
         } else if (![self.sdk.crossGameUserId isEqualToString:crossGameUserId]) {
-            [self.sdk recordEventWithName:@"ddnaRegisterCrossGameUserID" eventParams:@{
-                    @"ddnaCrossGameUserID": crossGameUserId
-            }];
+            [[self.sdk recordEventWithName:@"ddnaRegisterCrossGameUserID" eventParams:@{
+                                                                                        @"ddnaCrossGameUserID": crossGameUserId
+                                                                                        }] run];
         }
     } else {
         __typeof(self) __weak weakSelf = self;
@@ -408,9 +408,9 @@ static NSString *const DD_EVENT_NEW_SESSION = @"DDNASDKNewSession";
     if (_started) {
         NSString *token = [pushNotificationToken stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]];
         token = [token stringByReplacingOccurrencesOfString:@" " withString:@""];
-        [self.sdk recordEventWithName:@"notificationServices" eventParams:@{
-                @"pushNotificationToken": token
-            }];
+        [[self.sdk recordEventWithName:@"notificationServices" eventParams:@{
+                                                                             @"pushNotificationToken": token
+                                                                             }] run] ;
     } else {
         __typeof(self) __weak weakSelf = self;
         dispatch_async(_taskQueue, ^{
@@ -477,6 +477,9 @@ static NSString *const DD_EVENT_NEW_SESSION = @"DDNASDKNewSession";
                 [self.sdk.delegate didFailToConfigureSessionWithError:error];
             }
         }
+        
+        // Once we're started, & session configuration has been received or failed then send default events.
+        [self triggerDefaultEvents:userManager.isNewPlayer];
     }];
 }
 
@@ -510,6 +513,8 @@ static NSString *const DD_EVENT_NEW_SESSION = @"DDNASDKNewSession";
 
 - (void) triggerDefaultEvents:(BOOL)newPlayer
 {
+    if (self.sentDefaultEvents) return;
+    
     if (self.sdk.settings.onFirstRunSendNewPlayerEvent && newPlayer)
     {
         DDNALogDebug(@"Sending 'newPlayer' event");
@@ -518,7 +523,8 @@ static NSString *const DD_EVENT_NEW_SESSION = @"DDNASDKNewSession";
         if ([DDNAClientInfo sharedInstance].countryCode!=nil) {
             [newPlayerEvent setParam:[DDNAClientInfo sharedInstance].countryCode forKey:@"userCountry"];
         }
-        [self recordEvent:newPlayerEvent];
+        [[self recordEvent:newPlayerEvent] run];
+        
     }
     
     if (self.sdk.settings.onStartSendGameStartedEvent)
@@ -540,7 +546,7 @@ static NSString *const DD_EVENT_NEW_SESSION = @"DDNASDKNewSession";
             [gameStartedEvent setParam:self.sdk.pushNotificationToken forKey:@"pushNotificationToken"];
         }
         
-        [self recordEvent:gameStartedEvent];
+        [[self recordEvent:gameStartedEvent] run];
     }
     
     if (self.sdk.settings.onStartSendClientDeviceEvent)
@@ -560,8 +566,10 @@ static NSString *const DD_EVENT_NEW_SESSION = @"DDNASDKNewSession";
         if ([DDNAClientInfo sharedInstance].languageCode!=nil) {
             [clientDeviceEvent setParam:[DDNAClientInfo sharedInstance].languageCode forKey:@"userLanguage"];
         }
-        [self recordEvent:clientDeviceEvent];
+        [[self recordEvent:clientDeviceEvent] run];
     }
+    
+    self.sentDefaultEvents = YES;
 }
 
 - (void)appWillResignActive:(NSNotification *)notification
