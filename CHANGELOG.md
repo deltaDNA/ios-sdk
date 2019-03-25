@@ -1,8 +1,12 @@
 # Change Log
 
+## [4.11.3](https://github.com/deltaDNA/ios-sdk/releases/tag/4.11.3)
+### Fixed
+- Evaluation of non-whitelisted events for Event-Triggered Campaigns (it no longer fails).
+
 ## [4.11.2](https://github.com/deltaDNA/ios-sdk/releases/tag/4.11.2)
 ### Added
-- Capability for developers to set default game and image handlers
+- Capability for developers to set default game and image handlers.
 
 ## [4.11.1](https://github.com/deltaDNA/ios-sdk/releases/tag/4.11.1)
 ### Fixed

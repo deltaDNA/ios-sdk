@@ -71,12 +71,14 @@
             // send event...
             [self.sdk recordEvent:actionTriggered];
             
-            if ([self.settings getDefaultGameParametersHandler] != nil) {
-                [self.handlers addObject:[self.settings getDefaultGameParametersHandler]];
-            }
-            
-            if ([self.settings getDefaultImageParameterHandler] != nil) {
-                [self.handlers addObject:[self.settings getDefaultImageParameterHandler]];
+            if (self.settings != nil) {
+                if ([self.settings getDefaultGameParametersHandler] != nil) {
+                    [self.handlers addObject:[self.settings getDefaultGameParametersHandler]];
+                }
+                
+                if ([self.settings getDefaultImageParameterHandler] != nil) {
+                    [self.handlers addObject:[self.settings getDefaultImageParameterHandler]];
+                }
             }
             
             for (id<DDNAEventActionHandler> h in self.handlers) {
