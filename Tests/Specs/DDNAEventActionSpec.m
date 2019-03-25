@@ -43,6 +43,14 @@ describe(@"event action", ^{
         store = mock([DDNAActionStore class]);
     });
     
+    xit(@"runs empty event action wihtout errors", ^{
+        
+        DDNAEvent *e = mock([DDNAEvent class]);
+        DDNAEventAction *a = mock([[DDNAEventAction alloc] init]);
+        
+        [a run];
+    });
+    
     xit(@"tries triggers in order", ^{
         
         DDNAEvent *e = mock([DDNAEvent class]);
