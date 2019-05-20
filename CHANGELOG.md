@@ -1,6 +1,6 @@
 # Change Log
 
-## [4.11.4](https://github.com/deltaDNA/ios-sdk/releases/tag/4.11.3)
+## [4.11.4](https://github.com/deltaDNA/ios-sdk/releases/tag/4.11.4)
 ### Fixed
 - Issue with persistence to avoid an edge-case crash
 
