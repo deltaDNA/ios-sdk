@@ -66,7 +66,9 @@
     documentsDirectory = [documentsDirectory stringByAppendingPathComponent:@"DeltaDNA"];
     
     NSError *error = nil;
-    [[NSFileManager defaultManager] createDirectoryAtPath:documentsDirectory withIntermediateDirectories:YES attributes:nil error:&error];
+    if (![[NSFileManager defaultManager] createDirectoryAtPath:documentsDirectory withIntermediateDirectories:YES attributes:nil error:&error]) {
+        DDNALogDebug(@"Error occured while creating directories. %@, %@ %@", error.localizedDescription, error.localizedFailureReason, error.localizedRecoverySuggestion);
+    }
     return documentsDirectory;
 }
 
