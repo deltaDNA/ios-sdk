@@ -1,5 +1,9 @@
 # Change Log
 
+## [4.11.4](https://github.com/deltaDNA/ios-sdk/releases/tag/4.11.3)
+### Fixed
+- Issue with persistence to avoid an edge-case crash
+
 ## [4.11.3](https://github.com/deltaDNA/ios-sdk/releases/tag/4.11.3)
 ### Fixed
 - Evaluation of non-whitelisted events for Event-Triggered Campaigns (it no longer fails).
