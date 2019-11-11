@@ -239,6 +239,12 @@
     [self.impl setPushNotificationToken:pushNotificationToken];
 }
 
+-(void) setDeviceToken:(NSData *)deviceToken
+{
+    _deviceToken = deviceToken;
+    [self.impl setDeviceToken:deviceToken];
+}
+
 - (BOOL)hasStarted
 {
     return [self.impl hasStarted];

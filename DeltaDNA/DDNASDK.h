@@ -68,6 +68,13 @@
  an example of how to get the token.
  */
 @property (nonatomic, copy) NSString *pushNotificationToken;
+/**
+The Apple Device Token received from in your AppDelegate
+ didRegisterForRemoteNotificationsWithDeviceToken.
+ Set this @b before starting the SDK to enable DeltaDNA
+ to send push notifications to your game.
+ */
+@property (nonatomic, copy) NSData *deviceToken;
 
 /// The environment key for this game environment (Dev or Live).
 @property (nonatomic, copy, readonly) NSString *environmentKey;
