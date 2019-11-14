@@ -406,16 +406,30 @@ static NSString *const DD_EVENT_NEW_SESSION = @"DDNASDKNewSession";
 - (void) setPushNotificationToken:(NSString *)pushNotificationToken
 {
     if (_started) {
-        NSString *token = [pushNotificationToken stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]];
-        token = [token stringByReplacingOccurrencesOfString:@" " withString:@""];
-        [[self.sdk recordEventWithName:@"notificationServices" eventParams:@{
-                                                                             @"pushNotificationToken": token
-                                                                             }] run] ;
+        DDNALogDebug(@"DeltaDNA SDK Set PushNotificationToken %@", pushNotificationToken);
     } else {
         __typeof(self) __weak weakSelf = self;
         dispatch_async(_taskQueue, ^{
             [weakSelf setPushNotificationToken:pushNotificationToken];
         });
+    }
+}
+-(void) setDeviceToken:(NSData *)deviceToken{
+    
+    NSUInteger length = deviceToken.length;
+    if (length > 0)
+    {
+        const unsigned char *buffer = (const unsigned char *) deviceToken.bytes;
+        NSMutableString *tokenString =[NSMutableString stringWithCapacity:(length*2)];
+        for(int i=0; i<length ; i++)
+        {
+            [tokenString appendFormat:@"%02x",buffer[i]];
+        }
+        self.sdk.pushNotificationToken = tokenString;
+        NSLog(@"DeltaDNA SDK Set PushNotificationToken %@", tokenString);
+        [[self.sdk recordEventWithName:@"notificationServices" eventParams:@{
+                                                                             @"pushNotificationToken": tokenString
+                                                                             }] run] ;
     }
 }
 

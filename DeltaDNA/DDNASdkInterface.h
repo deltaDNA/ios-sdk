@@ -45,5 +45,5 @@
 
 - (void)setCrossGameUserId:(NSString *)crossGameUserId;
 - (void)setPushNotificationToken:(NSString *)pushNotificationToken;
-
+- (void)setDeviceToken:(NSData *)deviceToken;
 @end

@@ -62,12 +62,21 @@
 /**
  The Apple push notification token. Set this @b before starting
  the SDK to enable DeltaDNA to send push notifications to your
- game.  
- 
- @see http://docs.deltadna.com/ios-sdk/#PushNotification for
+ game.
+
+ @see https://docs.deltadna.com/advanced-integration/ios-sdk/#push-notifications for
  an example of how to get the token.
  */
-@property (nonatomic, copy) NSString *pushNotificationToken;
+
+@property (nonatomic, copy) NSString *pushNotificationToken __attribute__((deprecated("Replaced by setDeviceToken - Please see README for updated usage.")));
+
+/**
+The Apple Device Token received from in your AppDelegate
+ didRegisterForRemoteNotificationsWithDeviceToken.
+ Set this @b before starting the SDK to enable DeltaDNA
+ to send push notifications to your game.
+ */
+@property (nonatomic, copy) NSData *deviceToken;
 
 /// The environment key for this game environment (Dev or Live).
 @property (nonatomic, copy, readonly) NSString *environmentKey;
