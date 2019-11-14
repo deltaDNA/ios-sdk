@@ -67,7 +67,7 @@
 {
     // From iOS13 onward, setting the pushNotificationToken from the description property no longer works
     // Please update your app to set the deviceToken instead.
-    [DDNASDK sharedInstance].deviceToken = deviceToken;
+    [[DDNASDK sharedInstance] setDeviceToken: deviceToken];
 }
 
 - (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error

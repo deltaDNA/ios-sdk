@@ -425,6 +425,7 @@ static NSString *const DD_EVENT_NEW_SESSION = @"DDNASDKNewSession";
         {
             [tokenString appendFormat:@"%02x",buffer[i]];
         }
+        self.sdk.pushNotificationToken = tokenString;
         NSLog(@"DeltaDNA SDK Set PushNotificationToken %@", tokenString);
         [[self.sdk recordEventWithName:@"notificationServices" eventParams:@{
                                                                              @"pushNotificationToken": tokenString
