@@ -19,7 +19,7 @@ target 'MyApp' do
 # Uncomment this line if you're using Swift or would like to use dynamic frameworks
 use_frameworks!
 
-pod 'DeltaDNA', '~> 4.11.4'
+pod 'DeltaDNA', '~> 4.11.5'
 
 target 'MyAppTests' do
 inherit! :search_paths
@@ -228,6 +228,18 @@ When a cross promotion campaign with a store action has been acted on by the use
 ### Forget Me API
 
 In order to help with GDPR compliance, calling `forgetMe` on the sdk sends an event to the platform indicating the user wishes their previously collected data to be deleted.  Once called the sdk will no longer record events and Engage requests will return empty responses.  No additional calls are required on the sdk since it will appear to work correctly from the caller's point of view.  The sdk can be reset by either calling `clearPersistantData` or starting with a new user id.
+
+
+### Push Notifications
+In order to enable receive notifications you will need to send the deviceToken received in the didRegisterForRemoteNotificationsWithDeviceToken method in your AppDelegate.m to deltaDNA
+```objective-c
+- (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken
+{
+    // From iOS13 onward, setting the pushNotificationToken from the description property no longer works
+    // Please update your app to set the deviceToken instead.
+    [DDNASDK sharedInstance].deviceToken = deviceToken;
+}
+```
 
 ### Further Integration
 

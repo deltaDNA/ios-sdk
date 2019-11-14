@@ -149,6 +149,12 @@
     self.sdk.pushNotificationToken = token;
 }
 
+- (void)setDeviceToken:(NSData *)token
+{
+ // do nothing
+}
+
+
 - (void)downloadImageAssets
 {
     // do nothing
