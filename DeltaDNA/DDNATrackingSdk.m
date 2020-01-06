@@ -69,6 +69,7 @@
 
 @property (nonatomic, assign, readwrite) BOOL started;
 @property (nonatomic, assign, readwrite) BOOL uploading;
+@property (nonatomic, assign, readwrite) BOOL sendNewPlayerEvent;
 @property (nonatomic, assign, readwrite) BOOL sentDefaultEvents;
 
 @end
@@ -96,6 +97,7 @@ static NSString *const DD_EVENT_NEW_SESSION = @"DDNASDKNewSession";
         self.reset = NO;
         self.uploading = NO;
         self.sentDefaultEvents = NO;
+        self.sendNewPlayerEvent = NO;
         
         self.taskQueue = dispatch_queue_create("com.deltadna.TaskQueue", NULL);
         dispatch_suspend(self.taskQueue);
@@ -152,6 +154,7 @@ static NSString *const DD_EVENT_NEW_SESSION = @"DDNASDKNewSession";
     
     if (userManager.isNewPlayer) {
         [self.actionStore clear];
+        self.sendNewPlayerEvent = YES;
     }
     
     [self.sdk newSession];
@@ -493,7 +496,7 @@ static NSString *const DD_EVENT_NEW_SESSION = @"DDNASDKNewSession";
         }
         
         // Once we're started, & session configuration has been received or failed then send default events.
-        [self triggerDefaultEvents:userManager.isNewPlayer];
+        [self triggerDefaultEvents:self.sendNewPlayerEvent];
     }];
 }
 
