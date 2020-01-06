@@ -176,8 +176,8 @@ BOOL validConfiguration(NSDictionary *configuration)
                                          [bg[@"height"] integerValue]);
             
             CGImageRef imageRef = CGImageCreateWithImageInRect([_spriteMap CGImage], cropRect);
-            
             backgroundImage = [UIImage imageWithCGImage:imageRef];
+            CGImageRelease(imageRef);
         }
         
         if (spritemap[@"buttons"]) {
@@ -191,7 +191,7 @@ BOOL validConfiguration(NSDictionary *configuration)
                 
                 CGImageRef imageRef = CGImageCreateWithImageInRect([_spriteMap CGImage], cropRect);
                 UIImage* buttonImage = [UIImage imageWithCGImage:imageRef];
-                
+                CGImageRelease(imageRef);
                 [buttonImages addObject:buttonImage];
             }
         }
