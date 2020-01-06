@@ -1,5 +1,10 @@
 # Change Log
 
+## [4.11.6](https://github.com/deltaDNA/ios-sdk/releases/tag/4.11.6)
+### Fixed
+- stopped a memory leak with image messages
+- `newPlayer` events will now be sent correctly
+
 ## [4.11.5](https://github.com/deltaDNA/ios-sdk/releases/tag/4.11.5)
 ### Fixed
 - Add push notification token support for iOS13 
