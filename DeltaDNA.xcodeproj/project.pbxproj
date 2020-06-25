@@ -188,6 +188,8 @@
 		63F8C5F81D8045D5004E5D66 /* iso_4217.xml in Resources */ = {isa = PBXBuildFile; fileRef = 63F8C5F71D8045D5004E5D66 /* iso_4217.xml */; };
 		63F8C5F91D8048F8004E5D66 /* iso_4217.xml in Resources */ = {isa = PBXBuildFile; fileRef = 63F8C5F71D8045D5004E5D66 /* iso_4217.xml */; };
 		7C71803D21E78B2B00A52EB9 /* DDNASettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 636556361C60F5F2004153E7 /* DDNASettings.m */; };
+		90B3437E249FAD400099554A /* DDNANotificationService.h in Headers */ = {isa = PBXBuildFile; fileRef = 90B3437C249FAD400099554A /* DDNANotificationService.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		90B3437F249FAD400099554A /* DDNANotificationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 90B3437D249FAD400099554A /* DDNANotificationService.m */; };
 		BE8BC6CE991955F4F252F48F /* Pods_DeltaDNA_tvOS_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC5FDFD8337EC612AB2B8483 /* Pods_DeltaDNA_tvOS_Tests.framework */; };
 /* End PBXBuildFile section */
 
@@ -313,6 +315,8 @@
 		63BD747920C814E700F0DD97 /* DDNATrackingSdkSpec.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DDNATrackingSdkSpec.m; sourceTree = "<group>"; };
 		63E78AB9208F807C00DDD48D /* DDNAUserManagerSpec.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DDNAUserManagerSpec.m; sourceTree = "<group>"; };
 		63F8C5F71D8045D5004E5D66 /* iso_4217.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = iso_4217.xml; path = DeltaDNA/Resources/iso_4217.xml; sourceTree = "<group>"; };
+		90B3437C249FAD400099554A /* DDNANotificationService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DDNANotificationService.h; sourceTree = "<group>"; };
+		90B3437D249FAD400099554A /* DDNANotificationService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DDNANotificationService.m; sourceTree = "<group>"; };
 		D432A4CBC0CAD37B699A59A3 /* Pods-DeltaDNA tvOS Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DeltaDNA tvOS Tests.debug.xcconfig"; path = "Tests/Pods/Target Support Files/Pods-DeltaDNA tvOS Tests/Pods-DeltaDNA tvOS Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		D7BE3517D44F9BE8A36CB4A6 /* Pods-DeltaDNA tvOS Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DeltaDNA tvOS Tests.release.xcconfig"; path = "Tests/Pods/Target Support Files/Pods-DeltaDNA tvOS Tests/Pods-DeltaDNA tvOS Tests.release.xcconfig"; sourceTree = "<group>"; };
 		DBBF3347BE53332EC63C4DD1 /* Pods_DeltaDNA_iOS_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DeltaDNA_iOS_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -393,6 +397,8 @@
 				630458841CAE724800875B71 /* DDNAImageMessage.m */,
 				632513BC206E5C4A00BB0088 /* DDNAEngageFactory.h */,
 				632513BD206E5C4A00BB0088 /* DDNAEngageFactory.m */,
+				90B3437C249FAD400099554A /* DDNANotificationService.h */,
+				90B3437D249FAD400099554A /* DDNANotificationService.m */,
 			);
 			name = Engage;
 			sourceTree = "<group>";
@@ -651,6 +657,7 @@
 				633BEA9D208DEC320080301A /* DDNASdkInterface.h in Headers */,
 				6327172D1C650D1B00AB2806 /* DDNAEngageCache.h in Headers */,
 				6359F01020920BEE0087F5D8 /* DDNAImageCache.h in Headers */,
+				90B3437E249FAD400099554A /* DDNANotificationService.h in Headers */,
 				63A11FDC1C71F7F7008DEE99 /* DDNAEventStoreProtocol.h in Headers */,
 				63A11FBF1C6CF435008DEE99 /* DDNATransaction.h in Headers */,
 				63A11FDE1C71F7F7008DEE99 /* DDNAPersistentEventStore.h in Headers */,
@@ -831,6 +838,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = 636555EB1C60F45B004153E7;
@@ -988,6 +996,7 @@
 				636556671C60F5F2004153E7 /* NSURL+DeltaDNA.m in Sources */,
 				635AC81320D27302009027D5 /* DDNAEventActionHandler.m in Sources */,
 				632513C0206E5C4A00BB0088 /* DDNAEngageFactory.m in Sources */,
+				90B3437F249FAD400099554A /* DDNANotificationService.m in Sources */,
 				63A11FD31C71E77D008DEE99 /* DDNAParams.m in Sources */,
 				630458871CAE724800875B71 /* DDNAImageMessage.m in Sources */,
 				6327172F1C650D1B00AB2806 /* DDNAEngageCache.m in Sources */,
@@ -1239,7 +1248,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = Framework/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = Framework/module.modulemap;
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -1297,7 +1306,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = Framework/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = Framework/module.modulemap;
 				MTL_ENABLE_DEBUG_INFO = NO;
