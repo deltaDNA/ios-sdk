@@ -14,6 +14,17 @@
 // limitations under the License.
 //
 
+#import <UIKit/UIKit.h>
+
+//! Project version number for DeltaDNA.
+FOUNDATION_EXPORT double DeltaDNAVersionNumber;
+
+//! Project version string for DeltaDNA.
+FOUNDATION_EXPORT const unsigned char DeltaDNAVersionString[];
+
+// In this header, you should import all the public headers of your framework using statements like #import <DeltaDNA/PublicHeader.h>
+
+
 #ifndef _DELTADNA_
 #define _DELTADNA_
 

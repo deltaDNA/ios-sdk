@@ -1,5 +1,9 @@
 # Change Log
 
+## [4.12.1](https://github.com/deltaDNA/ios-sdk/releases/tag/4.12.1)
+### Added
+- added support for rich push notifications
+
 ## [4.11.6](https://github.com/deltaDNA/ios-sdk/releases/tag/4.11.6)
 ### Fixed
 - stopped a memory leak with image messages
