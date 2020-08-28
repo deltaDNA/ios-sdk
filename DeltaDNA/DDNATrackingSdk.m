@@ -526,6 +526,23 @@ static NSString *const DD_EVENT_NEW_SESSION = @"DDNASDKNewSession";
     }];
 }
 
+#pragma mark - Pinpointer
+
+- (void)recordSignalTrackingSessionEvent
+{
+    // TODO
+}
+
+- (void)recordSignalTrackingPurchaseEvent
+{
+    // TODO
+}
+
+- (void)recordSignalTrackingAdRevenueEvent
+{
+    // TODO
+}
+
 #pragma mark - Private Helpers
 
 - (void) triggerDefaultEvents:(BOOL)newPlayer

@@ -811,10 +811,12 @@
 					636555F61C60F4BD004153E7 = {
 						CreatedOnToolsVersion = 7.2;
 						DevelopmentTeam = 846C8UZB42;
+						LastSwiftMigration = 1200;
 					};
 					636556041C60F4F6004153E7 = {
 						CreatedOnToolsVersion = 7.2;
 						DevelopmentTeam = 846C8UZB42;
+						LastSwiftMigration = 1200;
 					};
 					6365567A1C60F683004153E7 = {
 						CreatedOnToolsVersion = 7.2;
@@ -831,6 +833,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = 636555EB1C60F45B004153E7;
@@ -1248,6 +1251,8 @@
 				PRODUCT_NAME = DeltaDNA;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -1305,6 +1310,7 @@
 				PRODUCT_NAME = DeltaDNA;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1365,6 +1371,8 @@
 				PRODUCT_NAME = DeltaDNA;
 				SDKROOT = appletvos;
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 9.2;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1418,6 +1426,7 @@
 				PRODUCT_NAME = DeltaDNA;
 				SDKROOT = appletvos;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 9.2;
 				VALIDATE_PRODUCT = YES;
