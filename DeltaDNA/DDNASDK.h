@@ -259,6 +259,7 @@ The Apple Device Token received from in your AppDelegate
 /**
  Records a session event to be used in pinpointer signal tracking.
  Only designed to be used for Audience Pinpointer.
+ @availability iOS 12 or higher
  @param developerId The apple development team that created the app
  */
 - (void)recordSignalTrackingSessionEvent:(NSString *) developerId;
@@ -266,6 +267,7 @@ The Apple Device Token received from in your AppDelegate
 /**
  Records a purchase event to be used in pinpointer signal tracking.
  Only designed to be used for Audience Pinpointer.
+ @availability iOS 12 or higher
  @param developerId The apple development team that created the app
  @param realCurrencyAmount The amount spent on the purchase, in the currency used for the purchase
  @param realCurrencyType The currency code of the currency used for the purchase. For example, USD for dollars or GBP for pounds sterling.
@@ -275,6 +277,7 @@ The Apple Device Token received from in your AppDelegate
 /**
  Records an ad revenue event to be used in pinpointer signal tracking.
  Only designed to be used for Audience Pinpointer.
+ @availability iOS 12 or higher 
  @param developerId The apple development team that created the app
  @param realCurrencyAmount The amount of revenue raised, in the relevant currency
  @param realCurrencyType The currency code of the currency raised by this ad revenue. For example, USD for dollars or GBP for pounds sterling.

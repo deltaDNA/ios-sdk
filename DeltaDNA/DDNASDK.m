@@ -219,19 +219,19 @@
 #pragma mark - Audience Pinpointer
 - (void) recordSignalTrackingSessionEvent :(NSString *) developerId
 {
-    DDNAEvent *event = [DDNAPinpointer createSignalTrackingSessionEventWithDeveloperId:developerId];
+    DDNAEvent *event = [DDNAPinpointer.shared createSignalTrackingSessionEventWithDeveloperId:developerId];
     [self recordEvent:event];
 }
 
 - (void) createSignalTrackingPurchaseEvent :(NSString *) developerId :(NSNumber *) realCurrencyAmount :(NSString *) realCurrencyType
 {
-    DDNAEvent *event = [DDNAPinpointer createSignalTrackingPurchaseEventWithRealCurrencyAmount:realCurrencyAmount realCurrencyType:realCurrencyType developerId:developerId];
+    DDNAEvent *event = [DDNAPinpointer.shared createSignalTrackingPurchaseEventWithRealCurrencyAmount:realCurrencyAmount realCurrencyType:realCurrencyType developerId:developerId];
     [self recordEvent:event];
 }
 
 - (void) createSignalTrackingAdRevenueEvent :(NSString *) developerId :(NSNumber *) realCurrencyAmount :(NSString *) realCurrencyType
 {
-    DDNAEvent *event = [DDNAPinpointer createSignalTrackingAdRevenueEventWithRealCurrencyAmount:realCurrencyAmount realCurrencyType:realCurrencyType developerId:developerId];
+    DDNAEvent *event = [DDNAPinpointer.shared createSignalTrackingAdRevenueEventWithRealCurrencyAmount:realCurrencyAmount realCurrencyType:realCurrencyType developerId:developerId];
     [self recordEvent:event];
 }
 

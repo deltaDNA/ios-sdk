@@ -19,13 +19,33 @@ import Network
 import AppTrackingTransparency
 import AdSupport
 
+@available(iOS 12.0, *)
 public class DDNAPinpointer: NSObject {
-    static let wifiIdentifier = "wifi"
-    static let cellularIdentifier = "cellular"
+    @objc public static let shared = DDNAPinpointer()
+    
+    let wifiIdentifier = "wifi"
+    let cellularIdentifier = "cellular"
+    var networkType = "unknown"
+    var monitor: NWPathMonitor? = nil
+    
+    override init() {
+        super.init()
+        self.monitor = NWPathMonitor()
+        monitor?.pathUpdateHandler = { path in
+            if path.status == .satisfied {
+                self.networkType = path.isExpensive ? self.cellularIdentifier : self.wifiIdentifier
+            }
+        }
+        monitor?.start(queue: DispatchQueue.global(qos: .background))
+    }
+    
+    deinit {
+        self.monitor?.cancel()
+    }
     
     // MARK: Event methods
     
-    @objc public static func createSignalTrackingSessionEvent(developerId: NSString) -> DDNAEvent {
+    @objc public func createSignalTrackingSessionEvent(developerId: NSString) -> DDNAEvent {
         let signalEvent = DDNAEvent(name: "unitySignalTrackingSession")!
         signalEvent.setParam(UIDevice.current.model as NSString, forKey: "deviceType")
         signalEvent.setParam((NSLocale.current.regionCode ?? "ZZ") as NSString, forKey: "userCountry")
@@ -48,13 +68,7 @@ public class DDNAPinpointer: NSObject {
         signalEvent.setParam(true as NSObject, forKey: "privacyPermissionGameExp")
         signalEvent.setParam(true as NSObject, forKey: "privacyPermissionProfiling")
         
-        let networkType: NSString
-        if #available(iOS 12.0, *) {
-            networkType = getNetworkType()
-        } else {
-            networkType = "unknown"
-        }
-        signalEvent.setParam(networkType, forKey: "connectionType")
+        signalEvent.setParam(self.networkType as NSString, forKey: "connectionType")
         if let ipAddress = getIPAddress(usingInterface: networkType) {
             signalEvent.setParam(ipAddress, forKey: "ipAddress")
         }
@@ -63,7 +77,7 @@ public class DDNAPinpointer: NSObject {
         return signalEvent
     }
     
-    @objc public static func createSignalTrackingPurchaseEvent(
+    @objc public func createSignalTrackingPurchaseEvent(
         realCurrencyAmount: NSNumber,
         realCurrencyType: NSString,
         developerId: NSString
@@ -76,7 +90,7 @@ public class DDNAPinpointer: NSObject {
         return signalEvent
     }
     
-    @objc public static func createSignalTrackingAdRevenueEvent(
+    @objc public func createSignalTrackingAdRevenueEvent(
         realCurrencyAmount: NSNumber,
         realCurrencyType: NSString,
         developerId: NSString
@@ -92,27 +106,10 @@ public class DDNAPinpointer: NSObject {
     
     // MARK: Data helper methods
     
-    @available(iOS 12.0, *)
-    private static func getNetworkType() -> NSString {
-        // TODO: Should we just create the network monitor once and leave it running on
-        // a background thread? That way we always have up to date data cached, but at
-        // a small performance hit?
-        let monitor = NWPathMonitor()
-        monitor.start(queue: DispatchQueue.global(qos: .default))
-        var networkType = "unknown"
-        if monitor.currentPath.usesInterfaceType(.wifi) {
-            networkType = wifiIdentifier
-        } else if monitor.currentPath.usesInterfaceType(.cellular) {
-            networkType = cellularIdentifier
-        }
-        monitor.cancel()
-        return networkType as NSString
-    }
-    
     // NOTE: This method gets the *local* ip address of the interface requested. If a
     // public IP address is required this will need to be gathered from a network request.
     // It uses an Apple inbuilt C library, which needs to be included in the main app header.
-    private static func getIPAddress(usingInterface requiredInterfaceIdentifier: NSString) -> NSString? {
+    private func getIPAddress(usingInterface requiredInterfaceIdentifier: String) -> NSString? {
         let wifiInterfaceName = "en0"
         let cellularInterfaceName = "pdp_ip0"
         
