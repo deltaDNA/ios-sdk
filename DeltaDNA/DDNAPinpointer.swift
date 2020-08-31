@@ -19,7 +19,7 @@ import Network
 import AppTrackingTransparency
 import AdSupport
 
-public class DDNAPinpointerHelpers: NSObject {
+public class DDNAPinpointer: NSObject {
     static let wifiIdentifier = "wifi"
     static let cellularIdentifier = "cellular"
     

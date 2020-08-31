@@ -37,7 +37,6 @@
 #import "DDNAImageCache.h"
 #import "DDNAEventAction.h"
 #import "DDNAEventTrigger.h"
-#import "DDNAPinpointer.h"
 
 #import <UIKit/UIKit.h>
 
@@ -525,26 +524,6 @@ static NSString *const DD_EVENT_NEW_SESSION = @"DDNASDKNewSession";
             }
         }
     }];
-}
-
-#pragma mark - Pinpointer
-
-- (void)recordSignalTrackingSessionEvent
-{
-    DDNAEvent *signalTrackingEvent = [DDNAPinpointer createSignalTrackingSessionEvent];
-    [self recordEvent:signalTrackingEvent];
-}
-
-- (void)recordSignalTrackingPurchaseEvent
-{
-    DDNAEvent *signalTrackingEvent = [DDNAPinpointer createSignalTrackingPurchaseEvent];
-    [self recordEvent:signalTrackingEvent];
-}
-
-- (void)recordSignalTrackingAdRevenueEvent
-{
-    DDNAEvent *signalTrackingEvent = [DDNAPinpointer createSignalTrackingAdRevenueEvent];
-    [self recordEvent:signalTrackingEvent];
 }
 
 #pragma mark - Private Helpers

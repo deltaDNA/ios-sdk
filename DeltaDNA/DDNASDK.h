@@ -254,6 +254,33 @@ The Apple Device Token received from in your AppDelegate
  */
 - (void)forgetMe;
 
+#pragma mark Pinpointer Methods
+
+/**
+ Records a session event to be used in pinpointer signal tracking.
+ Only designed to be used for Audience Pinpointer.
+ @param developerId The apple development team that created the app
+ */
+- (void)recordSignalTrackingSessionEvent:(NSString *) developerId;
+
+/**
+ Records a purchase event to be used in pinpointer signal tracking.
+ Only designed to be used for Audience Pinpointer.
+ @param developerId The apple development team that created the app
+ @param realCurrencyAmount The amount spent on the purchase, in the currency used for the purchase
+ @param realCurrencyType The currency code of the currency used for the purchase. For example, USD for dollars or GBP for pounds sterling.
+ */
+- (void)recordSignalTrackingPurchaseEvent:(NSString *) developerId :(NSNumber *) realCurrencyAmount :(NSString *) realCurrencyType;
+
+/**
+ Records an ad revenue event to be used in pinpointer signal tracking.
+ Only designed to be used for Audience Pinpointer.
+ @param developerId The apple development team that created the app
+ @param realCurrencyAmount The amount of revenue raised, in the relevant currency
+ @param realCurrencyType The currency code of the currency raised by this ad revenue. For example, USD for dollars or GBP for pounds sterling.
+ */
+- (void)recordSignalTrackingAdRevenueEvent:(NSString *) developerId :(NSNumber *) realCurrencyAmount :(NSString *) realCurrencyType;
+
 @end
 
 /**

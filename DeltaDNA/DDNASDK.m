@@ -29,6 +29,8 @@
 #import "DDNAInstanceFactory.h"
 
 #import <UIKit/UIKit.h>
+#import <DeltaDNA/DeltaDNA-Swift.h>
+#include <ifaddrs.h>
 
 @interface DDNASDK ()
 
@@ -213,6 +215,25 @@
         self.impl = [[DDNANonTrackingSdk alloc] initWithSdk:self instanceFactory:DDNAInstanceFactory.sharedInstance];
         [self.impl startWithNewPlayer:self.userManager];
     }
+}
+
+#pragma mark - Audience Pinpointer
+- (void) recordSignalTrackingSessionEvent :(NSString *) developerId
+{
+    DDNAEvent *event = [DDNAPinpointer createSignalTrackingSessionEventWithDeveloperId:developerId];
+    [self recordEvent:event];
+}
+
+- (void) createSignalTrackingPurchaseEvent :(NSString *) developerId :(NSNumber *) realCurrencyAmount :(NSString *) realCurrencyType
+{
+    DDNAEvent *event = [DDNAPinpointer createSignalTrackingPurchaseEventWithRealCurrencyAmount:realCurrencyAmount realCurrencyType:realCurrencyType developerId:developerId];
+    [self recordEvent:event];
+}
+
+- (void) createSignalTrackingAdRevenueEvent :(NSString *) developerId :(NSNumber *) realCurrencyAmount :(NSString *) realCurrencyType
+{
+    DDNAEvent *event = [DDNAPinpointer createSignalTrackingAdRevenueEventWithRealCurrencyAmount:realCurrencyAmount realCurrencyType:realCurrencyType developerId:developerId];
+    [self recordEvent:event];
 }
 
 #pragma mark - Client Configuration Properties
