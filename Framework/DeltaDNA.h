@@ -15,6 +15,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#include <ifaddrs.h>
 
 //! Project version number for DeltaDNA.
 FOUNDATION_EXPORT double DeltaDNAVersionNumber;

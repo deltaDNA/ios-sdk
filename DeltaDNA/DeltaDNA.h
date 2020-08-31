@@ -29,5 +29,6 @@
 #import <DeltaDNA/DDNAImageMessage.h>
 #import <DeltaDNA/DDNAEventAction.h>
 #import <DeltaDNA/DDNAEventActionHandler.h>
+#import <DeltaDNA/DDNAPinpointer.h>
 
 #endif /* _DELTADNA_ */

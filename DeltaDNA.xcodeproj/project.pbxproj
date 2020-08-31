@@ -187,6 +187,12 @@
 		63E78ABD208F80B800DDD48D /* DDNAUserManagerSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E78AB9208F807C00DDD48D /* DDNAUserManagerSpec.m */; };
 		63F8C5F81D8045D5004E5D66 /* iso_4217.xml in Resources */ = {isa = PBXBuildFile; fileRef = 63F8C5F71D8045D5004E5D66 /* iso_4217.xml */; };
 		63F8C5F91D8048F8004E5D66 /* iso_4217.xml in Resources */ = {isa = PBXBuildFile; fileRef = 63F8C5F71D8045D5004E5D66 /* iso_4217.xml */; };
+		6F6BF81824F937E500525F4A /* DDNAPinpointer.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F6BF81724F937E500525F4A /* DDNAPinpointer.h */; };
+		6F6BF81924F937E500525F4A /* DDNAPinpointer.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F6BF81724F937E500525F4A /* DDNAPinpointer.h */; };
+		6F6BF81B24F937FC00525F4A /* DDNAPinpointer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6BF81A24F937FC00525F4A /* DDNAPinpointer.m */; };
+		6F6BF81C24F937FC00525F4A /* DDNAPinpointer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6BF81A24F937FC00525F4A /* DDNAPinpointer.m */; };
+		6F6BF82124F958C100525F4A /* DDNAPinpointerHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6BF82024F958C100525F4A /* DDNAPinpointerHelpers.swift */; };
+		6F6BF82224F958C100525F4A /* DDNAPinpointerHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6BF82024F958C100525F4A /* DDNAPinpointerHelpers.swift */; };
 		7C71803D21E78B2B00A52EB9 /* DDNASettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 636556361C60F5F2004153E7 /* DDNASettings.m */; };
 		BE8BC6CE991955F4F252F48F /* Pods_DeltaDNA_tvOS_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC5FDFD8337EC612AB2B8483 /* Pods_DeltaDNA_tvOS_Tests.framework */; };
 /* End PBXBuildFile section */
@@ -313,6 +319,9 @@
 		63BD747920C814E700F0DD97 /* DDNATrackingSdkSpec.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DDNATrackingSdkSpec.m; sourceTree = "<group>"; };
 		63E78AB9208F807C00DDD48D /* DDNAUserManagerSpec.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DDNAUserManagerSpec.m; sourceTree = "<group>"; };
 		63F8C5F71D8045D5004E5D66 /* iso_4217.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = iso_4217.xml; path = DeltaDNA/Resources/iso_4217.xml; sourceTree = "<group>"; };
+		6F6BF81724F937E500525F4A /* DDNAPinpointer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DDNAPinpointer.h; sourceTree = "<group>"; };
+		6F6BF81A24F937FC00525F4A /* DDNAPinpointer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DDNAPinpointer.m; sourceTree = "<group>"; };
+		6F6BF82024F958C100525F4A /* DDNAPinpointerHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDNAPinpointerHelpers.swift; sourceTree = "<group>"; };
 		D432A4CBC0CAD37B699A59A3 /* Pods-DeltaDNA tvOS Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DeltaDNA tvOS Tests.debug.xcconfig"; path = "Tests/Pods/Target Support Files/Pods-DeltaDNA tvOS Tests/Pods-DeltaDNA tvOS Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		D7BE3517D44F9BE8A36CB4A6 /* Pods-DeltaDNA tvOS Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DeltaDNA tvOS Tests.release.xcconfig"; path = "Tests/Pods/Target Support Files/Pods-DeltaDNA tvOS Tests/Pods-DeltaDNA tvOS Tests.release.xcconfig"; sourceTree = "<group>"; };
 		DBBF3347BE53332EC63C4DD1 /* Pods_DeltaDNA_iOS_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DeltaDNA_iOS_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -572,6 +581,7 @@
 		63A11FE81C71F86B008DEE99 /* Impl */ = {
 			isa = PBXGroup;
 			children = (
+				6F6BF81624F937C500525F4A /* Pinpointer */,
 				63A11FE61C71F817008DEE99 /* Collect */,
 				63A11FE71C71F828008DEE99 /* Engage */,
 				63A11FE91C71F903008DEE99 /* Helpers */,
@@ -621,6 +631,16 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
+		6F6BF81624F937C500525F4A /* Pinpointer */ = {
+			isa = PBXGroup;
+			children = (
+				6F6BF81724F937E500525F4A /* DDNAPinpointer.h */,
+				6F6BF81A24F937FC00525F4A /* DDNAPinpointer.m */,
+				6F6BF82024F958C100525F4A /* DDNAPinpointerHelpers.swift */,
+			);
+			name = Pinpointer;
+			sourceTree = "<group>";
+		};
 		C0A0A3415B8D93441863560A /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -648,6 +668,7 @@
 				636556491C60F5F2004153E7 /* DDNAEngageService.h in Headers */,
 				63A11FE21C71F7F7008DEE99 /* DDNAVolatileEventStore.h in Headers */,
 				633BEAA1208DEE090080301A /* DDNATrackingSdk.h in Headers */,
+				6F6BF81824F937E500525F4A /* DDNAPinpointer.h in Headers */,
 				633BEA9D208DEC320080301A /* DDNASdkInterface.h in Headers */,
 				6327172D1C650D1B00AB2806 /* DDNAEngageCache.h in Headers */,
 				6359F01020920BEE0087F5D8 /* DDNAImageCache.h in Headers */,
@@ -706,6 +727,7 @@
 				6359F01120920BEE0087F5D8 /* DDNAImageCache.h in Headers */,
 				636557001C610E20004153E7 /* DeltaDNA.h in Headers */,
 				636556E11C6108DF004153E7 /* DDNASDK.h in Headers */,
+				6F6BF81924F937E500525F4A /* DDNAPinpointer.h in Headers */,
 				63A11FDF1C71F7F7008DEE99 /* DDNAPersistentEventStore.h in Headers */,
 				63A11FAE1C6B77D6008DEE99 /* DDNACollectService.h in Headers */,
 				636556E21C6108DF004153E7 /* DDNASettings.h in Headers */,
@@ -984,6 +1006,7 @@
 				63A11FB51C6CF20A008DEE99 /* DDNAEvent.m in Sources */,
 				636556651C60F5F2004153E7 /* NSString+DeltaDNA.m in Sources */,
 				636556631C60F5F2004153E7 /* NSDictionary+DeltaDNA.m in Sources */,
+				6F6BF81B24F937FC00525F4A /* DDNAPinpointer.m in Sources */,
 				30EF37DE2180A8FD007BAA47 /* DDNAActionStore.m in Sources */,
 				636556501C60F5F2004153E7 /* DDNAInstanceFactory.m in Sources */,
 				304F13D82029F88200FA367B /* DDNAUtils.m in Sources */,
@@ -998,6 +1021,7 @@
 				63A11FC11C6CF435008DEE99 /* DDNATransaction.m in Sources */,
 				6365565E1C60F5F2004153E7 /* DDNASDK.m in Sources */,
 				635AC81120D27302009027D5 /* DDNAEventAction.m in Sources */,
+				6F6BF82124F958C100525F4A /* DDNAPinpointerHelpers.swift in Sources */,
 				633BEAAF208DEECF0080301A /* DDNAUserManager.m in Sources */,
 				636556441C60F5F2004153E7 /* DDNAClientInfo.m in Sources */,
 				63A11FE01C71F7F7008DEE99 /* DDNAPersistentEventStore.m in Sources */,
@@ -1022,6 +1046,7 @@
 				636556C51C6108BE004153E7 /* DDNAInstanceFactory.m in Sources */,
 				636556C61C6108BE004153E7 /* DDNALog.m in Sources */,
 				636556C71C6108BE004153E7 /* DDNANetworkRequest.m in Sources */,
+				6F6BF81C24F937FC00525F4A /* DDNAPinpointer.m in Sources */,
 				30EF37DF2180A8FD007BAA47 /* DDNAActionStore.m in Sources */,
 				636556C81C6108BE004153E7 /* DDNAPlayerPrefs.m in Sources */,
 				63A11FD41C71E77D008DEE99 /* DDNAParams.m in Sources */,
@@ -1036,6 +1061,7 @@
 				63A11FC21C6CF435008DEE99 /* DDNATransaction.m in Sources */,
 				636556CE1C6108BE004153E7 /* NSDictionary+DeltaDNA.m in Sources */,
 				635AC81220D27302009027D5 /* DDNAEventAction.m in Sources */,
+				6F6BF82224F958C100525F4A /* DDNAPinpointerHelpers.swift in Sources */,
 				633BEAB0208DEECF0080301A /* DDNAUserManager.m in Sources */,
 				636556CF1C6108BE004153E7 /* NSString+DeltaDNA.m in Sources */,
 				63A11FE11C71F7F7008DEE99 /* DDNAPersistentEventStore.m in Sources */,
@@ -1154,6 +1180,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = DeltaDNA;
 				SDKROOT = iphoneos;
 				TVOS_DEPLOYMENT_TARGET = 9.2;
 			};
@@ -1188,6 +1215,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				PRODUCT_NAME = DeltaDNA;
 				SDKROOT = iphoneos;
 				TVOS_DEPLOYMENT_TARGET = 9.2;
 			};
@@ -1439,6 +1467,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 4230748C72C905B3FCB0D3E7 /* Pods-DeltaDNA iOS Tests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -1488,6 +1517,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 1545773A5B3C2343D5D24F5D /* Pods-DeltaDNA iOS Tests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -1531,6 +1561,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D432A4CBC0CAD37B699A59A3 /* Pods-DeltaDNA tvOS Tests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -1579,6 +1610,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D7BE3517D44F9BE8A36CB4A6 /* Pods-DeltaDNA tvOS Tests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
