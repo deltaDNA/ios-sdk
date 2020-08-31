@@ -30,7 +30,6 @@
 
 #import <UIKit/UIKit.h>
 #import <DeltaDNA/DeltaDNA-Swift.h>
-#include <ifaddrs.h>
 
 @interface DDNASDK ()
 
