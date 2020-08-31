@@ -34,6 +34,10 @@ public class DDNAPinpointerHelpers: NSObject {
         }
         signalEvent.setParam(idfaIsPresent as NSObject, forKey: "limitedAdTracking")
         signalEvent.setParam(Bundle.main.bundleIdentifier as NSString?, forKey: "appStoreId")
+        signalEvent.setParam(idfaIsPresent as NSObject, forKey: "privacyPermissionAds")
+        signalEvent.setParam(true as NSObject, forKey: "privacyPermissionExternal")
+        signalEvent.setParam(true as NSObject, forKey: "privacyPermissionGameExp")
+        signalEvent.setParam(true as NSObject, forKey: "privacyPermissionProfiling")
         
         let networkType: NSString
         if #available(iOS 12.0, *) {
