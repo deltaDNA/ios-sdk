@@ -46,7 +46,36 @@ public class DDNAPinpointer: NSObject {
     // MARK: Event methods
     
     @objc public func createSignalTrackingSessionEvent(developerId: NSString) -> DDNAEvent {
-        let signalEvent = DDNAEvent(name: "unitySignalTrackingSession")!
+        let signalEvent = createBaseSignalMappingEvent(developerId: developerId, eventName: "unitySignalTrackingSession")
+        return signalEvent
+    }
+    
+    @objc public func createSignalTrackingPurchaseEvent(
+        realCurrencyAmount: NSNumber,
+        realCurrencyType: NSString,
+        developerId: NSString
+    ) -> DDNAEvent {
+        let signalEvent = createBaseSignalMappingEvent(developerId: developerId, eventName: "unitySignalTrackingPurchase")
+        signalEvent.setParam(realCurrencyAmount, forKey: "realCurrencyAmount")
+        signalEvent.setParam(realCurrencyType, forKey: "realCurrencyType")
+        return signalEvent
+    }
+    
+    @objc public func createSignalTrackingAdRevenueEvent(
+        realCurrencyAmount: NSNumber,
+        realCurrencyType: NSString,
+        developerId: NSString
+    ) -> DDNAEvent {
+        let signalEvent = createBaseSignalMappingEvent(developerId: developerId, eventName: "unitySignalTrackingAdRevenue")
+        signalEvent.setParam(realCurrencyAmount, forKey: "realCurrencyAmount")
+        signalEvent.setParam(realCurrencyType, forKey: "realCurrencyType")
+        return signalEvent
+    }
+    
+    // MARK: Data helper methods
+    
+    private func createBaseSignalMappingEvent(developerId: NSString, eventName: String) -> DDNAEvent {
+        let signalEvent = DDNAEvent(name: eventName)!
         signalEvent.setParam(UIDevice.current.model as NSString, forKey: "deviceType")
         signalEvent.setParam((NSLocale.current.regionCode ?? "ZZ") as NSString, forKey: "userCountry")
         signalEvent.setParam((NSLocale.current.languageCode ?? "zz") as NSString, forKey: "deviceLanguage")
@@ -73,38 +102,8 @@ public class DDNAPinpointer: NSObject {
             signalEvent.setParam(ipAddress, forKey: "ipAddress")
         }
         signalEvent.setParam(developerId, forKey: "appDeveloperID")
-        
         return signalEvent
     }
-    
-    @objc public func createSignalTrackingPurchaseEvent(
-        realCurrencyAmount: NSNumber,
-        realCurrencyType: NSString,
-        developerId: NSString
-    ) -> DDNAEvent {
-        // For now, this event and the one for the session share much of the same
-        // content, so we can reuse the above method to get us started here too.
-        let signalEvent = createSignalTrackingSessionEvent(developerId: developerId)
-        signalEvent.setParam(realCurrencyAmount, forKey: "realCurrencyAmount")
-        signalEvent.setParam(realCurrencyType, forKey: "realCurrencyType")
-        return signalEvent
-    }
-    
-    @objc public func createSignalTrackingAdRevenueEvent(
-        realCurrencyAmount: NSNumber,
-        realCurrencyType: NSString,
-        developerId: NSString
-    ) -> DDNAEvent {
-        // For now, this event and the one for purchases have the same content, so
-        // to avoid duplication we can reuse that method verbatim.
-        return createSignalTrackingPurchaseEvent(
-            realCurrencyAmount: realCurrencyAmount,
-            realCurrencyType: realCurrencyType,
-            developerId: developerId
-        )
-    }
-    
-    // MARK: Data helper methods
     
     // NOTE: This method gets the *local* ip address of the interface requested. If a
     // public IP address is required this will need to be gathered from a network request.
@@ -122,7 +121,8 @@ public class DDNAPinpointer: NSObject {
         for interfacePointer in sequence(first: firstAddress, next: { $0.pointee.ifa_next }) {
             let interface = interfacePointer.pointee
             let interfaceAddressFamily = interface.ifa_addr.pointee.sa_family
-            if interfaceAddressFamily == UInt8(AF_INET) || interfaceAddressFamily == UInt8(AF_INET6) {
+            // || interfaceAddressFamily == UInt8(AF_INET6)
+            if interfaceAddressFamily == UInt8(AF_INET) {
                 let interfaceName = String(cString: interface.ifa_name)
                 let requiredInterfaceName = (requiredInterfaceIdentifier as String) == wifiIdentifier
                     ? wifiInterfaceName
