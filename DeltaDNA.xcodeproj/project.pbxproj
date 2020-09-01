@@ -1455,7 +1455,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 4230748C72C905B3FCB0D3E7 /* Pods-DeltaDNA iOS Tests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -1505,7 +1504,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 1545773A5B3C2343D5D24F5D /* Pods-DeltaDNA iOS Tests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -1549,7 +1547,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D432A4CBC0CAD37B699A59A3 /* Pods-DeltaDNA tvOS Tests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -1598,7 +1595,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D7BE3517D44F9BE8A36CB4A6 /* Pods-DeltaDNA tvOS Tests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
