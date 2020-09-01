@@ -121,7 +121,6 @@ public class DDNAPinpointer: NSObject {
         for interfacePointer in sequence(first: firstAddress, next: { $0.pointee.ifa_next }) {
             let interface = interfacePointer.pointee
             let interfaceAddressFamily = interface.ifa_addr.pointee.sa_family
-            // || interfaceAddressFamily == UInt8(AF_INET6)
             if interfaceAddressFamily == UInt8(AF_INET) {
                 let interfaceName = String(cString: interface.ifa_name)
                 let requiredInterfaceName = (requiredInterfaceIdentifier as String) == wifiIdentifier
