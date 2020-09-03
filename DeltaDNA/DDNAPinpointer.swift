@@ -46,7 +46,7 @@ public class DDNAPinpointer: NSObject {
     // MARK: Event methods
     
     @objc public func createSignalTrackingSessionEvent(developerId: NSString) -> DDNAEvent {
-        let signalEvent = createBaseSignalMappingEvent(developerId: developerId, eventName: "unitySignalTrackingSession")
+        let signalEvent = createBaseSignalMappingEvent(developerId: developerId, eventName: "unitySignalSession")
         return signalEvent
     }
     
@@ -55,18 +55,7 @@ public class DDNAPinpointer: NSObject {
         realCurrencyType: NSString,
         developerId: NSString
     ) -> DDNAEvent {
-        let signalEvent = createBaseSignalMappingEvent(developerId: developerId, eventName: "unitySignalTrackingPurchase")
-        signalEvent.setParam(realCurrencyAmount, forKey: "realCurrencyAmount")
-        signalEvent.setParam(realCurrencyType, forKey: "realCurrencyType")
-        return signalEvent
-    }
-    
-    @objc public func createSignalTrackingAdRevenueEvent(
-        realCurrencyAmount: NSNumber,
-        realCurrencyType: NSString,
-        developerId: NSString
-    ) -> DDNAEvent {
-        let signalEvent = createBaseSignalMappingEvent(developerId: developerId, eventName: "unitySignalTrackingAdRevenue")
+        let signalEvent = createBaseSignalMappingEvent(developerId: developerId, eventName: "unitySignalPurchase")
         signalEvent.setParam(realCurrencyAmount, forKey: "realCurrencyAmount")
         signalEvent.setParam(realCurrencyType, forKey: "realCurrencyType")
         return signalEvent
@@ -84,6 +73,7 @@ public class DDNAPinpointer: NSObject {
         var idfaIsPresent: Bool = false
         if #available(iOS 14, *) {
             idfaIsPresent = ATTrackingManager.trackingAuthorizationStatus == .authorized
+            signalEvent.setParam(ATTrackingManager.trackingAuthorizationStatus.rawValue as NSNumber, forKey: "attTrackingStatus")
         } else {
             idfaIsPresent = ASIdentifierManager.shared().isAdvertisingTrackingEnabled
         }
