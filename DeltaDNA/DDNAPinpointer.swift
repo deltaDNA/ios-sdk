@@ -85,7 +85,6 @@ public class DDNAPinpointer: NSObject {
         signalEvent.setParam(idfaIsPresent as NSObject, forKey: "privacyPermissionAds")
         signalEvent.setParam(true as NSObject, forKey: "privacyPermissionExternal")
         signalEvent.setParam(true as NSObject, forKey: "privacyPermissionGameExp")
-        signalEvent.setParam(true as NSObject, forKey: "privacyPermissionProfiling")
         
         signalEvent.setParam(self.networkType as NSString, forKey: "connectionType")
         if let ipAddress = getIPAddress(usingInterface: networkType) {
