@@ -274,16 +274,6 @@ The Apple Device Token received from in your AppDelegate
  */
 - (void)recordSignalTrackingPurchaseEvent:(NSString *) developerId :(NSNumber *) realCurrencyAmount :(NSString *) realCurrencyType;
 
-/**
- Records an ad revenue event to be used in pinpointer signal tracking.
- Only designed to be used for Audience Pinpointer.
- @availability iOS 12 or higher 
- @param developerId The apple development team that created the app
- @param realCurrencyAmount The amount of revenue raised, in the relevant currency
- @param realCurrencyType The currency code of the currency raised by this ad revenue. For example, USD for dollars or GBP for pounds sterling.
- */
-- (void)recordSignalTrackingAdRevenueEvent:(NSString *) developerId :(NSNumber *) realCurrencyAmount :(NSString *) realCurrencyType;
-
 @end
 
 /**

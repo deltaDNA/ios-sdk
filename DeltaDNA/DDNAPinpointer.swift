@@ -65,7 +65,7 @@ public class DDNAPinpointer: NSObject {
     
     private func createBaseSignalMappingEvent(developerId: NSString, eventName: String) -> DDNAEvent {
         let signalEvent = DDNAEvent(name: eventName)!
-        signalEvent.setParam(UIDevice.current.model as NSString, forKey: "deviceType")
+        signalEvent.setParam(UIDevice.current.model as NSString, forKey: "deviceName")
         signalEvent.setParam((NSLocale.current.regionCode ?? "ZZ") as NSString, forKey: "userCountry")
         signalEvent.setParam((NSLocale.current.languageCode ?? "zz") as NSString, forKey: "deviceLanguage")
         signalEvent.setParam(UIDevice.current.identifierForVendor?.uuidString as NSString?, forKey: "idfv")
