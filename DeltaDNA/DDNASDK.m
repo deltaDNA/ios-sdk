@@ -229,12 +229,6 @@
     [self recordEvent:event];
 }
 
-- (void) recordSignalTrackingAdRevenueEvent :(NSString *) developerId :(NSNumber *) realCurrencyAmount :(NSString *) realCurrencyType
-{
-    DDNAEvent *event = [DDNAPinpointer.shared createSignalTrackingAdRevenueEventWithRealCurrencyAmount:realCurrencyAmount realCurrencyType:realCurrencyType developerId:developerId];
-    [self recordEvent:event];
-}
-
 #pragma mark - Client Configuration Properties
 
 - (NSString *) userID
