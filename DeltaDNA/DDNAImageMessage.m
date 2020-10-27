@@ -525,7 +525,8 @@ BOOL validConfiguration(NSDictionary *configuration)
     [self.actionEvent setParam:name forKey:@"imActionName"];
     [self.actionEvent setParam:type forKey:@"imActionType"];
     if (value != nil) {
-        [self.actionEvent setParam:value forKey:@"imActionValue"];
+        NSString* valueString = value.description;//[NSString stringWithFormat: @"%@", value];
+        [self.actionEvent setParam:valueString forKey:@"imActionValue"];
     }
     [[DDNASDK sharedInstance] recordEvent:self.actionEvent];
     
