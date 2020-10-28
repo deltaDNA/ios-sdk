@@ -11,8 +11,6 @@
 		63298E2B1C624E500080E112 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63298E2A1C624E500080E112 /* ViewController.swift */; };
 		63298E2E1C624E500080E112 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63298E2C1C624E500080E112 /* Main.storyboard */; };
 		63298E301C624E500080E112 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63298E2F1C624E500080E112 /* Assets.xcassets */; };
-		6337E00D1C64EAB80011321F /* DeltaDNA.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6337E00C1C64EAB80011321F /* DeltaDNA.framework */; };
-		6337E00E1C64EAB80011321F /* DeltaDNA.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6337E00C1C64EAB80011321F /* DeltaDNA.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6337E0101C64EBC40011321F /* DeltaDNA.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6337E00C1C64EAB80011321F /* DeltaDNA.framework */; };
 		636556F61C610BB6004153E7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 636556EC1C610BB6004153E7 /* AppDelegate.m */; };
 		636556F71C610BB6004153E7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 636556ED1C610BB6004153E7 /* Assets.xcassets */; };
@@ -20,16 +18,54 @@
 		636556F91C610BB6004153E7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 636556F01C610BB6004153E7 /* Main.storyboard */; };
 		636556FB1C610BB6004153E7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 636556F31C610BB6004153E7 /* main.m */; };
 		636556FC1C610BB6004153E7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 636556F51C610BB6004153E7 /* ViewController.m */; };
+		90B34388249FAF1F0099554A /* NotificationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 90B34387249FAF1F0099554A /* NotificationService.m */; };
+		90B3438C249FAF1F0099554A /* iOSExampleNotificationExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 90B34384249FAF1F0099554A /* iOSExampleNotificationExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		90B34391249FB1DE0099554A /* DeltaDNA.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90B34390249FB1DE0099554A /* DeltaDNA.framework */; };
+		90B34392249FB1DE0099554A /* DeltaDNA.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 90B34390249FB1DE0099554A /* DeltaDNA.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		90B34395249FB2030099554A /* DeltaDNA.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90B34394249FB2030099554A /* DeltaDNA.framework */; };
+		90B34396249FB2030099554A /* DeltaDNA.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 90B34394249FB2030099554A /* DeltaDNA.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		90B3438A249FAF1F0099554A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 63CCEBC41BFB70440041F49E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 90B34383249FAF1F0099554A;
+			remoteInfo = iOSExampleNotificationExtension;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXCopyFilesBuildPhase section */
-		6337E00F1C64EAB80011321F /* Embed Frameworks */ = {
+		90B3437B249CCDC80099554A /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				90B3438C249FAF1F0099554A /* iOSExampleNotificationExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		90B34393249FB1DE0099554A /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				6337E00E1C64EAB80011321F /* DeltaDNA.framework in Embed Frameworks */,
+				90B34392249FB1DE0099554A /* DeltaDNA.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		90B34397249FB2030099554A /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				90B34396249FB2030099554A /* DeltaDNA.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -54,6 +90,13 @@
 		636556F41C610BB6004153E7 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		636556F51C610BB6004153E7 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		63CCEBCC1BFB70440041F49E /* iOS Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iOS Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		90B3436B249CAA480099554A /* iOS Example.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "iOS Example.entitlements"; sourceTree = "<group>"; };
+		90B34384249FAF1F0099554A /* iOSExampleNotificationExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = iOSExampleNotificationExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		90B34386249FAF1F0099554A /* NotificationService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotificationService.h; sourceTree = "<group>"; };
+		90B34387249FAF1F0099554A /* NotificationService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NotificationService.m; sourceTree = "<group>"; };
+		90B34389249FAF1F0099554A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		90B34390249FB1DE0099554A /* DeltaDNA.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = DeltaDNA.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		90B34394249FB2030099554A /* DeltaDNA.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = DeltaDNA.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,7 +112,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6337E00D1C64EAB80011321F /* DeltaDNA.framework in Frameworks */,
+				90B34391249FB1DE0099554A /* DeltaDNA.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		90B34381249FAF1F0099554A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				90B34395249FB2030099554A /* DeltaDNA.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -91,6 +142,7 @@
 		636556EA1C610BB6004153E7 /* iOS Example */ = {
 			isa = PBXGroup;
 			children = (
+				90B3436B249CAA480099554A /* iOS Example.entitlements */,
 				636556EB1C610BB6004153E7 /* AppDelegate.h */,
 				636556EC1C610BB6004153E7 /* AppDelegate.m */,
 				636556ED1C610BB6004153E7 /* Assets.xcassets */,
@@ -107,6 +159,8 @@
 		636556FF1C610D10004153E7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				90B34394249FB2030099554A /* DeltaDNA.framework */,
+				90B34390249FB1DE0099554A /* DeltaDNA.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -117,6 +171,7 @@
 				6337E00C1C64EAB80011321F /* DeltaDNA.framework */,
 				636556EA1C610BB6004153E7 /* iOS Example */,
 				63298E271C624E500080E112 /* tvOS Example */,
+				90B34385249FAF1F0099554A /* iOSExampleNotificationExtension */,
 				636556FF1C610D10004153E7 /* Frameworks */,
 				63CCEBCD1BFB70440041F49E /* Products */,
 			);
@@ -127,8 +182,19 @@
 			children = (
 				63CCEBCC1BFB70440041F49E /* iOS Example.app */,
 				63298E261C624E500080E112 /* tvOS Example.app */,
+				90B34384249FAF1F0099554A /* iOSExampleNotificationExtension.appex */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		90B34385249FAF1F0099554A /* iOSExampleNotificationExtension */ = {
+			isa = PBXGroup;
+			children = (
+				90B34386249FAF1F0099554A /* NotificationService.h */,
+				90B34387249FAF1F0099554A /* NotificationService.m */,
+				90B34389249FAF1F0099554A /* Info.plist */,
+			);
+			path = iOSExampleNotificationExtension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -158,16 +224,36 @@
 				63CCEBC81BFB70440041F49E /* Sources */,
 				63CCEBC91BFB70440041F49E /* Frameworks */,
 				63CCEBCA1BFB70440041F49E /* Resources */,
-				6337E00F1C64EAB80011321F /* Embed Frameworks */,
+				90B3437B249CCDC80099554A /* Embed App Extensions */,
+				90B34393249FB1DE0099554A /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				90B3438B249FAF1F0099554A /* PBXTargetDependency */,
 			);
 			name = "iOS Example";
 			productName = "DeltaDNA iOS Example";
 			productReference = 63CCEBCC1BFB70440041F49E /* iOS Example.app */;
 			productType = "com.apple.product-type.application";
+		};
+		90B34383249FAF1F0099554A /* iOSExampleNotificationExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 90B3438D249FAF1F0099554A /* Build configuration list for PBXNativeTarget "iOSExampleNotificationExtension" */;
+			buildPhases = (
+				90B34380249FAF1F0099554A /* Sources */,
+				90B34381249FAF1F0099554A /* Frameworks */,
+				90B34382249FAF1F0099554A /* Resources */,
+				90B34397249FB2030099554A /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = iOSExampleNotificationExtension;
+			productName = iOSExampleNotificationExtension;
+			productReference = 90B34384249FAF1F0099554A /* iOSExampleNotificationExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -175,19 +261,24 @@
 		63CCEBC41BFB70440041F49E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0720;
+				LastSwiftUpdateCheck = 1150;
 				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = deltaDNA;
 				TargetAttributes = {
 					63298E251C624E500080E112 = {
 						CreatedOnToolsVersion = 7.2.1;
-						DevelopmentTeam = 846C8UZB42;
+						DevelopmentTeam = 4DZT52R2T5;
 						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
 					};
 					63CCEBCB1BFB70440041F49E = {
 						CreatedOnToolsVersion = 7.1.1;
-						DevelopmentTeam = 846C8UZB42;
+						DevelopmentTeam = 4DZT52R2T5;
+					};
+					90B34383249FAF1F0099554A = {
+						CreatedOnToolsVersion = 11.5;
+						DevelopmentTeam = 4DZT52R2T5;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -196,6 +287,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -206,6 +298,7 @@
 			targets = (
 				63CCEBCB1BFB70440041F49E /* iOS Example */,
 				63298E251C624E500080E112 /* tvOS Example */,
+				90B34383249FAF1F0099554A /* iOSExampleNotificationExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -227,6 +320,13 @@
 				636556F91C610BB6004153E7 /* Main.storyboard in Resources */,
 				636556F71C610BB6004153E7 /* Assets.xcassets in Resources */,
 				636556F81C610BB6004153E7 /* LaunchScreen.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		90B34382249FAF1F0099554A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -252,7 +352,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		90B34380249FAF1F0099554A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				90B34388249FAF1F0099554A /* NotificationService.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		90B3438B249FAF1F0099554A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 90B34383249FAF1F0099554A /* iOSExampleNotificationExtension */;
+			targetProxy = 90B3438A249FAF1F0099554A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		63298E2C1C624E500080E112 /* Main.storyboard */ = {
@@ -290,7 +406,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 846C8UZB42;
+				DEVELOPMENT_TEAM = 4DZT52R2T5;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -317,7 +433,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 846C8UZB42;
+				DEVELOPMENT_TEAM = 4DZT52R2T5;
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "tvOS Example/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -442,7 +558,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
-				DEVELOPMENT_TEAM = 846C8UZB42;
+				CODE_SIGN_ENTITLEMENTS = "iOS Example/iOS Example.entitlements";
+				DEVELOPMENT_TEAM = 4DZT52R2T5;
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -450,9 +567,9 @@
 				);
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "$(SRCROOT)/iOS Example/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.deltadna.ios.iOS-Example";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.unity3d.deltadna.ios.iOS-Example";
 				PRODUCT_NAME = "iOS Example";
 			};
 			name = Debug;
@@ -463,14 +580,64 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
-				DEVELOPMENT_TEAM = 846C8UZB42;
+				CODE_SIGN_ENTITLEMENTS = "iOS Example/iOS Example.entitlements";
+				DEVELOPMENT_TEAM = 4DZT52R2T5;
 				FRAMEWORK_SEARCH_PATHS = "";
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "$(SRCROOT)/iOS Example/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.deltadna.ios.iOS-Example";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.unity3d.deltadna.ios.iOS-Example";
 				PRODUCT_NAME = "iOS Example";
+			};
+			name = Release;
+		};
+		90B3438E249FAF1F0099554A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4DZT52R2T5;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = iOSExampleNotificationExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.unity3d.deltadna.ios.iOS-Example.iOSExampleNotificationExtension";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		90B3438F249FAF1F0099554A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4DZT52R2T5;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = iOSExampleNotificationExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.unity3d.deltadna.ios.iOS-Example.iOSExampleNotificationExtension";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -500,6 +667,15 @@
 			buildConfigurations = (
 				63CCEBE41BFB70440041F49E /* Debug */,
 				63CCEBE51BFB70440041F49E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		90B3438D249FAF1F0099554A /* Build configuration list for PBXNativeTarget "iOSExampleNotificationExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				90B3438E249FAF1F0099554A /* Debug */,
+				90B3438F249FAF1F0099554A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

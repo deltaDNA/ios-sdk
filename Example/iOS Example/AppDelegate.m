@@ -16,6 +16,7 @@
 
 #import "AppDelegate.h"
 @import DeltaDNA;
+@import UserNotifications;
 
 @interface AppDelegate ()
 
@@ -29,15 +30,7 @@
     
     NSLog(@"DeltaDNA Version: %@", DDNA_SDK_VERSION);
     
-    // Let the device know we want to receive push notifications
-    // Modified to handle changes in iOS8 (this is Xcode 6 code, Xcode 5 you will need to use conditional compiling)
-    if([application respondsToSelector:@selector(registerUserNotificationSettings:)]){
-        [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:
-                                                                             (UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
-        
-        [[UIApplication sharedApplication] registerForRemoteNotifications];
-    }
-    
+    [self registerForPushNotifications];
     return YES;
 }
 
@@ -73,6 +66,17 @@
 - (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error
 {
     NSLog(@"Failed to get token, error: %@", error);
+}
+
+-(void)registerForPushNotifications {
+    
+    UNUserNotificationCenter* center = [UNUserNotificationCenter currentNotificationCenter];
+    [center requestAuthorizationWithOptions:(UNAuthorizationOptionAlert + UNAuthorizationOptionBadge + UNAuthorizationOptionSound) completionHandler:^(BOOL granted, NSError * _Nullable error) {
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[UIApplication sharedApplication] registerForRemoteNotifications];
+        });
+    }];
 }
 
 @end
