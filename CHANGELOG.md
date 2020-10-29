@@ -1,6 +1,14 @@
 # Change Log
 
-## [4.11.6](https://github.com/deltaDNA/ios-sdk/releases/tag/4.11.6)
+## [4.12.2](https://github.com/deltaDNA/ios-sdk/releases/tag/4.12.2) (2020-10-28)
+### Fixed
+- `imageMessageAction` events will now be sent correctly
+
+## [4.12.1](https://github.com/deltaDNA/ios-sdk/releases/tag/4.12.1) (2020-07-01)
+### Added
+- added support for rich push notifications
+
+## [4.11.6](https://github.com/deltaDNA/ios-sdk/releases/tag/4.11.6) (2020-01-06)
 ### Fixed
 - stopped a memory leak with image messages
 - `newPlayer` events will now be sent correctly

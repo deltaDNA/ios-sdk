@@ -19,7 +19,7 @@ target 'MyApp' do
 # Uncomment this line if you're using Swift or would like to use dynamic frameworks
 use_frameworks!
 
-pod 'DeltaDNA', '~> 4.11.6'
+pod 'DeltaDNA', '~> 4.12.2'
 
 target 'MyAppTests' do
 inherit! :search_paths
@@ -239,6 +239,31 @@ In order to enable receive notifications you will need to send the deviceToken r
     // Please update your app to set the deviceToken instead.
     [DDNASDK sharedInstance].deviceToken = deviceToken;
 }
+```
+
+### Rich Push Notifications
+To support rich push notifications for devices running iOS10 or greater you will need to include a Notification Service Extension in your project.  To do this within XCode you should select File -> New -> Target...  You will then be presented with a dialogue to "Choose a template for your new target".  Select the "Notification Service Extension" option and choose "Next".  You will need to provide a name (e.g. {YourAppName}NotificationExtension).  It is assumed for these instructions that you select Objective-C as your language.
+
+Once you click finish you will find that 2 files have been added to your project; NotificationService.h and NotificationService.m.  All that remains is to modify these to use the default implementations provided by the DeltaDNA SDK.
+
+For the NotificationService.h file change it as follows:
+
+```objective-c
+#import <DeltaDNA/DeltaDNA.h>
+
+@interface NotificationService : DDNANotificationService
+
+@end
+```
+
+For the NotificationService.m file change it as follows:
+
+```objective-c
+#import "NotificationService.h"
+
+@implementation NotificationService
+
+@end
 ```
 
 ### Further Integration
