@@ -14,12 +14,17 @@
 // limitations under the License.
 //
 
+/*
+ WARNING: If you are updating the contract of the APIs in this file,
+ remember to update/regenerate DeltaDNA-Swift.h too.
+ */
+
 import Foundation
 import Network
 import AppTrackingTransparency
 import AdSupport
 
-@available(iOS 12.0, *)
+@available(iOS 12.0, tvOS 14.0, *)
 public class DDNAPinpointer: NSObject {
     @objc public static let shared = DDNAPinpointer()
     

@@ -186,6 +186,8 @@
 		63E78ABD208F80B800DDD48D /* DDNAUserManagerSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E78AB9208F807C00DDD48D /* DDNAUserManagerSpec.m */; };
 		63F8C5F81D8045D5004E5D66 /* iso_4217.xml in Resources */ = {isa = PBXBuildFile; fileRef = 63F8C5F71D8045D5004E5D66 /* iso_4217.xml */; };
 		63F8C5F91D8048F8004E5D66 /* iso_4217.xml in Resources */ = {isa = PBXBuildFile; fileRef = 63F8C5F71D8045D5004E5D66 /* iso_4217.xml */; };
+		6F5748ED2550447B0057D221 /* DeltaDNA-Swift.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F5748EC2550447B0057D221 /* DeltaDNA-Swift.h */; };
+		6F5748EE2550447B0057D221 /* DeltaDNA-Swift.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F5748EC2550447B0057D221 /* DeltaDNA-Swift.h */; };
 		6F6BF82124F958C100525F4A /* DDNAPinpointer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6BF82024F958C100525F4A /* DDNAPinpointer.swift */; };
 		6F6BF82224F958C100525F4A /* DDNAPinpointer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6BF82024F958C100525F4A /* DDNAPinpointer.swift */; };
 		7C71803D21E78B2B00A52EB9 /* DDNASettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 636556361C60F5F2004153E7 /* DDNASettings.m */; };
@@ -317,6 +319,7 @@
 		63BD747920C814E700F0DD97 /* DDNATrackingSdkSpec.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DDNATrackingSdkSpec.m; sourceTree = "<group>"; };
 		63E78AB9208F807C00DDD48D /* DDNAUserManagerSpec.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DDNAUserManagerSpec.m; sourceTree = "<group>"; };
 		63F8C5F71D8045D5004E5D66 /* iso_4217.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = iso_4217.xml; path = DeltaDNA/Resources/iso_4217.xml; sourceTree = "<group>"; };
+		6F5748EC2550447B0057D221 /* DeltaDNA-Swift.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DeltaDNA-Swift.h"; sourceTree = "<group>"; };
 		6F6BF82024F958C100525F4A /* DDNAPinpointer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDNAPinpointer.swift; sourceTree = "<group>"; };
 		9084B3CB24ABE57E00F82BA3 /* DeltaDNA.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeltaDNA.h; sourceTree = "<group>"; };
 		90B3437C249FAD400099554A /* DDNANotificationService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DDNANotificationService.h; sourceTree = "<group>"; };
@@ -636,9 +639,10 @@
 		6F6BF81624F937C500525F4A /* Pinpointer */ = {
 			isa = PBXGroup;
 			children = (
+				6F5748EC2550447B0057D221 /* DeltaDNA-Swift.h */,
 				6F6BF82024F958C100525F4A /* DDNAPinpointer.swift */,
 			);
-			name = Pinpointer;			
+			name = Pinpointer;
 			sourceTree = "<group>";
 		};
 		9084B3C924ABE55C00F82BA3 /* iOS */ = {
@@ -699,6 +703,7 @@
 				636556101C60F598004153E7 /* DeltaDNA.h in Headers */,
 				635AC80920D272F1009027D5 /* DDNAEventTrigger.h in Headers */,
 				6365565D1C60F5F2004153E7 /* DDNASDK.h in Headers */,
+				6F5748ED2550447B0057D221 /* DeltaDNA-Swift.h in Headers */,
 				632513BE206E5C4A00BB0088 /* DDNAEngageFactory.h in Headers */,
 				636556621C60F5F2004153E7 /* NSDictionary+DeltaDNA.h in Headers */,
 				635AC81520D27302009027D5 /* DDNAEventActionHandler.h in Headers */,
@@ -728,6 +733,7 @@
 				636556D41C6108DF004153E7 /* DDNAClientInfo.h in Headers */,
 				635AC81620D27302009027D5 /* DDNAEventActionHandler.h in Headers */,
 				9084B3CC24ABE5FD00F82BA3 /* DeltaDNA.h in Headers */,
+				6F5748EE2550447B0057D221 /* DeltaDNA-Swift.h in Headers */,
 				63A11FD21C71E77D008DEE99 /* DDNAParams.h in Headers */,
 				6327172E1C650D1B00AB2806 /* DDNAEngageCache.h in Headers */,
 				636556D71C6108DF004153E7 /* DDNAEngageService.h in Headers */,
