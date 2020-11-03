@@ -24,7 +24,8 @@ import Network
 import AppTrackingTransparency
 import AdSupport
 
-@available(iOS 12.0, tvOS 14.0, *)
+#if os(iOS)
+@available(iOS 12.0, *)
 public class DDNAPinpointer: NSObject {
     @objc public static let shared = DDNAPinpointer()
     
@@ -142,3 +143,4 @@ public class DDNAPinpointer: NSObject {
         return address as NSString?
     }
 }
+#endif

@@ -188,8 +188,8 @@
 		63F8C5F91D8048F8004E5D66 /* iso_4217.xml in Resources */ = {isa = PBXBuildFile; fileRef = 63F8C5F71D8045D5004E5D66 /* iso_4217.xml */; };
 		6F5748ED2550447B0057D221 /* DeltaDNA-Swift.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F5748EC2550447B0057D221 /* DeltaDNA-Swift.h */; };
 		6F5748EE2550447B0057D221 /* DeltaDNA-Swift.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F5748EC2550447B0057D221 /* DeltaDNA-Swift.h */; };
+		6F3E9663254AD85500EF089C /* DDNAPinpointerTvOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F3E9662254AD85500EF089C /* DDNAPinpointerTvOS.swift */; };
 		6F6BF82124F958C100525F4A /* DDNAPinpointer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6BF82024F958C100525F4A /* DDNAPinpointer.swift */; };
-		6F6BF82224F958C100525F4A /* DDNAPinpointer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6BF82024F958C100525F4A /* DDNAPinpointer.swift */; };
 		7C71803D21E78B2B00A52EB9 /* DDNASettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 636556361C60F5F2004153E7 /* DDNASettings.m */; };
 		9084B3CC24ABE5FD00F82BA3 /* DeltaDNA.h in Headers */ = {isa = PBXBuildFile; fileRef = 9084B3CB24ABE57E00F82BA3 /* DeltaDNA.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		90B3437E249FAD400099554A /* DDNANotificationService.h in Headers */ = {isa = PBXBuildFile; fileRef = 90B3437C249FAD400099554A /* DDNANotificationService.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -320,6 +320,7 @@
 		63E78AB9208F807C00DDD48D /* DDNAUserManagerSpec.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DDNAUserManagerSpec.m; sourceTree = "<group>"; };
 		63F8C5F71D8045D5004E5D66 /* iso_4217.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = iso_4217.xml; path = DeltaDNA/Resources/iso_4217.xml; sourceTree = "<group>"; };
 		6F5748EC2550447B0057D221 /* DeltaDNA-Swift.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DeltaDNA-Swift.h"; sourceTree = "<group>"; };
+		6F3E9662254AD85500EF089C /* DDNAPinpointerTvOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDNAPinpointerTvOS.swift; sourceTree = "<group>"; };
 		6F6BF82024F958C100525F4A /* DDNAPinpointer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDNAPinpointer.swift; sourceTree = "<group>"; };
 		9084B3CB24ABE57E00F82BA3 /* DeltaDNA.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeltaDNA.h; sourceTree = "<group>"; };
 		90B3437C249FAD400099554A /* DDNANotificationService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DDNANotificationService.h; sourceTree = "<group>"; };
@@ -641,6 +642,7 @@
 			children = (
 				6F5748EC2550447B0057D221 /* DeltaDNA-Swift.h */,
 				6F6BF82024F958C100525F4A /* DDNAPinpointer.swift */,
+				6F3E9662254AD85500EF089C /* DDNAPinpointerTvOS.swift */,
 			);
 			name = Pinpointer;
 			sourceTree = "<group>";
@@ -859,7 +861,7 @@
 					636556041C60F4F6004153E7 = {
 						CreatedOnToolsVersion = 7.2;
 						DevelopmentTeam = 846C8UZB42;
-						LastSwiftMigration = 1200;
+						LastSwiftMigration = 1210;
 					};
 					6365567A1C60F683004153E7 = {
 						CreatedOnToolsVersion = 7.2;
@@ -1069,6 +1071,7 @@
 				636556C71C6108BE004153E7 /* DDNANetworkRequest.m in Sources */,
 				30EF37DF2180A8FD007BAA47 /* DDNAActionStore.m in Sources */,
 				636556C81C6108BE004153E7 /* DDNAPlayerPrefs.m in Sources */,
+				6F3E9663254AD85500EF089C /* DDNAPinpointerTvOS.swift in Sources */,
 				63A11FD41C71E77D008DEE99 /* DDNAParams.m in Sources */,
 				6359F01320920BEE0087F5D8 /* DDNAImageCache.m in Sources */,
 				304F13DC2029FB7800FA367B /* DDNAUtils.m in Sources */,
@@ -1081,7 +1084,6 @@
 				63A11FC21C6CF435008DEE99 /* DDNATransaction.m in Sources */,
 				636556CE1C6108BE004153E7 /* NSDictionary+DeltaDNA.m in Sources */,
 				635AC81220D27302009027D5 /* DDNAEventAction.m in Sources */,
-				6F6BF82224F958C100525F4A /* DDNAPinpointer.swift in Sources */,
 				633BEAB0208DEECF0080301A /* DDNAUserManager.m in Sources */,
 				636556CF1C6108BE004153E7 /* NSString+DeltaDNA.m in Sources */,
 				63A11FE11C71F7F7008DEE99 /* DDNAPersistentEventStore.m in Sources */,
@@ -1189,6 +1191,7 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				DEFINES_MODULE = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -1226,6 +1229,7 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				DEFINES_MODULE = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -1579,6 +1583,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D432A4CBC0CAD37B699A59A3 /* Pods-DeltaDNA tvOS Tests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -1627,6 +1632,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D7BE3517D44F9BE8A36CB4A6 /* Pods-DeltaDNA tvOS Tests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
