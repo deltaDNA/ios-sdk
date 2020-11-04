@@ -14,11 +14,17 @@
 // limitations under the License.
 //
 
+/*
+ WARNING: If you are updating the contract of the APIs in this file,
+ remember to update/regenerate DeltaDNA-Swift.h too.
+ */
+
 import Foundation
 import Network
 import AppTrackingTransparency
 import AdSupport
 
+#if os(iOS)
 @available(iOS 12.0, *)
 public class DDNAPinpointer: NSObject {
     @objc public static let shared = DDNAPinpointer()
@@ -137,3 +143,4 @@ public class DDNAPinpointer: NSObject {
         return address as NSString?
     }
 }
+#endif
