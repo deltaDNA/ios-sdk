@@ -261,8 +261,9 @@ The Apple Device Token received from in your AppDelegate
  Only designed to be used for Audience Pinpointer.
  @availability iOS 12 or higher
  @param developerId The apple development team that created the app
+ @param appStoreId The store ID of the application, as shown in iTunes connect
  */
-- (void)recordSignalTrackingSessionEvent:(NSString *) developerId;
+- (void) recordSignalTrackingSessionEvent :(NSString *)developerId appStoreId:(NSString *)appStoreId;
 
 /**
  Records a installation event to be used in pinpointer signal tracking.
@@ -280,8 +281,10 @@ The Apple Device Token received from in your AppDelegate
  @param developerId The apple development team that created the app
  @param realCurrencyAmount The amount spent on the purchase, in the currency used for the purchase
  @param realCurrencyType The currency code of the currency used for the purchase. For example, USD for dollars or GBP for pounds sterling.
+ @param appStoreId The store ID of the application, as shown in iTunes connect 
  */
-- (void)recordSignalTrackingPurchaseEvent:(NSString *) developerId :(NSNumber *) realCurrencyAmount :(NSString *) realCurrencyType;
+- (void) recordSignalTrackingPurchaseEvent :(NSString *)developerId realCurrencyAmount:(NSNumber *)realCurrencyAmount realCurrencyType:(NSString *)realCurrencyType appStoreId:(NSString *)appStoreId;
+
 
 @end
 
