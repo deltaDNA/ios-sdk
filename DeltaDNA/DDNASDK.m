@@ -223,7 +223,17 @@
     [self recordEvent:event];
 }
 
-- (void) recordSignalTrackingPurchaseEvent :(NSString *) developerId :(NSNumber *) realCurrencyAmount :(NSString *) realCurrencyType
+- (void) recordSignalTrackingInstallEvent :(NSString *)developerId appStoreId:(NSString *)appStoreId
+{
+    if (@available(iOS 12.0, *)) {
+        DDNAEvent *event = [[DDNAPinpointer shared] createSignalTrackingInstallEventWithDeveloperId:developerId appStoreId:appStoreId];
+        [self recordEvent:event];
+    } else {
+        DDNALogWarn(@"Audience pinpointer is not supported on iOS versions older than 12");
+    }
+}
+
+- (void) recordSignalTrackingPurchaseEvent :(NSString *)developerId realCurrencyAmount:(NSNumber *)realCurrencyAmount realCurrencyType:(NSString *)realCurrencyType appStoreId:(NSString *)appStoreId
 {
     DDNAEvent *event = [DDNAPinpointer.shared createSignalTrackingPurchaseEventWithRealCurrencyAmount:realCurrencyAmount realCurrencyType:realCurrencyType developerId:developerId];
     [self recordEvent:event];

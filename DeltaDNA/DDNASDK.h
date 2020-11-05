@@ -265,6 +265,15 @@ The Apple Device Token received from in your AppDelegate
 - (void)recordSignalTrackingSessionEvent:(NSString *) developerId;
 
 /**
+ Records a installation event to be used in pinpointer signal tracking.
+ Only designed to be used for Audience Pinpointer.
+ @availability iOS 12 or higher
+ @param developerId The apple development team that created the app
+ @param appStoreId The store ID of the application, as shown in iTunes connect
+ */
+- (void) recordSignalTrackingInstallEvent :(NSString *)developerId appStoreId:(NSString *)appStoreId;
+
+/**
  Records a purchase event to be used in pinpointer signal tracking.
  Only designed to be used for Audience Pinpointer.
  @availability iOS 12 or higher
