@@ -100,6 +100,7 @@ public class DDNAPinpointer: NSObject {
         }
         signalEvent.setParam(!idfaIsPresent as NSObject, forKey: "limitedAdTracking")
         signalEvent.setParam(appStoreId, forKey: "appStoreId")
+        signalEvent.setParam(Bundle.main.bundleIdentifier as NSString?, forKey: "appBundleId")
         signalEvent.setParam(idfaIsPresent as NSObject, forKey: "privacyPermissionAds")
         signalEvent.setParam(true as NSObject, forKey: "privacyPermissionExternal")
         signalEvent.setParam(true as NSObject, forKey: "privacyPermissionGameExp")
