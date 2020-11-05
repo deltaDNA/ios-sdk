@@ -16,7 +16,10 @@ public class DDNAPinpointer: NSObject {
     
     // MARK: Event methods
     
-    @objc public func createSignalTrackingSessionEvent(developerId: NSString) -> DDNAEvent {
+    @objc public func createSignalTrackingSessionEvent(
+        developerId: NSString,
+        appStoreId: NSString
+    ) -> DDNAEvent {
         let signalEvent = DDNAEvent(name: "unitySignalSession")!
         return signalEvent
     }
@@ -24,6 +27,7 @@ public class DDNAPinpointer: NSObject {
     @objc public func createSignalTrackingPurchaseEvent(
         realCurrencyAmount: NSNumber,
         realCurrencyType: NSString,
+        appStoreId: NSString,
         developerId: NSString
     ) -> DDNAEvent {
         let signalEvent = DDNAEvent(name: "unitySignalPurchase")!
