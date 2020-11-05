@@ -63,6 +63,18 @@ public class DDNAPinpointer: NSObject {
         return signalEvent
     }
     
+    @objc public func createSignalTrackingInstallEvent(
+        developerId: NSString,
+        appStoreId: NSString
+    ) -> DDNAEvent {
+        let signalEvent = createBaseSignalMappingEvent(
+            developerId: developerId,
+            appStoreId: appStoreId,
+            eventName: "unitySignalInstall"
+        )
+        return signalEvent
+    }
+    
     @objc public func createSignalTrackingPurchaseEvent(
         realCurrencyAmount: NSNumber,
         realCurrencyType: NSString,

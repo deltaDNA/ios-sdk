@@ -227,6 +227,16 @@
     }
 }
 
+- (void) recordSignalTrackingInstallEvent :(NSString *)developerId appStoreId:(NSString *)appStoreId
+{
+    if (@available(iOS 12.0, *)) {
+        DDNAEvent *event = [[DDNAPinpointer shared] createSignalTrackingInstallEventWithDeveloperId:developerId appStoreId:appStoreId];
+        [self recordEvent:event];
+    } else {
+        DDNALogWarn(@"Audience pinpointer is not supported on iOS versions older than 12");
+    }
+}
+
 - (void) recordSignalTrackingPurchaseEvent :(NSString *)developerId realCurrencyAmount:(NSNumber *)realCurrencyAmount realCurrencyType:(NSString *)realCurrencyType appStoreId:(NSString *)appStoreId
 {
     if (@available(iOS 12.0, *)) {
