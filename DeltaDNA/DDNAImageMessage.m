@@ -526,6 +526,9 @@ BOOL validConfiguration(NSDictionary *configuration)
     [self.actionEvent setParam:type forKey:@"imActionType"];
     if (value != nil) {
         NSString* valueString = [NSString stringWithFormat: @"%@", value];
+        if ([type isEqualToStringCaseInsensitive:@"store"]) {
+            valueString = ((NSDictionary *) value)[@"IOS"];
+        }
         [self.actionEvent setParam:valueString forKey:@"imActionValue"];
     }
     [[DDNASDK sharedInstance] recordEvent:self.actionEvent];
