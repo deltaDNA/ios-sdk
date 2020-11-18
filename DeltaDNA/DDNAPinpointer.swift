@@ -97,7 +97,6 @@ public class DDNAPinpointer: NSObject {
         let signalEvent = DDNAEvent(name: eventName)!
         signalEvent.setParam(UIDevice.current.model as NSString, forKey: "deviceName")
         signalEvent.setParam((NSLocale.current.regionCode ?? "ZZ") as NSString, forKey: "userCountry")
-        signalEvent.setParam((NSLocale.current.languageCode ?? "zz") as NSString, forKey: "deviceLanguage")
         signalEvent.setParam(UIDevice.current.identifierForVendor?.uuidString as NSString?, forKey: "idfv")
         
         var idfaIsPresent: Bool = false
@@ -111,8 +110,8 @@ public class DDNAPinpointer: NSObject {
             signalEvent.setParam(ASIdentifierManager.shared().advertisingIdentifier.uuidString as NSString, forKey: "idfa");
         }
         signalEvent.setParam(!idfaIsPresent as NSObject, forKey: "limitedAdTracking")
-        signalEvent.setParam(appStoreId, forKey: "appStoreId")
-        signalEvent.setParam(Bundle.main.bundleIdentifier as NSString?, forKey: "appBundleId")
+        signalEvent.setParam(appStoreId, forKey: "appStoreID")
+        signalEvent.setParam(Bundle.main.bundleIdentifier as NSString?, forKey: "appBundleID")
         
         signalEvent.setParam(false as NSObject, forKey: "privacyPermissionAds")
         signalEvent.setParam(false as NSObject, forKey: "privacyPermissionExternal")
@@ -121,54 +120,8 @@ public class DDNAPinpointer: NSObject {
         signalEvent.setParam("developer_consent" as NSString, forKey: "privacyPermissionMethod")
         
         signalEvent.setParam(self.networkType as NSString, forKey: "connectionType")
-        if let ipAddress = getIPAddress(usingInterface: networkType) {
-            signalEvent.setParam(ipAddress, forKey: "ipAddress")
-        }
         signalEvent.setParam(developerId, forKey: "appDeveloperID")
         return signalEvent
-    }
-    
-    // NOTE: This method gets the *local* ip address of the interface requested. If a
-    // public IP address is required this will need to be gathered from a network request.
-    // It uses an Apple inbuilt C library, which needs to be included in the main app header.
-    private func getIPAddress(usingInterface requiredInterfaceIdentifier: String) -> NSString? {
-        let wifiInterfaceName = "en0"
-        let cellularInterfaceName = "pdp_ip0"
-        
-        var address : String?
-
-        var interfaceAddressLinkedList : UnsafeMutablePointer<ifaddrs>?
-        guard getifaddrs(&interfaceAddressLinkedList) == 0 else { return nil }
-        guard let firstAddress = interfaceAddressLinkedList else { return nil }
-
-        for interfacePointer in sequence(first: firstAddress, next: { $0.pointee.ifa_next }) {
-            let interface = interfacePointer.pointee
-            let interfaceAddressFamily = interface.ifa_addr.pointee.sa_family
-            if interfaceAddressFamily == UInt8(AF_INET) {
-                let interfaceName = String(cString: interface.ifa_name)
-                let requiredInterfaceName = (requiredInterfaceIdentifier as String) == wifiIdentifier
-                    ? wifiInterfaceName
-                    : cellularInterfaceName
-                
-                if interfaceName == requiredInterfaceName {
-                    var hostname = [CChar](repeating: 0, count: Int(NI_MAXHOST))
-                    getnameinfo(
-                        interface.ifa_addr,
-                        socklen_t(interface.ifa_addr.pointee.sa_len),
-                        &hostname,
-                        socklen_t(hostname.count),
-                        nil,
-                        socklen_t(0),
-                        NI_NUMERICHOST
-                    )
-                    address = String(cString: hostname)
-                    break
-                }
-            }
-        }
-        freeifaddrs(interfaceAddressLinkedList)
-
-        return address as NSString?
     }
 }
 #endif
