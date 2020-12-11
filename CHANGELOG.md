@@ -1,5 +1,9 @@
 # Change Log
 
+## [4.12.3](https://github.com/deltaDNA/ios-sdk/releases/tag/4.12.3) (2020-11-11)
+### Fixed
+- `imageMessageAction` events that use the store action will only contain the iOS app store link
+
 ## [4.12.2](https://github.com/deltaDNA/ios-sdk/releases/tag/4.12.2) (2020-10-28)
 ### Fixed
 - `imageMessageAction` events will now be sent correctly
