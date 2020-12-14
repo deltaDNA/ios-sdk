@@ -60,6 +60,19 @@
 @property (nonatomic, copy) NSString *crossGameUserId;
 
 /**
+ The Apple developer ID email of the developer account that published
+ the current application. (e.g. test@example.com). This needs to be set
+ before any Audience Pinpointer methods are called.
+ */
+@property NSString *appleDeveloperId;
+
+/**
+ The iTunes connect store ID of the current application. This needs to be set
+ before any Audience Pinpointer methods are called.
+ */
+@property NSString *appStoreId;
+
+/**
  The Apple push notification token. Set this @b before starting
  the SDK to enable DeltaDNA to send push notifications to your
  game.
@@ -260,30 +273,24 @@ The Apple Device Token received from in your AppDelegate
  Records a session event to be used in pinpointer signal tracking.
  Only designed to be used for Audience Pinpointer.
  @availability iOS 12 or higher
- @param developerId The apple development team that created the app
- @param appStoreId The store ID of the application, as shown in iTunes connect
  */
-- (void) recordSignalTrackingSessionEvent :(NSString *)developerId appStoreId:(NSString *)appStoreId;
+- (void) recordSignalTrackingSessionEvent;
 
 /**
  Records a installation event to be used in pinpointer signal tracking.
  Only designed to be used for Audience Pinpointer.
  @availability iOS 12 or higher
- @param developerId The apple development team that created the app
- @param appStoreId The store ID of the application, as shown in iTunes connect
  */
-- (void) recordSignalTrackingInstallEvent :(NSString *)developerId appStoreId:(NSString *)appStoreId;
+- (void) recordSignalTrackingInstallEvent;
 
 /**
  Records a purchase event to be used in pinpointer signal tracking.
  Only designed to be used for Audience Pinpointer.
  @availability iOS 12 or higher
- @param developerId The apple development team that created the app
  @param realCurrencyAmount The amount spent on the purchase, in the currency used for the purchase
  @param realCurrencyType The currency code of the currency used for the purchase. For example, USD for dollars or GBP for pounds sterling.
- @param appStoreId The store ID of the application, as shown in iTunes connect 
  */
-- (void) recordSignalTrackingPurchaseEvent :(NSString *)developerId realCurrencyAmount:(NSNumber *)realCurrencyAmount realCurrencyType:(NSString *)realCurrencyType appStoreId:(NSString *)appStoreId;
+- (void) recordSignalTrackingPurchaseEventWithRealCurrencyAmount :(NSNumber *)realCurrencyAmount realCurrencyType:(NSString *)realCurrencyType;
 
 
 @end

@@ -51,41 +51,19 @@ public class DDNAPinpointer: NSObject {
     
     // MARK: Event methods
     
-    @objc public func createSignalTrackingSessionEvent(
-        developerId: NSString,
-        appStoreId: NSString
-    ) -> DDNAEvent {
-        let signalEvent = createBaseSignalMappingEvent(
-            developerId: developerId,
-            appStoreId: appStoreId,
-            eventName: "unitySignalSession"
-        )
-        return signalEvent
+    @objc public func createSignalTrackingSessionEvent() -> DDNAEvent {
+        return createBaseSignalMappingEvent(eventName: "unitySignalSession")
     }
     
-    @objc public func createSignalTrackingInstallEvent(
-        developerId: NSString,
-        appStoreId: NSString
-    ) -> DDNAEvent {
-        let signalEvent = createBaseSignalMappingEvent(
-            developerId: developerId,
-            appStoreId: appStoreId,
-            eventName: "unitySignalInstall"
-        )
-        return signalEvent
+    @objc public func createSignalTrackingInstallEvent() -> DDNAEvent {
+        return createBaseSignalMappingEvent(eventName: "unitySignalInstall")
     }
     
     @objc public func createSignalTrackingPurchaseEvent(
         realCurrencyAmount: NSNumber,
-        realCurrencyType: NSString,
-        appStoreId: NSString,
-        developerId: NSString
+        realCurrencyType: NSString
     ) -> DDNAEvent {
-        let signalEvent = createBaseSignalMappingEvent(
-            developerId: developerId,
-            appStoreId: appStoreId,
-            eventName: "unitySignalPurchase"
-        )
+        let signalEvent = createBaseSignalMappingEvent(eventName: "unitySignalPurchase")
         signalEvent.setParam(realCurrencyAmount, forKey: "realCurrencyAmount")
         signalEvent.setParam(realCurrencyType, forKey: "realCurrencyType")
         return signalEvent
@@ -93,7 +71,10 @@ public class DDNAPinpointer: NSObject {
     
     // MARK: Data helper methods
     
-    private func createBaseSignalMappingEvent(developerId: NSString, appStoreId: NSString, eventName: String) -> DDNAEvent {
+    private func createBaseSignalMappingEvent(eventName: String) -> DDNAEvent {
+        let appStoreId = DDNASDK.sharedInstance()?.appStoreId
+        let developerId = DDNASDK.sharedInstance()?.appleDeveloperId
+        
         let signalEvent = DDNAEvent(name: eventName)!
         signalEvent.setParam(UIDevice.current.model as NSString, forKey: "deviceName")
         signalEvent.setParam((NSLocale.current.regionCode ?? "ZZ") as NSString, forKey: "userCountry")
@@ -110,7 +91,7 @@ public class DDNAPinpointer: NSObject {
             signalEvent.setParam(ASIdentifierManager.shared().advertisingIdentifier.uuidString as NSString, forKey: "idfa");
         }
         signalEvent.setParam(!idfaIsPresent as NSObject, forKey: "limitedAdTracking")
-        signalEvent.setParam(appStoreId, forKey: "appStoreID")
+        signalEvent.setParam(appStoreId as NSString?, forKey: "appStoreID")
         signalEvent.setParam(Bundle.main.bundleIdentifier as NSString?, forKey: "appBundleID")
         
         signalEvent.setParam(false as NSObject, forKey: "privacyPermissionAds")
@@ -120,7 +101,7 @@ public class DDNAPinpointer: NSObject {
         signalEvent.setParam("developer_consent" as NSString, forKey: "privacyPermissionMethod")
         
         signalEvent.setParam(self.networkType as NSString, forKey: "connectionType")
-        signalEvent.setParam(developerId, forKey: "appDeveloperID")
+        signalEvent.setParam(developerId as NSString?, forKey: "appDeveloperID")
         return signalEvent
     }
 }

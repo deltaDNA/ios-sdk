@@ -92,7 +92,8 @@
     
     // Default behaviour will automatically send 'newPlayer' if a new user id is used
     // and will send 'clientInfo' and 'gameStarted'.
-
+    sdk.appStoreId = @"1234567890";
+    sdk.appleDeveloperId = @"test@example.com";
 }
 
 - (void)didReceiveMemoryWarning {
@@ -206,6 +207,8 @@
     [sdk startWithEnvironmentKey:[SdkConfig environmentKey]
                       collectURL:[SdkConfig collectUrl]
                        engageURL:[SdkConfig engageUrl]];
+    sdk.appStoreId = @"1234567890";
+    sdk.appleDeveloperId = @"test@example.com";
 }
 
 - (IBAction)stopSDK:(id)sender {
@@ -231,6 +234,13 @@
 - (IBAction)setCrossGameUserId:(id)sender {
     NSString* crossId = [self.crossGameUserId text];
     [[DDNASDK sharedInstance] setCrossGameUserId:crossId];
+}
+
+- (IBAction)sendPinpointerEvents:(id)sender {
+    [[DDNASDK sharedInstance] recordSignalTrackingSessionEvent];
+    [[DDNASDK sharedInstance] recordSignalTrackingInstallEvent];
+    [[DDNASDK sharedInstance] recordSignalTrackingPurchaseEventWithRealCurrencyAmount :@100 realCurrencyType:@"GBP"];
+    NSLog(@"Uploaded Pinpointer Signal Events");
 }
 
 #pragma mark - DDNASDKDelegate

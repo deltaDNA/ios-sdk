@@ -46,9 +46,4 @@
 - (void)setCrossGameUserId:(NSString *)crossGameUserId;
 - (void)setPushNotificationToken:(NSString *)pushNotificationToken;
 - (void)setDeviceToken:(NSData *)deviceToken;
-
-// Pinpointer Helper Methods
-- (void)recordSignalTrackingSessionEvent;
-- (void)recordSignalTrackingPurchaseEvent;
-- (void)recordSignalTrackingAdRevenueEvent;
 @end
