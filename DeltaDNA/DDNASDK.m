@@ -217,30 +217,45 @@
 }
 
 #pragma mark - Audience Pinpointer
-- (void) recordSignalTrackingSessionEvent :(NSString *)developerId appStoreId:(NSString *)appStoreId
+- (void) recordSignalTrackingSessionEvent
 {
     if (@available(iOS 12.0, *)) {
-        DDNAEvent *event = [[DDNAPinpointer shared] createSignalTrackingSessionEventWithDeveloperId:developerId appStoreId:appStoreId];
+        if ([_appStoreId length] == 0 || [_appleDeveloperId length] == 0) {
+            // Check for existance of required fields. Note that in Objective-C, null is equivalent to 0 length.
+            DDNALogWarn(@"Pinpointer events require an app store ID and an Apple developer ID to be registered in the SDK, no event will be sent");
+            return;
+        }
+        DDNAEvent *event = [[DDNAPinpointer shared] createSignalTrackingSessionEvent];
         [self recordEvent:event];
     } else {
         DDNALogWarn(@"Audience pinpointer is not supported on iOS versions older than 12");
     }
 }
 
-- (void) recordSignalTrackingInstallEvent :(NSString *)developerId appStoreId:(NSString *)appStoreId
+- (void) recordSignalTrackingInstallEvent
 {
     if (@available(iOS 12.0, *)) {
-        DDNAEvent *event = [[DDNAPinpointer shared] createSignalTrackingInstallEventWithDeveloperId:developerId appStoreId:appStoreId];
+        if ([_appStoreId length] == 0 || [_appleDeveloperId length] == 0) {
+            // Check for existance of required fields. Note that in Objective-C, null is equivalent to 0 length.
+            DDNALogWarn(@"Pinpointer events require an app store ID and an Apple developer ID to be registered in the SDK, no event will be sent");
+            return;
+        }
+        DDNAEvent *event = [[DDNAPinpointer shared] createSignalTrackingInstallEvent];
         [self recordEvent:event];
     } else {
         DDNALogWarn(@"Audience pinpointer is not supported on iOS versions older than 12");
     }
 }
 
-- (void) recordSignalTrackingPurchaseEvent :(NSString *)developerId realCurrencyAmount:(NSNumber *)realCurrencyAmount realCurrencyType:(NSString *)realCurrencyType appStoreId:(NSString *)appStoreId
+- (void) recordSignalTrackingPurchaseEventWithRealCurrencyAmount :(NSNumber *)realCurrencyAmount realCurrencyType:(NSString *)realCurrencyType 
 {
     if (@available(iOS 12.0, *)) {
-        DDNAEvent *event = [DDNAPinpointer.shared createSignalTrackingPurchaseEventWithRealCurrencyAmount:realCurrencyAmount realCurrencyType:realCurrencyType appStoreId:appStoreId developerId:developerId];
+        if ([_appStoreId length] == 0 || [_appleDeveloperId length] == 0) {
+            // Check for existance of required fields. Note that in Objective-C, null is equivalent to 0 length.
+            DDNALogWarn(@"Pinpointer events require an app store ID and an Apple developer ID to be registered in the SDK, no event will be sent");
+            return;
+        }
+        DDNAEvent *event = [DDNAPinpointer.shared createSignalTrackingPurchaseEventWithRealCurrencyAmount:realCurrencyAmount realCurrencyType:realCurrencyType];
         [self recordEvent:event];
     } else {
         DDNALogWarn(@"Audience pinpointer is not supported on iOS versions older than 12");
