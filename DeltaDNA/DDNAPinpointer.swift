@@ -76,7 +76,8 @@ public class DDNAPinpointer: NSObject {
         let developerId = DDNASDK.sharedInstance()?.appleDeveloperId
         
         let signalEvent = DDNAEvent(name: eventName)!
-        signalEvent.setParam(UIDevice.current.model as NSString, forKey: "deviceName")
+        
+        signalEvent.setParam(getDeviceModel() as NSString?, forKey: "deviceName")
         signalEvent.setParam((NSLocale.current.regionCode ?? "ZZ") as NSString, forKey: "userCountry")
         signalEvent.setParam(UIDevice.current.identifierForVendor?.uuidString as NSString?, forKey: "idfv")
         
@@ -103,6 +104,16 @@ public class DDNAPinpointer: NSObject {
         signalEvent.setParam(self.networkType as NSString, forKey: "connectionType")
         signalEvent.setParam(developerId as NSString?, forKey: "appDeveloperID")
         return signalEvent
+    }
+    
+    private func getDeviceModel() -> String? {
+        var systemInfo = utsname()
+        uname(&systemInfo)
+        return withUnsafePointer(to: &systemInfo.machine) {
+            $0.withMemoryRebound(to: CChar.self, capacity: 1) {
+                ptr in String.init(validatingUTF8: ptr)
+            }
+        }
     }
 }
 #endif
