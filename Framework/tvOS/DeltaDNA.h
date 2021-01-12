@@ -15,6 +15,8 @@
 //
 
 #import <UIKit/UIKit.h>
+// The below include is required for the ip address code in pinpointer
+#include <ifaddrs.h>
 
 //! Project version number for DeltaDNA.
 FOUNDATION_EXPORT double DeltaDNAVersionNumber;

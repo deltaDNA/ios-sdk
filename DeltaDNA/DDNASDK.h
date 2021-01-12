@@ -60,6 +60,19 @@
 @property (nonatomic, copy) NSString *crossGameUserId;
 
 /**
+ The Apple developer ID email of the developer account that published
+ the current application. (e.g. test@example.com). This needs to be set
+ before any Audience Pinpointer methods are called.
+ */
+@property NSString *appleDeveloperId;
+
+/**
+ The iTunes connect store ID of the current application. This needs to be set
+ before any Audience Pinpointer methods are called.
+ */
+@property NSString *appStoreId;
+
+/**
  The Apple push notification token. Set this @b before starting
  the SDK to enable DeltaDNA to send push notifications to your
  game.
@@ -253,6 +266,32 @@ The Apple Device Token received from in your AppDelegate
  Once called, StartSDK will no longer function unless started with a different user id.
  */
 - (void)forgetMe;
+
+#pragma mark Pinpointer Methods
+
+/**
+ Records a session event to be used in pinpointer signal tracking.
+ Only designed to be used for Audience Pinpointer.
+ @availability iOS 12 or higher
+ */
+- (void) recordSignalTrackingSessionEvent;
+
+/**
+ Records a installation event to be used in pinpointer signal tracking.
+ Only designed to be used for Audience Pinpointer.
+ @availability iOS 12 or higher
+ */
+- (void) recordSignalTrackingInstallEvent;
+
+/**
+ Records a purchase event to be used in pinpointer signal tracking.
+ Only designed to be used for Audience Pinpointer.
+ @availability iOS 12 or higher
+ @param realCurrencyAmount The amount spent on the purchase, in the currency used for the purchase
+ @param realCurrencyType The currency code of the currency used for the purchase. For example, USD for dollars or GBP for pounds sterling.
+ */
+- (void) recordSignalTrackingPurchaseEventWithRealCurrencyAmount :(NSNumber *)realCurrencyAmount realCurrencyType:(NSString *)realCurrencyType;
+
 
 @end
 

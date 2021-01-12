@@ -11,7 +11,6 @@
 		63298E2B1C624E500080E112 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63298E2A1C624E500080E112 /* ViewController.swift */; };
 		63298E2E1C624E500080E112 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63298E2C1C624E500080E112 /* Main.storyboard */; };
 		63298E301C624E500080E112 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63298E2F1C624E500080E112 /* Assets.xcassets */; };
-		6337E0101C64EBC40011321F /* DeltaDNA.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6337E00C1C64EAB80011321F /* DeltaDNA.framework */; };
 		636556F61C610BB6004153E7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 636556EC1C610BB6004153E7 /* AppDelegate.m */; };
 		636556F71C610BB6004153E7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 636556ED1C610BB6004153E7 /* Assets.xcassets */; };
 		636556F81C610BB6004153E7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 636556EE1C610BB6004153E7 /* LaunchScreen.storyboard */; };
@@ -79,7 +78,6 @@
 		63298E2D1C624E500080E112 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		63298E2F1C624E500080E112 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		63298E311C624E500080E112 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6337E00C1C64EAB80011321F /* DeltaDNA.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = DeltaDNA.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		636556EB1C610BB6004153E7 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = AppDelegate.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		636556EC1C610BB6004153E7 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AppDelegate.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		636556ED1C610BB6004153E7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -104,7 +102,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6337E0101C64EBC40011321F /* DeltaDNA.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -168,7 +165,6 @@
 		63CCEBC31BFB70440041F49E = {
 			isa = PBXGroup;
 			children = (
-				6337E00C1C64EAB80011321F /* DeltaDNA.framework */,
 				636556EA1C610BB6004153E7 /* iOS Example */,
 				63298E271C624E500080E112 /* tvOS Example */,
 				90B34385249FAF1F0099554A /* iOSExampleNotificationExtension */,

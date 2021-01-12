@@ -1,5 +1,9 @@
 # Change Log
 
+## [4.12.4](https://github.com/deltaDNA/ios-sdk/releases/tag/4.12.4) (2021-01-12)
+### Added
+- device client info contains entries for newer iPhone and iPad models
+
 ## [4.12.3](https://github.com/deltaDNA/ios-sdk/releases/tag/4.12.3) (2020-11-11)
 ### Fixed
 - `imageMessageAction` events that use the store action will only contain the iOS app store link
