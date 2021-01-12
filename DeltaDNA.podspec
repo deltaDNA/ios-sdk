@@ -2,7 +2,7 @@ Pod::Spec.new do |spec|
 
   # Spec Metadata
   spec.name         = "DeltaDNA"
-  spec.version      = "4.12.3"
+  spec.version      = "4.12.4"
   spec.summary      = "A gaming analytics platform."
 
   spec.homepage     = "https://deltadna.com"
