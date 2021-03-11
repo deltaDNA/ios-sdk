@@ -5,9 +5,27 @@
 [![Build Status](https://travis-ci.org/deltaDNA/ios-sdk.svg?branch=master)](https://travis-ci.org/deltaDNA/ios-sdk)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
-### Installation with CocoaPods
+### Installation
 
-[CocoaPods](https://cocoapods.org/) is a dependency manager for Objective-C, which automates and simplifies using 3rd party libraries.
+#### XCFramework (Recommended, Xcode 11 or later)
+
+The recommended way to install the SDK as of version 4.12.5 is to install using our XCFramework. This can be found on the Releases tab in the GitHub repository. 
+
+* Download the archive from the version you want to install
+* Extract it
+* Drag the DeltaDNA.xcframework bundle out from the `builds/Framework/` folder into your Xcode project.
+* When prompted, choose "Copy Files If Needed" and ensure that the checkbox by your target name is checked
+* The framework should now be available to use
+
+#### Framework (Recommended, Xcode 10 or earlier)
+
+You can also include the individual frameworks from within the XCFramework, if you are using an older version of Xcode that doesn't support this format. The steps are as above, but drag the individual frameworks out of the main framework folder instead.
+
+Note that when using individual frameworks, you will need both the iOS device and simulator frameworks provided in order to use the SDK in both environments.
+
+#### Cocoapods
+
+If you have an existing Cocoapods project you can also install the SDK using Cocoapods. A sample Podfile is listed below.
 
 #### Podfile
 
@@ -19,7 +37,7 @@ target 'MyApp' do
 # Uncomment this line if you're using Swift or would like to use dynamic frameworks
 use_frameworks!
 
-pod 'DeltaDNA', '~> 4.12.4'
+pod 'DeltaDNA', '~> 4.13.0'
 
 target 'MyAppTests' do
 inherit! :search_paths
@@ -30,10 +48,6 @@ end
 ```
 
 The deltaDNA SDKs are available from our private spec repository, its url must be added as a source to your podfile.
-
-### Installation as a Framework
-
-Open DeltaDNA.xcworkspace.  The DeltaDNA project contains targets to build iOS and tvOS frameworks.  Once built, drag the framework into your project.  The example project shows how to do this in XCode.
 
 ### Usage
 

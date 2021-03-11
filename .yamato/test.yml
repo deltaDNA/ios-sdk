@@ -1,0 +1,11 @@
+tests:
+    name: Test deltaDNA iOS SDK
+    agent:
+        type: Unity::VM::osx
+        image: desktop/unity-macos-10.15-xcode-12.2:stable
+        flavor: m1.mac
+    triggers:
+        cancel_old_ci: true
+        expression: pull_request.target EQ "develop" OR pull_request.target EQ "master"
+    commands:
+        - xcodebuild -workspace "DeltaDNA.xcworkspace" -scheme "DeltaDNA iOS" -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 8,OS=14.2' clean test

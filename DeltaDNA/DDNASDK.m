@@ -40,9 +40,6 @@
 
 @property (nonatomic, strong) DDNAEngageFactory *engageFactory;
 
-@property (nonatomic, strong) DDNAUserManager *userManager;
-@property (nonatomic, strong) id<DDNASdkInterface> impl;
-
 @end
 
 @implementation DDNASDK

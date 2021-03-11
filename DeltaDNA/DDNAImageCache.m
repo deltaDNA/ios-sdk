@@ -17,13 +17,15 @@
 #import "DDNAImageCache.h"
 #import "DDNALog.h"
 #import "DDNAUtils.h"
+#import "NSURLSessionInterface.h"
 
 static const NSURLRequestCachePolicy kCachePolicy = NSURLRequestUseProtocolCachePolicy;
 static const NSTimeInterval kTimeoutInterval = 180;
 
+@protocol NSURLSessionInterface;
 @interface DDNAImageCache ()
 
-@property (nonatomic, strong) NSURLSession *session;
+@property (nonatomic, strong) id<NSURLSessionInterface> session;
 @property (nonatomic, strong) NSString *cacheDir;
 @property (nonatomic, strong) NSError *encounteredError;
 
@@ -46,7 +48,7 @@ static const NSTimeInterval kTimeoutInterval = 180;
     return sharedInstance;
 }
 
-- (instancetype)initWithURLSession:(NSURLSession *)session cacheDir:(NSString *)cacheDir
+- (instancetype)initWithURLSession:(id<NSURLSessionInterface>)session cacheDir:(NSString *)cacheDir
 {
     self = [super init];
     if (self) {

@@ -1,6 +1,7 @@
 # Xcode
 #
 build/
+archives/
 *.pbxuser
 !default.pbxuser
 *.mode1v3
@@ -19,7 +20,7 @@ DerivedData
 
 # CocoaPods
 Tests/Pods
-Tests/Podfile.lock
+Pods
 
 .DS_Store
 

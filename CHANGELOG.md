@@ -1,5 +1,14 @@
 # Change Log
 
+## [4.13.0](https://github.com/deltaDNA/ios-sdk/releases/tag/4.13.0) (2021-03-11)
+### New
+- An .xcframework is now provided with frameworks for supported platforms
+- The recommended install method for new installs is now using the framework, rather than cocoapods (note that cocoapods also remains a supported install method)
+
+### Fixed
+- cache now correctly stores successful responses and can reuse them if subsequent responses return errors 
+- Cocoapods install should now install without build errors
+
 ## [4.12.4](https://github.com/deltaDNA/ios-sdk/releases/tag/4.12.4) (2021-01-12)
 ### Added
 - device client info contains entries for newer iPhone and iPad models

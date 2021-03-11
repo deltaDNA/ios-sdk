@@ -35,6 +35,7 @@ static NSString *const kStoreName = @"ActionStore.plist";
 - (instancetype)initWithPath:(NSString *)path
 {
     if ((self = [super init])) {
+        [[self class] createFolderForPath:path];
         self.location = [path stringByAppendingPathComponent:kStoreName];
         self.store = [NSMutableDictionary dictionaryWithContentsOfFile:self.location];
         if (!self.store) {
@@ -77,6 +78,16 @@ static NSString *const kStoreName = @"ActionStore.plist";
 + (NSString *)keyForTrigger:(DDNAEventTrigger *)trigger
 {
     return [NSString stringWithFormat:@"%ld",[trigger campaignId]];
+}
+
++ (bool)createFolderForPath: (NSString*) path
+{
+    NSError *error = nil;
+    if (![[NSFileManager defaultManager] createDirectoryAtPath:path withIntermediateDirectories:YES attributes:nil error:&error]) {
+        DDNALogDebug(@"Error occured while creating directories. %@, %@ %@", error.localizedDescription, error.localizedFailureReason, error.localizedRecoverySuggestion);
+        return false;
+    }
+    return true;
 }
 
 @end

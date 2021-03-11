@@ -17,11 +17,12 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+@protocol NSURLSessionInterface;
 @interface DDNAImageCache : NSObject
 
 + (instancetype)sharedInstance;
 
-- (instancetype)initWithURLSession:(NSURLSession *)session cacheDir:(NSString *)cacheDir;
+- (instancetype)initWithURLSession:(id<NSURLSessionInterface>)session cacheDir:(NSString *)cacheDir;
 
 - (void)setImage:(UIImage *)image forURL:(NSURL *)url;
 

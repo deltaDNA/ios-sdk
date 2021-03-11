@@ -17,6 +17,7 @@
 #import <Foundation/Foundation.h>
 
 @protocol DDNANetworkRequestDelegate;
+@protocol NSURLSessionInterface;
 
 @interface DDNANetworkRequest : NSObject
 
@@ -29,7 +30,7 @@
 /**
  Replace default NSURLSession to allow mocking in unit tests.
  */
-@property (nonatomic, strong) NSURLSession *urlSession;
+@property (nonatomic, strong) id<NSURLSessionInterface> urlSession;
 
 - (instancetype)initWithURL: (NSURL *)URL jsonPayload:(NSString *)jsonPayload;
 

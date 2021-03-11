@@ -37,11 +37,12 @@ static NSTimeInterval const kDefaultExpiryTime = 12 * 60 * 60;  // 12 hours
         
         self.cacheLocation = [[DDNAUtils getCacheDir] stringByAppendingPathComponent:path];
         self.expiryTimeInterval = expiryTimeInterval;
+        self.cache = [NSMutableDictionary dictionaryWithContentsOfFile:self.cacheLocation];
         if ([[NSFileManager defaultManager] fileExistsAtPath:self.cacheLocation]) {
             self.cache = [NSMutableDictionary dictionaryWithContentsOfFile:self.cacheLocation];
-            if (!self.cache) {
-                self.cache = [NSMutableDictionary dictionary];
-            }
+        }
+        if (!self.cache) {
+            self.cache = [NSMutableDictionary dictionary];
         }
     }
     return self;

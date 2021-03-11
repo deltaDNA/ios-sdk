@@ -22,11 +22,15 @@
 @class DDNAEvent;
 @class DDNAEngagement;
 @class DDNAEngageFactory;
+@class DDNAUserManager;
 @protocol DDNAPopup;
 
 @protocol DDNASDKDelegate;
 
 @interface DDNASDK : NSObject
+
+@property (nonatomic, strong) id<DDNASdkInterface> impl;
+@property (nonatomic, strong) DDNAUserManager *userManager;
 
 @property (nonatomic, weak) id<DDNASDKDelegate> delegate;
 

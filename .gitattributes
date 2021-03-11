@@ -1,0 +1,20 @@
+# Git Attributes
+
+# ------------------------------------------------------------------------------
+# Line Endings
+
+* text=auto
+
+# Source Files
+*.m eol=lf
+*.mm eol=lf
+*.swift eol=lf
+*.h eol=lf
+
+*.txt eol=lf
+*.md eol=lf
+
+# Batch Files
+*.sh text eol=lf
+*.{bat,[bB][aA][tT]} text eol=crlf
+*.{cmd,[cC][mM][dD]} text eol=crlf

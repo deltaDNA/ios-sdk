@@ -17,6 +17,7 @@
 #import "DDNANetworkRequest.h"
 #import "DDNASDK.h"
 #import "DDNASettings.h"
+#import "NSURLSessionInterface.h"
 
 @interface DDNANetworkRequest ()
 

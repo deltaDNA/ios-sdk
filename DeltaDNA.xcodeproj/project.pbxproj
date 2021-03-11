@@ -7,81 +7,33 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1563679A7BBA871614FF22A4 /* Pods_DeltaDNA_iOS_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBBF3347BE53332EC63C4DD1 /* Pods_DeltaDNA_iOS_Tests.framework */; };
 		304F13D72029F88200FA367B /* DDNAUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 304F13D52029F88100FA367B /* DDNAUtils.h */; };
 		304F13D82029F88200FA367B /* DDNAUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 304F13D62029F88200FA367B /* DDNAUtils.m */; };
-		304F13D92029F9E100FA367B /* DDNAUtilsSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 304F13D32029F63C00FA367B /* DDNAUtilsSpec.m */; };
-		304F13DA2029F9E200FA367B /* DDNAUtilsSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 304F13D32029F63C00FA367B /* DDNAUtilsSpec.m */; };
-		304F13DB2029FB7500FA367B /* DDNAUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 304F13D52029F88100FA367B /* DDNAUtils.h */; };
-		304F13DC2029FB7800FA367B /* DDNAUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 304F13D62029F88200FA367B /* DDNAUtils.m */; };
-		30D213692181D44D004DE813 /* DDNAActionStoreSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 30D213682181D44C004DE813 /* DDNAActionStoreSpec.m */; };
-		30D2136A2181D44D004DE813 /* DDNAActionStoreSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 30D213682181D44C004DE813 /* DDNAActionStoreSpec.m */; };
 		30EF37DB2180A8D7007BAA47 /* DDNAActionStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 30EF37DA2180A8D6007BAA47 /* DDNAActionStore.h */; };
-		30EF37DC2180A8D7007BAA47 /* DDNAActionStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 30EF37DA2180A8D6007BAA47 /* DDNAActionStore.h */; };
 		30EF37DE2180A8FD007BAA47 /* DDNAActionStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 30EF37DD2180A8FD007BAA47 /* DDNAActionStore.m */; };
-		30EF37DF2180A8FD007BAA47 /* DDNAActionStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 30EF37DD2180A8FD007BAA47 /* DDNAActionStore.m */; };
 		630458851CAE724800875B71 /* DDNAImageMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = 630458831CAE724800875B71 /* DDNAImageMessage.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		630458861CAE724800875B71 /* DDNAImageMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = 630458831CAE724800875B71 /* DDNAImageMessage.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		630458871CAE724800875B71 /* DDNAImageMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 630458841CAE724800875B71 /* DDNAImageMessage.m */; };
-		630458881CAE724800875B71 /* DDNAImageMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 630458841CAE724800875B71 /* DDNAImageMessage.m */; };
-		6318EADF1CAD2A5900E9A72C /* EXPMatchers+equalJSONString.m in Sources */ = {isa = PBXBuildFile; fileRef = 6318EADB1CAD26FD00E9A72C /* EXPMatchers+equalJSONString.m */; };
-		6318EAE01CAD2A5A00E9A72C /* EXPMatchers+equalJSONString.m in Sources */ = {isa = PBXBuildFile; fileRef = 6318EADB1CAD26FD00E9A72C /* EXPMatchers+equalJSONString.m */; };
 		632513BE206E5C4A00BB0088 /* DDNAEngageFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = 632513BC206E5C4A00BB0088 /* DDNAEngageFactory.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		632513BF206E5C4A00BB0088 /* DDNAEngageFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = 632513BC206E5C4A00BB0088 /* DDNAEngageFactory.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		632513C0206E5C4A00BB0088 /* DDNAEngageFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 632513BD206E5C4A00BB0088 /* DDNAEngageFactory.m */; };
-		632513C1206E5C4A00BB0088 /* DDNAEngageFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 632513BD206E5C4A00BB0088 /* DDNAEngageFactory.m */; };
 		6327172D1C650D1B00AB2806 /* DDNAEngageCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 6327172B1C650D1B00AB2806 /* DDNAEngageCache.h */; };
-		6327172E1C650D1B00AB2806 /* DDNAEngageCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 6327172B1C650D1B00AB2806 /* DDNAEngageCache.h */; };
 		6327172F1C650D1B00AB2806 /* DDNAEngageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 6327172C1C650D1B00AB2806 /* DDNAEngageCache.m */; };
-		632717301C650D1B00AB2806 /* DDNAEngageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 6327172C1C650D1B00AB2806 /* DDNAEngageCache.m */; };
 		632D8F831C736DA4004738A7 /* DDNAEngagement.h in Headers */ = {isa = PBXBuildFile; fileRef = 632D8F811C736DA4004738A7 /* DDNAEngagement.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		632D8F841C736DA4004738A7 /* DDNAEngagement.h in Headers */ = {isa = PBXBuildFile; fileRef = 632D8F811C736DA4004738A7 /* DDNAEngagement.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		632D8F851C736DA4004738A7 /* DDNAEngagement.m in Sources */ = {isa = PBXBuildFile; fileRef = 632D8F821C736DA4004738A7 /* DDNAEngagement.m */; };
-		632D8F861C736DA4004738A7 /* DDNAEngagement.m in Sources */ = {isa = PBXBuildFile; fileRef = 632D8F821C736DA4004738A7 /* DDNAEngagement.m */; };
-		632D8F881C737830004738A7 /* DDNAEngagementSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 632D8F871C737830004738A7 /* DDNAEngagementSpec.m */; };
-		632D8F891C737830004738A7 /* DDNAEngagementSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 632D8F871C737830004738A7 /* DDNAEngagementSpec.m */; };
-		632D9EDD1CBE625C00145331 /* DDNAImageMessageSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 632D9EDC1CBE625C00145331 /* DDNAImageMessageSpec.m */; };
-		632D9EDE1CBE625C00145331 /* DDNAImageMessageSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 632D9EDC1CBE625C00145331 /* DDNAImageMessageSpec.m */; };
 		633BEA9D208DEC320080301A /* DDNASdkInterface.h in Headers */ = {isa = PBXBuildFile; fileRef = 633BEA9C208DEC320080301A /* DDNASdkInterface.h */; };
-		633BEA9E208DEC320080301A /* DDNASdkInterface.h in Headers */ = {isa = PBXBuildFile; fileRef = 633BEA9C208DEC320080301A /* DDNASdkInterface.h */; };
 		633BEAA1208DEE090080301A /* DDNATrackingSdk.h in Headers */ = {isa = PBXBuildFile; fileRef = 633BEA9F208DEE090080301A /* DDNATrackingSdk.h */; };
-		633BEAA2208DEE090080301A /* DDNATrackingSdk.h in Headers */ = {isa = PBXBuildFile; fileRef = 633BEA9F208DEE090080301A /* DDNATrackingSdk.h */; };
 		633BEAA3208DEE090080301A /* DDNATrackingSdk.m in Sources */ = {isa = PBXBuildFile; fileRef = 633BEAA0208DEE090080301A /* DDNATrackingSdk.m */; };
-		633BEAA4208DEE090080301A /* DDNATrackingSdk.m in Sources */ = {isa = PBXBuildFile; fileRef = 633BEAA0208DEE090080301A /* DDNATrackingSdk.m */; };
 		633BEAA7208DEE4D0080301A /* DDNANonTrackingSdk.h in Headers */ = {isa = PBXBuildFile; fileRef = 633BEAA5208DEE4D0080301A /* DDNANonTrackingSdk.h */; };
-		633BEAA8208DEE4D0080301A /* DDNANonTrackingSdk.h in Headers */ = {isa = PBXBuildFile; fileRef = 633BEAA5208DEE4D0080301A /* DDNANonTrackingSdk.h */; };
 		633BEAA9208DEE4D0080301A /* DDNANonTrackingSdk.m in Sources */ = {isa = PBXBuildFile; fileRef = 633BEAA6208DEE4D0080301A /* DDNANonTrackingSdk.m */; };
-		633BEAAA208DEE4D0080301A /* DDNANonTrackingSdk.m in Sources */ = {isa = PBXBuildFile; fileRef = 633BEAA6208DEE4D0080301A /* DDNANonTrackingSdk.m */; };
 		633BEAAD208DEECF0080301A /* DDNAUserManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 633BEAAB208DEECF0080301A /* DDNAUserManager.h */; };
-		633BEAAE208DEECF0080301A /* DDNAUserManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 633BEAAB208DEECF0080301A /* DDNAUserManager.h */; };
 		633BEAAF208DEECF0080301A /* DDNAUserManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 633BEAAC208DEECF0080301A /* DDNAUserManager.m */; };
-		633BEAB0208DEECF0080301A /* DDNAUserManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 633BEAAC208DEECF0080301A /* DDNAUserManager.m */; };
-		6343D583207659B900CC5A46 /* DDNAEngageFactorySpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 6343D582207659B900CC5A46 /* DDNAEngageFactorySpec.m */; };
-		6343D584207659B900CC5A46 /* DDNAEngageFactorySpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 6343D582207659B900CC5A46 /* DDNAEngageFactorySpec.m */; };
 		6359F01020920BEE0087F5D8 /* DDNAImageCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 6359F00E20920BEE0087F5D8 /* DDNAImageCache.h */; };
-		6359F01120920BEE0087F5D8 /* DDNAImageCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 6359F00E20920BEE0087F5D8 /* DDNAImageCache.h */; };
 		6359F01220920BEE0087F5D8 /* DDNAImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 6359F00F20920BEE0087F5D8 /* DDNAImageCache.m */; };
-		6359F01320920BEE0087F5D8 /* DDNAImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 6359F00F20920BEE0087F5D8 /* DDNAImageCache.m */; };
-		6359F0152092282F0087F5D8 /* DDNAImageCacheSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 6359F0142092282F0087F5D8 /* DDNAImageCacheSpec.m */; };
-		6359F0162092282F0087F5D8 /* DDNAImageCacheSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 6359F0142092282F0087F5D8 /* DDNAImageCacheSpec.m */; };
 		635AC80720D272F1009027D5 /* DDNAEventTrigger.m in Sources */ = {isa = PBXBuildFile; fileRef = 635AC80520D272F1009027D5 /* DDNAEventTrigger.m */; };
-		635AC80820D272F1009027D5 /* DDNAEventTrigger.m in Sources */ = {isa = PBXBuildFile; fileRef = 635AC80520D272F1009027D5 /* DDNAEventTrigger.m */; };
 		635AC80920D272F1009027D5 /* DDNAEventTrigger.h in Headers */ = {isa = PBXBuildFile; fileRef = 635AC80620D272F1009027D5 /* DDNAEventTrigger.h */; };
-		635AC80A20D272F1009027D5 /* DDNAEventTrigger.h in Headers */ = {isa = PBXBuildFile; fileRef = 635AC80620D272F1009027D5 /* DDNAEventTrigger.h */; };
 		635AC80F20D27302009027D5 /* DDNAEventAction.h in Headers */ = {isa = PBXBuildFile; fileRef = 635AC80B20D27302009027D5 /* DDNAEventAction.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		635AC81020D27302009027D5 /* DDNAEventAction.h in Headers */ = {isa = PBXBuildFile; fileRef = 635AC80B20D27302009027D5 /* DDNAEventAction.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		635AC81120D27302009027D5 /* DDNAEventAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 635AC80C20D27302009027D5 /* DDNAEventAction.m */; };
-		635AC81220D27302009027D5 /* DDNAEventAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 635AC80C20D27302009027D5 /* DDNAEventAction.m */; };
 		635AC81320D27302009027D5 /* DDNAEventActionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 635AC80D20D27302009027D5 /* DDNAEventActionHandler.m */; };
-		635AC81420D27302009027D5 /* DDNAEventActionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 635AC80D20D27302009027D5 /* DDNAEventActionHandler.m */; };
 		635AC81520D27302009027D5 /* DDNAEventActionHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 635AC80E20D27302009027D5 /* DDNAEventActionHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		635AC81620D27302009027D5 /* DDNAEventActionHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 635AC80E20D27302009027D5 /* DDNAEventActionHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		635AC81920D2731B009027D5 /* DDNAEventTriggerSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 635AC81720D2731B009027D5 /* DDNAEventTriggerSpec.m */; };
-		635AC81A20D2731B009027D5 /* DDNAEventTriggerSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 635AC81720D2731B009027D5 /* DDNAEventTriggerSpec.m */; };
-		635AC81B20D2731B009027D5 /* DDNAEventActionSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 635AC81820D2731B009027D5 /* DDNAEventActionSpec.m */; };
-		635AC81C20D2731B009027D5 /* DDNAEventActionSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 635AC81820D2731B009027D5 /* DDNAEventActionSpec.m */; };
-		635AC81E20D27EBA009027D5 /* DDNAEventActionHandlerSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 635AC81D20D27EBA009027D5 /* DDNAEventActionHandlerSpec.m */; };
-		635AC81F20D27EBA009027D5 /* DDNAEventActionHandlerSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 635AC81D20D27EBA009027D5 /* DDNAEventActionHandlerSpec.m */; };
 		636556101C60F598004153E7 /* DeltaDNA.h in Headers */ = {isa = PBXBuildFile; fileRef = 6365560E1C60F598004153E7 /* DeltaDNA.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		636556431C60F5F2004153E7 /* DDNAClientInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 636556191C60F5F2004153E7 /* DDNAClientInfo.h */; };
 		636556441C60F5F2004153E7 /* DDNAClientInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 6365561A1C60F5F2004153E7 /* DDNAClientInfo.m */; };
@@ -105,96 +57,69 @@
 		636556651C60F5F2004153E7 /* NSString+DeltaDNA.m in Sources */ = {isa = PBXBuildFile; fileRef = 6365563B1C60F5F2004153E7 /* NSString+DeltaDNA.m */; };
 		636556661C60F5F2004153E7 /* NSURL+DeltaDNA.h in Headers */ = {isa = PBXBuildFile; fileRef = 6365563C1C60F5F2004153E7 /* NSURL+DeltaDNA.h */; };
 		636556671C60F5F2004153E7 /* NSURL+DeltaDNA.m in Sources */ = {isa = PBXBuildFile; fileRef = 6365563D1C60F5F2004153E7 /* NSURL+DeltaDNA.m */; };
-		636556A11C60FCD5004153E7 /* DDNAEngageServiceSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 636556881C60F740004153E7 /* DDNAEngageServiceSpec.m */; };
-		636556A21C60FCD5004153E7 /* DDNANetworkRequestSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 636556891C60F740004153E7 /* DDNANetworkRequestSpec.m */; };
-		636556A31C60FCD5004153E7 /* DDNAVolatileEventStoreSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 6365568A1C60F740004153E7 /* DDNAVolatileEventStoreSpec.m */; };
-		636556A41C60FCD5004153E7 /* NSURL+DeltaDNASpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 6365568B1C60F740004153E7 /* NSURL+DeltaDNASpec.m */; };
-		636556A51C60FCD5004153E7 /* DDNAFakeInstanceFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 6365568E1C60F740004153E7 /* DDNAFakeInstanceFactory.m */; };
-		636556A61C60FCD5004153E7 /* DDNAFakeNetworkRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 636556901C60F740004153E7 /* DDNAFakeNetworkRequest.m */; };
-		636556B71C60FDF1004153E7 /* DDNAEngageServiceSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 636556881C60F740004153E7 /* DDNAEngageServiceSpec.m */; };
-		636556B81C60FDF1004153E7 /* DDNANetworkRequestSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 636556891C60F740004153E7 /* DDNANetworkRequestSpec.m */; };
-		636556B91C60FDF1004153E7 /* DDNAVolatileEventStoreSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 6365568A1C60F740004153E7 /* DDNAVolatileEventStoreSpec.m */; };
-		636556BA1C60FDF1004153E7 /* NSURL+DeltaDNASpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 6365568B1C60F740004153E7 /* NSURL+DeltaDNASpec.m */; };
-		636556BB1C60FDF1004153E7 /* DDNAFakeInstanceFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 6365568E1C60F740004153E7 /* DDNAFakeInstanceFactory.m */; };
-		636556BC1C60FDF1004153E7 /* DDNAFakeNetworkRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 636556901C60F740004153E7 /* DDNAFakeNetworkRequest.m */; };
-		636556BF1C6108BE004153E7 /* DDNAClientInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 6365561A1C60F5F2004153E7 /* DDNAClientInfo.m */; };
-		636556C21C6108BE004153E7 /* DDNAEngageService.m in Sources */ = {isa = PBXBuildFile; fileRef = 636556201C60F5F2004153E7 /* DDNAEngageService.m */; };
-		636556C51C6108BE004153E7 /* DDNAInstanceFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 636556261C60F5F2004153E7 /* DDNAInstanceFactory.m */; };
-		636556C61C6108BE004153E7 /* DDNALog.m in Sources */ = {isa = PBXBuildFile; fileRef = 636556281C60F5F2004153E7 /* DDNALog.m */; };
-		636556C71C6108BE004153E7 /* DDNANetworkRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6365562A1C60F5F2004153E7 /* DDNANetworkRequest.m */; };
-		636556C81C6108BE004153E7 /* DDNAPlayerPrefs.m in Sources */ = {isa = PBXBuildFile; fileRef = 6365562C1C60F5F2004153E7 /* DDNAPlayerPrefs.m */; };
-		636556CC1C6108BE004153E7 /* DDNASDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 636556341C60F5F2004153E7 /* DDNASDK.m */; };
-		636556CD1C6108BE004153E7 /* DDNASettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 636556361C60F5F2004153E7 /* DDNASettings.m */; };
-		636556CE1C6108BE004153E7 /* NSDictionary+DeltaDNA.m in Sources */ = {isa = PBXBuildFile; fileRef = 636556391C60F5F2004153E7 /* NSDictionary+DeltaDNA.m */; };
-		636556CF1C6108BE004153E7 /* NSString+DeltaDNA.m in Sources */ = {isa = PBXBuildFile; fileRef = 6365563B1C60F5F2004153E7 /* NSString+DeltaDNA.m */; };
-		636556D01C6108BE004153E7 /* NSURL+DeltaDNA.m in Sources */ = {isa = PBXBuildFile; fileRef = 6365563D1C60F5F2004153E7 /* NSURL+DeltaDNA.m */; };
-		636556D41C6108DF004153E7 /* DDNAClientInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 636556191C60F5F2004153E7 /* DDNAClientInfo.h */; };
-		636556D71C6108DF004153E7 /* DDNAEngageService.h in Headers */ = {isa = PBXBuildFile; fileRef = 6365561F1C60F5F2004153E7 /* DDNAEngageService.h */; };
-		636556DA1C6108DF004153E7 /* DDNAInstanceFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = 636556251C60F5F2004153E7 /* DDNAInstanceFactory.h */; };
-		636556DB1C6108DF004153E7 /* DDNALog.h in Headers */ = {isa = PBXBuildFile; fileRef = 636556271C60F5F2004153E7 /* DDNALog.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		636556DC1C6108DF004153E7 /* DDNANetworkRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 636556291C60F5F2004153E7 /* DDNANetworkRequest.h */; };
-		636556DD1C6108DF004153E7 /* DDNAPlayerPrefs.h in Headers */ = {isa = PBXBuildFile; fileRef = 6365562B1C60F5F2004153E7 /* DDNAPlayerPrefs.h */; };
-		636556E11C6108DF004153E7 /* DDNASDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 636556331C60F5F2004153E7 /* DDNASDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		636556E21C6108DF004153E7 /* DDNASettings.h in Headers */ = {isa = PBXBuildFile; fileRef = 636556351C60F5F2004153E7 /* DDNASettings.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		636556E41C6108DF004153E7 /* NSDictionary+DeltaDNA.h in Headers */ = {isa = PBXBuildFile; fileRef = 636556381C60F5F2004153E7 /* NSDictionary+DeltaDNA.h */; };
-		636556E51C6108DF004153E7 /* NSString+DeltaDNA.h in Headers */ = {isa = PBXBuildFile; fileRef = 6365563A1C60F5F2004153E7 /* NSString+DeltaDNA.h */; };
-		636556E61C6108DF004153E7 /* NSURL+DeltaDNA.h in Headers */ = {isa = PBXBuildFile; fileRef = 6365563C1C60F5F2004153E7 /* NSURL+DeltaDNA.h */; };
 		637373011C6B4B41007B789D /* DeltaDNA.h in Headers */ = {isa = PBXBuildFile; fileRef = 637373001C6B4B41007B789D /* DeltaDNA.h */; };
-		639F2EC52090CB24007EEBB5 /* DDNANonTrackingSdkSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 639F2EC22090CB0C007EEBB5 /* DDNANonTrackingSdkSpec.m */; };
-		639F2EC62090CB25007EEBB5 /* DDNANonTrackingSdkSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 639F2EC22090CB0C007EEBB5 /* DDNANonTrackingSdkSpec.m */; };
 		63A11FAD1C6B77D6008DEE99 /* DDNACollectService.h in Headers */ = {isa = PBXBuildFile; fileRef = 63A11FAB1C6B77D6008DEE99 /* DDNACollectService.h */; };
-		63A11FAE1C6B77D6008DEE99 /* DDNACollectService.h in Headers */ = {isa = PBXBuildFile; fileRef = 63A11FAB1C6B77D6008DEE99 /* DDNACollectService.h */; };
 		63A11FAF1C6B77D6008DEE99 /* DDNACollectService.m in Sources */ = {isa = PBXBuildFile; fileRef = 63A11FAC1C6B77D6008DEE99 /* DDNACollectService.m */; };
-		63A11FB01C6B77D6008DEE99 /* DDNACollectService.m in Sources */ = {isa = PBXBuildFile; fileRef = 63A11FAC1C6B77D6008DEE99 /* DDNACollectService.m */; };
 		63A11FB31C6CF20A008DEE99 /* DDNAEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 63A11FB11C6CF20A008DEE99 /* DDNAEvent.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		63A11FB41C6CF20A008DEE99 /* DDNAEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 63A11FB11C6CF20A008DEE99 /* DDNAEvent.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		63A11FB51C6CF20A008DEE99 /* DDNAEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 63A11FB21C6CF20A008DEE99 /* DDNAEvent.m */; };
-		63A11FB61C6CF20A008DEE99 /* DDNAEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 63A11FB21C6CF20A008DEE99 /* DDNAEvent.m */; };
 		63A11FB91C6CF2A4008DEE99 /* DDNAProduct.h in Headers */ = {isa = PBXBuildFile; fileRef = 63A11FB71C6CF2A4008DEE99 /* DDNAProduct.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		63A11FBA1C6CF2A4008DEE99 /* DDNAProduct.h in Headers */ = {isa = PBXBuildFile; fileRef = 63A11FB71C6CF2A4008DEE99 /* DDNAProduct.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		63A11FBB1C6CF2A4008DEE99 /* DDNAProduct.m in Sources */ = {isa = PBXBuildFile; fileRef = 63A11FB81C6CF2A4008DEE99 /* DDNAProduct.m */; };
-		63A11FBC1C6CF2A4008DEE99 /* DDNAProduct.m in Sources */ = {isa = PBXBuildFile; fileRef = 63A11FB81C6CF2A4008DEE99 /* DDNAProduct.m */; };
 		63A11FBF1C6CF435008DEE99 /* DDNATransaction.h in Headers */ = {isa = PBXBuildFile; fileRef = 63A11FBD1C6CF435008DEE99 /* DDNATransaction.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		63A11FC01C6CF435008DEE99 /* DDNATransaction.h in Headers */ = {isa = PBXBuildFile; fileRef = 63A11FBD1C6CF435008DEE99 /* DDNATransaction.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		63A11FC11C6CF435008DEE99 /* DDNATransaction.m in Sources */ = {isa = PBXBuildFile; fileRef = 63A11FBE1C6CF435008DEE99 /* DDNATransaction.m */; };
-		63A11FC21C6CF435008DEE99 /* DDNATransaction.m in Sources */ = {isa = PBXBuildFile; fileRef = 63A11FBE1C6CF435008DEE99 /* DDNATransaction.m */; };
-		63A11FC41C6E26FF008DEE99 /* DDNAEventSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 63A11FC31C6E26FF008DEE99 /* DDNAEventSpec.m */; };
-		63A11FC51C6E26FF008DEE99 /* DDNAEventSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 63A11FC31C6E26FF008DEE99 /* DDNAEventSpec.m */; };
-		63A11FCA1C6E2F94008DEE99 /* DDNAProductSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 63A11FC91C6E2F94008DEE99 /* DDNAProductSpec.m */; };
-		63A11FCB1C6E2F94008DEE99 /* DDNAProductSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 63A11FC91C6E2F94008DEE99 /* DDNAProductSpec.m */; };
-		63A11FCD1C6E3BCC008DEE99 /* DDNATransactionSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 63A11FCC1C6E3BCC008DEE99 /* DDNATransactionSpec.m */; };
-		63A11FCE1C6E3BCC008DEE99 /* DDNATransactionSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 63A11FCC1C6E3BCC008DEE99 /* DDNATransactionSpec.m */; };
 		63A11FD11C71E77D008DEE99 /* DDNAParams.h in Headers */ = {isa = PBXBuildFile; fileRef = 63A11FCF1C71E77D008DEE99 /* DDNAParams.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		63A11FD21C71E77D008DEE99 /* DDNAParams.h in Headers */ = {isa = PBXBuildFile; fileRef = 63A11FCF1C71E77D008DEE99 /* DDNAParams.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		63A11FD31C71E77D008DEE99 /* DDNAParams.m in Sources */ = {isa = PBXBuildFile; fileRef = 63A11FD01C71E77D008DEE99 /* DDNAParams.m */; };
-		63A11FD41C71E77D008DEE99 /* DDNAParams.m in Sources */ = {isa = PBXBuildFile; fileRef = 63A11FD01C71E77D008DEE99 /* DDNAParams.m */; };
 		63A11FDC1C71F7F7008DEE99 /* DDNAEventStoreProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 63A11FD71C71F7F7008DEE99 /* DDNAEventStoreProtocol.h */; };
-		63A11FDD1C71F7F7008DEE99 /* DDNAEventStoreProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 63A11FD71C71F7F7008DEE99 /* DDNAEventStoreProtocol.h */; };
 		63A11FDE1C71F7F7008DEE99 /* DDNAPersistentEventStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 63A11FD81C71F7F7008DEE99 /* DDNAPersistentEventStore.h */; };
-		63A11FDF1C71F7F7008DEE99 /* DDNAPersistentEventStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 63A11FD81C71F7F7008DEE99 /* DDNAPersistentEventStore.h */; };
 		63A11FE01C71F7F7008DEE99 /* DDNAPersistentEventStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 63A11FD91C71F7F7008DEE99 /* DDNAPersistentEventStore.m */; };
-		63A11FE11C71F7F7008DEE99 /* DDNAPersistentEventStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 63A11FD91C71F7F7008DEE99 /* DDNAPersistentEventStore.m */; };
 		63A11FE21C71F7F7008DEE99 /* DDNAVolatileEventStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 63A11FDA1C71F7F7008DEE99 /* DDNAVolatileEventStore.h */; };
-		63A11FE31C71F7F7008DEE99 /* DDNAVolatileEventStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 63A11FDA1C71F7F7008DEE99 /* DDNAVolatileEventStore.h */; };
 		63A11FE41C71F7F7008DEE99 /* DDNAVolatileEventStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 63A11FDB1C71F7F7008DEE99 /* DDNAVolatileEventStore.m */; };
-		63A11FE51C71F7F7008DEE99 /* DDNAVolatileEventStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 63A11FDB1C71F7F7008DEE99 /* DDNAVolatileEventStore.m */; };
-		63B7733820EB70DE00D73D66 /* DDNAEngageCacheSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 63B7733720EB70DE00D73D66 /* DDNAEngageCacheSpec.m */; };
-		63B7733920EB70DE00D73D66 /* DDNAEngageCacheSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 63B7733720EB70DE00D73D66 /* DDNAEngageCacheSpec.m */; };
-		63BD747C20C8160E00F0DD97 /* DDNATrackingSdkSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 63BD747920C814E700F0DD97 /* DDNATrackingSdkSpec.m */; };
-		63BD747D20C8160F00F0DD97 /* DDNATrackingSdkSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 63BD747920C814E700F0DD97 /* DDNATrackingSdkSpec.m */; };
-		63E78ABC208F80B800DDD48D /* DDNAUserManagerSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E78AB9208F807C00DDD48D /* DDNAUserManagerSpec.m */; };
-		63E78ABD208F80B800DDD48D /* DDNAUserManagerSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 63E78AB9208F807C00DDD48D /* DDNAUserManagerSpec.m */; };
 		63F8C5F81D8045D5004E5D66 /* iso_4217.xml in Resources */ = {isa = PBXBuildFile; fileRef = 63F8C5F71D8045D5004E5D66 /* iso_4217.xml */; };
-		63F8C5F91D8048F8004E5D66 /* iso_4217.xml in Resources */ = {isa = PBXBuildFile; fileRef = 63F8C5F71D8045D5004E5D66 /* iso_4217.xml */; };
+		6812ACAD25C80EF6007623D3 /* DDNAProductTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6812ACAC25C80EF6007623D3 /* DDNAProductTests.swift */; };
+		6812ACBC25C84110007623D3 /* ObjC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6812ACBB25C84110007623D3 /* ObjC.m */; };
+		6812AD0A25C97920007623D3 /* DDNASdkInterfaceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6812AD0925C97920007623D3 /* DDNASdkInterfaceMock.swift */; };
+		6812AD0E25C97941007623D3 /* DDNAActionStoreMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6812AD0D25C97941007623D3 /* DDNAActionStoreMock.swift */; };
+		6812AD1825C98EED007623D3 /* DDNAEventActionHandlerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6812AD1725C98EED007623D3 /* DDNAEventActionHandlerMock.swift */; };
+		6812AD1C25C98F0F007623D3 /* DDNAEventTriggerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6812AD1B25C98F0F007623D3 /* DDNAEventTriggerMock.swift */; };
+		6812AD2225C990DA007623D3 /* NSURL+DeltaDNATests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6812AD2125C990DA007623D3 /* NSURL+DeltaDNATests.swift */; };
+		6812AD2825C9996E007623D3 /* DDNAImageMessageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6812AD2725C9996E007623D3 /* DDNAImageMessageTests.swift */; };
+		6825D6BB25BED9030065B042 /* DDNAActionStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6825D6BA25BED9030065B042 /* DDNAActionStoreTests.swift */; };
+		6882432125D31BB20038EE30 /* DDNAImageCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6882432025D31BB20038EE30 /* DDNAImageCacheTests.swift */; };
+		68C33A8A25E664FB0096AE18 /* DDNATrackingSdkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C33A8925E664FB0096AE18 /* DDNATrackingSdkTests.swift */; };
+		68C33A9725E687140096AE18 /* DDNAImageCacheExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C33A9625E687140096AE18 /* DDNAImageCacheExtension.swift */; };
+		68C33A9D25E687350096AE18 /* DDNAImageMessageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C33A9C25E687350096AE18 /* DDNAImageMessageExtension.swift */; };
+		68C33AA125E687620096AE18 /* DDNAImageCacheMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C33AA025E687620096AE18 /* DDNAImageCacheMock.swift */; };
+		68C33AA525E687D00096AE18 /* DDNAImageMessageHandlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C33AA425E687D00096AE18 /* DDNAImageMessageHandlerTests.swift */; };
+		68C9695225E9621C00663AE1 /* DDNAEngageServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C9695125E9621C00663AE1 /* DDNAEngageServiceMock.swift */; };
+		68CE913725E3E4380060F9F3 /* UrlSessionDownloadTaskMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68CE913625E3E4380060F9F3 /* UrlSessionDownloadTaskMock.swift */; };
+		68CE913B25E3E4780060F9F3 /* UrlSessionMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68CE913A25E3E4780060F9F3 /* UrlSessionMock.swift */; };
+		68CE913F25E3E5610060F9F3 /* UrlMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68CE913E25E3E5610060F9F3 /* UrlMock.swift */; };
+		68CE914725E400640060F9F3 /* DDNATransactionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68CE914625E400640060F9F3 /* DDNATransactionTests.swift */; };
+		68CE915925E429AB0060F9F3 /* DDNAEngagementTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68CE915825E429AB0060F9F3 /* DDNAEngagementTests.swift */; };
+		68CE916225E43E960060F9F3 /* DDNAEventTriggerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68CE916125E43E960060F9F3 /* DDNAEventTriggerTests.swift */; };
+		68CE916A25E450E10060F9F3 /* DDNANetworkRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68CE916925E450E10060F9F3 /* DDNANetworkRequestTests.swift */; };
+		68CE916E25E45B6F0060F9F3 /* NSURLSessionInterface.h in Headers */ = {isa = PBXBuildFile; fileRef = 68CE916D25E45B6F0060F9F3 /* NSURLSessionInterface.h */; };
+		68CE918225E46BA30060F9F3 /* DDNANetworkRequestDelegateMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68CE918125E46BA30060F9F3 /* DDNANetworkRequestDelegateMock.swift */; };
+		68CE918625E46C0E0060F9F3 /* DDNANonTrackingSdkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68CE918525E46C0E0060F9F3 /* DDNANonTrackingSdkTests.swift */; };
+		68CE918C25E5146C0060F9F3 /* DDNAUserManagerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68CE918B25E5146C0060F9F3 /* DDNAUserManagerMock.swift */; };
+		68CE919025E5149E0060F9F3 /* DDNASDKDelegateMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68CE918F25E5149E0060F9F3 /* DDNASDKDelegateMock.swift */; };
+		68CE919425E514C20060F9F3 /* DDNACollectServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68CE919325E514C20060F9F3 /* DDNACollectServiceMock.swift */; };
+		68CE919825E514E40060F9F3 /* DDNASDKMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68CE919725E514E40060F9F3 /* DDNASDKMock.swift */; };
+		68CE919C25E515CD0060F9F3 /* DDNAEngageFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68CE919B25E515CD0060F9F3 /* DDNAEngageFactoryTests.swift */; };
+		68CE91A225E51B7D0060F9F3 /* DDNAUserManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68CE91A125E51B7D0060F9F3 /* DDNAUserManagerTests.swift */; };
+		68CE91A825E5232E0060F9F3 /* DDNAGameParametersHandlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68CE91A725E5232E0060F9F3 /* DDNAGameParametersHandlerTests.swift */; };
+		68D1C09425C41F4900F1D0C3 /* DDNAVolatileEventStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D1C09325C41F4900F1D0C3 /* DDNAVolatileEventStoreTests.swift */; };
+		68D1C09C25C450F900F1D0C3 /* DDNAEventActionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D1C09B25C450F900F1D0C3 /* DDNAEventActionTests.swift */; };
+		68F8B30125BEF9C7009816AF /* DDNAUtilsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F8B30025BEF9C7009816AF /* DDNAUtilsTests.swift */; };
+		68F8B30725BF080E009816AF /* DDNAEngageServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F8B30625BF080E009816AF /* DDNAEngageServiceTests.swift */; };
+		68F8B31B25C0384B009816AF /* DDNAInstanceFactoryMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F8B31A25C0384B009816AF /* DDNAInstanceFactoryMock.swift */; };
+		68F8B32325C03890009816AF /* DDNANetworkRequestMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F8B32225C03890009816AF /* DDNANetworkRequestMock.swift */; };
+		68F8B32725C038CC009816AF /* DDNAEngageRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F8B32625C038CC009816AF /* DDNAEngageRequestTests.swift */; };
+		68F8B32D25C04E73009816AF /* DDNAEngageCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F8B32C25C04E73009816AF /* DDNAEngageCacheTests.swift */; };
 		6F5748ED2550447B0057D221 /* DeltaDNA-Swift.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F5748EC2550447B0057D221 /* DeltaDNA-Swift.h */; };
-		6F5748EE2550447B0057D221 /* DeltaDNA-Swift.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F5748EC2550447B0057D221 /* DeltaDNA-Swift.h */; };
-		6F3E9663254AD85500EF089C /* DDNAPinpointerTvOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F3E9662254AD85500EF089C /* DDNAPinpointerTvOS.swift */; };
 		6F6BF82124F958C100525F4A /* DDNAPinpointer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6BF82024F958C100525F4A /* DDNAPinpointer.swift */; };
 		7C71803D21E78B2B00A52EB9 /* DDNASettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 636556361C60F5F2004153E7 /* DDNASettings.m */; };
-		9084B3CC24ABE5FD00F82BA3 /* DeltaDNA.h in Headers */ = {isa = PBXBuildFile; fileRef = 9084B3CB24ABE57E00F82BA3 /* DeltaDNA.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		90B3437E249FAD400099554A /* DDNANotificationService.h in Headers */ = {isa = PBXBuildFile; fileRef = 90B3437C249FAD400099554A /* DDNANotificationService.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		90B3437F249FAD400099554A /* DDNANotificationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 90B3437D249FAD400099554A /* DDNANotificationService.m */; };
-		BE8BC6CE991955F4F252F48F /* Pods_DeltaDNA_tvOS_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC5FDFD8337EC612AB2B8483 /* Pods_DeltaDNA_tvOS_Tests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -205,37 +130,22 @@
 			remoteGlobalIDString = 636555F61C60F4BD004153E7;
 			remoteInfo = "DeltaDNA iOS";
 		};
-		636556B11C60FD6C004153E7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 636555EC1C60F45B004153E7 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 636556041C60F4F6004153E7;
-			remoteInfo = "DeltaDNA tvOS";
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1545773A5B3C2343D5D24F5D /* Pods-DeltaDNA iOS Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DeltaDNA iOS Tests.release.xcconfig"; path = "Tests/Pods/Target Support Files/Pods-DeltaDNA iOS Tests/Pods-DeltaDNA iOS Tests.release.xcconfig"; sourceTree = "<group>"; };
-		304F13D32029F63C00FA367B /* DDNAUtilsSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = DDNAUtilsSpec.m; sourceTree = "<group>"; };
 		304F13D52029F88100FA367B /* DDNAUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = DDNAUtils.h; sourceTree = "<group>"; };
 		304F13D62029F88200FA367B /* DDNAUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = DDNAUtils.m; sourceTree = "<group>"; };
-		30D213682181D44C004DE813 /* DDNAActionStoreSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDNAActionStoreSpec.m; sourceTree = "<group>"; };
 		30EF37DA2180A8D6007BAA47 /* DDNAActionStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDNAActionStore.h; sourceTree = "<group>"; };
 		30EF37DD2180A8FD007BAA47 /* DDNAActionStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDNAActionStore.m; sourceTree = "<group>"; };
 		30F944A81D786E3A0021E6FA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4230748C72C905B3FCB0D3E7 /* Pods-DeltaDNA iOS Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DeltaDNA iOS Tests.debug.xcconfig"; path = "Tests/Pods/Target Support Files/Pods-DeltaDNA iOS Tests/Pods-DeltaDNA iOS Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		630458831CAE724800875B71 /* DDNAImageMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDNAImageMessage.h; sourceTree = "<group>"; };
 		630458841CAE724800875B71 /* DDNAImageMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDNAImageMessage.m; sourceTree = "<group>"; };
-		6318EADA1CAD26FD00E9A72C /* EXPMatchers+equalJSONString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "EXPMatchers+equalJSONString.h"; sourceTree = "<group>"; };
-		6318EADB1CAD26FD00E9A72C /* EXPMatchers+equalJSONString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "EXPMatchers+equalJSONString.m"; sourceTree = "<group>"; };
 		632513BC206E5C4A00BB0088 /* DDNAEngageFactory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DDNAEngageFactory.h; sourceTree = "<group>"; };
 		632513BD206E5C4A00BB0088 /* DDNAEngageFactory.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DDNAEngageFactory.m; sourceTree = "<group>"; };
 		6327172B1C650D1B00AB2806 /* DDNAEngageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = DDNAEngageCache.h; sourceTree = "<group>"; };
 		6327172C1C650D1B00AB2806 /* DDNAEngageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = DDNAEngageCache.m; sourceTree = "<group>"; };
 		632D8F811C736DA4004738A7 /* DDNAEngagement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDNAEngagement.h; sourceTree = "<group>"; };
 		632D8F821C736DA4004738A7 /* DDNAEngagement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDNAEngagement.m; sourceTree = "<group>"; };
-		632D8F871C737830004738A7 /* DDNAEngagementSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDNAEngagementSpec.m; sourceTree = "<group>"; };
-		632D9EDC1CBE625C00145331 /* DDNAImageMessageSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDNAImageMessageSpec.m; sourceTree = "<group>"; };
 		633BEA9C208DEC320080301A /* DDNASdkInterface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DDNASdkInterface.h; sourceTree = "<group>"; };
 		633BEA9F208DEE090080301A /* DDNATrackingSdk.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DDNATrackingSdk.h; sourceTree = "<group>"; };
 		633BEAA0208DEE090080301A /* DDNATrackingSdk.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DDNATrackingSdk.m; sourceTree = "<group>"; };
@@ -243,21 +153,15 @@
 		633BEAA6208DEE4D0080301A /* DDNANonTrackingSdk.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DDNANonTrackingSdk.m; sourceTree = "<group>"; };
 		633BEAAB208DEECF0080301A /* DDNAUserManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DDNAUserManager.h; sourceTree = "<group>"; };
 		633BEAAC208DEECF0080301A /* DDNAUserManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DDNAUserManager.m; sourceTree = "<group>"; };
-		6343D582207659B900CC5A46 /* DDNAEngageFactorySpec.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DDNAEngageFactorySpec.m; sourceTree = "<group>"; };
 		6359F00E20920BEE0087F5D8 /* DDNAImageCache.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DDNAImageCache.h; sourceTree = "<group>"; };
 		6359F00F20920BEE0087F5D8 /* DDNAImageCache.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DDNAImageCache.m; sourceTree = "<group>"; };
-		6359F0142092282F0087F5D8 /* DDNAImageCacheSpec.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DDNAImageCacheSpec.m; sourceTree = "<group>"; };
 		635AC80520D272F1009027D5 /* DDNAEventTrigger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDNAEventTrigger.m; sourceTree = "<group>"; };
 		635AC80620D272F1009027D5 /* DDNAEventTrigger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDNAEventTrigger.h; sourceTree = "<group>"; };
 		635AC80B20D27302009027D5 /* DDNAEventAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDNAEventAction.h; sourceTree = "<group>"; };
 		635AC80C20D27302009027D5 /* DDNAEventAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDNAEventAction.m; sourceTree = "<group>"; };
 		635AC80D20D27302009027D5 /* DDNAEventActionHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDNAEventActionHandler.m; sourceTree = "<group>"; };
 		635AC80E20D27302009027D5 /* DDNAEventActionHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDNAEventActionHandler.h; sourceTree = "<group>"; };
-		635AC81720D2731B009027D5 /* DDNAEventTriggerSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDNAEventTriggerSpec.m; sourceTree = "<group>"; };
-		635AC81820D2731B009027D5 /* DDNAEventActionSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDNAEventActionSpec.m; sourceTree = "<group>"; };
-		635AC81D20D27EBA009027D5 /* DDNAEventActionHandlerSpec.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DDNAEventActionHandlerSpec.m; sourceTree = "<group>"; };
 		636555F71C60F4BD004153E7 /* DeltaDNA.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DeltaDNA.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		636556051C60F4F6004153E7 /* DeltaDNA.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DeltaDNA.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6365560E1C60F598004153E7 /* DeltaDNA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = DeltaDNA.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		6365560F1C60F598004153E7 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		636556191C60F5F2004153E7 /* DDNAClientInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = DDNAClientInfo.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -283,20 +187,9 @@
 		6365563C1C60F5F2004153E7 /* NSURL+DeltaDNA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = "NSURL+DeltaDNA.h"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		6365563D1C60F5F2004153E7 /* NSURL+DeltaDNA.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = "NSURL+DeltaDNA.m"; sourceTree = "<group>"; };
 		6365567B1C60F683004153E7 /* DeltaDNA iOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "DeltaDNA iOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		636556881C60F740004153E7 /* DDNAEngageServiceSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = DDNAEngageServiceSpec.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		636556891C60F740004153E7 /* DDNANetworkRequestSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = DDNANetworkRequestSpec.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		6365568A1C60F740004153E7 /* DDNAVolatileEventStoreSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = DDNAVolatileEventStoreSpec.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		6365568B1C60F740004153E7 /* NSURL+DeltaDNASpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = "NSURL+DeltaDNASpec.m"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		6365568D1C60F740004153E7 /* DDNAFakeInstanceFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = DDNAFakeInstanceFactory.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		6365568E1C60F740004153E7 /* DDNAFakeInstanceFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = DDNAFakeInstanceFactory.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		6365568F1C60F740004153E7 /* DDNAFakeNetworkRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = DDNAFakeNetworkRequest.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		636556901C60F740004153E7 /* DDNAFakeNetworkRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = DDNAFakeNetworkRequest.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		636556921C60F740004153E7 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		636556931C60F740004153E7 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Podfile; path = Tests/Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		636556AB1C60FD6C004153E7 /* DeltaDNA tvOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "DeltaDNA tvOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		636556E81C610A12004153E7 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		637373001C6B4B41007B789D /* DeltaDNA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = DeltaDNA.h; sourceTree = "<group>"; };
-		639F2EC22090CB0C007EEBB5 /* DDNANonTrackingSdkSpec.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DDNANonTrackingSdkSpec.m; sourceTree = "<group>"; };
 		63A11FAB1C6B77D6008DEE99 /* DDNACollectService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = DDNACollectService.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		63A11FAC1C6B77D6008DEE99 /* DDNACollectService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = DDNACollectService.m; sourceTree = "<group>"; };
 		63A11FB11C6CF20A008DEE99 /* DDNAEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = DDNAEvent.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -305,9 +198,6 @@
 		63A11FB81C6CF2A4008DEE99 /* DDNAProduct.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = DDNAProduct.m; sourceTree = "<group>"; };
 		63A11FBD1C6CF435008DEE99 /* DDNATransaction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = DDNATransaction.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		63A11FBE1C6CF435008DEE99 /* DDNATransaction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = DDNATransaction.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		63A11FC31C6E26FF008DEE99 /* DDNAEventSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = DDNAEventSpec.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		63A11FC91C6E2F94008DEE99 /* DDNAProductSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = DDNAProductSpec.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		63A11FCC1C6E3BCC008DEE99 /* DDNATransactionSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = DDNATransactionSpec.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		63A11FCF1C71E77D008DEE99 /* DDNAParams.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = DDNAParams.h; sourceTree = "<group>"; };
 		63A11FD01C71E77D008DEE99 /* DDNAParams.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = DDNAParams.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		63A11FD71C71F7F7008DEE99 /* DDNAEventStoreProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = DDNAEventStoreProtocol.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -315,20 +205,56 @@
 		63A11FD91C71F7F7008DEE99 /* DDNAPersistentEventStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = DDNAPersistentEventStore.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		63A11FDA1C71F7F7008DEE99 /* DDNAVolatileEventStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = DDNAVolatileEventStore.h; sourceTree = "<group>"; };
 		63A11FDB1C71F7F7008DEE99 /* DDNAVolatileEventStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = DDNAVolatileEventStore.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		63B7733720EB70DE00D73D66 /* DDNAEngageCacheSpec.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DDNAEngageCacheSpec.m; sourceTree = "<group>"; };
-		63BD747920C814E700F0DD97 /* DDNATrackingSdkSpec.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DDNATrackingSdkSpec.m; sourceTree = "<group>"; };
-		63E78AB9208F807C00DDD48D /* DDNAUserManagerSpec.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DDNAUserManagerSpec.m; sourceTree = "<group>"; };
 		63F8C5F71D8045D5004E5D66 /* iso_4217.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = iso_4217.xml; path = DeltaDNA/Resources/iso_4217.xml; sourceTree = "<group>"; };
-		6F5748EC2550447B0057D221 /* DeltaDNA-Swift.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DeltaDNA-Swift.h"; sourceTree = "<group>"; };
+		6812ACAC25C80EF6007623D3 /* DDNAProductTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DDNAProductTests.swift; path = Tests/DDNAProductTests.swift; sourceTree = "<group>"; };
+		6812ACBB25C84110007623D3 /* ObjC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ObjC.m; sourceTree = "<group>"; };
+		6812ACC125C8418B007623D3 /* ObjC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjC.h; sourceTree = "<group>"; };
+		6812AD0925C97920007623D3 /* DDNASdkInterfaceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDNASdkInterfaceMock.swift; sourceTree = "<group>"; };
+		6812AD0D25C97941007623D3 /* DDNAActionStoreMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDNAActionStoreMock.swift; sourceTree = "<group>"; };
+		6812AD1725C98EED007623D3 /* DDNAEventActionHandlerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDNAEventActionHandlerMock.swift; sourceTree = "<group>"; };
+		6812AD1B25C98F0F007623D3 /* DDNAEventTriggerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDNAEventTriggerMock.swift; sourceTree = "<group>"; };
+		6812AD2125C990DA007623D3 /* NSURL+DeltaDNATests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "NSURL+DeltaDNATests.swift"; path = "Tests/NSURL+DeltaDNATests.swift"; sourceTree = "<group>"; };
+		6812AD2725C9996E007623D3 /* DDNAImageMessageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DDNAImageMessageTests.swift; path = Tests/DDNAImageMessageTests.swift; sourceTree = "<group>"; };
+		6825D6B725BED9030065B042 /* DeltaDNA iOS Tests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DeltaDNA iOS Tests-Bridging-Header.h"; sourceTree = "<group>"; };
+		6825D6BA25BED9030065B042 /* DDNAActionStoreTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DDNAActionStoreTests.swift; path = Tests/DDNAActionStoreTests.swift; sourceTree = "<group>"; };
+		6882432025D31BB20038EE30 /* DDNAImageCacheTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DDNAImageCacheTests.swift; path = Tests/DDNAImageCacheTests.swift; sourceTree = "<group>"; };
+		68C33A8925E664FB0096AE18 /* DDNATrackingSdkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DDNATrackingSdkTests.swift; path = Tests/DDNATrackingSdkTests.swift; sourceTree = "<group>"; };
+		68C33A9625E687140096AE18 /* DDNAImageCacheExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDNAImageCacheExtension.swift; sourceTree = "<group>"; };
+		68C33A9C25E687350096AE18 /* DDNAImageMessageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDNAImageMessageExtension.swift; sourceTree = "<group>"; };
+		68C33AA025E687620096AE18 /* DDNAImageCacheMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDNAImageCacheMock.swift; sourceTree = "<group>"; };
+		68C33AA425E687D00096AE18 /* DDNAImageMessageHandlerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DDNAImageMessageHandlerTests.swift; path = Tests/DDNAImageMessageHandlerTests.swift; sourceTree = "<group>"; };
+		68C9695125E9621C00663AE1 /* DDNAEngageServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDNAEngageServiceMock.swift; sourceTree = "<group>"; };
+		68CE913625E3E4380060F9F3 /* UrlSessionDownloadTaskMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlSessionDownloadTaskMock.swift; sourceTree = "<group>"; };
+		68CE913A25E3E4780060F9F3 /* UrlSessionMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlSessionMock.swift; sourceTree = "<group>"; };
+		68CE913E25E3E5610060F9F3 /* UrlMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlMock.swift; sourceTree = "<group>"; };
+		68CE914625E400640060F9F3 /* DDNATransactionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDNATransactionTests.swift; sourceTree = "<group>"; };
+		68CE915825E429AB0060F9F3 /* DDNAEngagementTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DDNAEngagementTests.swift; path = Tests/DDNAEngagementTests.swift; sourceTree = "<group>"; };
+		68CE916125E43E960060F9F3 /* DDNAEventTriggerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDNAEventTriggerTests.swift; sourceTree = "<group>"; };
+		68CE916925E450E10060F9F3 /* DDNANetworkRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DDNANetworkRequestTests.swift; path = Tests/DDNANetworkRequestTests.swift; sourceTree = "<group>"; };
+		68CE916D25E45B6F0060F9F3 /* NSURLSessionInterface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NSURLSessionInterface.h; sourceTree = "<group>"; };
+		68CE918125E46BA30060F9F3 /* DDNANetworkRequestDelegateMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDNANetworkRequestDelegateMock.swift; sourceTree = "<group>"; };
+		68CE918525E46C0E0060F9F3 /* DDNANonTrackingSdkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DDNANonTrackingSdkTests.swift; path = Tests/DDNANonTrackingSdkTests.swift; sourceTree = "<group>"; };
+		68CE918B25E5146C0060F9F3 /* DDNAUserManagerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDNAUserManagerMock.swift; sourceTree = "<group>"; };
+		68CE918F25E5149E0060F9F3 /* DDNASDKDelegateMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDNASDKDelegateMock.swift; sourceTree = "<group>"; };
+		68CE919325E514C20060F9F3 /* DDNACollectServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDNACollectServiceMock.swift; sourceTree = "<group>"; };
+		68CE919725E514E40060F9F3 /* DDNASDKMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDNASDKMock.swift; sourceTree = "<group>"; };
+		68CE919B25E515CD0060F9F3 /* DDNAEngageFactoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DDNAEngageFactoryTests.swift; path = Tests/DDNAEngageFactoryTests.swift; sourceTree = "<group>"; };
+		68CE91A125E51B7D0060F9F3 /* DDNAUserManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DDNAUserManagerTests.swift; path = Tests/DDNAUserManagerTests.swift; sourceTree = "<group>"; };
+		68CE91A725E5232E0060F9F3 /* DDNAGameParametersHandlerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DDNAGameParametersHandlerTests.swift; path = Tests/DDNAGameParametersHandlerTests.swift; sourceTree = "<group>"; };
+		68D1C09325C41F4900F1D0C3 /* DDNAVolatileEventStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DDNAVolatileEventStoreTests.swift; path = Tests/DDNAVolatileEventStoreTests.swift; sourceTree = "<group>"; };
+		68D1C09B25C450F900F1D0C3 /* DDNAEventActionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DDNAEventActionTests.swift; path = Tests/DDNAEventActionTests.swift; sourceTree = "<group>"; };
+		68F8B30025BEF9C7009816AF /* DDNAUtilsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DDNAUtilsTests.swift; path = Tests/DDNAUtilsTests.swift; sourceTree = "<group>"; };
+		68F8B30625BF080E009816AF /* DDNAEngageServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DDNAEngageServiceTests.swift; path = Tests/DDNAEngageServiceTests.swift; sourceTree = "<group>"; };
+		68F8B31A25C0384B009816AF /* DDNAInstanceFactoryMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDNAInstanceFactoryMock.swift; sourceTree = "<group>"; };
+		68F8B32225C03890009816AF /* DDNANetworkRequestMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDNANetworkRequestMock.swift; sourceTree = "<group>"; };
+		68F8B32625C038CC009816AF /* DDNAEngageRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DDNAEngageRequestTests.swift; path = Tests/DDNAEngageRequestTests.swift; sourceTree = "<group>"; };
+		68F8B32C25C04E73009816AF /* DDNAEngageCacheTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DDNAEngageCacheTests.swift; path = Tests/DDNAEngageCacheTests.swift; sourceTree = "<group>"; };
 		6F3E9662254AD85500EF089C /* DDNAPinpointerTvOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDNAPinpointerTvOS.swift; sourceTree = "<group>"; };
+		6F5748EC2550447B0057D221 /* DeltaDNA-Swift.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DeltaDNA-Swift.h"; sourceTree = "<group>"; };
 		6F6BF82024F958C100525F4A /* DDNAPinpointer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDNAPinpointer.swift; sourceTree = "<group>"; };
 		9084B3CB24ABE57E00F82BA3 /* DeltaDNA.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeltaDNA.h; sourceTree = "<group>"; };
 		90B3437C249FAD400099554A /* DDNANotificationService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DDNANotificationService.h; sourceTree = "<group>"; };
 		90B3437D249FAD400099554A /* DDNANotificationService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DDNANotificationService.m; sourceTree = "<group>"; };
-		D432A4CBC0CAD37B699A59A3 /* Pods-DeltaDNA tvOS Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DeltaDNA tvOS Tests.debug.xcconfig"; path = "Tests/Pods/Target Support Files/Pods-DeltaDNA tvOS Tests/Pods-DeltaDNA tvOS Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		D7BE3517D44F9BE8A36CB4A6 /* Pods-DeltaDNA tvOS Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DeltaDNA tvOS Tests.release.xcconfig"; path = "Tests/Pods/Target Support Files/Pods-DeltaDNA tvOS Tests/Pods-DeltaDNA tvOS Tests.release.xcconfig"; sourceTree = "<group>"; };
-		DBBF3347BE53332EC63C4DD1 /* Pods_DeltaDNA_iOS_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DeltaDNA_iOS_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		DC5FDFD8337EC612AB2B8483 /* Pods_DeltaDNA_tvOS_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DeltaDNA_tvOS_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -339,57 +265,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		636556011C60F4F6004153E7 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		636556781C60F683004153E7 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1563679A7BBA871614FF22A4 /* Pods_DeltaDNA_iOS_Tests.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		636556A81C60FD6C004153E7 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				BE8BC6CE991955F4F252F48F /* Pods_DeltaDNA_tvOS_Tests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1F74FFAF1E4935FF99A22A51 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				DBBF3347BE53332EC63C4DD1 /* Pods_DeltaDNA_iOS_Tests.framework */,
-				DC5FDFD8337EC612AB2B8483 /* Pods_DeltaDNA_tvOS_Tests.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		30F944A71D786E3A0021E6FA /* DeltaDNA */ = {
 			isa = PBXGroup;
 			children = (
 				30F944A81D786E3A0021E6FA /* Info.plist */,
 			);
 			path = DeltaDNA;
-			sourceTree = "<group>";
-		};
-		6318EAD91CAD26FD00E9A72C /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				6318EADA1CAD26FD00E9A72C /* EXPMatchers+equalJSONString.h */,
-				6318EADB1CAD26FD00E9A72C /* EXPMatchers+equalJSONString.m */,
-			);
-			name = Extensions;
-			path = Tests/Extensions;
 			sourceTree = "<group>";
 		};
 		632A3BA91C7471DF00547A29 /* Engage */ = {
@@ -420,8 +311,6 @@
 				6365560D1C60F598004153E7 /* Framework */,
 				30F944A71D786E3A0021E6FA /* DeltaDNA */,
 				636555F81C60F4BD004153E7 /* Products */,
-				C0A0A3415B8D93441863560A /* Pods */,
-				1F74FFAF1E4935FF99A22A51 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -429,9 +318,7 @@
 			isa = PBXGroup;
 			children = (
 				636555F71C60F4BD004153E7 /* DeltaDNA.framework */,
-				636556051C60F4F6004153E7 /* DeltaDNA.framework */,
 				6365567B1C60F683004153E7 /* DeltaDNA iOS Tests.xctest */,
-				636556AB1C60FD6C004153E7 /* DeltaDNA tvOS Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -460,46 +347,6 @@
 			path = DeltaDNA;
 			sourceTree = "<group>";
 		};
-		636556861C60F740004153E7 /* Specs */ = {
-			isa = PBXGroup;
-			children = (
-				30D213682181D44C004DE813 /* DDNAActionStoreSpec.m */,
-				304F13D32029F63C00FA367B /* DDNAUtilsSpec.m */,
-				636556881C60F740004153E7 /* DDNAEngageServiceSpec.m */,
-				636556891C60F740004153E7 /* DDNANetworkRequestSpec.m */,
-				6365568A1C60F740004153E7 /* DDNAVolatileEventStoreSpec.m */,
-				6365568B1C60F740004153E7 /* NSURL+DeltaDNASpec.m */,
-				63A11FC31C6E26FF008DEE99 /* DDNAEventSpec.m */,
-				63A11FC91C6E2F94008DEE99 /* DDNAProductSpec.m */,
-				63A11FCC1C6E3BCC008DEE99 /* DDNATransactionSpec.m */,
-				632D8F871C737830004738A7 /* DDNAEngagementSpec.m */,
-				632D9EDC1CBE625C00145331 /* DDNAImageMessageSpec.m */,
-				6343D582207659B900CC5A46 /* DDNAEngageFactorySpec.m */,
-				63E78AB9208F807C00DDD48D /* DDNAUserManagerSpec.m */,
-				639F2EC22090CB0C007EEBB5 /* DDNANonTrackingSdkSpec.m */,
-				6359F0142092282F0087F5D8 /* DDNAImageCacheSpec.m */,
-				63BD747920C814E700F0DD97 /* DDNATrackingSdkSpec.m */,
-				635AC81820D2731B009027D5 /* DDNAEventActionSpec.m */,
-				635AC81720D2731B009027D5 /* DDNAEventTriggerSpec.m */,
-				635AC81D20D27EBA009027D5 /* DDNAEventActionHandlerSpec.m */,
-				63B7733720EB70DE00D73D66 /* DDNAEngageCacheSpec.m */,
-			);
-			name = Specs;
-			path = Tests/Specs;
-			sourceTree = "<group>";
-		};
-		6365568C1C60F740004153E7 /* Fakes */ = {
-			isa = PBXGroup;
-			children = (
-				6365568D1C60F740004153E7 /* DDNAFakeInstanceFactory.h */,
-				6365568E1C60F740004153E7 /* DDNAFakeInstanceFactory.m */,
-				6365568F1C60F740004153E7 /* DDNAFakeNetworkRequest.h */,
-				636556901C60F740004153E7 /* DDNAFakeNetworkRequest.m */,
-			);
-			name = Fakes;
-			path = Tests/Fakes;
-			sourceTree = "<group>";
-		};
 		636556911C60F740004153E7 /* iOS Tests */ = {
 			isa = PBXGroup;
 			children = (
@@ -512,12 +359,33 @@
 		6365569F1C60F758004153E7 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				6318EAD91CAD26FD00E9A72C /* Extensions */,
-				636556861C60F740004153E7 /* Specs */,
-				6365568C1C60F740004153E7 /* Fakes */,
+				6825D6B725BED9030065B042 /* DeltaDNA iOS Tests-Bridging-Header.h */,
+				6812ACBB25C84110007623D3 /* ObjC.m */,
+				6812ACC125C8418B007623D3 /* ObjC.h */,
+				68F8B31925C03834009816AF /* Mocks */,
+				6825D6BA25BED9030065B042 /* DDNAActionStoreTests.swift */,
+				68CE916125E43E960060F9F3 /* DDNAEventTriggerTests.swift */,
+				68F8B30025BEF9C7009816AF /* DDNAUtilsTests.swift */,
+				68F8B30625BF080E009816AF /* DDNAEngageServiceTests.swift */,
+				68F8B32625C038CC009816AF /* DDNAEngageRequestTests.swift */,
+				68F8B32C25C04E73009816AF /* DDNAEngageCacheTests.swift */,
+				68D1C09B25C450F900F1D0C3 /* DDNAEventActionTests.swift */,
+				6812ACAC25C80EF6007623D3 /* DDNAProductTests.swift */,
+				6812AD2725C9996E007623D3 /* DDNAImageMessageTests.swift */,
+				6812AD2125C990DA007623D3 /* NSURL+DeltaDNATests.swift */,
+				68D1C09325C41F4900F1D0C3 /* DDNAVolatileEventStoreTests.swift */,
+				68CE914625E400640060F9F3 /* DDNATransactionTests.swift */,
+				68CE915825E429AB0060F9F3 /* DDNAEngagementTests.swift */,
+				68CE916925E450E10060F9F3 /* DDNANetworkRequestTests.swift */,
+				68CE918525E46C0E0060F9F3 /* DDNANonTrackingSdkTests.swift */,
+				68CE919B25E515CD0060F9F3 /* DDNAEngageFactoryTests.swift */,
+				68CE91A125E51B7D0060F9F3 /* DDNAUserManagerTests.swift */,
+				68CE91A725E5232E0060F9F3 /* DDNAGameParametersHandlerTests.swift */,
+				68C33AA425E687D00096AE18 /* DDNAImageMessageHandlerTests.swift */,
+				68C33A8925E664FB0096AE18 /* DDNATrackingSdkTests.swift */,
+				6882432025D31BB20038EE30 /* DDNAImageCacheTests.swift */,
 				636556911C60F740004153E7 /* iOS Tests */,
 				636556E71C610A12004153E7 /* tvOS Tests */,
-				636556931C60F740004153E7 /* Podfile */,
 			);
 			name = Tests;
 			sourceTree = "<group>";
@@ -598,6 +466,7 @@
 				633BEAA6208DEE4D0080301A /* DDNANonTrackingSdk.m */,
 				633BEAAB208DEECF0080301A /* DDNAUserManager.h */,
 				633BEAAC208DEECF0080301A /* DDNAUserManager.m */,
+				68CE916D25E45B6F0060F9F3 /* NSURLSessionInterface.h */,
 			);
 			name = Impl;
 			sourceTree = "<group>";
@@ -637,6 +506,39 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
+		68C33A9525E686F50096AE18 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				68C33A9625E687140096AE18 /* DDNAImageCacheExtension.swift */,
+				68C33A9C25E687350096AE18 /* DDNAImageMessageExtension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		68F8B31925C03834009816AF /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				68C33A9525E686F50096AE18 /* Extensions */,
+				68F8B31A25C0384B009816AF /* DDNAInstanceFactoryMock.swift */,
+				68F8B32225C03890009816AF /* DDNANetworkRequestMock.swift */,
+				6812AD0925C97920007623D3 /* DDNASdkInterfaceMock.swift */,
+				6812AD0D25C97941007623D3 /* DDNAActionStoreMock.swift */,
+				6812AD1725C98EED007623D3 /* DDNAEventActionHandlerMock.swift */,
+				6812AD1B25C98F0F007623D3 /* DDNAEventTriggerMock.swift */,
+				68CE913625E3E4380060F9F3 /* UrlSessionDownloadTaskMock.swift */,
+				68CE913A25E3E4780060F9F3 /* UrlSessionMock.swift */,
+				68CE913E25E3E5610060F9F3 /* UrlMock.swift */,
+				68CE918125E46BA30060F9F3 /* DDNANetworkRequestDelegateMock.swift */,
+				68CE918B25E5146C0060F9F3 /* DDNAUserManagerMock.swift */,
+				68CE918F25E5149E0060F9F3 /* DDNASDKDelegateMock.swift */,
+				68CE919325E514C20060F9F3 /* DDNACollectServiceMock.swift */,
+				68CE919725E514E40060F9F3 /* DDNASDKMock.swift */,
+				68C33AA025E687620096AE18 /* DDNAImageCacheMock.swift */,
+				68C9695125E9621C00663AE1 /* DDNAEngageServiceMock.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
 		6F6BF81624F937C500525F4A /* Pinpointer */ = {
 			isa = PBXGroup;
 			children = (
@@ -661,17 +563,6 @@
 				9084B3CB24ABE57E00F82BA3 /* DeltaDNA.h */,
 			);
 			path = tvOS;
-			sourceTree = "<group>";
-		};
-		C0A0A3415B8D93441863560A /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				4230748C72C905B3FCB0D3E7 /* Pods-DeltaDNA iOS Tests.debug.xcconfig */,
-				1545773A5B3C2343D5D24F5D /* Pods-DeltaDNA iOS Tests.release.xcconfig */,
-				D432A4CBC0CAD37B699A59A3 /* Pods-DeltaDNA tvOS Tests.debug.xcconfig */,
-				D7BE3517D44F9BE8A36CB4A6 /* Pods-DeltaDNA tvOS Tests.release.xcconfig */,
-			);
-			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -717,49 +608,8 @@
 				6365565F1C60F5F2004153E7 /* DDNASettings.h in Headers */,
 				636556641C60F5F2004153E7 /* NSString+DeltaDNA.h in Headers */,
 				636556551C60F5F2004153E7 /* DDNAPlayerPrefs.h in Headers */,
+				68CE916E25E45B6F0060F9F3 /* NSURLSessionInterface.h in Headers */,
 				637373011C6B4B41007B789D /* DeltaDNA.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		636556021C60F4F6004153E7 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				63A11FBA1C6CF2A4008DEE99 /* DDNAProduct.h in Headers */,
-				30EF37DC2180A8D7007BAA47 /* DDNAActionStore.h in Headers */,
-				633BEAA8208DEE4D0080301A /* DDNANonTrackingSdk.h in Headers */,
-				304F13DB2029FB7500FA367B /* DDNAUtils.h in Headers */,
-				635AC80A20D272F1009027D5 /* DDNAEventTrigger.h in Headers */,
-				633BEA9E208DEC320080301A /* DDNASdkInterface.h in Headers */,
-				630458861CAE724800875B71 /* DDNAImageMessage.h in Headers */,
-				636556D41C6108DF004153E7 /* DDNAClientInfo.h in Headers */,
-				635AC81620D27302009027D5 /* DDNAEventActionHandler.h in Headers */,
-				9084B3CC24ABE5FD00F82BA3 /* DeltaDNA.h in Headers */,
-				6F5748EE2550447B0057D221 /* DeltaDNA-Swift.h in Headers */,
-				63A11FD21C71E77D008DEE99 /* DDNAParams.h in Headers */,
-				6327172E1C650D1B00AB2806 /* DDNAEngageCache.h in Headers */,
-				636556D71C6108DF004153E7 /* DDNAEngageService.h in Headers */,
-				636556DA1C6108DF004153E7 /* DDNAInstanceFactory.h in Headers */,
-				633BEAA2208DEE090080301A /* DDNATrackingSdk.h in Headers */,
-				632513BF206E5C4A00BB0088 /* DDNAEngageFactory.h in Headers */,
-				63A11FE31C71F7F7008DEE99 /* DDNAVolatileEventStore.h in Headers */,
-				636556DB1C6108DF004153E7 /* DDNALog.h in Headers */,
-				636556DC1C6108DF004153E7 /* DDNANetworkRequest.h in Headers */,
-				636556DD1C6108DF004153E7 /* DDNAPlayerPrefs.h in Headers */,
-				63A11FDD1C71F7F7008DEE99 /* DDNAEventStoreProtocol.h in Headers */,
-				63A11FB41C6CF20A008DEE99 /* DDNAEvent.h in Headers */,
-				633BEAAE208DEECF0080301A /* DDNAUserManager.h in Headers */,
-				6359F01120920BEE0087F5D8 /* DDNAImageCache.h in Headers */,
-				636556E11C6108DF004153E7 /* DDNASDK.h in Headers */,
-				63A11FDF1C71F7F7008DEE99 /* DDNAPersistentEventStore.h in Headers */,
-				63A11FAE1C6B77D6008DEE99 /* DDNACollectService.h in Headers */,
-				636556E21C6108DF004153E7 /* DDNASettings.h in Headers */,
-				63A11FC01C6CF435008DEE99 /* DDNATransaction.h in Headers */,
-				636556E41C6108DF004153E7 /* NSDictionary+DeltaDNA.h in Headers */,
-				636556E51C6108DF004153E7 /* NSString+DeltaDNA.h in Headers */,
-				636556E61C6108DF004153E7 /* NSURL+DeltaDNA.h in Headers */,
-				635AC81020D27302009027D5 /* DDNAEventAction.h in Headers */,
-				632D8F841C736DA4004738A7 /* DDNAEngagement.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -784,33 +634,13 @@
 			productReference = 636555F71C60F4BD004153E7 /* DeltaDNA.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		636556041C60F4F6004153E7 /* DeltaDNA tvOS */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 6365560A1C60F4F6004153E7 /* Build configuration list for PBXNativeTarget "DeltaDNA tvOS" */;
-			buildPhases = (
-				636556001C60F4F6004153E7 /* Sources */,
-				636556011C60F4F6004153E7 /* Frameworks */,
-				636556021C60F4F6004153E7 /* Headers */,
-				636556031C60F4F6004153E7 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "DeltaDNA tvOS";
-			productName = "DeltaDNA tvOS";
-			productReference = 636556051C60F4F6004153E7 /* DeltaDNA.framework */;
-			productType = "com.apple.product-type.framework";
-		};
 		6365567A1C60F683004153E7 /* DeltaDNA iOS Tests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 636556831C60F683004153E7 /* Build configuration list for PBXNativeTarget "DeltaDNA iOS Tests" */;
 			buildPhases = (
-				BCEFA2B596F704ED7A6FF320 /* [CP] Check Pods Manifest.lock */,
 				636556771C60F683004153E7 /* Sources */,
 				636556781C60F683004153E7 /* Frameworks */,
 				636556791C60F683004153E7 /* Resources */,
-				AB69FD4C36E921D49ACA41A9 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -820,26 +650,6 @@
 			name = "DeltaDNA iOS Tests";
 			productName = "DeltaDNA iOS Tests";
 			productReference = 6365567B1C60F683004153E7 /* DeltaDNA iOS Tests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		636556AA1C60FD6C004153E7 /* DeltaDNA tvOS Tests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 636556B31C60FD6C004153E7 /* Build configuration list for PBXNativeTarget "DeltaDNA tvOS Tests" */;
-			buildPhases = (
-				2FA6647ABB65F7ED8E88A45C /* [CP] Check Pods Manifest.lock */,
-				636556A71C60FD6C004153E7 /* Sources */,
-				636556A81C60FD6C004153E7 /* Frameworks */,
-				636556A91C60FD6C004153E7 /* Resources */,
-				F85B738B43A39E6F5229273E /* [CP] Embed Pods Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				636556B21C60FD6C004153E7 /* PBXTargetDependency */,
-			);
-			name = "DeltaDNA tvOS Tests";
-			productName = "DeltaDNA tvOS Tests";
-			productReference = 636556AB1C60FD6C004153E7 /* DeltaDNA tvOS Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -858,16 +668,7 @@
 						DevelopmentTeam = 846C8UZB42;
 						LastSwiftMigration = 1200;
 					};
-					636556041C60F4F6004153E7 = {
-						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = 846C8UZB42;
-						LastSwiftMigration = 1210;
-					};
 					6365567A1C60F683004153E7 = {
-						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = 846C8UZB42;
-					};
-					636556AA1C60FD6C004153E7 = {
 						CreatedOnToolsVersion = 7.2;
 						DevelopmentTeam = 846C8UZB42;
 					};
@@ -887,9 +688,7 @@
 			projectRoot = "";
 			targets = (
 				636555F61C60F4BD004153E7 /* DeltaDNA iOS */,
-				636556041C60F4F6004153E7 /* DeltaDNA tvOS */,
 				6365567A1C60F683004153E7 /* DeltaDNA iOS Tests */,
-				636556AA1C60FD6C004153E7 /* DeltaDNA tvOS Tests */,
 			);
 		};
 /* End PBXProject section */
@@ -903,14 +702,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		636556031C60F4F6004153E7 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				63F8C5F91D8048F8004E5D66 /* iso_4217.xml in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		636556791C60F683004153E7 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -918,101 +709,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		636556A91C60FD6C004153E7 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		2FA6647ABB65F7ED8E88A45C /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-DeltaDNA tvOS Tests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		AB69FD4C36E921D49ACA41A9 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Tests/Pods/Target Support Files/Pods-DeltaDNA iOS Tests/Pods-DeltaDNA iOS Tests-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Expecta-iOS/Expecta.framework",
-				"${BUILT_PRODUCTS_DIR}/OCHamcrest-iOS/OCHamcrest.framework",
-				"${BUILT_PRODUCTS_DIR}/OCMockito-iOS/OCMockito.framework",
-				"${BUILT_PRODUCTS_DIR}/Specta-iOS/Specta.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Expecta.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OCHamcrest.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OCMockito.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Specta.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Tests/Pods/Target Support Files/Pods-DeltaDNA iOS Tests/Pods-DeltaDNA iOS Tests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		BCEFA2B596F704ED7A6FF320 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-DeltaDNA iOS Tests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		F85B738B43A39E6F5229273E /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Tests/Pods/Target Support Files/Pods-DeltaDNA tvOS Tests/Pods-DeltaDNA tvOS Tests-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Expecta-tvOS/Expecta.framework",
-				"${BUILT_PRODUCTS_DIR}/OCHamcrest-tvOS/OCHamcrest.framework",
-				"${BUILT_PRODUCTS_DIR}/OCMockito-tvOS/OCMockito.framework",
-				"${BUILT_PRODUCTS_DIR}/Specta-tvOS/Specta.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Expecta.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OCHamcrest.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OCMockito.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Specta.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Tests/Pods/Target Support Files/Pods-DeltaDNA tvOS Tests/Pods-DeltaDNA tvOS Tests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		636555F21C60F4BD004153E7 /* Sources */ = {
@@ -1055,103 +752,51 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		636556001C60F4F6004153E7 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				633BEAA4208DEE090080301A /* DDNATrackingSdk.m in Sources */,
-				636556BF1C6108BE004153E7 /* DDNAClientInfo.m in Sources */,
-				63A11FBC1C6CF2A4008DEE99 /* DDNAProduct.m in Sources */,
-				63A11FB61C6CF20A008DEE99 /* DDNAEvent.m in Sources */,
-				636556C21C6108BE004153E7 /* DDNAEngageService.m in Sources */,
-				632D8F861C736DA4004738A7 /* DDNAEngagement.m in Sources */,
-				635AC80820D272F1009027D5 /* DDNAEventTrigger.m in Sources */,
-				636556C51C6108BE004153E7 /* DDNAInstanceFactory.m in Sources */,
-				636556C61C6108BE004153E7 /* DDNALog.m in Sources */,
-				636556C71C6108BE004153E7 /* DDNANetworkRequest.m in Sources */,
-				30EF37DF2180A8FD007BAA47 /* DDNAActionStore.m in Sources */,
-				636556C81C6108BE004153E7 /* DDNAPlayerPrefs.m in Sources */,
-				6F3E9663254AD85500EF089C /* DDNAPinpointerTvOS.swift in Sources */,
-				63A11FD41C71E77D008DEE99 /* DDNAParams.m in Sources */,
-				6359F01320920BEE0087F5D8 /* DDNAImageCache.m in Sources */,
-				304F13DC2029FB7800FA367B /* DDNAUtils.m in Sources */,
-				635AC81420D27302009027D5 /* DDNAEventActionHandler.m in Sources */,
-				632513C1206E5C4A00BB0088 /* DDNAEngageFactory.m in Sources */,
-				630458881CAE724800875B71 /* DDNAImageMessage.m in Sources */,
-				632717301C650D1B00AB2806 /* DDNAEngageCache.m in Sources */,
-				636556CC1C6108BE004153E7 /* DDNASDK.m in Sources */,
-				636556CD1C6108BE004153E7 /* DDNASettings.m in Sources */,
-				63A11FC21C6CF435008DEE99 /* DDNATransaction.m in Sources */,
-				636556CE1C6108BE004153E7 /* NSDictionary+DeltaDNA.m in Sources */,
-				635AC81220D27302009027D5 /* DDNAEventAction.m in Sources */,
-				633BEAB0208DEECF0080301A /* DDNAUserManager.m in Sources */,
-				636556CF1C6108BE004153E7 /* NSString+DeltaDNA.m in Sources */,
-				63A11FE11C71F7F7008DEE99 /* DDNAPersistentEventStore.m in Sources */,
-				63A11FE51C71F7F7008DEE99 /* DDNAVolatileEventStore.m in Sources */,
-				633BEAAA208DEE4D0080301A /* DDNANonTrackingSdk.m in Sources */,
-				636556D01C6108BE004153E7 /* NSURL+DeltaDNA.m in Sources */,
-				63A11FB01C6B77D6008DEE99 /* DDNACollectService.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		636556771C60F683004153E7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				632D9EDD1CBE625C00145331 /* DDNAImageMessageSpec.m in Sources */,
-				6359F0152092282F0087F5D8 /* DDNAImageCacheSpec.m in Sources */,
-				636556A11C60FCD5004153E7 /* DDNAEngageServiceSpec.m in Sources */,
-				636556A21C60FCD5004153E7 /* DDNANetworkRequestSpec.m in Sources */,
-				63A11FCD1C6E3BCC008DEE99 /* DDNATransactionSpec.m in Sources */,
-				304F13D92029F9E100FA367B /* DDNAUtilsSpec.m in Sources */,
-				635AC81B20D2731B009027D5 /* DDNAEventActionSpec.m in Sources */,
-				639F2EC52090CB24007EEBB5 /* DDNANonTrackingSdkSpec.m in Sources */,
-				63A11FC41C6E26FF008DEE99 /* DDNAEventSpec.m in Sources */,
+				68C33A8A25E664FB0096AE18 /* DDNATrackingSdkTests.swift in Sources */,
+				68CE916A25E450E10060F9F3 /* DDNANetworkRequestTests.swift in Sources */,
+				68CE913725E3E4380060F9F3 /* UrlSessionDownloadTaskMock.swift in Sources */,
+				6812AD1C25C98F0F007623D3 /* DDNAEventTriggerMock.swift in Sources */,
+				68CE91A825E5232E0060F9F3 /* DDNAGameParametersHandlerTests.swift in Sources */,
+				68C33A9725E687140096AE18 /* DDNAImageCacheExtension.swift in Sources */,
+				68CE919825E514E40060F9F3 /* DDNASDKMock.swift in Sources */,
+				68C33AA125E687620096AE18 /* DDNAImageCacheMock.swift in Sources */,
 				7C71803D21E78B2B00A52EB9 /* DDNASettings.m in Sources */,
-				632D8F881C737830004738A7 /* DDNAEngagementSpec.m in Sources */,
-				635AC81920D2731B009027D5 /* DDNAEventTriggerSpec.m in Sources */,
-				63E78ABC208F80B800DDD48D /* DDNAUserManagerSpec.m in Sources */,
-				636556A31C60FCD5004153E7 /* DDNAVolatileEventStoreSpec.m in Sources */,
-				636556A41C60FCD5004153E7 /* NSURL+DeltaDNASpec.m in Sources */,
-				30D213692181D44D004DE813 /* DDNAActionStoreSpec.m in Sources */,
-				635AC81E20D27EBA009027D5 /* DDNAEventActionHandlerSpec.m in Sources */,
-				636556A51C60FCD5004153E7 /* DDNAFakeInstanceFactory.m in Sources */,
-				636556A61C60FCD5004153E7 /* DDNAFakeNetworkRequest.m in Sources */,
-				63B7733820EB70DE00D73D66 /* DDNAEngageCacheSpec.m in Sources */,
-				6343D583207659B900CC5A46 /* DDNAEngageFactorySpec.m in Sources */,
-				6318EAE01CAD2A5A00E9A72C /* EXPMatchers+equalJSONString.m in Sources */,
-				63A11FCA1C6E2F94008DEE99 /* DDNAProductSpec.m in Sources */,
-				63BD747C20C8160E00F0DD97 /* DDNATrackingSdkSpec.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		636556A71C60FD6C004153E7 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				632D9EDE1CBE625C00145331 /* DDNAImageMessageSpec.m in Sources */,
-				6359F0162092282F0087F5D8 /* DDNAImageCacheSpec.m in Sources */,
-				636556B71C60FDF1004153E7 /* DDNAEngageServiceSpec.m in Sources */,
-				636556B81C60FDF1004153E7 /* DDNANetworkRequestSpec.m in Sources */,
-				63A11FCE1C6E3BCC008DEE99 /* DDNATransactionSpec.m in Sources */,
-				304F13DA2029F9E200FA367B /* DDNAUtilsSpec.m in Sources */,
-				635AC81C20D2731B009027D5 /* DDNAEventActionSpec.m in Sources */,
-				639F2EC62090CB25007EEBB5 /* DDNANonTrackingSdkSpec.m in Sources */,
-				63A11FC51C6E26FF008DEE99 /* DDNAEventSpec.m in Sources */,
-				632D8F891C737830004738A7 /* DDNAEngagementSpec.m in Sources */,
-				635AC81A20D2731B009027D5 /* DDNAEventTriggerSpec.m in Sources */,
-				63E78ABD208F80B800DDD48D /* DDNAUserManagerSpec.m in Sources */,
-				636556B91C60FDF1004153E7 /* DDNAVolatileEventStoreSpec.m in Sources */,
-				636556BA1C60FDF1004153E7 /* NSURL+DeltaDNASpec.m in Sources */,
-				30D2136A2181D44D004DE813 /* DDNAActionStoreSpec.m in Sources */,
-				635AC81F20D27EBA009027D5 /* DDNAEventActionHandlerSpec.m in Sources */,
-				636556BB1C60FDF1004153E7 /* DDNAFakeInstanceFactory.m in Sources */,
-				636556BC1C60FDF1004153E7 /* DDNAFakeNetworkRequest.m in Sources */,
-				63B7733920EB70DE00D73D66 /* DDNAEngageCacheSpec.m in Sources */,
-				6343D584207659B900CC5A46 /* DDNAEngageFactorySpec.m in Sources */,
-				6318EADF1CAD2A5900E9A72C /* EXPMatchers+equalJSONString.m in Sources */,
-				63A11FCB1C6E2F94008DEE99 /* DDNAProductSpec.m in Sources */,
-				63BD747D20C8160F00F0DD97 /* DDNATrackingSdkSpec.m in Sources */,
+				68F8B32D25C04E73009816AF /* DDNAEngageCacheTests.swift in Sources */,
+				68C33AA525E687D00096AE18 /* DDNAImageMessageHandlerTests.swift in Sources */,
+				6882432125D31BB20038EE30 /* DDNAImageCacheTests.swift in Sources */,
+				6812AD0E25C97941007623D3 /* DDNAActionStoreMock.swift in Sources */,
+				68D1C09425C41F4900F1D0C3 /* DDNAVolatileEventStoreTests.swift in Sources */,
+				6812AD2225C990DA007623D3 /* NSURL+DeltaDNATests.swift in Sources */,
+				6812ACAD25C80EF6007623D3 /* DDNAProductTests.swift in Sources */,
+				6812ACBC25C84110007623D3 /* ObjC.m in Sources */,
+				6825D6BB25BED9030065B042 /* DDNAActionStoreTests.swift in Sources */,
+				68CE918225E46BA30060F9F3 /* DDNANetworkRequestDelegateMock.swift in Sources */,
+				68CE919C25E515CD0060F9F3 /* DDNAEngageFactoryTests.swift in Sources */,
+				68F8B30125BEF9C7009816AF /* DDNAUtilsTests.swift in Sources */,
+				68CE913F25E3E5610060F9F3 /* UrlMock.swift in Sources */,
+				68F8B32325C03890009816AF /* DDNANetworkRequestMock.swift in Sources */,
+				6812AD1825C98EED007623D3 /* DDNAEventActionHandlerMock.swift in Sources */,
+				68CE914725E400640060F9F3 /* DDNATransactionTests.swift in Sources */,
+				68CE916225E43E960060F9F3 /* DDNAEventTriggerTests.swift in Sources */,
+				68CE919425E514C20060F9F3 /* DDNACollectServiceMock.swift in Sources */,
+				68CE919025E5149E0060F9F3 /* DDNASDKDelegateMock.swift in Sources */,
+				68CE91A225E51B7D0060F9F3 /* DDNAUserManagerTests.swift in Sources */,
+				68C9695225E9621C00663AE1 /* DDNAEngageServiceMock.swift in Sources */,
+				68F8B30725BF080E009816AF /* DDNAEngageServiceTests.swift in Sources */,
+				68CE918C25E5146C0060F9F3 /* DDNAUserManagerMock.swift in Sources */,
+				68C33A9D25E687350096AE18 /* DDNAImageMessageExtension.swift in Sources */,
+				68F8B31B25C0384B009816AF /* DDNAInstanceFactoryMock.swift in Sources */,
+				68CE915925E429AB0060F9F3 /* DDNAEngagementTests.swift in Sources */,
+				6812AD0A25C97920007623D3 /* DDNASdkInterfaceMock.swift in Sources */,
+				6812AD2825C9996E007623D3 /* DDNAImageMessageTests.swift in Sources */,
+				68F8B32725C038CC009816AF /* DDNAEngageRequestTests.swift in Sources */,
+				68CE918625E46C0E0060F9F3 /* DDNANonTrackingSdkTests.swift in Sources */,
+				68CE913B25E3E4780060F9F3 /* UrlSessionMock.swift in Sources */,
+				68D1C09C25C450F900F1D0C3 /* DDNAEventActionTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1162,11 +807,6 @@
 			isa = PBXTargetDependency;
 			target = 636555F61C60F4BD004153E7 /* DeltaDNA iOS */;
 			targetProxy = 636556811C60F683004153E7 /* PBXContainerItemProxy */;
-		};
-		636556B21C60FD6C004153E7 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 636556041C60F4F6004153E7 /* DeltaDNA tvOS */;
-			targetProxy = 636556B11C60FD6C004153E7 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1370,126 +1010,8 @@
 			};
 			name = Release;
 		};
-		6365560B1C60F4F6004153E7 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
-				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_TESTABILITY = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = Framework/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = Framework/module.modulemap;
-				MTL_ENABLE_DEBUG_INFO = YES;
-				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.deltadna.ios.DeltaDNA-tvOS";
-				PRODUCT_NAME = DeltaDNA;
-				SDKROOT = appletvos;
-				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 9.2;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		6365560C1C60F4F6004153E7 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
-				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_NS_ASSERTIONS = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = Framework/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = Framework/module.modulemap;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.deltadna.ios.DeltaDNA-tvOS";
-				PRODUCT_NAME = DeltaDNA;
-				SDKROOT = appletvos;
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 9.2;
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
 		636556841C60F683004153E7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4230748C72C905B3FCB0D3E7 /* Pods-DeltaDNA iOS Tests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -1526,19 +1048,21 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "Tests/iOS Tests/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.deltadna.ios.DeltaDNA-iOS-Tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "DeltaDNA iOS Tests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
 		636556851C60F683004153E7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1545773A5B3C2343D5D24F5D /* Pods-DeltaDNA iOS Tests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -1569,104 +1093,14 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "Tests/iOS Tests/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.deltadna.ios.DeltaDNA-iOS-Tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
-		636556B41C60FD6C004153E7 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = D432A4CBC0CAD37B699A59A3 /* Pods-DeltaDNA tvOS Tests.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = 846C8UZB42;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_TESTABILITY = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = "Tests/tvOS Tests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.deltadna.ios.DeltaDNA-tvOS-Tests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = appletvos;
-				TVOS_DEPLOYMENT_TARGET = 9.2;
-			};
-			name = Debug;
-		};
-		636556B51C60FD6C004153E7 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = D7BE3517D44F9BE8A36CB4A6 /* Pods-DeltaDNA tvOS Tests.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = 846C8UZB42;
-				ENABLE_NS_ASSERTIONS = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = "Tests/tvOS Tests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.deltadna.ios.DeltaDNA-tvOS-Tests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = appletvos;
-				TVOS_DEPLOYMENT_TARGET = 9.2;
+				SWIFT_OBJC_BRIDGING_HEADER = "DeltaDNA iOS Tests-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -1692,29 +1126,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6365560A1C60F4F6004153E7 /* Build configuration list for PBXNativeTarget "DeltaDNA tvOS" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				6365560B1C60F4F6004153E7 /* Debug */,
-				6365560C1C60F4F6004153E7 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		636556831C60F683004153E7 /* Build configuration list for PBXNativeTarget "DeltaDNA iOS Tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				636556841C60F683004153E7 /* Debug */,
 				636556851C60F683004153E7 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		636556B31C60FD6C004153E7 /* Build configuration list for PBXNativeTarget "DeltaDNA tvOS Tests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				636556B41C60FD6C004153E7 /* Debug */,
-				636556B51C60FD6C004153E7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
