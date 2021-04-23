@@ -2,7 +2,6 @@
 
 ## deltaDNA Analytics iOS SDK
 
-[![Build Status](https://travis-ci.org/deltaDNA/ios-sdk.svg?branch=master)](https://travis-ci.org/deltaDNA/ios-sdk)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
 ### Installation
@@ -37,7 +36,7 @@ target 'MyApp' do
 # Uncomment this line if you're using Swift or would like to use dynamic frameworks
 use_frameworks!
 
-pod 'DeltaDNA', '~> 4.13.0'
+pod 'DeltaDNA', '~> 4.13.1'
 
 target 'MyAppTests' do
 inherit! :search_paths
@@ -287,6 +286,8 @@ Refer to our [documentation](http://docs.deltadna.com/advanced-integration/ios-s
 ## License
 
 The sources are available under the Apache 2.0 license.
+
+By integrating, accessing, or using the deltaDNA UA SDK, you acknowledge and agree that (1) your access to and use of the deltaDNA UA SDK is governed by Unity’s Monetization Terms of Service, available [here](https://unity3d.com/legal/monetization-services-terms-of-service), and that such service is an Experimental Service (as defined therein); and (2) you will not access or use the deltaDNA UA SDK in connection with any application that is “directed to children” under the age of 13 or would otherwise be subject to the Children’s Online Privacy Protection Act of 1998, or with any application designated as a “Kids” or “Family” application in the Apple App Store or Google Play Store.
 
 ## Contact Us
 

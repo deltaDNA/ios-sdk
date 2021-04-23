@@ -13,4 +13,6 @@ xcodebuild archive -workspace "DeltaDNA.xcworkspace" -scheme "DeltaDNA iOS" -sdk
 xcodebuild -create-xcframework -framework archives/ios_devices.xcarchive/Products/Library/Frameworks/DeltaDNA.framework -framework archives/ios_simulators.xcarchive/Products/Library/Frameworks/DeltaDNA.framework -output build/Frameworks/DeltaDNA.xcframework
 
 # Compress the archive ready for distribution to GitHub
-tar -zcvf build/DeltaDNA-iOS.tar.gz build/Frameworks
+rm build/*.zip
+zip -r DeltaDNA-4.13.1.zip build
+mv DeltaDNA-4.13.1.zip build/

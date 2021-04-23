@@ -227,7 +227,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) DDNAPinpoint
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 - (DDNAEvent * _Nonnull)createSignalTrackingSessionEvent SWIFT_WARN_UNUSED_RESULT;
 - (DDNAEvent * _Nonnull)createSignalTrackingInstallEvent SWIFT_WARN_UNUSED_RESULT;
-- (DDNAEvent * _Nonnull)createSignalTrackingPurchaseEventWithRealCurrencyAmount:(NSNumber * _Nonnull)realCurrencyAmount realCurrencyType:(NSString * _Nonnull)realCurrencyType SWIFT_WARN_UNUSED_RESULT;
+- (DDNAEvent * _Nonnull)createSignalTrackingPurchaseEventWithRealCurrencyAmount:(NSNumber * _Nonnull)realCurrencyAmount realCurrencyType:(NSString * _Nonnull)realCurrencyType transactionID:(NSString * _Nonnull)transactionID SWIFT_WARN_UNUSED_RESULT;
 @end
 
 #if __has_attribute(external_source_symbol)

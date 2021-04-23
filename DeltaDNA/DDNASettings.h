@@ -108,6 +108,14 @@ extern NSUInteger const DDNA_MAX_EVENT_STORE_BYTES;
 @property (nonatomic, assign) BOOL multipleActionsForEventTriggerEnabled;
 
 /**
+ Controls whether the user or the SDK provides transaction events for the Audience Pinpointer signal events.
+ A value of true means the SDK will automatically generate a basic transaction event for each unitySignalPurchase.
+ A value of false means this will be provided by the game.
+ Defaults to true.
+ */
+@property (nonatomic, assign) BOOL automaticallyGenerateTransactionForAudiencePinpointer;
+
+/**
  Returns the path to the privates settings directory on 
  this device.
  */

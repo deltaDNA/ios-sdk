@@ -61,11 +61,13 @@ public class DDNAPinpointer: NSObject {
     
     @objc public func createSignalTrackingPurchaseEvent(
         realCurrencyAmount: NSNumber,
-        realCurrencyType: NSString
+        realCurrencyType: NSString,
+        transactionID: NSString
     ) -> DDNAEvent {
         let signalEvent = createBaseSignalMappingEvent(eventName: "unitySignalPurchase")
         signalEvent.setParam(realCurrencyAmount, forKey: "realCurrencyAmount")
         signalEvent.setParam(realCurrencyType, forKey: "realCurrencyType")
+        signalEvent.setParam(transactionID, forKey: "transactionID")
         return signalEvent
     }
     

@@ -293,9 +293,10 @@ The Apple Device Token received from in your AppDelegate
  @availability iOS 12 or higher
  @param realCurrencyAmount The amount spent on the purchase, in the currency used for the purchase
  @param realCurrencyType The currency code of the currency used for the purchase. For example, USD for dollars or GBP for pounds sterling.
+ @param transactionID The transaction ID of the purchase, as reported by Apple's StoreKit API
+ @param transactionReceipt The base64 encoded receipt data, as returned by Apple's StoreKit validation API
  */
-- (void) recordSignalTrackingPurchaseEventWithRealCurrencyAmount :(NSNumber *)realCurrencyAmount realCurrencyType:(NSString *)realCurrencyType;
-
+- (void) recordSignalTrackingPurchaseEventWithRealCurrencyAmount :(NSNumber *)realCurrencyAmount realCurrencyType:(NSString *)realCurrencyType transactionID:(NSString *)transactionID transactionReceipt:(NSString *)transactionReceipt;
 
 @end
 

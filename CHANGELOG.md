@@ -1,5 +1,9 @@
 # Change Log
 
+## [4.13.1](https://github.com/deltaDNA/ios-sdk/releases/tag/4.13.1) (2021-04-23)
+### New
+- Signal purchase methods now generate verifiable transaction events
+
 ## [4.13.0](https://github.com/deltaDNA/ios-sdk/releases/tag/4.13.0) (2021-03-11)
 ### New
 - An .xcframework is now provided with frameworks for supported platforms

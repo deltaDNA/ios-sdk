@@ -8,7 +8,7 @@ elif [ -z "$2" ]; then
   exit 1
 fi
 
-sed -i '' "s/$1/$2/g" DeltaDNA/DDNASettings.m DeltaDNA.podspec README.md README-CN.md
+sed -i '' "s/$1/$2/g" DeltaDNA/DDNASettings.m DeltaDNA.podspec README.md README-CN.md buildFrameworks.sh .yamato/build.yaml
 
 echo "Have you updated the changelog?"
 

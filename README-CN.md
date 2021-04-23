@@ -19,7 +19,7 @@ target 'MyApp' do
   # 如果你使用Swift或者想要使用动态框架，请取消此行注释
   use_frameworks!
 
-  pod 'DeltaDNA', '~> 4.13.0'
+  pod 'DeltaDNA', '~> 4.13.1'
 
   target 'MyAppTests' do
     inherit! :search_paths
@@ -141,3 +141,5 @@ DDNAEngagement *engagement = [DDNAEngagement engagementWithDecisionPoint:@"image
 ## 授权
 
 该资源适用于Apache 2.0授权。
+
+By integrating, accessing, or using the deltaDNA UA SDK, you acknowledge and agree that (1) your access to and use of the deltaDNA UA SDK is governed by Unity’s Monetization Terms of Service, available [here](https://unity3d.com/legal/monetization-services-terms-of-service), and that such service is an Experimental Service (as defined therein); and (2) you will not access or use the deltaDNA UA SDK in connection with any application that is “directed to children” under the age of 13 or would otherwise be subject to the Children’s Online Privacy Protection Act of 1998, or with any application designated as a “Kids” or “Family” application in the Apple App Store or Google Play Store.

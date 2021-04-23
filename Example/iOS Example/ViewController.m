@@ -239,7 +239,7 @@
 - (IBAction)sendPinpointerEvents:(id)sender {
     [[DDNASDK sharedInstance] recordSignalTrackingSessionEvent];
     [[DDNASDK sharedInstance] recordSignalTrackingInstallEvent];
-    [[DDNASDK sharedInstance] recordSignalTrackingPurchaseEventWithRealCurrencyAmount :@100 realCurrencyType:@"GBP"];
+    [[DDNASDK sharedInstance] recordSignalTrackingPurchaseEventWithRealCurrencyAmount :@100 realCurrencyType:@"GBP" transactionID:@"mySuperAwesomeTransactionID" transactionReceipt:@"someReceiptData"];
     NSLog(@"Uploaded Pinpointer Signal Events");
 }
 

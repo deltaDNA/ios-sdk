@@ -27,6 +27,7 @@
 #import "DDNATrackingSdk.h"
 #import "DDNANonTrackingSdk.h"
 #import "DDNAInstanceFactory.h"
+#import "DDNATransaction.h"
 
 #import <UIKit/UIKit.h>
 #import <DeltaDNA/DeltaDNA-Swift.h>
@@ -244,7 +245,11 @@
     }
 }
 
-- (void) recordSignalTrackingPurchaseEventWithRealCurrencyAmount :(NSNumber *)realCurrencyAmount realCurrencyType:(NSString *)realCurrencyType 
+- (void) recordSignalTrackingPurchaseEventWithRealCurrencyAmount
+    :(NSNumber *)realCurrencyAmount
+    realCurrencyType:(NSString *)realCurrencyType
+    transactionID:(NSString *)transactionID
+    transactionReceipt:(NSString *)transactionReceipt
 {
     if (@available(iOS 12.0, *)) {
         if ([_appStoreId length] == 0 || [_appleDeveloperId length] == 0) {
@@ -252,8 +257,16 @@
             DDNALogWarn(@"Pinpointer events require an app store ID and an Apple developer ID to be registered in the SDK, no event will be sent");
             return;
         }
-        DDNAEvent *event = [DDNAPinpointer.shared createSignalTrackingPurchaseEventWithRealCurrencyAmount:realCurrencyAmount realCurrencyType:realCurrencyType];
+        DDNAEvent *event = [DDNAPinpointer.shared createSignalTrackingPurchaseEventWithRealCurrencyAmount:realCurrencyAmount realCurrencyType:realCurrencyType transactionID:transactionID];
         [self recordEvent:event];
+        
+        if ([DDNASDK sharedInstance].settings.automaticallyGenerateTransactionForAudiencePinpointer) {
+            DDNAProduct *placeholderProduct = [DDNAProduct product];
+            DDNATransaction *transactionEvent = [DDNATransaction transactionWithName:@"Pinpointer Signal Transaction" type:@"PURCHASE" productsReceived:placeholderProduct productsSpent:placeholderProduct];
+            [transactionEvent setReceipt:transactionReceipt];
+            [transactionEvent setTransactionId:transactionID];
+            [self recordEvent:transactionEvent];
+        }
     } else {
         DDNALogWarn(@"Audience pinpointer is not supported on iOS versions older than 12");
     }
