@@ -265,6 +265,7 @@
             DDNATransaction *transactionEvent = [DDNATransaction transactionWithName:@"Pinpointer Signal Transaction" type:@"PURCHASE" productsReceived:placeholderProduct productsSpent:placeholderProduct];
             [transactionEvent setReceipt:transactionReceipt];
             [transactionEvent setTransactionId:transactionID];
+            [transactionEvent setServer:@"APPLE"];
             [self recordEvent:transactionEvent];
         }
     } else {

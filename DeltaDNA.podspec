@@ -2,7 +2,7 @@ Pod::Spec.new do |spec|
 
   # Spec Metadata
   spec.name         = "DeltaDNA"
-  spec.version      = "4.13.1"
+  spec.version      = "4.13.2"
   spec.summary      = "A gaming analytics platform."
 
   spec.homepage     = "https://deltadna.com"
@@ -18,7 +18,7 @@ Pod::Spec.new do |spec|
   spec.platform = :ios
 
   # Source Location 
-  spec.source       = { :http => "https://github.com/deltaDNA/ios-sdk/releases/download/4.13.1/DeltaDNA-4.13.1.zip" }
+  spec.source       = { :http => "https://github.com/deltaDNA/ios-sdk/releases/download/4.13.2/DeltaDNA-4.13.2.zip" }
 
   # Source Code 
   spec.vendored_frameworks = 'build/Frameworks/DeltaDNA.xcframework'

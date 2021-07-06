@@ -1,5 +1,9 @@
 # Change Log
 
+## [4.13.2](https://github.com/deltaDNA/ios-sdk/releases/tag/4.13.2) (2021-07-06)
+### Fixed
+- Signal purchase generated events now include the correct `transactionServer` parameter
+
 ## [4.13.1](https://github.com/deltaDNA/ios-sdk/releases/tag/4.13.1) (2021-04-23)
 ### New
 - Signal purchase methods now generate verifiable transaction events
