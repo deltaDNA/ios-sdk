@@ -16,6 +16,7 @@
 
 #import "DDNAEventTrigger.h"
 #import "DDNALog.h"
+#import <DeltaDNA/DeltaDNA-Swift.h>
 
 @interface DDNAEventTrigger ()
 
@@ -29,6 +30,7 @@
 @property (nonatomic, strong) NSNumber *limit;
 @property (nonatomic, strong) NSArray<NSDictionary *> *condition;
 @property (nonatomic, assign) NSUInteger count;
+@property (nonatomic, strong) NSArray<id<DDNATriggerCondition>> *campaignTriggerConditions;
 
 @end
 
@@ -47,6 +49,13 @@
         self.limit = dictionary[@"limit"];
         self.condition = [NSArray arrayWithArray:dictionary[@"condition"]];
         self.count = 0;
+        
+        NSDictionary *campaignConditionDictionary = dictionary[@"campaignExecutionConfig"];
+        if (campaignConditionDictionary != nil) {
+            DDNAEventTriggeredCampaignMetricStore *sharedMetricStore = [DDNAEventTriggeredCampaignMetricStore sharedInstance];
+            DDNATriggerConditionParser *parser = [[DDNATriggerConditionParser alloc] initWithMetricStore:sharedMetricStore variantId: self.variantId];
+            self.campaignTriggerConditions = [parser parseFromJSON: campaignConditionDictionary];
+        }
     }
     return self;
 }
@@ -117,9 +126,22 @@
         }
     }
     
-    BOOL responding = (stack.count == 0) || ([stack.lastObject[@"b"] boolValue]);
-    if (responding) self.count++;
-    return responding;
+    
+    if ((stack.count == 0) || ([stack.lastObject[@"b"] boolValue])) {
+        BOOL responding = self.campaignTriggerConditions.count == 0;
+        [[DDNAEventTriggeredCampaignMetricStore sharedInstance] incrementETCExecutionCountForVariantId:self.variantId];
+        
+        for (id condition in self.campaignTriggerConditions) {
+            if ([condition canExecute]) {
+                responding = true;
+            }
+        }
+        
+        if (responding) self.count++;
+        return responding;
+    } else {
+        return false;
+    }
 }
 
 - (NSNumber *)compareWithBoolOp:(NSString *)op left:(NSNumber *)left right:(NSNumber *)right

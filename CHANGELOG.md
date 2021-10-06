@@ -1,5 +1,9 @@
 # Change Log
 
+## [4.13.3](https://github.com/deltaDNA/ios-sdk/releases/tag/4.13.3) (2021-10-06)
+### Fixed
+- Event Triggered Campaigns will now respect repeat and interval triggers
+
 ## [4.13.2](https://github.com/deltaDNA/ios-sdk/releases/tag/4.13.2) (2021-07-06)
 ### Fixed
 - Signal purchase generated events now include the correct `transactionServer` parameter

@@ -2,6 +2,17 @@ import XCTest
 @testable import DeltaDNA
 
 class DDNAEventTriggerTests: XCTestCase {
+    override func setUpWithError() throws {
+        // This isn't ideal, but is needed to reset the shared metric store between tests
+        // so we can do an integration test for the trigger conditions.
+        // It runs in the setup phase because we might have already polluted this file from other tests that
+        // don't mock the metric store.
+        let sharedMetricStorePath = URL(fileURLWithPath: DDNASettings.getPrivateSettingsDirectoryPath()).appendingPathComponent("ddnaETCCountStore")
+        if FileManager.default.fileExists(atPath: sharedMetricStorePath.path) {
+            try FileManager.default.removeItem(at: sharedMetricStorePath)
+        }
+        DDNAEventTriggeredCampaignMetricStore.sharedInstance.readCountFromFile()
+    }
 
     func test_eventTrigger_buildsItselfFromAJsonDictionary() throws {
         let response = [
@@ -244,6 +255,20 @@ class DDNAEventTriggerTests: XCTestCase {
     func test_failsOnMisMatchedParameterTypes() throws {
         // This doesn't work in objc AND Swift because it will happily convert 'b' to 0 and then carry on...
         XCTAssertTrue(cond(parameters: ["a":"b"], condition: [["p":"a"], ["i":5], ["o":"not equal to"]]))
+    }
+    
+    func test_evaluatesCampaignTriggersAsExpected() {
+        let campaignTriggerConfig: [String : Any] = [
+            "showConditions": [
+                ["executionsRequiredCount": "3"]
+            ]
+        ]
+        let json = ["campaignExecutionConfig": campaignTriggerConfig]
+        let trigger = DDNAEventTrigger(dictionary: json)!
+        
+        XCTAssertFalse(trigger.responds(toEventSchema: [:]))
+        XCTAssertFalse(trigger.responds(toEventSchema: [:]))
+        XCTAssertTrue(trigger.responds(toEventSchema: [:]))
     }
     
     private func cond(parameters: [AnyHashable:Any], condition: [[String:Any]]) -> Bool {
