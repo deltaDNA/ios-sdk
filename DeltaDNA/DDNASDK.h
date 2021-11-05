@@ -23,6 +23,7 @@
 @class DDNAEngagement;
 @class DDNAEngageFactory;
 @class DDNAUserManager;
+@class DDNAConsentTracker;
 @protocol DDNAPopup;
 
 @protocol DDNASDKDelegate;
@@ -31,6 +32,12 @@
 
 @property (nonatomic, strong) id<DDNASdkInterface> impl;
 @property (nonatomic, strong) DDNAUserManager *userManager;
+
+/**
+ INTERNAL USE ONLY. Do not use this property directly. Use the methods isPiplConsentRequired and
+ setPiplConsentForDataUse to check for and track a user's PIPL consent.
+ */
+@property (nonatomic, strong) DDNAConsentTracker *consentTracker;
 
 @property (nonatomic, weak) id<DDNASDKDelegate> delegate;
 
@@ -297,6 +304,23 @@ The Apple Device Token received from in your AppDelegate
  @param transactionReceipt The base64 encoded receipt data, as returned by Apple's StoreKit validation API
  */
 - (void) recordSignalTrackingPurchaseEventWithRealCurrencyAmount :(NSNumber *)realCurrencyAmount realCurrencyType:(NSString *)realCurrencyType transactionID:(NSString *)transactionID transactionReceipt:(NSString *)transactionReceipt;
+
+// MARK: PIPL Consent
+
+/**
+ Checks to see if PIPL consent is required to send and record data.
+ As of version 5.0.0 and higher, this method _must_ be called before events will be sent from the device.
+ @param callback A callback which receives a boolean value - true if consent is required, and false if not (or if an error occurred), and an optional NSError. If the NSError is not nil, then a problem occurred while checking for required consents, and you should try again later.
+ */
+- (void) isPiplConsentRequired :(void(^)(BOOL, NSError *))callback;
+
+/**
+ Sets the user's preference for PIPL consent, if required.
+ Note: You should call isPiplConsentRequired first in order to determine if the user is in a jurisdiction that requires PIPL compliance.
+ @param dataUse Whether or not the user has granted consent for their data to be used
+ @param dataExport Whether or not the user has granted consent for their data to be exported from China
+ */
+- (void) setPiplConsentForDataUse :(BOOL)dataUse andDataExport:(BOOL)dataExport;
 
 @end
 

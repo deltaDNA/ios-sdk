@@ -62,6 +62,7 @@
     if ((self = [super init]))
     {
         self.userManager = [[DDNAUserManager alloc] initWithUserDefaults:[NSUserDefaults standardUserDefaults]];
+        self.consentTracker = [[DDNAConsentTracker alloc] init];
         self.settings = [[DDNASettings alloc] init];
     }
     return self;
@@ -85,6 +86,11 @@
                          userID:(NSString *)userID
 {
     @synchronized(self) {
+        if (![self.consentTracker hasCheckedForConsent]) {
+            NSLog(@"Since version 5.0.0 of the deltaDNA SDK, you are required to check for required user consents before starting the SDK.\
+                  Any events recorded will not be sent until user consent is recorded in the SDK.");
+        }
+            
         self.environmentKey = environmentKey;
         self.collectURL = [DDNAUtils fixURL: collectURL];
         self.engageURL = [DDNAUtils fixURL: engageURL];
@@ -96,7 +102,7 @@
         
         self.userManager.userId = userID;
         
-        if (self.userManager.doNotTrack) {
+        if (self.userManager.doNotTrack || [self.consentTracker isConsentDenied]) {
             self.impl = [[DDNANonTrackingSdk alloc] initWithSdk:self instanceFactory:DDNAInstanceFactory.sharedInstance];
         } else {
             self.impl = [[DDNATrackingSdk alloc] initWithSdk:self instanceFactory:DDNAInstanceFactory.sharedInstance];
@@ -272,6 +278,37 @@
         DDNALogWarn(@"Audience pinpointer is not supported on iOS versions older than 12");
     }
 }
+
+#pragma mark - PIPL Consent
+
+- (void) isPiplConsentRequired :(void(^)(BOOL, NSError *))callback
+{
+    [self.consentTracker isPiplConsentRequiredWithCallback:^(BOOL isRequired, NSError *error) {
+        if ([self hasStarted] && !isRequired && error == nil) {
+            // Earlier configuration requests will have failed, and the refetch in setConsent won't be called,
+            // so we need to refresh here to get e.g. engage configs
+            [self requestSessionConfiguration];
+        }
+        callback(isRequired, error);
+    }];
+}
+
+- (void) setPiplConsentForDataUse :(BOOL)dataUse andDataExport:(BOOL)dataExport
+{
+    if (!dataUse || !dataExport) {
+        [self.impl clearPersistentData];
+        [self forgetMe];
+    } else {
+        if ([self hasStarted]) {
+            // Earlier configuration requests will have failed, so we need to refresh here to get e.g. engage configs
+            [self requestSessionConfiguration];
+        }
+    }
+    
+    [self.consentTracker setPiplUseConsent:dataUse];
+    [self.consentTracker setPiplExportConsent:dataExport];
+}
+
 
 #pragma mark - Client Configuration Properties
 

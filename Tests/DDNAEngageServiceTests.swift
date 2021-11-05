@@ -14,6 +14,9 @@ class DDNAEngageServiceTests: XCTestCase {
         self.fakeFactory = DDNAInstanceFactoryMock()
         fakeFactory.fakeNetworkRequest = DDNANetworkRequestMock()
         engageService.factory = fakeFactory
+        
+        DDNASDK.sharedInstance().consentTracker.piplExportStatus = .consentGiven
+        DDNASDK.sharedInstance().consentTracker.piplUseStatus = .consentGiven
     }
     
     func test_responseFail_completionHandlerIsCalledAndReturnsCorrectArguments() throws {

@@ -21,6 +21,9 @@
 #import "NSString+DeltaDNA.h"
 #import "NSDictionary+DeltaDNA.h"
 #import "NSURL+DeltaDNA.h"
+#import "DDNASDK.h"
+
+#import <DeltaDNA/DeltaDNA-Swift.h>
 
 @interface DDNACollectRequest ()
 
@@ -116,6 +119,11 @@
 - (void)request:(DDNACollectRequest *)collectRequest handler:(DDNACollectResponse)responseHandler
 {
     if (!collectRequest || !responseHandler) return;
+    if (![[DDNASDK sharedInstance].consentTracker allConsentsAreMet]) {
+        NSLog(@"Cannot make a collect request without user consent in SDK version >= 5.x, please check user consent and try again");
+        responseHandler(nil, 0, nil);
+        return;
+    }
     
     NSString *jsonPayload = [collectRequest toJSON];
     

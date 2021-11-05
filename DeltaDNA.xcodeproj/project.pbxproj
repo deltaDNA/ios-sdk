@@ -132,6 +132,11 @@
 		6FB9924826FDCE1300A937FF /* DDNAExecutionCountTriggerCondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB9924726FDCE1300A937FF /* DDNAExecutionCountTriggerCondition.swift */; };
 		6FB9924A26FDD0C500A937FF /* DDNAExecutionRepeatTriggerCondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB9924926FDD0C500A937FF /* DDNAExecutionRepeatTriggerCondition.swift */; };
 		6FB9924C26FDEAC200A937FF /* DDNATriggerConditionParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB9924B26FDEAC200A937FF /* DDNATriggerConditionParser.swift */; };
+		6FC10E722726E6D500FAB070 /* DDNAConsentTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC10E712726E6D500FAB070 /* DDNAConsentTracker.swift */; };
+		6FC10E762726F3F800FAB070 /* GeoIpNetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC10E752726F3F800FAB070 /* GeoIpNetworkClient.swift */; };
+		6FC10E7A2728092C00FAB070 /* DDNAConsentTrackerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC10E782728090200FAB070 /* DDNAConsentTrackerTests.swift */; };
+		6FC10E7D27280AAE00FAB070 /* GeoIpNetworkClientMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC10E7B27280A8900FAB070 /* GeoIpNetworkClientMock.swift */; };
+		6FC10E8027282B8E00FAB070 /* GeoIpNetworkClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC10E7E27282B8700FAB070 /* GeoIpNetworkClientTests.swift */; };
 		6FED0E742701BE1500680EA4 /* DDNAEventTriggeredCampaignMetricStoreMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FED0E732701BE1500680EA4 /* DDNAEventTriggeredCampaignMetricStoreMock.swift */; };
 		7C71803D21E78B2B00A52EB9 /* DDNASettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 636556361C60F5F2004153E7 /* DDNASettings.m */; };
 		90B3437E249FAD400099554A /* DDNANotificationService.h in Headers */ = {isa = PBXBuildFile; fileRef = 90B3437C249FAD400099554A /* DDNANotificationService.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -283,6 +288,11 @@
 		6FB9924726FDCE1300A937FF /* DDNAExecutionCountTriggerCondition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDNAExecutionCountTriggerCondition.swift; sourceTree = "<group>"; };
 		6FB9924926FDD0C500A937FF /* DDNAExecutionRepeatTriggerCondition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDNAExecutionRepeatTriggerCondition.swift; sourceTree = "<group>"; };
 		6FB9924B26FDEAC200A937FF /* DDNATriggerConditionParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDNATriggerConditionParser.swift; sourceTree = "<group>"; };
+		6FC10E712726E6D500FAB070 /* DDNAConsentTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDNAConsentTracker.swift; sourceTree = "<group>"; };
+		6FC10E752726F3F800FAB070 /* GeoIpNetworkClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeoIpNetworkClient.swift; sourceTree = "<group>"; };
+		6FC10E782728090200FAB070 /* DDNAConsentTrackerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDNAConsentTrackerTests.swift; sourceTree = "<group>"; };
+		6FC10E7B27280A8900FAB070 /* GeoIpNetworkClientMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoIpNetworkClientMock.swift; sourceTree = "<group>"; };
+		6FC10E7E27282B8700FAB070 /* GeoIpNetworkClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoIpNetworkClientTests.swift; sourceTree = "<group>"; };
 		6FED0E732701BE1500680EA4 /* DDNAEventTriggeredCampaignMetricStoreMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDNAEventTriggeredCampaignMetricStoreMock.swift; sourceTree = "<group>"; };
 		9084B3CB24ABE57E00F82BA3 /* DeltaDNA.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeltaDNA.h; sourceTree = "<group>"; };
 		90B3437C249FAD400099554A /* DDNANotificationService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DDNANotificationService.h; sourceTree = "<group>"; };
@@ -391,6 +401,7 @@
 		6365569F1C60F758004153E7 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				6FC10E77272808F700FAB070 /* Consent */,
 				6825D6B725BED9030065B042 /* DeltaDNA iOS Tests-Bridging-Header.h */,
 				6812ACBB25C84110007623D3 /* ObjC.m */,
 				6812ACC125C8418B007623D3 /* ObjC.h */,
@@ -493,6 +504,7 @@
 		63A11FE81C71F86B008DEE99 /* Impl */ = {
 			isa = PBXGroup;
 			children = (
+				6FC10E702726E6C400FAB070 /* Consent */,
 				6F6BF81624F937C500525F4A /* Pinpointer */,
 				63A11FE61C71F817008DEE99 /* Collect */,
 				63A11FE71C71F828008DEE99 /* Engage */,
@@ -576,6 +588,7 @@
 				68CF8CF9268F6F510015D8E6 /* TrackingHelperMock.swift */,
 				68CA3E4726945FDB0091B46D /* NWPathMonitorMock.swift */,
 				6FED0E732701BE1500680EA4 /* DDNAEventTriggeredCampaignMetricStoreMock.swift */,
+				6FC10E7B27280A8900FAB070 /* GeoIpNetworkClientMock.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -603,6 +616,24 @@
 				6F8D2E9227030D0F00EC648A /* DDNATriggerCondition.swift */,
 			);
 			name = "ETC Trigger Conditions";
+			sourceTree = "<group>";
+		};
+		6FC10E702726E6C400FAB070 /* Consent */ = {
+			isa = PBXGroup;
+			children = (
+				6FC10E712726E6D500FAB070 /* DDNAConsentTracker.swift */,
+				6FC10E752726F3F800FAB070 /* GeoIpNetworkClient.swift */,
+			);
+			name = Consent;
+			sourceTree = "<group>";
+		};
+		6FC10E77272808F700FAB070 /* Consent */ = {
+			isa = PBXGroup;
+			children = (
+				6FC10E782728090200FAB070 /* DDNAConsentTrackerTests.swift */,
+				6FC10E7E27282B8700FAB070 /* GeoIpNetworkClientTests.swift */,
+			);
+			path = Consent;
 			sourceTree = "<group>";
 		};
 		9084B3C924ABE55C00F82BA3 /* iOS */ = {
@@ -799,9 +830,11 @@
 				636556601C60F5F2004153E7 /* DDNASettings.m in Sources */,
 				63A11FC11C6CF435008DEE99 /* DDNATransaction.m in Sources */,
 				6365565E1C60F5F2004153E7 /* DDNASDK.m in Sources */,
+				6FC10E722726E6D500FAB070 /* DDNAConsentTracker.swift in Sources */,
 				635AC81120D27302009027D5 /* DDNAEventAction.m in Sources */,
 				6F6BF82124F958C100525F4A /* DDNAPinpointer.swift in Sources */,
 				633BEAAF208DEECF0080301A /* DDNAUserManager.m in Sources */,
+				6FC10E762726F3F800FAB070 /* GeoIpNetworkClient.swift in Sources */,
 				6FB9924826FDCE1300A937FF /* DDNAExecutionCountTriggerCondition.swift in Sources */,
 				68CA3E4426945F600091B46D /* NWPathProtocol.swift in Sources */,
 				636556441C60F5F2004153E7 /* DDNAClientInfo.m in Sources */,
@@ -824,6 +857,7 @@
 				68CE916A25E450E10060F9F3 /* DDNANetworkRequestTests.swift in Sources */,
 				68CE913725E3E4380060F9F3 /* UrlSessionDownloadTaskMock.swift in Sources */,
 				6F05A43C27047388003C6D85 /* DDNAExecutionRepeatTriggerConditionTests.swift in Sources */,
+				6FC10E8027282B8E00FAB070 /* GeoIpNetworkClientTests.swift in Sources */,
 				6812AD1C25C98F0F007623D3 /* DDNAEventTriggerMock.swift in Sources */,
 				68CE91A825E5232E0060F9F3 /* DDNAGameParametersHandlerTests.swift in Sources */,
 				68C33A9725E687140096AE18 /* DDNAImageCacheExtension.swift in Sources */,
@@ -856,6 +890,7 @@
 				68CE919025E5149E0060F9F3 /* DDNASDKDelegateMock.swift in Sources */,
 				68CE91A225E51B7D0060F9F3 /* DDNAUserManagerTests.swift in Sources */,
 				68C9695225E9621C00663AE1 /* DDNAEngageServiceMock.swift in Sources */,
+				6FC10E7A2728092C00FAB070 /* DDNAConsentTrackerTests.swift in Sources */,
 				68F8B30725BF080E009816AF /* DDNAEngageServiceTests.swift in Sources */,
 				68CE918C25E5146C0060F9F3 /* DDNAUserManagerMock.swift in Sources */,
 				68C33A9D25E687350096AE18 /* DDNAImageMessageExtension.swift in Sources */,
@@ -863,6 +898,7 @@
 				68F8B31B25C0384B009816AF /* DDNAInstanceFactoryMock.swift in Sources */,
 				68CE915925E429AB0060F9F3 /* DDNAEngagementTests.swift in Sources */,
 				6812AD0A25C97920007623D3 /* DDNASdkInterfaceMock.swift in Sources */,
+				6FC10E7D27280AAE00FAB070 /* GeoIpNetworkClientMock.swift in Sources */,
 				6F05A43B27047388003C6D85 /* DDNAPinpointerTests.swift in Sources */,
 				6812AD2825C9996E007623D3 /* DDNAImageMessageTests.swift in Sources */,
 				68F8B32725C038CC009816AF /* DDNAEngageRequestTests.swift in Sources */,

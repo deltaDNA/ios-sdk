@@ -85,6 +85,17 @@
     // Enable event hashing.
     sdk.hashSecret = @"KmMBBcNwStLJaq6KsEBxXc6HY3A4bhGw";
     
+    [sdk isPiplConsentRequired:^(BOOL consentRequired, NSError *error) {
+        if (error != nil) {
+            NSLog(@"Failed to retrieve consent status, no events will be sent yet.");
+        } else {
+            if (consentRequired) {
+                // Get the user's consent here, then replace the booleans below with real values
+                [sdk setPiplConsentForDataUse:YES andDataExport:YES];
+            }
+        }
+    }];
+    
     // Start the SDK.
     [sdk startWithEnvironmentKey:[SdkConfig environmentKey]
                       collectURL:[SdkConfig collectUrl]

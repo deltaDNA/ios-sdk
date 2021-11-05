@@ -1,5 +1,13 @@
 # Change Log
 
+## [5.0.0](https://github.com/deltaDNA/ios-sdk/releases/tag/5.0.0)
+### New
+
+**Breaking Change**: New APIs provided for checking if PIPL consent is required, and recording users' consent. Note that
+it is now required to check if PIPL consent is required, and provide that consent if necessary, before collect and engage
+requests will be sent from the SDK.
+
+
 ## [4.13.3](https://github.com/deltaDNA/ios-sdk/releases/tag/4.13.3) (2021-10-06)
 ### Fixed
 - Event Triggered Campaigns will now respect repeat and interval triggers

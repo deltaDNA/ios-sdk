@@ -36,7 +36,7 @@ target 'MyApp' do
 # Uncomment this line if you're using Swift or would like to use dynamic frameworks
 use_frameworks!
 
-pod 'DeltaDNA', '~> 4.13.3'
+pod 'DeltaDNA', '~> 5.0.0'
 
 target 'MyAppTests' do
 inherit! :search_paths
@@ -54,6 +54,24 @@ Include the SDK header files.
 
 ```objective-c
 #include <DeltaDNA/DeltaDNA.h>
+```
+
+It is a requirement in versions 5.0.0 and above to check if a user is in a location where PIPL consent is required, and to provide that consent if so. This must
+be done before the SDK will send any events or make any engage requests.
+
+```objective-c
+[[DDNASDK sharedInstance] isPiplConsentRequired:^(BOOL consentRequired, NSError *error) {
+    if (error != nil) {
+        NSLog(@"Failed to retrieve consent status, no events will be sent yet.");
+    } else {
+        if (consentRequired) {
+            // Get the user's consent here, then replace the booleans below with real values
+            [sdk setPiplConsentForDataUse:YES andDataExport:YES];
+        }
+
+        // Start the SDK
+    }
+}];
 ```
 
 Start the analytics SDK.

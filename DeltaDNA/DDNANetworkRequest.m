@@ -18,6 +18,7 @@
 #import "DDNASDK.h"
 #import "DDNASettings.h"
 #import "NSURLSessionInterface.h"
+#import <DeltaDNA/DeltaDNA-Swift.h>
 
 @interface DDNANetworkRequest ()
 
@@ -60,6 +61,14 @@
     [request setHTTPBody:[self.jsonPayload dataUsingEncoding:NSUTF8StringEncoding]];
     [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    
+    // These headers just need to be present, the content is irrelevant, so they are given a placeholder value if consent is given
+    if ([DDNASDK sharedInstance].consentTracker.piplUseStatus == ConsentStatusConsentGiven) {
+        [request setValue:@"" forHTTPHeaderField:@"PIPL_CONSENT"];
+    }
+    if ([DDNASDK sharedInstance].consentTracker.piplExportStatus == ConsentStatusConsentGiven) {
+        [request setValue:@"" forHTTPHeaderField:@"PIPL_EXPORT"];
+    }
     
     [[self.urlSession dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         [self handleResponse:data response:response error:error];

@@ -22,6 +22,9 @@
 #import "NSDictionary+DeltaDNA.h"
 #import "DDNALog.h"
 #import "DDNAEngageCache.h"
+#import "DDNASDK.h"
+
+#import <DeltaDNA/DeltaDNA-Swift.h>
 
 @interface DDNAEngageRequest ()
 
@@ -129,6 +132,11 @@ static NSString *const kEngagementCacheKey = @"Engagement %@(%@)";
 - (void)request:(DDNAEngageRequest *)engageRequest handler:(DDNAEngageResponse)responseHandler
 {
     if (!engageRequest || !responseHandler) return;
+    if (![[DDNASDK sharedInstance].consentTracker allConsentsAreMet]) {
+        NSLog(@"Cannot make a collect request without user consent in SDK version >= 5.x, please check user consent and try again");
+        responseHandler(nil, 0, nil);
+        return;
+    }
     
     NSDictionary *request = @{
         @"decisionPoint": engageRequest.decisionPoint,
