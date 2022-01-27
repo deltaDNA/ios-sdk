@@ -108,6 +108,8 @@
             self.impl = [[DDNATrackingSdk alloc] initWithSdk:self instanceFactory:DDNAInstanceFactory.sharedInstance];
         }
         
+        [self handleEnvironmentChanges];
+        
         [self.impl startWithNewPlayer:self.userManager];
     }
 }
@@ -190,6 +192,25 @@
 {
     @synchronized(self) {
         [self.impl upload];
+    }
+}
+
+/*
+ Detects if the environment has changed since the last app startup. We assume this method is called after the
+ environment key on self has been initialised in the start method. This method will clear out the event store and cache
+ if the environment changes - this is to ensure that events are not sent to the wrong environment during testing.
+ */
+- (void) handleEnvironmentChanges
+{
+    static NSString *previousEnvironmentUserDefaultKey = @"DDNA_PREVIOUS_ENV";
+    
+    @synchronized (self) {
+        NSString *previousEnv = [[NSUserDefaults standardUserDefaults] stringForKey:previousEnvironmentUserDefaultKey];
+        if (previousEnv != nil && previousEnv.length != 0 && previousEnv != self.environmentKey) {
+            DDNALogDebug(@"Detected an environment configuration change from %@ to %@, clearing out cached events from previous environment.", previousEnv, self.environmentKey);
+            [self.impl clearPersistentData];
+        }
+        [[NSUserDefaults standardUserDefaults] setValue:self.environmentKey forKey:previousEnvironmentUserDefaultKey];
     }
 }
 
