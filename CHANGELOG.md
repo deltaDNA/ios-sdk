@@ -1,5 +1,10 @@
 # Change Log
 
+## [Unreleased]
+
+### Fixed
+- When switching environments between Dev and Live, data will be cleaned so that events are not sent to the wrong environment during testing
+
 ## [5.0.0](https://github.com/deltaDNA/ios-sdk/releases/tag/5.0.0)
 ### New
 

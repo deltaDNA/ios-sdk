@@ -36,7 +36,7 @@ target 'MyApp' do
 # Uncomment this line if you're using Swift or would like to use dynamic frameworks
 use_frameworks!
 
-pod 'DeltaDNA', '~> 5.0.0'
+pod 'DeltaDNA', '~> 5.0.1'
 
 target 'MyAppTests' do
 inherit! :search_paths
@@ -86,6 +86,9 @@ engageURL:@"YOUR_ENGAGE_URL"];
 ```
 
 On the first run it will create a new user id and send a `newPlayer` event.  On every call it will send a `gameStarted` and `clientDevice` event.
+
+> Note: If the SDK detects that the environment has changed between runs (for example during testing) then the event store will be cleared, to avoid sending events
+> to the wrong environment.
 
 #### iOS 9 Support
 
