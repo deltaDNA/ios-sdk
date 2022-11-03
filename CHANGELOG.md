@@ -1,5 +1,10 @@
 # Change Log
 
+## [5.0.2](https://github.com/deltaDNA/ios-sdk/releases/tag/5.0.2)
+
+### Fixed
+- Resuming an app from the background after a session has expired and the SDK is stopped will no longer throw an exception
+
 ## [5.0.1](https://github.com/deltaDNA/ios-sdk/releases/tag/5.0.1)
 
 ### Fixed

@@ -19,7 +19,7 @@ target 'MyApp' do
   # 如果你使用Swift或者想要使用动态框架，请取消此行注释
   use_frameworks!
 
-  pod 'DeltaDNA', '~> 5.0.1'
+  pod 'DeltaDNA', '~> 5.0.2'
 
   target 'MyAppTests' do
     inherit! :search_paths

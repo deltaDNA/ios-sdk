@@ -600,7 +600,9 @@ static NSString *const DD_EVENT_NEW_SESSION = @"DDNASDKNewSession";
         NSTimeInterval backgroundSeconds = [[NSDate date] timeIntervalSinceDate:self.lastActiveDate];
         if (backgroundSeconds > self.sdk.settings.sessionTimeoutSeconds) {
             self.lastActiveDate = nil;
-            [self.sdk newSession];
+            if (self.sdk.started) {
+                [self.sdk newSession];
+            }
         }
     }
 }

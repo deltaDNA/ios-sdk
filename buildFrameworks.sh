@@ -14,5 +14,5 @@ xcodebuild -create-xcframework -framework archives/ios_devices.xcarchive/Product
 
 # Compress the archive ready for distribution to GitHub
 rm build/*.zip
-zip -r DeltaDNA-5.0.1.zip build
-mv DeltaDNA-5.0.1.zip build/
+zip -r DeltaDNA-5.0.2.zip build
+mv DeltaDNA-5.0.2.zip build/
