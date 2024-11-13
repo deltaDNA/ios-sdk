@@ -80,6 +80,7 @@ static NSString *const kEngagementCacheKey = @"Engagement %@(%@)";
 
 @interface DDNAEngageService () <DDNANetworkRequestDelegate>
 
+@property (nonatomic, copy) NSString *projectID;
 @property (nonatomic, copy) NSString *engageURL;
 @property (nonatomic, copy) NSString *environmentKey;
 @property (nonatomic, copy) NSString *hashSecret;
@@ -99,6 +100,7 @@ static NSString *const kEngagementCacheKey = @"Engagement %@(%@)";
 @implementation DDNAEngageService
 
 - (instancetype)initWithEnvironmentKey:(NSString *)environmentKey
+                             projectID:(NSString *)projectID
                              engageURL:(NSString *)engageURL
                             hashSecret:(NSString *)hashSecret
                             apiVersion:(NSString *)apiVersion
@@ -113,6 +115,7 @@ static NSString *const kEngagementCacheKey = @"Engagement %@(%@)";
 {
     if ((self = [super self])) {
         self.environmentKey = environmentKey;
+        self.projectID = projectID;
         self.engageURL = engageURL;
         self.hashSecret = hashSecret;
         self.apiVersion = apiVersion;
@@ -139,18 +142,22 @@ static NSString *const kEngagementCacheKey = @"Engagement %@(%@)";
     }
     
     NSDictionary *request = @{
-        @"decisionPoint": engageRequest.decisionPoint,
-        @"flavour": engageRequest.flavour,
-        @"parameters": engageRequest.parameters ? engageRequest.parameters : @{},
-        @"userID": engageRequest.userId,
-        @"sessionID": engageRequest.sessionId,
-        @"version": self.apiVersion,
-        @"sdkVersion": self.sdkVersion,
-        @"platform": self.platform,
-        @"locale": self.locale,
-        @"timezoneOffset": self.timezoneOffset,
-        @"manufacturer": self.manufacturer,
-        @"operatingSystemVersion": self.operatingSystemVersion
+        @"projectId": self.projectID,
+        @"userId": engageRequest.userId,
+        @"environmentId" : self.environmentKey,
+        @"attributes" : @{ @"unity" : @{},@"app" : @{},@"user" : engageRequest.parameters },
+        //@"decisionPoint": engageRequest.decisionPoint,
+        //@"flavour": engageRequest.flavour,
+        //@"parameters": engageRequest.parameters ? engageRequest.parameters : @{},
+       
+        //@"sessionID": engageRequest.sessionId,
+        //@"version": self.apiVersion,
+        //@"sdkVersion": self.sdkVersion,
+        //@"platform": self.platform,
+        //@"locale": self.locale,
+        //@"timezoneOffset": self.timezoneOffset,
+        //@"manufacturer": self.manufacturer,
+        //@"operatingSystemVersion": self.operatingSystemVersion
     };
     
     NSString *jsonPayload = [NSString stringWithContentsOfDictionary:request];

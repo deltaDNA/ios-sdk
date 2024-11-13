@@ -41,6 +41,7 @@ typedef void (^DDNAEngageResponse) (NSString *response, NSInteger statusCode, NS
 @property (nonatomic, weak) DDNAInstanceFactory *factory;
 
 - (instancetype)initWithEnvironmentKey:(NSString *)environmentKey
+                             projectID:(NSString *)projectID
                              engageURL:(NSString *)engageURL
                             hashSecret:(NSString *)hashSecret
                             apiVersion:(NSString *)apiVersion

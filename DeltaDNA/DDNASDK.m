@@ -34,6 +34,8 @@
 
 @interface DDNASDK ()
 
+@property (nonatomic, copy, readwrite) NSString *projectID;
+@property (nonatomic, copy, readwrite) NSString *environmentName;
 @property (nonatomic, copy, readwrite) NSString *environmentKey;
 @property (nonatomic, copy, readwrite) NSString *collectURL;
 @property (nonatomic, copy, readwrite) NSString *engageURL;
@@ -69,31 +71,39 @@
 }
 
 #pragma mark - Setup SDK
-
-- (void)startWithEnvironmentKey:(NSString *)environmentKey
-                      collectURL:(NSString *)collectURL
-                       engageURL:(NSString *)engageURL
+- (void)startWithProjectID:(NSString *)projectID
+           environmentName:(NSString *)environmentName
+            environmentKey:(NSString *)environmentKey
+              analyticsURL:(NSString *)analyticsURL
+           remoteConfigURL:(NSString *)remoteConfigURL
 {
-    [self startWithEnvironmentKey:environmentKey
-                       collectURL:collectURL
-                        engageURL:engageURL
-                           userID:nil];
+
+    [self startWithProjectID:projectID
+             environmentName:environmentName
+              environmentKey:environmentKey
+                analyticsURL:analyticsURL
+             remoteConfigURL:remoteConfigURL
+                      userID:nil];
 }
 
-- (void)startWithEnvironmentKey:(NSString *)environmentKey
-                     collectURL:(NSString *)collectURL
-                      engageURL:(NSString *)engageURL
-                         userID:(NSString *)userID
+
+- (void)startWithProjectID:(NSString *)projectID
+           environmentName:(NSString *)environmentName
+            environmentKey:(NSString *)environmentKey
+              analyticsURL:(NSString *)analyticsURL
+           remoteConfigURL:(NSString *)remoteConfigURL
+                    userID:(NSString *)userID
 {
     @synchronized(self) {
         if (![self.consentTracker hasCheckedForConsent]) {
             NSLog(@"Since version 5.0.0 of the deltaDNA SDK, you are required to check for required user consents before starting the SDK.\
                   Any events recorded will not be sent until user consent is recorded in the SDK.");
         }
-            
+        self.projectID = projectID;
         self.environmentKey = environmentKey;
-        self.collectURL = [DDNAUtils fixURL: collectURL];
-        self.engageURL = [DDNAUtils fixURL: engageURL];
+        self.environmentName = environmentName;
+        self.collectURL = [DDNAUtils fixURL: analyticsURL];
+        self.engageURL = [DDNAUtils fixURL: remoteConfigURL];
         self.engageFactory = [[DDNAEngageFactory alloc] initWithDDNASDK:self];
         // if not set by client...
         if ([NSString stringIsNilOrEmpty:self.platform]) {

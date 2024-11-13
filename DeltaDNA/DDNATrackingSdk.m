@@ -444,6 +444,7 @@ static NSString *const DD_EVENT_NEW_SESSION = @"DDNASDKNewSession";
 
 - (void)requestSessionConfiguration:(DDNAUserManager *)userManager
 {
+    /*
     DDNAEngagement *configEngagement = [DDNAEngagement engagementWithDecisionPoint:@"config"];
     configEngagement.flavour = @"internal";
     [configEngagement setParam:[NSNumber numberWithUnsignedInteger:userManager.msSinceFirstSession]  forKey:@"timeSinceFirstSession"];
@@ -497,7 +498,9 @@ static NSString *const DD_EVENT_NEW_SESSION = @"DDNASDKNewSession";
         
         // Once we're started, & session configuration has been received or failed then send default events.
         [self triggerDefaultEvents:self.sendNewPlayerEvent];
-    }];
+    }];*/
+    self.eventWhitelist = nil;
+    [self triggerDefaultEvents:self.sendNewPlayerEvent];
 }
 
 - (void)downloadImageAssets

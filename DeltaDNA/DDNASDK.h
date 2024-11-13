@@ -101,8 +101,11 @@ The Apple Device Token received from in your AppDelegate
  to send push notifications to your game.
  */
 @property (nonatomic, copy) NSData *deviceToken;
-
-/// The environment key for this game environment (Dev or Live).
+/// The Unity ProjectID
+@property (nonatomic, copy, readonly) NSString *projectID;
+/// The environment name for this game environment (Dev or Live).
+@property (nonatomic, copy, readonly) NSString *environmentName;
+/// The environment key for this game environment key .
 @property (nonatomic, copy, readonly) NSString *environmentKey;
 /// The URL for Collect for this environment.
 @property (nonatomic, copy, readonly) NSString *collectURL;
@@ -131,34 +134,47 @@ The Apple Device Token received from in your AppDelegate
  */
 + (instancetype)sharedInstance;
 
-/**
- The SDK must be started once before you can send events.
- 
- @param environmentKey The games's unique environment key.
- 
- @param collectURL The games's unique Collect URL.
- 
- @param engageURL The games's unique EngageURL, use nil if not using Engage.
- */
-- (void)startWithEnvironmentKey: (NSString *) environmentKey
-                     collectURL: (NSString *) collectURL
-                      engageURL: (NSString *) engageURL;
 
 /**
  The SDK must be started once before you can send events.
+ @param projectID The Id of the Unity Project
  
- @param environmentKey The games's unique environment key.
+ @param environmentName The games's unique environment Name. e.g. "production"
  
- @param collectURL The games's unique Collect URL.
+ @param environmentKey The games's unique environment Key e.g. "1875d8f6-5c64-42e0-9e18-be437a0a126d"
  
- @param engageURL The games's unique EngageURL, use nil if not using Engage.
+ @param analyticsURL The Unity Analytics URL.
+ 
+ @param remoteConfigURL The Remote Config URL, use nil if not using Engage.
+ */
+- (void)startWithProjectID: (NSString *) projectID
+           environmentName: (NSString *) environmentName
+            environmentKey: (NSString *) environmentKey
+              analyticsURL: (NSString *) analyticsURL
+           remoteConfigURL: (NSString *) remoteConfigURL;
+
+
+/**
+ The SDK must be started once before you can send events.
+ @param projectID The Id of the Unity Project
+ 
+ @param environmentName The games's unique environment Name. e.g. "production"
+ 
+ @param environmentKey The games's unique environment Key e.g. "1875d8f6-5c64-42e0-9e18-be437a0a126d"
+ 
+ @param analyticsURL The Unity Analytics URL.
+ 
+ @param remoteConfigURL The Remote Config URL, use nil if not using Engage.
  
  @param userID The user id to associate the game events with, use nil if you want the SDK to generate a random one.
  */
-- (void)startWithEnvironmentKey: (NSString *) environmentKey
-                     collectURL: (NSString *) collectURL
-                      engageURL: (NSString *) engageURL
-                         userID: (NSString *) userID;
+- (void)startWithProjectID: (NSString *) projectID
+           environmentName: (NSString *) environmentName
+            environmentKey: (NSString *) environmentKey
+              analyticsURL: (NSString *) analyticsURL
+           remoteConfigURL: (NSString *) remoteConfigURL
+                    userID: (NSString *) userID;
+                      
 
 /**
  Generates a new session id, subsequent events will belong to a new session.

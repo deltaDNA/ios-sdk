@@ -50,6 +50,7 @@
     DDNAClientInfo *ddnaci = [DDNAClientInfo sharedInstance];
     
     DDNAEngageService *engageService = [[DDNAEngageService alloc] initWithEnvironmentKey:ddnasdk.environmentKey
+                                                                               projectID:ddnasdk.projectID
                                                                                engageURL:ddnasdk.engageURL
                                                                               hashSecret:ddnasdk.hashSecret
                                                                               apiVersion:DDNA_ENGAGE_API_VERSION
@@ -70,7 +71,7 @@
 {
     DDNASDK *ddnasdk = [DDNASDK sharedInstance];
     
-    DDNACollectService *collectService = [[DDNACollectService alloc] initWithEnvironmentKey:ddnasdk.environmentKey collectURL:ddnasdk.collectURL hashSecret:ddnasdk.hashSecret];
+    DDNACollectService *collectService = [[DDNACollectService alloc] initWithEnvironmentName:ddnasdk.environmentName projectID:ddnasdk.projectID collectURL:ddnasdk.collectURL hashSecret:ddnasdk.hashSecret];
     
     collectService.factory = self;
     return collectService;

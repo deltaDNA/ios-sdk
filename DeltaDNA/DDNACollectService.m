@@ -95,8 +95,8 @@
 @end
 
 @interface DDNACollectService () <DDNANetworkRequestDelegate>
-
-@property (nonatomic, copy) NSString *environmentKey;
+@property (nonatomic, copy) NSString *projectID;
+@property (nonatomic, copy) NSString *environmentName;
 @property (nonatomic, copy) NSString *collectURL;
 @property (nonatomic, copy) NSString *hashSecret;
 @property (nonatomic, strong) NSMapTable *requests;
@@ -105,10 +105,11 @@
 
 @implementation DDNACollectService
 
-- (instancetype)initWithEnvironmentKey:(NSString *)environmentKey collectURL:(NSString *)collectURL hashSecret:(NSString *)hashSecret
+- (instancetype)initWithEnvironmentName:(NSString *)environmentName projectID:(NSString *) projectID collectURL:(NSString *)collectURL hashSecret:(NSString *)hashSecret
 {
     if ((self = [super self])) {
-        self.environmentKey = environmentKey;
+        self.projectID = projectID;
+        self.environmentName = environmentName;
         self.collectURL = collectURL;
         self.hashSecret = hashSecret;
         self.requests = [NSMapTable strongToStrongObjectsMapTable];
@@ -128,7 +129,8 @@
     NSString *jsonPayload = [collectRequest toJSON];
     
     NSURL *url = [NSURL URLWithCollectEndpoint:self.collectURL
-                               environmentKey:self.environmentKey
+                                     projectID:self.projectID
+                               environmentName:self.environmentName
                                       payload:jsonPayload
                                    hashSecret:self.hashSecret];
     

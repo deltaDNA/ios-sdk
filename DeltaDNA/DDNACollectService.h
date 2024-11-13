@@ -41,7 +41,8 @@ typedef void (^DDNACollectResponse) (NSString *response, NSInteger statusCode, N
 
 @property (nonatomic, weak) DDNAInstanceFactory *factory;
 
-- (instancetype)initWithEnvironmentKey:(NSString *)environmentKey
+- (instancetype)initWithEnvironmentName:(NSString *)environmentName
+                             projectID:(NSString *)projectID
                             collectURL:(NSString *)collectURL
                             hashSecret:(NSString *)hashSecret;
 

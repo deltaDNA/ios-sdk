@@ -26,32 +26,32 @@
 
 + (NSURL *)URLWithEngageEndpoint:(NSString *)endpoint environmentKey:(NSString *)environmentKey payload:(NSString *)payload hashSecret:(NSString *)hashSecret
 {
-    NSString *hashComponent = @"";
+    /*NSString *hashComponent = @"";
     
     if (hashSecret != nil && hashSecret.length > 0) {
         hashComponent = [NSString stringWithFormat:@"/hash/%@", [[payload stringByAppendingString:hashSecret] md5]];
     }
-    
-    NSString *url = [NSString stringWithFormat:@"%@/%@%@", endpoint, environmentKey, hashComponent];
-    
+    */
+    //NSString *url = [NSString stringWithFormat:@"%@/%@%@", endpoint, environmentKey, hashComponent];
+    NSString *url = [NSString stringWithFormat:@"%@", endpoint];
     return [NSURL URLWithString:url];
 }
 
-+ (NSURL *)URLWithCollectEndpoint:(NSString *)endpoint environmentKey:(NSString *)environmentKey
++ (NSURL *)URLWithCollectEndpoint:(NSString *)endpoint projectID:(NSString *) projectID environmentName:(NSString *)environmentName
 {
-    return [NSURL URLWithCollectEndpoint:endpoint environmentKey:environmentKey payload:@"" hashSecret:nil];
+    return [NSURL URLWithCollectEndpoint:endpoint projectID:projectID environmentName:environmentName payload:@"" hashSecret:nil];
 }
 
-+ (NSURL *)URLWithCollectEndpoint:(NSString *)endpoint environmentKey:(NSString *)environmentKey payload:(NSString *)payload hashSecret:(NSString *)hashSecret
-{
++ (NSURL *)URLWithCollectEndpoint:(NSString *)endpoint projectID: (NSString * ) projectID environmentName:(NSString *)environmentName payload:(NSString *)payload hashSecret:(NSString *)hashSecret
+{   /*
     NSString *hashComponent = @"";
     
     if (hashSecret != nil && hashSecret.length > 0) {
         hashComponent = [NSString stringWithFormat:@"/hash/%@", [[payload stringByAppendingString:hashSecret] md5]];
-    }
+    }*/
     
-    NSString *url = [NSString stringWithFormat:@"%@/%@/bulk%@", endpoint, environmentKey, hashComponent];
-    
+    NSString *url = [NSString stringWithFormat:@"%@/%@/environments/%@/", endpoint, projectID, environmentName];
+    NSLog(@"%@",url);
     return [NSURL URLWithString:url];
 }
 

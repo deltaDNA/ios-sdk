@@ -51,13 +51,17 @@
     
     DDNAEngagement *engagement = [DDNAEngagement engagementWithDecisionPoint:decisionPoint];
     NSDictionary *paramsCopy = [[NSDictionary alloc] initWithDictionary:parameters.dictionary copyItems:YES];
+    
+    // Put the old DDNA decisionPoint name into the parameter block for remoteConfig so we can use JEXL to trigger by decisionPoint
+    [engagement setParam:decisionPoint forKey:@"decisionPoint"];
+    
     for (NSString *key in paramsCopy) {
         [engagement setParam:[parameters.dictionary valueForKey:key] forKey:key];
     }
     
     [self.sdk requestEngagement:engagement engagementHandler:^(DDNAEngagement *response) {
-        if (response != nil && response.json != nil && response.json[@"parameters"]) {
-            handler(response.json[@"parameters"]);
+        if (response != nil && response.json != nil && response.json[@"configs"] && response.json[@"configs"][@"settings"]) {
+            handler(response.json[@"configs"][@"settings"]);
         } else {
             handler(@{});
         }

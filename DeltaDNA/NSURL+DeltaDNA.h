@@ -22,8 +22,8 @@
 
 + (NSURL *)URLWithEngageEndpoint:(NSString *)endpoint environmentKey:(NSString *)environmentKey payload:(NSString *)payload hashSecret:(NSString *)hashSecret;
 
-+ (NSURL *)URLWithCollectEndpoint:(NSString *)endpoint environmentKey:(NSString *)environmentKey;
++ (NSURL *)URLWithCollectEndpoint:(NSString *)endpoint projectID:(NSString *) projectID environmentName:(NSString *)environmentName;
 
-+ (NSURL *)URLWithCollectEndpoint:(NSString *)endpoint environmentKey:(NSString *)environmentKey payload:(NSString *)payload hashSecret:(NSString *)hashSecret;
++ (NSURL *)URLWithCollectEndpoint:(NSString *)endpoint projectID:(NSString *) projectID environmentName:(NSString *)environmentName payload:(NSString *)payload hashSecret:(NSString *)hashSecret;
 
 @end
